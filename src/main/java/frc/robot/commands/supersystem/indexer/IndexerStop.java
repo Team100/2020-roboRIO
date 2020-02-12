@@ -9,6 +9,8 @@ package frc.robot.commands.supersystem.indexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.GlobalManager;
+import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Indexer.ActionState;
 
@@ -28,6 +30,7 @@ public class IndexerStop extends CommandBase {
   @Override
   public void initialize() {
     indexer.actionState = ActionState.STOP;
+    GlobalManager.SupersystemManager.supersystemState = SupersystemState.NEUTRAL;
     indexer.indexerStageOne.drivePercentOutput(0);
     indexer.indexerStageTwo.drivePercentOutput(0);
   }

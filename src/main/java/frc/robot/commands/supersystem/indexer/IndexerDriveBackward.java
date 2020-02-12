@@ -11,14 +11,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Indexer.ActionState;
-import frc.robot.subsystems.Indexer.SupersystemStates;
+import frc.robot.GlobalManager;
+import frc.robot.GlobalManager.SupersystemManager;
+import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
 
 public class IndexerDriveBackward extends CommandBase {
   /**
    * Creates a new IndexerDriveBackward.
    */
   public Indexer indexer;
-  
+
   public IndexerDriveBackward(Indexer indexer) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.indexer = indexer;
@@ -29,7 +31,7 @@ public class IndexerDriveBackward extends CommandBase {
   @Override
   public void initialize() {
     indexer.actionState = ActionState.MOVE_BACKWARDS;
-    indexer.supersystemStates = SupersystemStates.ERROR;
+    GlobalManager.SupersystemManager.supersystemState = SupersystemState.REVERSING;
     indexer.indexerStageOne.drivePercentOutput(-(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_BACKWARD));
     indexer.indexerStageTwo.drivePercentOutput(-(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_BACKWARD));
   }
