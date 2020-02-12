@@ -41,7 +41,6 @@ public class Indexer extends SubsystemBase {
     INTAKED,
     COMPLETE,
     ERROR
-    
   }
   public SupersystemStates supersystemStates;
 
