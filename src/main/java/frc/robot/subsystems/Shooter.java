@@ -60,9 +60,16 @@ public class Shooter extends SubsystemBase {
     follower.follow(master);
 
   }
+  /**
+   * Update any states
+   */
+  public void updateState(){
+
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    updateState();
   }
 }
