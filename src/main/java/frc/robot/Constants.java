@@ -201,6 +201,84 @@ public final class Constants {
             }
         }
     }
+
+    public static final class DrivetrainConstants{
+        public static final class DrivetrainMotors{
+            public static final class DrivetrainLeftMaster{
+                public static final int CAN_ID = 0;
+
+                public static final boolean INVERT = false;
+                public static final int FEEDBACK_PORT = 0;
+                public static final boolean SENSOR_PHASE = false;
+
+                public static final int TIMEOUT = 10;
+
+                public static final boolean ENABLE_CURRENT_LIMIT = true;
+                public static final int CURRENT_LIMIT = 35;
+                public static final double OPEN_LOOP_RAMP = 0.1;
+                public static final double PEAK_OUTPUT_FORWARD = 1;
+                public static final double PEAK_OUTPUT_REVERSE = -1;
+
+                public static final double NOMINAL_OUTPUT_FORWARD = 0;
+                public static final double NOMINAL_OUTPUT_REVERSE = 0;
+            }
+            public static final class DrivetrainLeftFollower{
+                public static final int CAN_ID = 1;
+
+                public static final boolean INVERT = false;
+                public static final int FEEDBACK_PORT = 0;
+                public static final boolean SENSOR_PHASE = false;
+
+                public static final int TIMEOUT = 10;
+
+                public static final boolean ENABLE_CURRENT_LIMIT = true;
+                public static final int CURRENT_LIMIT = 35;
+                public static final double OPEN_LOOP_RAMP = 0.1;
+                public static final double PEAK_OUTPUT_FORWARD = 1;
+                public static final double PEAK_OUTPUT_REVERSE = -1;
+
+                public static final double NOMINAL_OUTPUT_FORWARD = 0;
+                public static final double NOMINAL_OUTPUT_REVERSE = 0;
+            }
+            public static final class DrivetrainRightMaster{
+                public static final int CAN_ID = 15;
+
+                public static final boolean INVERT = false;
+                public static final int FEEDBACK_PORT = 0;
+                public static final boolean SENSOR_PHASE = false;
+
+                public static final int TIMEOUT = 10;
+
+                public static final boolean ENABLE_CURRENT_LIMIT = true;
+                public static final int CURRENT_LIMIT = 35;
+                public static final double OPEN_LOOP_RAMP = 0.1;
+                public static final double PEAK_OUTPUT_FORWARD = 1;
+                public static final double PEAK_OUTPUT_REVERSE = -1;
+
+                public static final double NOMINAL_OUTPUT_FORWARD = 0;
+                public static final double NOMINAL_OUTPUT_REVERSE = 0;
+            }
+            public static final class DrivetrainRightFollower{
+                public static final int CAN_ID = 15;
+
+                public static final boolean INVERT = false;
+                public static final int FEEDBACK_PORT = 0;
+                public static final boolean SENSOR_PHASE = false;
+
+                public static final int TIMEOUT = 10;
+
+                public static final boolean ENABLE_CURRENT_LIMIT = true;
+                public static final int CURRENT_LIMIT = 35;
+                public static final double OPEN_LOOP_RAMP = 0.1;
+                public static final double PEAK_OUTPUT_FORWARD = 1;
+                public static final double PEAK_OUTPUT_REVERSE = -1;
+
+                public static final double NOMINAL_OUTPUT_FORWARD = 0;
+                public static final double NOMINAL_OUTPUT_REVERSE = 0;
+            }
+        
+        }
+    }
     
 
 
