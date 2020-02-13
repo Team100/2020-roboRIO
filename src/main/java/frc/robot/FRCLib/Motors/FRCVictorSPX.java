@@ -1,6 +1,5 @@
 package frc.robot.FRCLib.Motors;
 
-import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class FRCVictorSPX {
