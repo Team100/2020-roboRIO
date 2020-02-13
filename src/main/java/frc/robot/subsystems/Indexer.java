@@ -30,21 +30,6 @@ public class Indexer extends SubsystemBase {
    */
   public int frontCount, rearCount;
 
-  public static enum SupersystemStates{
-    PAUSED,
-    NOT_AT_END,
-    AT_END,
-    MOVING_BOTH,
-    FIRST_OPEN,
-    REACHED_END,
-    INTAKING,
-    INTAKED,
-    COMPLETE,
-    ERROR
-    
-  }
-  public SupersystemStates supersystemStates;
-
   public static enum ActionState{
     MOVE_FOWARD,
     MOVE_BACKWARDS,

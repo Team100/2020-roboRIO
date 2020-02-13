@@ -24,12 +24,12 @@ public class GlobalManager {
          * States that the supersystem can exist in
          */
         public enum SupersystemState{
-            NEUTRAL,INTAKING,QUEUEING,ALIGNING,SHOOTING,JAMMED
+            NEUTRAL,INTAKING,QUEUEING,ALIGNING,SHOOTING,JAMMED,REVERSING
         }
         /**
          * The current state of the supersystem
          */
-        public SupersystemState supersystemState;
+        public static SupersystemState supersystemState;
 
         /**
          * Is the shooter ready to shoot

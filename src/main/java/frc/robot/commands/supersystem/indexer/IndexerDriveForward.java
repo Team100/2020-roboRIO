@@ -9,6 +9,8 @@ package frc.robot.commands.supersystem.indexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.GlobalManager;
+import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Indexer.ActionState;
 
@@ -28,6 +30,7 @@ public class IndexerDriveForward extends CommandBase {
   @Override
   public void initialize() {
     indexer.actionState = ActionState.MOVE_FOWARD;
+    GlobalManager.SupersystemManager.supersystemState = SupersystemState.QUEUEING;
     indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FOWARD);
     indexer.indexerStageTwo.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_FOWARD);
   }
