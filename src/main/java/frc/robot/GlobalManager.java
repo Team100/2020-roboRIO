@@ -10,7 +10,7 @@ package frc.robot;
 /**
  * Manages state for the entire robot
  */
-public static class GlobalManager {
+public class GlobalManager {
     /**
      * Manages states that pertain to the Supersystem
      */
