@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import frc.robot.FRCLib.Conversions.EncoderConversionFactors;
 
 /**
@@ -19,13 +21,45 @@ import frc.robot.FRCLib.Conversions.EncoderConversionFactors;
  */
 public final class Constants {
 
+    public static final class DrivetrainConstants {
+        public static final class DrivetrainParameters {
+            public static final double MAX_OUTPUT = 0.5;
+            public static final NeutralMode NEUTRAL_MODE = NeutralMode.Coast;
+        }
+        public static final class DrivetrainMotors {
+            public static final class LeftMaster {
+                public static final int CAN_ID = 0;
+                public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
+                public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
+                public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
+            }
+            public static final class LeftFollower {
+                public static final int CAN_ID = 1;
+                public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
+                public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
+                public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
+            }
+            public static final class RightMaster {
+                public static final int CAN_ID = 15;
+                public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
+                public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
+                public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
+            }
+            public static final class RightFollower {
+                public static final int CAN_ID = 14;
+                public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
+                public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
+                public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
+            }
+        }
+    }
 
-    public static final class TurretConstants{
-        public static final class TurretMotionParameters{
+    public static final class TurretConstants {
+        public static final class TurretMotionParameters {
             public static final double PERCENT_OUTPUT_FOWARD = 0.5;
         }
-        public static final class TurretMotors{
-            public static final class TurretMotor{
+        public static final class TurretMotors {
+            public static final class TurretMotor {
                 public static final int CAN_ID = 6;
 
                 public static final boolean INVERT = false;
@@ -45,24 +79,24 @@ public final class Constants {
             }
         }
     }
-    public static final class IndexerConstants{
-        public static final class IndexerSensors{
-            public static final class FrontSensor{
+    public static final class IndexerConstants {
+        public static final class IndexerSensors {
+            public static final class FrontSensor {
                 public static final int ID = 3;
             }
-            public static final class RearSensor{
+            public static final class RearSensor {
                 public static final int ID = 0;
             }
         }
-        public static final class IndexerMotionParameters{
+        public static final class IndexerMotionParameters {
             public static final double STAGE_ONE_PERCENT_OUTPUT_FOWARD = 0.5;
             public static final double STAGE_TWO_PERCENT_OUTPUT_FOWARD = 0.5;
 
             public static final double STAGE_ONE_PERCENT_OUTPUT_BACKWARD = 0.5;
             public static final double STAGE_TWO_PERCENT_OUTPUT_BACKWARD = 0.5;
         }
-        public static final class IndexerMotors{
-            public static final class IndexerStageOne{
+        public static final class IndexerMotors {
+            public static final class IndexerStageOne {
                 public static final int CAN_ID = 4;
 
                 public static final boolean INVERT = false;
@@ -79,9 +113,8 @@ public final class Constants {
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;
-
             }
-            public static final class IndexerStageTwo{
+            public static final class IndexerStageTwo {
                 public static final int CAN_ID = 11;
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
@@ -102,19 +135,17 @@ public final class Constants {
         }
     }
 
-    public static final class IntakeConstants{
+    public static final class IntakeConstants {
         public static final class IntakeMotionParameters{
             public static final double INTAKE_PERCENT_OUTPUT = 0.7;
             public static final double INTAKE_ZERO = 0;
 
             public static final double INTAKE_DOWN_DEGREES = EncoderConversionFactors.CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(-40); 
             public static final double INTAKE_UP_DEGREES = EncoderConversionFactors.CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(90);
-
-
         }
         
-        public static final class IntakeMotors{
-            public static final class IntakeSpin{
+        public static final class IntakeMotors {
+            public static final class IntakeSpin {
                 public static final int CAN_ID = 5;
 
                 public static final boolean INVERT = false;
@@ -131,9 +162,8 @@ public final class Constants {
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;
-
             }
-            public static final class IntakePivot{
+            public static final class IntakePivot {
                 public static final int CAN_ID = 10;
 
                 public static final boolean INVERT = false;
@@ -150,20 +180,19 @@ public final class Constants {
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;
-
             }
         }
     }
 
-    public static final class ShooterConstants{
-        public static final class ShooterMotionParameters{
+    public static final class ShooterConstants {
+        public static final class ShooterMotionParameters {
             public static final double RECOVER_PO = 0.8;
             public static final double SHOOT_PO = 0.5;
             public static final double STOP_PO = 0;
 
         }
-        public static final class ShooterMotors{
-            public static final class ShooterMaster{
+        public static final class ShooterMotors {
+            public static final class ShooterMaster {
                 public static final int CAN_ID = 2;
 
                 public static final boolean INVERT = false;
@@ -181,7 +210,7 @@ public final class Constants {
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;
             }
-            public static final class ShooterFollower{
+            public static final class ShooterFollower {
                 public static final int CAN_ID = 3;
 
                 public static final boolean INVERT = false;
