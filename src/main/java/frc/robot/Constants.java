@@ -203,6 +203,8 @@ public final class Constants {
     }
 
     public static final class DrivetrainConstants{
+        public static final boolean ENABLE_DEBUGGING = true;
+        public static final String SMART_DASHBOARD_PATH = "/drivetrain";
         public static final class DrivetrainMotors{
             public static final class DrivetrainLeftMaster{
                 public static final int CAN_ID = 0;
@@ -221,6 +223,9 @@ public final class Constants {
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;
+
+                public static final boolean ENABLE_DEBUGGING = DrivetrainConstants.ENABLE_DEBUGGING;
+                public static final String SMART_DASHBOARD_PATH = DrivetrainConstants.SMART_DASHBOARD_PATH+"/motors"+"/leftmaster";
             }
             public static final class DrivetrainLeftFollower{
                 public static final int CAN_ID = 1;
@@ -239,6 +244,11 @@ public final class Constants {
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;
+
+                public static final boolean ENABLE_DEBUGGING = DrivetrainConstants.ENABLE_DEBUGGING;
+                public static final String SMART_DASHBOARD_PATH = DrivetrainConstants.SMART_DASHBOARD_PATH+"/motors"+"/leftfollower";
+
+
             }
             public static final class DrivetrainRightMaster{
                 public static final int CAN_ID = 15;
@@ -257,9 +267,14 @@ public final class Constants {
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;
+
+                public static final boolean ENABLE_DEBUGGING = DrivetrainConstants.ENABLE_DEBUGGING;
+                public static final String SMART_DASHBOARD_PATH = DrivetrainConstants.SMART_DASHBOARD_PATH+"/motors"+"/rightmaster";
+
+
             }
             public static final class DrivetrainRightFollower{
-                public static final int CAN_ID = 15;
+                public static final int CAN_ID = 14;
 
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
@@ -275,6 +290,11 @@ public final class Constants {
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;
+
+                public static final boolean ENABLE_DEBUGGING = DrivetrainConstants.ENABLE_DEBUGGING;
+                public static final String SMART_DASHBOARD_PATH = DrivetrainConstants.SMART_DASHBOARD_PATH+"/motors"+"/rightfollower";
+
+
             }
         
         }
