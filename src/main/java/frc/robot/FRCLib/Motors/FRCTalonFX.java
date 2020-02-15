@@ -11,9 +11,6 @@ import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * An abstraction for the Talon SRX for debugging information
- */
 
 /**
  * An abstraction for the Talon SRX for debugging information
