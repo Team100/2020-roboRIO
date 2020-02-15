@@ -24,8 +24,7 @@ public class Turret extends SubsystemBase {
    * Creates a new Turret.
    */
   public Turret() {
-    turretMotor = new FRCTalonSRX.FRCTalonSRXBuilder()
-    .withCanID(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
+    turretMotor = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
     .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
     .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
     .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.SENSOR_PHASE)

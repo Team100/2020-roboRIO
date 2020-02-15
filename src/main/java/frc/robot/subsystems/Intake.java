@@ -41,8 +41,7 @@ public class Intake extends SubsystemBase {
    * Creates a new Intake.
    */
   public Intake() {
-    pivot = new FRCTalonSRX.FRCTalonSRXBuilder()
-    .withCanID(Constants.IntakeConstants.IntakeMotors.IntakePivot.CAN_ID)
+    pivot = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IntakeConstants.IntakeMotors.IntakePivot.CAN_ID)
     .withInverted(Constants.IntakeConstants.IntakeMotors.IntakePivot.INVERT)
     .withFeedbackPort(Constants.IntakeConstants.IntakeMotors.IntakePivot.FEEDBACK_PORT)
     .withSensorPhase(Constants.IntakeConstants.IntakeMotors.IntakePivot.SENSOR_PHASE)
@@ -56,8 +55,7 @@ public class Intake extends SubsystemBase {
     .withPeakOutputReverse(Constants.IntakeConstants.IntakeMotors.IntakePivot.PEAK_OUTPUT_REVERSE)
     .build();
 
-    spin = new FRCTalonSRX.FRCTalonSRXBuilder()
-    .withCanID(Constants.IntakeConstants.IntakeMotors.IntakeSpin.CAN_ID)
+    spin = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IntakeConstants.IntakeMotors.IntakeSpin.CAN_ID)
     .withInverted(Constants.IntakeConstants.IntakeMotors.IntakeSpin.INVERT)
     .withFeedbackPort(Constants.IntakeConstants.IntakeMotors.IntakeSpin.FEEDBACK_PORT)
     .withSensorPhase(Constants.IntakeConstants.IntakeMotors.IntakeSpin.SENSOR_PHASE)

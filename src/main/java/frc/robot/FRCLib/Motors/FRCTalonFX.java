@@ -9,13 +9,23 @@ package frc.robot.FRCLib.Motors;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
+
 
 
 /**
  * An abstraction for the Talon SRX for debugging information
  */
 public class FRCTalonFX implements Sendable {
+    public void follow(FRCTalonFX a){
+        this.master = a;
+        this.motor.follow(this.master.motor);
+    }
 
     @Override
     public void initSendable(SendableBuilder builder) {
@@ -135,6 +145,11 @@ public class FRCTalonFX implements Sendable {
      * A direct reference to the TalonSRX motor, designed for direct control
      */
     public WPI_TalonFX motor;
+
+    /**
+     * The master that will be followed
+     */
+    public FRCTalonFX master;
     ///////////////////////////////////////////////////////////////////////////
 
     public TalonFXSensorCollection m_sensorCollection;

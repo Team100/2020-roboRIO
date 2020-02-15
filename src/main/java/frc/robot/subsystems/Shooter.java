@@ -26,8 +26,7 @@ public class Shooter extends SubsystemBase {
    * Creates a new Shooter.
    */
   public Shooter() {
-    master = new FRCTalonFX.FRCTalonFXBuilder()
-    .withCanID(Constants.ShooterConstants.ShooterMotors.ShooterMaster.CAN_ID)
+    master = new FRCTalonFX.FRCTalonFXBuilder(Constants.ShooterConstants.ShooterMotors.ShooterMaster.CAN_ID)
     .withInverted(Constants.ShooterConstants.ShooterMotors.ShooterMaster.INVERT)
     .withFeedbackPort(Constants.ShooterConstants.ShooterMotors.ShooterMaster.FEEDBACK_PORT)
     .withSensorPhase(Constants.ShooterConstants.ShooterMotors.ShooterMaster.SENSOR_PHASE)
@@ -41,8 +40,7 @@ public class Shooter extends SubsystemBase {
     .withPeakOutputReverse(Constants.ShooterConstants.ShooterMotors.ShooterMaster.PEAK_OUTPUT_REVERSE)
     .build();
 
-    follower = new FRCTalonFX.FRCTalonFXBuilder()
-    .withCanID(Constants.ShooterConstants.ShooterMotors.ShooterFollower.CAN_ID)
+    follower = new FRCTalonFX.FRCTalonFXBuilder(Constants.ShooterConstants.ShooterMotors.ShooterFollower.CAN_ID)
     .withInverted(Constants.ShooterConstants.ShooterMotors.ShooterFollower.INVERT)
     .withFeedbackPort(Constants.ShooterConstants.ShooterMotors.ShooterFollower.FEEDBACK_PORT)
     .withSensorPhase(Constants.ShooterConstants.ShooterMotors.ShooterFollower.SENSOR_PHASE)

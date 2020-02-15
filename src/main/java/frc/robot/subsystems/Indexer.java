@@ -44,8 +44,7 @@ public class Indexer extends SubsystemBase {
 
 
     // Construct Motor Objects
-    indexerStageOne = new FRCTalonSRX.FRCTalonSRXBuilder()
-    .withCanID(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
+    indexerStageOne = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
     .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
     .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
     .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.SENSOR_PHASE)
@@ -59,8 +58,7 @@ public class Indexer extends SubsystemBase {
     .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE)
     .build();
 
-    indexerStageTwo = new FRCTalonSRX.FRCTalonSRXBuilder()
-    .withCanID(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.CAN_ID)
+    indexerStageTwo = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.CAN_ID)
     .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.INVERT)
     .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.FEEDBACK_PORT)
     .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.SENSOR_PHASE)
