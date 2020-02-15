@@ -9,12 +9,30 @@ package frc.robot.FRCLib.Motors;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.*;
+import frc.robot.Robot;
+
 
 /**
  * An abstraction for the Talon SRX for debugging information
  */
-public class FRCTalonSRX {
+public class FRCTalonSRX implements Sendable{
+
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("Text View");
+        builder.addDoubleProperty("EncoderPosition", this::getSelectedSensorPosition, null);
+        builder.addDoubleProperty("EncoderSpeed", this::getSensorVelocity, null);
+        builder.addDoubleProperty("Analog Input", this.m_sensorCollection::getAnalogIn, null);
+        builder.addBooleanProperty("Fwd Limit", this.m_sensorCollection::isFwdLimitSwitchClosed, null);
+        builder.addBooleanProperty("Rev Limit", this.m_sensorCollection::isRevLimitSwitchClosed, null);
+
+    }
 
     public void reset(){
         this.motor.configFactoryDefault();
@@ -78,12 +96,14 @@ public class FRCTalonSRX {
             SmartDashboard.putNumber(this.getSmartDashboardPath()+"/reverseSoftLimitThreshold",this.getReverseSoftLimitThreshold());
             SmartDashboard.putBoolean(this.getSmartDashboardPath()+"/sensorPhase",this.isSensorPhase());
             SmartDashboard.putString(this.getSmartDashboardPath()+"/SmartDashboardPath",this.getSmartDashboardPath());
+            
             SmartDashboard.putNumber(this.getSmartDashboardPath()+"/statusFrame",this.getStatusFrame());
             SmartDashboard.putString(this.getSmartDashboardPath()+"/statusFrameType",this.getStatusFrameType().toString());
             SmartDashboard.putNumber(this.getSmartDashboardPath()+"/timeout",this.getTimeout());
             SmartDashboard.putString(this.getSmartDashboardPath()+"/velocityMeasurementPeriod",this.getVelocityMeasurementPeriod().toString());
             SmartDashboard.putNumber(this.getSmartDashboardPath()+"/velocityMeasurementWindow",this.getVelocityMeasurementWindow());
             SmartDashboard.putNumber(this.getSmartDashboardPath()+"/voltageCompensationSaturation",this.getVoltageCompensationSaturation());
+        
 
         }
 
@@ -93,9 +113,9 @@ public class FRCTalonSRX {
     /**
      * A direct reference to the TalonSRX motor, designed for direct control
      */
-    public TalonSRX motor;
+    public WPI_TalonSRX motor;
     ///////////////////////////////////////////////////////////////////////////
-
+    public SensorCollection m_sensorCollection;
 
     /**
      * The Can ID of the selected motor
@@ -305,7 +325,8 @@ public class FRCTalonSRX {
 
     }
     public FRCTalonSRX configure(){
-        motor = new TalonSRX(this.getCanID());
+        motor = new WPI_TalonSRX(this.getCanID());
+        m_sensorCollection = motor.getSensorCollection();
         System.out.println(this.motor.configFactoryDefault());
         System.out.println("#################RESET");
         if(this.isInverted()){motor.setInverted(this.isInverted());System.out.println("Configuring Inverted");}
@@ -345,8 +366,8 @@ public class FRCTalonSRX {
 
         if(this.getPeakOutputForward() != 0 || this.getPeakOutputReverse() != 0){
             motor.configPeakOutputForward(this.getPeakOutputForward());
-        motor.configPeakOutputForward(this.getPeakOutputReverse());
-        System.out.println("Setting Peak Output");
+            motor.configPeakOutputReverse(this.getPeakOutputReverse());
+            System.out.println("Setting Peak Output");
         }
         
         if(this.isReverseSoftLimitEnabled()){
@@ -381,11 +402,11 @@ public class FRCTalonSRX {
         return this;
     }
 
-    public TalonSRX getMotor() {
+    public WPI_TalonSRX getMotor() {
         return motor;
     }
 
-    public void setMotor(TalonSRX motor) {
+    public void setMotor(WPI_TalonSRX motor) {
         this.motor = motor;
     }
 
@@ -692,49 +713,51 @@ public class FRCTalonSRX {
 
     public static final class FRCTalonSRXBuilder {
         private int canID;
-        private boolean inverted;
-        private int feedbackPort;
-        private int timeout;
-        private boolean sensorPhase;
-        private double kP;
-        private double kI;
-        private double kD;
-        private double kF;
-        private int allowableClosedLoopError;
-        private StatusFrameEnhanced statusFrameType;
-        private int statusFrame;
-        private boolean currentLimitEnabled;
-        private int currentLimit;
-        private NeutralMode neutralMode;
-        private boolean smartDashboardPutEnabled;
+        private boolean inverted = false;
+        private int feedbackPort = 0;
+        private int timeout = 10;
+        private boolean sensorPhase = false;
+        private double kP = 0.0;
+        private double kI = 0.0;
+        private double kD = 0.0;
+        private double kF = 0.0;
+        private int allowableClosedLoopError = 0;
+        private StatusFrameEnhanced statusFrameType = StatusFrameEnhanced.Status_3_Quadrature;
+        private int statusFrame = 0;
+        private boolean currentLimitEnabled = false;
+        private int currentLimit = 0;
+        private NeutralMode neutralMode = NeutralMode.Coast;
+        private boolean smartDashboardPutEnabled = false;
         private String smartDashboardPath;
-        private double openLoopRampRate;
-        private double closedLoopRampRate;
-        private double nominalOutputForward;
-        private double nominalOutputReverse;
-        private double peakOutputForward;
-        private double peakOutputReverse ;
-        private double neutralDeadband;
-        private double voltageCompensationSaturation;
-        private VelocityMeasPeriod velocityMeasurementPeriod;
-        private int velocityMeasurementWindow;
-        private boolean forwardSoftLimitEnabled;
-        private int forwardSoftLimitThreshold;
-        private boolean reverseSoftLimitEnabled;
-        private int reverseSoftLimitThreshold;
-        private boolean auxPIDPolarity;
-        private int motionCruiseVelocity;
-        private int motionAcceleration;
-        private int motionCurveStrength;
-        private int motionProfileTrajectoryPeriod;
-        private boolean feedbackNotContinuous;
+        private double openLoopRampRate = 0;
+        private double closedLoopRampRate = 0;
+        private double nominalOutputForward = 0;
+        private double nominalOutputReverse = 0;
+        private double peakOutputForward = 1.0;
+        private double peakOutputReverse = -1.0 ;
+        private double neutralDeadband = 0.04;
+        private double voltageCompensationSaturation = 0;
+        private VelocityMeasPeriod velocityMeasurementPeriod = VelocityMeasPeriod.Period_100Ms;//??
+        private int velocityMeasurementWindow = 64;
+        private boolean forwardSoftLimitEnabled = false;
+        private int forwardSoftLimitThreshold = 0;
+        private boolean reverseSoftLimitEnabled = false;
+        private int reverseSoftLimitThreshold = 0;
+        private boolean auxPIDPolarity = false;
+        private int motionCruiseVelocity = 0;
+        private int motionAcceleration = 0;
+        private int motionCurveStrength = 0;
+        private int motionProfileTrajectoryPeriod = 0;
+        private boolean feedbackNotContinuous = false;
 
-        public FRCTalonSRXBuilder() {
+        public FRCTalonSRXBuilder(int canID) {
+            this.canID = canID;
+            this.smartDashboardPath = "TalonSRX_" + canID;
         }
 
-        public static FRCTalonSRXBuilder aFRCTalonSRX() {
+/*         public static FRCTalonSRXBuilder aFRCTalonSRX() {
             return new FRCTalonSRXBuilder();
-        }
+        } */
 
         public FRCTalonSRXBuilder withCanID(int canID) {
             this.canID = canID;

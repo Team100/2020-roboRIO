@@ -51,11 +51,13 @@ public class FRCVictorSPX {
         private boolean inverted;
         private FRCTalonSRX master;
 
-        private FRCVictorSPXBuilder() {
+        public FRCVictorSPXBuilder(int canID) {
+            this.canID = canID;
+
         }
 
-        public static FRCVictorSPXBuilder aFRCVictorSPX() {
-            return new FRCVictorSPXBuilder();
+        public static FRCVictorSPXBuilder aFRCVictorSPX(int canID) {
+            return new FRCVictorSPXBuilder(canID);
         }
 
         public FRCVictorSPXBuilder withCanID(int canID) {
