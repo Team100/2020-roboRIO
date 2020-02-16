@@ -35,7 +35,8 @@ public class Indexer extends SubsystemBase {
     MOVE_BACKWARDS,
     STOP
   }
-  public ActionState actionState;
+  public ActionState stageOneActionState;
+  public ActionState stageTwoActionState;
 
   /**
    * Creates a new Indexer.

@@ -30,6 +30,7 @@ public class IndexerStageOneDriveBackward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    this.indexer.stageOneActionState = ActionState.MOVE_BACKWARDS;
     this.indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_BACKWARD);
   }
 

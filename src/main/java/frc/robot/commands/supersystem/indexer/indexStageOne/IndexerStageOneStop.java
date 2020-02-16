@@ -30,6 +30,8 @@ public class IndexerStageOneStop extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    this.indexer.stageOneActionState = ActionState.STOP;
+
     indexer.indexerStageOne.drivePercentOutput(0);
 
   }
