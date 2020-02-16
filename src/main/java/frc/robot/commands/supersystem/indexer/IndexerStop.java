@@ -29,7 +29,6 @@ public class IndexerStop extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    indexer.actionState = ActionState.STOP;
     GlobalManager.SupersystemManager.supersystemState = SupersystemState.NEUTRAL;
     indexer.indexerStageOne.drivePercentOutput(0);
     indexer.indexerStageTwo.drivePercentOutput(0);

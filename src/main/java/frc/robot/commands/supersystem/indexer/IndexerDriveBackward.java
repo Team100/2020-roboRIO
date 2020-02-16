@@ -30,7 +30,6 @@ public class IndexerDriveBackward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    indexer.actionState = ActionState.MOVE_BACKWARDS;
     GlobalManager.SupersystemManager.supersystemState = SupersystemState.REVERSING;
     indexer.indexerStageOne.drivePercentOutput(-(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_BACKWARD));
     indexer.indexerStageTwo.drivePercentOutput(-(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_BACKWARD));

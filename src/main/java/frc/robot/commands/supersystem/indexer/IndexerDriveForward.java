@@ -29,7 +29,6 @@ public class IndexerDriveForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    indexer.actionState = ActionState.MOVE_FOWARD;
     GlobalManager.SupersystemManager.supersystemState = SupersystemState.QUEUEING;
     indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FORWARD);
     indexer.indexerStageTwo.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_FORWARD);
