@@ -7,47 +7,22 @@
 
 package frc.robot.commands.supersystem.indexer;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveBackward;
+import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoDriveBackward;
 import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Indexer.ActionState;
-import frc.robot.GlobalManager;
-import frc.robot.GlobalManager.SupersystemManager;
-import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
 
-public class IndexerDriveBackward extends CommandBase {
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
+public class IndexerDriveBackward extends ParallelCommandGroup {
   /**
    * Creates a new IndexerDriveBackward.
    */
-  public Indexer indexer;
-
   public IndexerDriveBackward(Indexer indexer) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.indexer = indexer;
-    addRequirements(this.indexer);
-  }
+    // Add your commands in the super() call, e.g.
+    // super(new FooCommand(), new BarCommand());super();
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    GlobalManager.SupersystemManager.supersystemState = SupersystemState.REVERSING;
-    indexer.indexerStageOne.drivePercentOutput(-(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_BACKWARD));
-    indexer.indexerStageTwo.drivePercentOutput(-(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_BACKWARD));
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
+    super(new IndexerStageOneDriveBackward(indexer), new IndexerStageTwoDriveBackward(indexer));
   }
 }
