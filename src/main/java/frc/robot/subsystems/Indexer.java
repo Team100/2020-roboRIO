@@ -73,6 +73,9 @@ public class Indexer extends SubsystemBase {
     .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.PEAK_OUTPUT_REVERSE)
     .build();
 
+    addChild("frontSensor", frontSensor);
+    addChild("rearSensor", rearSensor);
+
 
   }
 
