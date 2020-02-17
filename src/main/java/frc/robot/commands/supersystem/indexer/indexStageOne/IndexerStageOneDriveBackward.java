@@ -5,22 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.supersystem.indexer;
+package frc.robot.commands.supersystem.indexer.indexStageOne;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
+
 import frc.robot.Constants;
 import frc.robot.GlobalManager;
 import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Indexer.ActionState;
 
-public class IndexerDriveForward extends CommandBase {
+public class IndexerStageOneDriveBackward extends CommandBase {
   /**
-   * Creates a new IndexerDriveForward.
+   * Creates a new IndexerStageOneDriveBackward.
    */
   public Indexer indexer;
 
-  public IndexerDriveForward(Indexer indexer) {
+  public IndexerStageOneDriveBackward(Indexer indexer) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.indexer = indexer;
     addRequirements(this.indexer);
@@ -30,9 +39,7 @@ public class IndexerDriveForward extends CommandBase {
   @Override
   public void initialize() {
     indexer.actionState = ActionState.MOVE_FOWARD;
-    GlobalManager.SupersystemManager.supersystemState = SupersystemState.QUEUEING;
-    indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FORWARD);
-    indexer.indexerStageTwo.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_FORWARD);
+    indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_BACKWARD);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

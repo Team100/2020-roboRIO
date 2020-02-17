@@ -5,34 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.supersystem.indexer;
+package frc.robot.commands.supersystem.indexer.indexStageOne;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Constants;
 import frc.robot.GlobalManager;
 import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Indexer.ActionState;
 
-public class IndexerDriveForward extends CommandBase {
-  /**
-   * Creates a new IndexerDriveForward.
-   */
+public class IndexerStageOneDriveForward extends CommandBase {
   public Indexer indexer;
-
-  public IndexerDriveForward(Indexer indexer) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  /**
+   * Creates a new IndexerStageOneDriveForward.
+   */
+  public IndexerStageOneDriveForward(Indexer indexer) {
     this.indexer = indexer;
     addRequirements(this.indexer);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    indexer.actionState = ActionState.MOVE_FOWARD;
-    GlobalManager.SupersystemManager.supersystemState = SupersystemState.QUEUEING;
     indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FORWARD);
-    indexer.indexerStageTwo.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_FORWARD);
+  
   }
 
   // Called every time the scheduler runs while the command is scheduled.
