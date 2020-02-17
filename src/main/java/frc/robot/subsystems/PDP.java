@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PDP extends SubsystemBase {
-  private final PowerDistributionPanel m_pdp = new PowerDistributionPanel();
-  
+  private final PowerDistributionPanel pdp = new PowerDistributionPanel();
+
   public PDP() {
-    addChild("PDP", m_pdp);
+    addChild("PDP", pdp);
   }
 }

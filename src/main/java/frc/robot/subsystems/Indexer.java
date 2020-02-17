@@ -42,8 +42,6 @@ public class Indexer extends SubsystemBase {
    * Creates a new Indexer.
    */
   public Indexer() {
-
-
     // Construct Motor Objects
     indexerStageOne = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
     .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
@@ -75,8 +73,6 @@ public class Indexer extends SubsystemBase {
 
     addChild("frontSensor", frontSensor);
     addChild("rearSensor", rearSensor);
-
-
   }
 
   public void processBallDetectionSensors(){
