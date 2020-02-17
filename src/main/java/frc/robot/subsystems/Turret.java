@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
@@ -14,6 +15,9 @@ import frc.robot.FRCLib.Motors.FRCTalonSRX;
 public class Turret extends SubsystemBase {
 
   public FRCTalonSRX turretMotor;
+
+  public DigitalInput fowardSensor = new DigitalInput(Constants.TurretConstants.TurretSensors.FowardSensor.ID);
+  public DigitalInput reverseSensor = new DigitalInput(Constants.TurretConstants.TurretSensors.ReverseSensor.ID);
 
   public static enum ActionState{
     MOVING,
@@ -37,6 +41,9 @@ public class Turret extends SubsystemBase {
     .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
     .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE)
     .build();
+
+    addChild("fowardSensor", fowardSensor);
+    addChild("reverseSensor", reverseSensor);
   }
 
   /**
