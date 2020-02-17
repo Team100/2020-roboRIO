@@ -16,8 +16,6 @@ public class Turret extends SubsystemBase {
 
   public FRCTalonSRX turretMotor;
 
-  public DigitalInput fowardSensor = new DigitalInput(Constants.TurretConstants.TurretSensors.FowardSensor.ID);
-  public DigitalInput reverseSensor = new DigitalInput(Constants.TurretConstants.TurretSensors.ReverseSensor.ID);
 
   public static enum ActionState{
     MOVING,
@@ -42,8 +40,7 @@ public class Turret extends SubsystemBase {
     .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE)
     .build();
 
-    addChild("fowardSensor", fowardSensor);
-    addChild("reverseSensor", reverseSensor);
+
   }
 
   /**

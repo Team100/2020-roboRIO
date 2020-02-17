@@ -199,6 +199,8 @@ public final class Constants {
             public static final double STOP_PO = 0;
 
         }
+        public static final class ShooterSensors {
+        }
         public static final class ShooterMotors {
             public static final class ShooterMaster {
                 public static final int CAN_ID = 2;
@@ -238,7 +240,5 @@ public final class Constants {
             }
         }
     }
-    
-
 
 }

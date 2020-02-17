@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.FRCLib.Motors.FRCTalonFX;
@@ -14,6 +15,7 @@ import frc.robot.FRCLib.Motors.FRCTalonFX;
 public class Shooter extends SubsystemBase {
   public FRCTalonFX master;
   public FRCTalonFX follower;
+
 
   public static enum ShooterState{
     SHOOTING,
