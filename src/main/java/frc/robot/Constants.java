@@ -1,3 +1,21 @@
+/////////////////////////////////////////////////////////////////
+//                                                             //
+// Hello Team 100                                              //
+//                                                             //
+/////////////////////////////////////////////////////////////////
+//                                                             //
+// This is Constants.java, where most code changes will occur. //
+//                                                             //
+// Please check with a programmer or programming mentor before //
+// making changes to this file.                                //
+//                                                             //
+// You most likely will not need to make any changes outside   //
+// of this file, unless it is a logic problem.                 //
+//                                                             //
+// Thanks!                                                     //
+//                                                             //
+/////////////////////////////////////////////////////////////////
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
