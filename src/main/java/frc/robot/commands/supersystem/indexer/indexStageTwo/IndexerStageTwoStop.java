@@ -9,27 +9,30 @@ package frc.robot.commands.supersystem.indexer.indexStageTwo;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.IndexerStageOne;
-import frc.robot.subsystems.IndexerStageOne.ActionState;
+import frc.robot.Constants;
+import frc.robot.GlobalManager;
+import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Indexer.ActionState;
 
 public class IndexerStageTwoStop extends CommandBase {
   /**
    * Creates a new IndexerStageTwoStop.
    */
-  public IndexerStageOne indexerStageOne;
+  public Indexer indexer;
 
-  public IndexerStageTwoStop(IndexerStageOne indexerStageOne) {
+  public IndexerStageTwoStop(Indexer indexer) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.indexerStageOne = indexerStageOne;
-    addRequirements(this.indexerStageOne);
+    this.indexer = indexer;
+    addRequirements(this.indexer);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.indexerStageOne.stageTwoActionState = ActionState.STOP;
+    this.indexer.stageTwoActionState = ActionState.STOP;
 
-    indexerStageOne.indexerStageTwo.drivePercentOutput(0);
+    indexer.indexerStageTwo.drivePercentOutput(0);
 
   }
 

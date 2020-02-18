@@ -13,51 +13,23 @@ import frc.robot.Constants;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
 
 public class IndexerStageTwo extends SubsystemBase {
-
-  public FRCTalonSRX indexerStageOne;
   public FRCTalonSRX indexerStageTwo;
 
-  public DigitalInput frontSensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.FrontSensor.ID);
-  public DigitalInput rearSensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.RearSensor.ID);
-
-    /**
-   * Keeps track of whether the last iteration was positive or not
-   */
-  public boolean lastIterateFront, lastIterateRear;
-
-  /**
-   * Keeps track of how many objects have passed the sensor
-   */
-  public int frontCount, rearCount;
 
   public static enum ActionState{
     MOVE_FOWARD,
     MOVE_BACKWARDS,
     STOP
   }
-  public ActionState stageOneActionState;
   public ActionState stageTwoActionState;
 
   /**
    * Creates a new Indexer.
    */
-  public Indexer() {
+  public IndexerStageTwo() {
 
 
-    // Construct Motor Objects
-    indexerStageOne = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
-    .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
-    .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
-    .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.SENSOR_PHASE)
-    .withTimeout(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.TIMEOUT)
-    .withCurrentLimitEnabled(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.ENABLE_CURRENT_LIMIT)
-    .withCurrentLimit(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CURRENT_LIMIT)
-    .withOpenLoopRampRate(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.OPEN_LOOP_RAMP)
-    .withNominalOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_FORWARD)
-    .withNominalOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_REVERSE)
-    .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
-    .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE)
-    .build();
+
 
     indexerStageTwo = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.CAN_ID)
     .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.INVERT)
@@ -76,26 +48,6 @@ public class IndexerStageTwo extends SubsystemBase {
 
   }
 
-  public void processBallDetectionSensors(){
-    if(!frontSensor.get() && lastIterateFront){
-      lastIterateFront = false;
-    } else if(frontSensor.get() && !lastIterateFront){
-      lastIterateFront = true;
-      frontCount += 1;
-      System.out.println("Front Count: "+frontCount);
-      
-    }
-
-
-    if(!rearSensor.get() && lastIterateRear){
-      lastIterateRear = false;
-    } else if(rearSensor.get() && !lastIterateRear){
-      lastIterateRear = true;
-      rearCount += 1;
-      System.out.println("Rear Count: "+rearCount);
-
-    }
-  }
 
   /**
    * Update any states
@@ -107,7 +59,6 @@ public class IndexerStageTwo extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    processBallDetectionSensors();
     updateState();
   }
 }
