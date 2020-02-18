@@ -9,6 +9,8 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import frc.robot.FRCLib.Conversions.EncoderConversionFactors;
 
@@ -26,6 +28,7 @@ public final class Constants {
 
     public static final class DrivetrainConstants {
         public static final boolean DEBUG = true;
+        public static final Port NAVX_PORT = SerialPort.Port.kUSB;
 
         public static final class DrivetrainParameters {
             public static final double MAX_OUTPUT = 0.5;
