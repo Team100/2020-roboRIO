@@ -48,6 +48,10 @@ public class RobotContainer {
 
         //Subsystem Initiation
         drivetrain = new Drivetrain();
+        indexer = new Indexer();
+        intake = new Intake();
+        shooter = new Shooter();
+        turret = new Turret();
 
 
         //Default Commands
