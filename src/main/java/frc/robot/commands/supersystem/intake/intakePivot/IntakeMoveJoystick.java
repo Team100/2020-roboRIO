@@ -5,45 +5,40 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.supersystem.intake;
+package frc.robot.commands.supersystem.intake.intakePivot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Intake.LocationState;
-import frc.robot.subsystems.Intake.ValidAngles;
+import frc.robot.subsystems.IntakePivot;
 
-public class IntakeMoveUp extends CommandBase {
-
-  public Intake intake;
+public class IntakeMoveJoystick extends CommandBase {
+  IntakePivot pivot;
+  Joystick joystick;
   /**
-   * Creates a new IntakeMoveUp.
+   * Creates a new IntakeMoveJoystick.
    */
-  public IntakeMoveUp(Intake intake) {
+  public IntakeMoveJoystick(IntakePivot pivot, Joystick joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
-
-    this.intake = intake;
-    addRequirements(this.intake);
+    this.pivot = pivot;
+    this.joystick = joystick;
+    addRequirements(this.pivot);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.currentAngle = ValidAngles.UNCERTAIN;
-    intake.locationState = LocationState.MOVING;
-    intake.pivot.driveMotionMagic(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_UP_DEGREES);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    pivot.pivot.drivePercentOutput(joystick.getRawAxis(0));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.currentAngle = ValidAngles.UP; //TODO Account for failure context
-    intake.locationState = LocationState.STATIONARY;
   }
 
   // Returns true when the command should end.
