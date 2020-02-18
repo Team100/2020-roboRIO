@@ -14,13 +14,14 @@ import frc.robot.GlobalManager;
 import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Indexer.ActionState;
+import frc.robot.subsystems.IndexerStageTwo;
 
 public class IndexerStageTwoDriveForward extends CommandBase {
-  public Indexer indexer;
+  public IndexerStageTwo indexer;
   /**
    * Creates a new IndexerStageTwoDriveForward.
    */
-  public IndexerStageTwoDriveForward(Indexer indexer) {
+  public IndexerStageTwoDriveForward(IndexerStageTwo indexer) {
     this.indexer = indexer;
     addRequirements(this.indexer);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,7 +30,7 @@ public class IndexerStageTwoDriveForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.indexer.stageTwoActionState = ActionState.MOVE_FOWARD;
+    this.indexer.actionState = ActionState.MOVE_FOWARD;
 
     indexer.indexerStageTwo.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_FORWARD);
   

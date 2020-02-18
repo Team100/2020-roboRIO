@@ -21,12 +21,8 @@ public class IndexerStageOne extends SubsystemBase {
 
 
 
-  public static enum ActionState{
-    MOVE_FOWARD,
-    MOVE_BACKWARDS,
-    STOP
-  }
-  public ActionState actionState;
+
+  public Indexer.ActionState actionState;
 
   /**
    * Creates a new Indexer.
