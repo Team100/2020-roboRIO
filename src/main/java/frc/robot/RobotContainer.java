@@ -34,7 +34,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     public final Drivetrain drivetrain;
-    public final Indexer indexer;
+    public final IndexerStageOne indexerStageOne;
     public final Intake intake;
     public final IntakePivot intakePivot;
     public final Shooter shooter;
@@ -63,7 +63,7 @@ public class RobotContainer {
 
         //Subsystem Initiation
         drivetrain = new Drivetrain();
-        indexer = new Indexer();
+        indexerStageOne = new IndexerStageOne();
         intake = new Intake();
         intakePivot = new IntakePivot();
         shooter = new Shooter();
@@ -80,7 +80,7 @@ public class RobotContainer {
 
     public void setDefaultCommands(){
         drivetrain.setDefaultCommand(new ArcadeDrive(drivetrain, leftJoystick, rightJoystick));
-        indexer.setDefaultCommand(new IndexerStop(indexer));
+        indexerStageOne.setDefaultCommand(new IndexerStop(indexerStageOne));
         intake.setDefaultCommand(new IntakeStop(intake));
         intakePivot.setDefaultCommand(new IntakeMoveJoystick(intakePivot, gamepad));
         shooter.setDefaultCommand(new ShooterStop(shooter));
@@ -99,10 +99,10 @@ public class RobotContainer {
         indexerStageOneForward = new JoystickButton(gamepad, 2);
         indexerStageTwoForward = new JoystickButton(gamepad, 4);
 
-        wholeIndexerForward.whileHeld(new IndexerDriveForward(indexer));
-        wholeIndexerReverse.whileHeld(new IndexerDriveBackward(indexer));
-        indexerStageOneForward.whileHeld(new IndexerStageOneDriveForward(indexer));
-        indexerStageTwoForward.whileHeld(new IndexerStageTwoDriveForward(indexer));
+        wholeIndexerForward.whileHeld(new IndexerDriveForward(indexerStageOne));
+        wholeIndexerReverse.whileHeld(new IndexerDriveBackward(indexerStageOne));
+        indexerStageOneForward.whileHeld(new IndexerStageOneDriveForward(indexerStageOne));
+        indexerStageTwoForward.whileHeld(new IndexerStageTwoDriveForward(indexerStageOne));
 
         ////////////////////////////////////////////////////////////////////////////
         intakeIntake = new JoystickButton(gamepad, 5);

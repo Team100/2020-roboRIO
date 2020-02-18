@@ -10,29 +10,27 @@ package frc.robot.commands.supersystem.indexer.indexStageTwo;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Constants;
-import frc.robot.GlobalManager;
-import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Indexer.ActionState;
+import frc.robot.subsystems.IndexerStageOne;
+import frc.robot.subsystems.IndexerStageOne.ActionState;
 
 
 public class IndexerStageTwoDriveBackward extends CommandBase {
-  Indexer indexer;
+  IndexerStageOne indexerStageOne;
   /**
    * Creates a new IndexerStageTwoDriveBackward.
    */
-  public IndexerStageTwoDriveBackward(Indexer indexer) {
+  public IndexerStageTwoDriveBackward(IndexerStageOne indexerStageOne) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.indexer = indexer;
-    addRequirements(this.indexer);
+    this.indexerStageOne = indexerStageOne;
+    addRequirements(this.indexerStageOne);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.indexer.stageTwoActionState = ActionState.MOVE_BACKWARDS;
+    this.indexerStageOne.stageTwoActionState = ActionState.MOVE_BACKWARDS;
 
-    this.indexer.indexerStageTwo.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_BACKWARD);
+    this.indexerStageOne.indexerStageTwo.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_BACKWARD);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

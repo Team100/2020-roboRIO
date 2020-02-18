@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
 
-public class Indexer extends SubsystemBase {
+public class IndexerStageTwo extends SubsystemBase {
 
   public FRCTalonSRX indexerStageOne;
   public FRCTalonSRX indexerStageTwo;
