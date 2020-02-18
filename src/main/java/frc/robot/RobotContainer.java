@@ -17,6 +17,7 @@ import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
 import frc.robot.commands.supersystem.indexer.IndexerStop;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
 import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoDriveForward;
+import frc.robot.commands.supersystem.intake.IntakeIntake;
 import frc.robot.commands.supersystem.intake.IntakeStop;
 import frc.robot.commands.supersystem.intake.intakePivot.IntakeMoveJoystick;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
@@ -46,6 +47,7 @@ public class RobotContainer {
     public JoystickButton wholeIndexerReverse;
     public JoystickButton indexerStageOneForward;
     public JoystickButton indexerStageTwoForward;
+    public JoystickButton intakeIntake;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -90,15 +92,19 @@ public class RobotContainer {
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        wholeIndexerForward = new JoystickButton(gamepad, 5);
-        wholeIndexerReverse = new JoystickButton(gamepad, 7);
-        indexerStageOneForward = new JoystickButton(gamepad, 6);
-        indexerStageTwoForward = new JoystickButton(gamepad, 8);
+        wholeIndexerForward = new JoystickButton(gamepad, 1);
+        wholeIndexerReverse = new JoystickButton(gamepad, 3);
+        indexerStageOneForward = new JoystickButton(gamepad, 2);
+        indexerStageTwoForward = new JoystickButton(gamepad, 4);
 
         wholeIndexerForward.whileHeld(new IndexerDriveForward(indexer));
         wholeIndexerReverse.whileHeld(new IndexerDriveBackward(indexer));
         indexerStageOneForward.whileHeld(new IndexerStageOneDriveForward(indexer));
         indexerStageTwoForward.whileHeld(new IndexerStageTwoDriveForward(indexer));
+
+        ////////////////////////////////////////////////////////////////////////////
+        intakeIntake = new JoystickButton(gamepad, 5);
+        intakeIntake.whileHeld(new IntakeIntake(intake));
 
 
     }
