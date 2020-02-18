@@ -12,6 +12,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Turret;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -23,6 +27,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final Drivetrain drivetrain;
+    private final Indexer indexer;
+    private final Intake intake;
+    private final Shooter shooter;
+    private final Turret turret;
 
     private final Joystick leftJoystick;
     private final Joystick rightJoystick;
