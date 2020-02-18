@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 
 public class AnnotatedTrajectory extends Trajectory {
-    public AnnotatedTrajectory (Trajectory trajectory) {
-        super (trajectory.getStates());
+    public AnnotatedTrajectory(Trajectory trajectory) {
+        super(trajectory.getStates());
     }
 
     @Override
@@ -26,10 +26,8 @@ public class AnnotatedTrajectory extends Trajectory {
         SmartDashboard.putNumber("Traj_Pos_Y m", current.poseMeters.getTranslation().getY());
         SmartDashboard.putNumber("Traj_Angle deg", current.poseMeters.getRotation().getDegrees());
         SmartDashboard.putNumber("Traj_Curvatured rad/m", current.curvatureRadPerMeter);
-        
+
         return current;
     }
-
-
 
 }

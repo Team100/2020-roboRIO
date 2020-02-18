@@ -17,6 +17,7 @@ public class TurretTurn extends CommandBase {
    * Creates a new TurretTurn.
    */
   public Turret turret;
+
   public TurretTurn(Turret turret) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.turret = turret;

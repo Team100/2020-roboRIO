@@ -88,6 +88,10 @@ public class Drivetrain extends SubsystemBase {
     odometry.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
   }
 
+  public void tankDrivePercentOutput(double leftPO, double rightPO){
+    this.leftMaster.drivePercentOutput(leftPO);
+    this.rightMaster.drivePercentOutput(rightPO);
+  }
   public void tankDriveVelocity(double leftVel, double rightVel) {
     System.out.println(leftVel + "," + rightVel);
 

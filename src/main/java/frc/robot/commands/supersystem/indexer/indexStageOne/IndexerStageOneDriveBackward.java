@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot.commands.supersystem.indexer.indexStageOne;
 
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Constants;
@@ -15,9 +14,9 @@ import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Indexer.ActionState;
 
-
 public class IndexerStageOneDriveBackward extends CommandBase {
   Indexer indexer;
+
   /**
    * Creates a new IndexerStageOneDriveBackward.
    */
@@ -31,7 +30,8 @@ public class IndexerStageOneDriveBackward extends CommandBase {
   @Override
   public void initialize() {
     this.indexer.stageOneActionState = ActionState.MOVE_BACKWARDS;
-    this.indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_BACKWARD);
+    this.indexer.indexerStageOne
+        .drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_BACKWARD);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
