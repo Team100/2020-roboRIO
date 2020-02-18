@@ -55,7 +55,7 @@ public class Shooter extends SubsystemBase {
     .build();
 
 
-    follower.follow(master);
+    follower.motor.follow(master.motor);
 
   }
   /**

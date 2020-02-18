@@ -48,7 +48,6 @@ public class FRCTalonFX implements Sendable {
 
     public void drivePercentOutput(double percentOutput) {
         this.motor.set(ControlMode.PercentOutput, percentOutput);
-        System.out.println(percentOutput);
 
     }
 
@@ -362,7 +361,7 @@ public class FRCTalonFX implements Sendable {
     public FRCTalonFX configure() {
         motor = new WPI_TalonFX(this.getCanID());
         m_sensorCollection = motor.getSensorCollection();
-        System.out.println(this.motor.configFactoryDefault());
+        this.motor.configFactoryDefault();
         System.out.println("#################RESET");
         if (this.isInverted()) {
             motor.setInverted(this.isInverted());

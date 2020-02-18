@@ -22,6 +22,7 @@ import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoStop;
 import frc.robot.commands.supersystem.intake.IntakeIntake;
 import frc.robot.commands.supersystem.intake.IntakeStop;
 import frc.robot.commands.supersystem.intake.intakePivot.IntakeMoveJoystick;
+import frc.robot.commands.supersystem.shooter.ShooterRun;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 import frc.robot.commands.supersystem.turret.TurretStop;
 import frc.robot.subsystems.*;
@@ -43,8 +44,8 @@ public class RobotContainer {
     public final IntakePivot intakePivot;
     public final Shooter shooter;
     public final Turret turret;
-    public final Joystick leftJoystick;
-    public final Joystick rightJoystick;
+    //public final Joystick leftJoystick;
+    //public final Joystick rightJoystick;
     public final Joystick gamepad;
 
     public JoystickButton wholeIndexerForward;
@@ -60,9 +61,9 @@ public class RobotContainer {
      */
     public RobotContainer() {
         //OI Initiation
-        leftJoystick = new Joystick(0);
-        rightJoystick = new Joystick(1);
-        gamepad = new Joystick(2);
+        //leftJoystick = new Joystick(0);
+        //rightJoystick = new Joystick(1);
+        gamepad = new Joystick(0);
 
 
         //Subsystem Initiation
@@ -85,7 +86,7 @@ public class RobotContainer {
     }
 
     public void setDefaultCommands(){
-        drivetrain.setDefaultCommand(new ArcadeDrive(drivetrain, leftJoystick, rightJoystick));
+        //drivetrain.setDefaultCommand(new ArcadeDrive(drivetrain, leftJoystick, rightJoystick));
         stageOne.setDefaultCommand(new IndexerStageOneStop(stageOne));
         stageTwo.setDefaultCommand(new IndexerStageTwoStop(stageTwo));
         intake.setDefaultCommand(new IntakeStop(intake));
@@ -117,7 +118,7 @@ public class RobotContainer {
 
         ////////////////////////////////////////////////////////////////////////////
         shooterShoot = new JoystickButton(gamepad, 6);
-        shooterShoot.whileHeld(new ShooterStop(shooter));
+        shooterShoot.whileHeld(new ShooterRun(shooter));
 
 
     }
