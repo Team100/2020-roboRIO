@@ -26,6 +26,8 @@ public class FRCTalonFX implements Sendable {
     public void follow(FRCTalonFX a){
         this.master = a;
         this.motor.follow(this.master.motor);
+        System.out.println("#####################################");
+        System.out.println(this.motor.getControlMode().toString());
     }
 
     @Override
