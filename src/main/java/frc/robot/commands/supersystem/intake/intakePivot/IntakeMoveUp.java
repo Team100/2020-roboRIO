@@ -9,9 +9,6 @@ package frc.robot.commands.supersystem.intake.intakePivot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Intake.LocationState;
-import frc.robot.subsystems.Intake.ValidAngles;
 import frc.robot.subsystems.IntakePivot;
 
 public class IntakeMoveUp extends CommandBase {
@@ -30,9 +27,9 @@ public class IntakeMoveUp extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.currentAngle = ValidAngles.UNCERTAIN;
-    intake.locationState = LocationState.MOVING;
-    intake.pivot.driveMotionMagic(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_UP_DEGREES);
+    pivot.currentAngle = IntakePivot.ValidAngles.UNCERTAIN;
+    pivot.locationState = IntakePivot.LocationState.MOVING;
+    pivot.pivot.driveMotionMagic(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_UP_DEGREES);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,8 +40,8 @@ public class IntakeMoveUp extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.currentAngle = ValidAngles.UP; //TODO Account for failure context
-    intake.locationState = LocationState.STATIONARY;
+    pivot.currentAngle = IntakePivot.ValidAngles.UP; //TODO Account for failure context
+    pivot.locationState = IntakePivot.LocationState.STATIONARY;
   }
 
   // Returns true when the command should end.

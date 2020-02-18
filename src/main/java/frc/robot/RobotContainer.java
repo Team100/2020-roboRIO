@@ -11,11 +11,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.drivetrain.ArcadeDrive;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Turret;
+import frc.robot.commands.supersystem.intake.intakePivot.IntakeMoveJoystick;
+import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -29,6 +26,8 @@ public class RobotContainer {
     private final Drivetrain drivetrain;
     private final Indexer indexer;
     private final Intake intake;
+    private final IntakePivot intakePivot;
+
     private final Shooter shooter;
     private final Turret turret;
 
@@ -50,17 +49,22 @@ public class RobotContainer {
         drivetrain = new Drivetrain();
         indexer = new Indexer();
         intake = new Intake();
+        intakePivot = new IntakePivot();
         shooter = new Shooter();
         turret = new Turret();
 
 
         //Default Commands
-        drivetrain.setDefaultCommand(new ArcadeDrive(drivetrain, leftJoystick, rightJoystick));
-        
+        this.setDefaultCommands();
       
 
         //Button to Command Mapping
         configureButtonBindings();
+    }
+
+    public void setDefaultCommands(){
+        drivetrain.setDefaultCommand(new ArcadeDrive(drivetrain, leftJoystick, rightJoystick));
+        intakePivot.setDefaultCommand(new IntakeMoveJoystick(intakePivot, gamepad));
     }
 
     /**
