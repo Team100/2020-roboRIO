@@ -27,17 +27,15 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
-    private final Drivetrain drivetrain;
-    private final Indexer indexer;
-    private final Intake intake;
-    private final IntakePivot intakePivot;
-
-    private final Shooter shooter;
-    private final Turret turret;
-
-    private final Joystick leftJoystick;
-    private final Joystick rightJoystick;
-    private final Joystick gamepad;
+    public final Drivetrain drivetrain;
+    public final Indexer indexer;
+    public final Intake intake;
+    public final IntakePivot intakePivot;
+    public final Shooter shooter;
+    public final Turret turret;
+    public final Joystick leftJoystick;
+    public final Joystick rightJoystick;
+    public final Joystick gamepad;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -82,7 +80,7 @@ public class RobotContainer {
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        
+
 
     }
 
