@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveBackward;
 import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoDriveBackward;
 import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.IndexerStageOne;
+import frc.robot.subsystems.IndexerStageTwo;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -19,10 +21,10 @@ public class IndexerDriveBackward extends ParallelCommandGroup {
   /**
    * Creates a new IndexerDriveBackward.
    */
-  public IndexerDriveBackward(Indexer indexer) {
+  public IndexerDriveBackward(IndexerStageOne stageOne, IndexerStageTwo stageTwo) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
 
-    super(new IndexerStageOneDriveBackward(indexer), new IndexerStageTwoDriveBackward(indexer));
+    super(new IndexerStageOneDriveBackward(stageOne), new IndexerStageTwoDriveBackward(stageTwo));
   }
 }
