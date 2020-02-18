@@ -47,7 +47,9 @@ public class RobotContainer {
     public JoystickButton wholeIndexerReverse;
     public JoystickButton indexerStageOneForward;
     public JoystickButton indexerStageTwoForward;
+
     public JoystickButton intakeIntake;
+    public JoystickButton shooterShoot;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -105,6 +107,10 @@ public class RobotContainer {
         ////////////////////////////////////////////////////////////////////////////
         intakeIntake = new JoystickButton(gamepad, 5);
         intakeIntake.whileHeld(new IntakeIntake(intake));
+
+        ////////////////////////////////////////////////////////////////////////////
+        shooterShoot = new JoystickButton(gamepad, 6);
+        shooterShoot.whileHeld(new ShooterStop(shooter));
 
 
     }
