@@ -57,7 +57,12 @@ public class CustomRamseteController extends RamseteController {
     final double vRef = linearVelocityRefMeters;
     final double omegaRef = angularVelocityRefRadiansPerSecond;
 
-    SmartDashboard.putNumber("Current X", currentPose.getTranslation().getX());
+    
+
+
+    double k = 2.0 * m_zeta * Math.sqrt(Math.pow(omegaRef, 2) + m_b * Math.pow(vRef, 2));
+    if(Constants.DrivetrainConstants.DEBUG){
+      SmartDashboard.putNumber("Current X", currentPose.getTranslation().getX());
     SmartDashboard.putNumber("Reference X", poseRef.getTranslation().getX());
 
     SmartDashboard.putNumber("eX", eX);
@@ -65,8 +70,6 @@ public class CustomRamseteController extends RamseteController {
     SmartDashboard.putNumber("eTheta", eTheta);
     SmartDashboard.putNumber("vRef", vRef);
     SmartDashboard.putNumber("omegaRef", omegaRef);
-
-    double k = 2.0 * m_zeta * Math.sqrt(Math.pow(omegaRef, 2) + m_b * Math.pow(vRef, 2));
 
     SmartDashboard.putNumber("k", k);
 
@@ -79,6 +82,10 @@ public class CustomRamseteController extends RamseteController {
             vRef * m_poseError.getRotation().getCos() + k * eX,
             Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
             Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV));
+
+    }
+    
+    
 
     return new ChassisSpeeds(vRef * m_poseError.getRotation().getCos() + k * eX, 0.0,
         omegaRef + k * eTheta + m_b * vRef * sinc(eTheta) * eY);

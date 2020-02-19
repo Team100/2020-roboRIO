@@ -22,6 +22,7 @@ import frc.robot.FRCLib.Conversions.EncoderConversionFactors;
 public final class Constants {
 
     public static final class DrivetrainConstants {
+        public static final boolean DEBUG = true;
         public static final class DrivetrainParameters {
             public static final double MAX_OUTPUT = 0.5;
             public static final NeutralMode NEUTRAL_MODE = NeutralMode.Coast;
