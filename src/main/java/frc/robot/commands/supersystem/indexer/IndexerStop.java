@@ -10,7 +10,8 @@ package frc.robot.commands.supersystem.indexer;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneStop;
 import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoStop;
-import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.IndexerStageOne;
+import frc.robot.subsystems.IndexerStageTwo;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -19,9 +20,9 @@ public class IndexerStop extends ParallelCommandGroup {
   /**
    * Creates a new IndexerStop.
    */
-  public IndexerStop(Indexer indexer) {
+  public IndexerStop(IndexerStageOne stageOne, IndexerStageTwo stageTwo) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    super(new IndexerStageOneStop(indexer), new IndexerStageTwoStop(indexer));
+    super(new IndexerStageOneStop(stageOne), new IndexerStageTwoStop(stageTwo));
   }
 }

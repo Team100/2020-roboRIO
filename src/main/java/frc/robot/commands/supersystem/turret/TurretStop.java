@@ -17,6 +17,7 @@ public class TurretStop extends CommandBase {
    * Creates a new TurretStop.
    */
   public Turret turret;
+
   public TurretStop(Turret turret) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.turret = turret;
