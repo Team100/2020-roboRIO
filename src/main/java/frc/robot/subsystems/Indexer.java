@@ -13,17 +13,14 @@ import frc.robot.Constants;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
 
 public class Indexer extends SubsystemBase {
-  public static enum ActionState{
-    MOVE_FOWARD,
-    MOVE_BACKWARDS,
-    STOP
+  public static enum ActionState {
+    MOVE_FOWARD, MOVE_BACKWARDS, STOP
   }
-
 
   public DigitalInput frontSensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.FrontSensor.ID);
   public DigitalInput rearSensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.RearSensor.ID);
 
-    /**
+  /**
    * Keeps track of whether the last iteration was positive or not
    */
   public boolean lastIterateFront, lastIterateRear;
@@ -33,35 +30,29 @@ public class Indexer extends SubsystemBase {
    */
   public int frontCount, rearCount;
 
-
-
   /**
    * Creates a new Indexer.
    */
   public Indexer() {
 
-
-
-
   }
 
-  public void processBallDetectionSensors(){
-    if(!frontSensor.get() && lastIterateFront){
+  public void processBallDetectionSensors() {
+    if (!frontSensor.get() && lastIterateFront) {
       lastIterateFront = false;
-    } else if(frontSensor.get() && !lastIterateFront){
+    } else if (frontSensor.get() && !lastIterateFront) {
       lastIterateFront = true;
       frontCount += 1;
-      System.out.println("Front Count: "+frontCount);
-      
+      System.out.println("Front Count: " + frontCount);
+
     }
 
-
-    if(!rearSensor.get() && lastIterateRear){
+    if (!rearSensor.get() && lastIterateRear) {
       lastIterateRear = false;
-    } else if(rearSensor.get() && !lastIterateRear){
+    } else if (rearSensor.get() && !lastIterateRear) {
       lastIterateRear = true;
       rearCount += 1;
-      System.out.println("Rear Count: "+rearCount);
+      System.out.println("Rear Count: " + rearCount);
 
     }
   }
@@ -69,7 +60,7 @@ public class Indexer extends SubsystemBase {
   /**
    * Update any states
    */
-  public void updateState(){
+  public void updateState() {
 
   }
 

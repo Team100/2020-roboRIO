@@ -6,19 +6,15 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot.commands.supersystem.indexer.indexStageTwo;
 
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Constants;
-import frc.robot.GlobalManager;
-import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
-import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Indexer.ActionState;
 import frc.robot.subsystems.IndexerStageTwo;
 
-
 public class IndexerStageTwoDriveBackward extends CommandBase {
   IndexerStageTwo indexer;
+
   /**
    * Creates a new IndexerStageTwoDriveBackward.
    */
@@ -33,7 +29,8 @@ public class IndexerStageTwoDriveBackward extends CommandBase {
   public void initialize() {
     this.indexer.actionState = ActionState.MOVE_BACKWARDS;
 
-    this.indexer.indexerStageTwo.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_BACKWARD);
+    this.indexer.indexerStageTwo
+        .drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_BACKWARD);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

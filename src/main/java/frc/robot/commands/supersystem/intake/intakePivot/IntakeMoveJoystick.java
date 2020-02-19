@@ -15,6 +15,7 @@ import frc.robot.subsystems.IntakePivot;
 public class IntakeMoveJoystick extends CommandBase {
   IntakePivot pivot;
   Joystick joystick;
+
   /**
    * Creates a new IntakeMoveJoystick.
    */

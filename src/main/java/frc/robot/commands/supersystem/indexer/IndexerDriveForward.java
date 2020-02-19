@@ -10,7 +10,6 @@ package frc.robot.commands.supersystem.indexer;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
 import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoDriveForward;
-import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.IndexerStageOne;
 import frc.robot.subsystems.IndexerStageTwo;
 

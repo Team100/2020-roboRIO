@@ -14,6 +14,7 @@ import frc.robot.subsystems.IntakePivot;
 public class IntakeMoveUp extends CommandBase {
 
   public IntakePivot pivot;
+
   /**
    * Creates a new IntakeMoveUp.
    */
@@ -40,7 +41,7 @@ public class IntakeMoveUp extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    pivot.currentAngle = IntakePivot.ValidAngles.UP; //TODO Account for failure context
+    pivot.currentAngle = IntakePivot.ValidAngles.UP; // TODO Account for failure context
     pivot.locationState = IntakePivot.LocationState.STATIONARY;
   }
 

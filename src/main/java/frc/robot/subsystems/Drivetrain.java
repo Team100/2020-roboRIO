@@ -20,25 +20,33 @@ public class Drivetrain extends SubsystemBase {
      */
     public Drivetrain() {
         leftMaster = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.CAN_ID)
-        .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_FORWARD)
-        .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_REVERSE)
-        .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.NEUTRAL_MODE)
-        .build();
-        leftFollower = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.CAN_ID)
-        .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.PEAK_OUTPUT_FORWARD)
-        .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.PEAK_OUTPUT_REVERSE)
-        .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.NEUTRAL_MODE)
-        .build();
-        rightMaster = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.CAN_ID)
-        .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.PEAK_OUTPUT_FORWARD)
-        .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.PEAK_OUTPUT_REVERSE)
-        .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.NEUTRAL_MODE)
-        .build();
-        rightFollower = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.CAN_ID)
-        .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.PEAK_OUTPUT_FORWARD)
-        .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.PEAK_OUTPUT_REVERSE)
-        .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.NEUTRAL_MODE)
-        .build();
+                .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_FORWARD)
+                .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_REVERSE)
+                .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.NEUTRAL_MODE).build();
+        leftFollower = new FRCTalonFX.FRCTalonFXBuilder(
+                Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.CAN_ID)
+                        .withPeakOutputForward(
+                                Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.PEAK_OUTPUT_FORWARD)
+                        .withPeakOutputReverse(
+                                Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.PEAK_OUTPUT_REVERSE)
+                        .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.NEUTRAL_MODE)
+                        .build();
+        rightMaster = new FRCTalonFX.FRCTalonFXBuilder(
+                Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.CAN_ID)
+                        .withPeakOutputForward(
+                                Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.PEAK_OUTPUT_FORWARD)
+                        .withPeakOutputReverse(
+                                Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.PEAK_OUTPUT_REVERSE)
+                        .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.NEUTRAL_MODE)
+                        .build();
+        rightFollower = new FRCTalonFX.FRCTalonFXBuilder(
+                Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.CAN_ID)
+                        .withPeakOutputForward(
+                                Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.PEAK_OUTPUT_FORWARD)
+                        .withPeakOutputReverse(
+                                Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.PEAK_OUTPUT_REVERSE)
+                        .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.NEUTRAL_MODE)
+                        .build();
 
         leftFollower.motor.follow(leftMaster.motor);
         rightFollower.motor.follow(rightMaster.motor);
@@ -52,7 +60,7 @@ public class Drivetrain extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        leftMaster.drivePercentOutput(leftOutput*Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT);
-        rightMaster.drivePercentOutput(rightOutput*Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT);
+        leftMaster.drivePercentOutput(leftOutput * Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT);
+        rightMaster.drivePercentOutput(rightOutput * Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT);
     }
 }

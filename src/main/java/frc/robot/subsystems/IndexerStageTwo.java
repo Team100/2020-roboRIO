@@ -15,7 +15,6 @@ import frc.robot.FRCLib.Motors.FRCTalonSRX;
 public class IndexerStageTwo extends SubsystemBase {
   public FRCTalonSRX indexerStageTwo;
 
-
   public Indexer.ActionState actionState;
 
   /**
@@ -23,31 +22,27 @@ public class IndexerStageTwo extends SubsystemBase {
    */
   public IndexerStageTwo() {
 
-
-
-
-    indexerStageTwo = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.CAN_ID)
-    .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.INVERT)
-    .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.FEEDBACK_PORT)
-    .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.SENSOR_PHASE)
-    .withTimeout(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.TIMEOUT)
-    .withCurrentLimitEnabled(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.ENABLE_CURRENT_LIMIT)
-    .withCurrentLimit(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.CURRENT_LIMIT)
-    .withOpenLoopRampRate(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.OPEN_LOOP_RAMP)
-    .withNominalOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.NOMINAL_OUTPUT_FORWARD)
-    .withNominalOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.NOMINAL_OUTPUT_REVERSE)
-    .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.PEAK_OUTPUT_FORWARD)
-    .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.PEAK_OUTPUT_REVERSE)
-    .build();
-
+    indexerStageTwo = new FRCTalonSRX.FRCTalonSRXBuilder(
+        Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.CAN_ID)
+            .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.INVERT)
+            .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.FEEDBACK_PORT)
+            .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.SENSOR_PHASE)
+            .withTimeout(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.TIMEOUT)
+            .withCurrentLimitEnabled(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.ENABLE_CURRENT_LIMIT)
+            .withCurrentLimit(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.CURRENT_LIMIT)
+            .withOpenLoopRampRate(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.OPEN_LOOP_RAMP)
+            .withNominalOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.NOMINAL_OUTPUT_FORWARD)
+            .withNominalOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.NOMINAL_OUTPUT_REVERSE)
+            .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.PEAK_OUTPUT_FORWARD)
+            .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.PEAK_OUTPUT_REVERSE)
+            .build();
 
   }
-
 
   /**
    * Update any states
    */
-  public void updateState(){
+  public void updateState() {
 
   }
 

@@ -8,7 +8,6 @@
 package frc.robot.FRCLib.Motors;
 
 import com.ctre.phoenix.motorcontrol.*;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Sendable;
@@ -17,16 +16,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-
-
 /**
  * An abstraction for the Talon SRX for debugging information
  */
 public class FRCTalonFX implements Sendable {
-    public void follow(FRCTalonFX a){
+    public void follow(FRCTalonFX a) {
         this.master = a;
         this.motor.follow(this.master.motor);
-        
+
     }
 
     @Override
@@ -37,7 +34,6 @@ public class FRCTalonFX implements Sendable {
         builder.addDoubleProperty("Fwd Limit", this.m_sensorCollection::isFwdLimitSwitchClosed, null);
         builder.addDoubleProperty("Rev Limit", this.m_sensorCollection::isRevLimitSwitchClosed, null);
     }
-
 
     public void reset() {
         this.motor.configFactoryDefault();
@@ -771,10 +767,10 @@ public class FRCTalonFX implements Sendable {
         private double nominalOutputForward = 0;
         private double nominalOutputReverse = 0;
         private double peakOutputForward = 1.0;
-        private double peakOutputReverse = -1.0 ;
+        private double peakOutputReverse = -1.0;
         private double neutralDeadband = 0.04;
         private double voltageCompensationSaturation = 0;
-        private VelocityMeasPeriod velocityMeasurementPeriod = VelocityMeasPeriod.Period_100Ms;//??
+        private VelocityMeasPeriod velocityMeasurementPeriod = VelocityMeasPeriod.Period_100Ms;// ??
         private int velocityMeasurementWindow = 64;
         private boolean forwardSoftLimitEnabled = false;
         private int forwardSoftLimitThreshold = 0;
@@ -793,7 +789,7 @@ public class FRCTalonFX implements Sendable {
         }
 
         // public static FRCTalonFXBuilder aFRCTalonFX() {
-        //     return new FRCTalonFXBuilder();
+        // return new FRCTalonFXBuilder();
         // }
 
         public FRCTalonFXBuilder withCanID(int canID) {
@@ -1024,6 +1020,4 @@ public class FRCTalonFX implements Sendable {
         }
     }
 
-    
-    
 }

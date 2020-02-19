@@ -18,6 +18,7 @@ import frc.robot.subsystems.IndexerStageTwo;
 
 public class IndexerStageTwoDriveForward extends CommandBase {
   public IndexerStageTwo indexer;
+
   /**
    * Creates a new IndexerStageTwoDriveForward.
    */
@@ -32,8 +33,9 @@ public class IndexerStageTwoDriveForward extends CommandBase {
   public void initialize() {
     this.indexer.actionState = ActionState.MOVE_FOWARD;
 
-    indexer.indexerStageTwo.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_FORWARD);
-  
+    indexer.indexerStageTwo
+        .drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_FORWARD);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
