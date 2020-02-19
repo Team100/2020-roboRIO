@@ -49,8 +49,8 @@ public class Drivetrain extends SubsystemBase {
         .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.NEUTRAL_MODE)
         .build();
 
-        leftFollower.motor.follow(leftMaster.motor);
-        rightFollower.motor.follow(rightMaster.motor);
+        leftFollower.follow(leftMaster);
+        rightMaster.follow(rightMaster);
     }
 
     public void set(double left, double right) {
