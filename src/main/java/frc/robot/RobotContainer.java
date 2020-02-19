@@ -21,7 +21,6 @@ import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.supersystem.indexer.IndexerDriveBackward;
 import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
-import frc.robot.commands.supersystem.indexer.IndexerStop;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneStop;
 import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoDriveForward;

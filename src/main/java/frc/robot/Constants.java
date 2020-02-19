@@ -88,6 +88,7 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
+                public static final boolean INVERTED = false;
             }
 
             public static final class LeftFollower {
@@ -95,6 +96,8 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
+                public static final boolean INVERTED = false;
+
             }
 
             public static final class RightMaster {
@@ -102,6 +105,8 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
+                public static final boolean INVERTED = true;
+
             }
 
             public static final class RightFollower {
@@ -109,6 +114,8 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
+                public static final boolean INVERTED = true;
+
             }
         }
     }
