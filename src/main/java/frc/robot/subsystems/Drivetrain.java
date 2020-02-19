@@ -39,6 +39,7 @@ public class Drivetrain extends SubsystemBase {
         .withKI(Constants.DrivetrainConstants.DrivetrainParameters.KI)
         .withKD(Constants.DrivetrainConstants.DrivetrainParameters.KD)
         .withKF(Constants.DrivetrainConstants.DrivetrainParameters.KF)
+        .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.INVERTED)
         .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_REVERSE)
         .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.NEUTRAL_MODE).build();
@@ -48,6 +49,7 @@ public class Drivetrain extends SubsystemBase {
         .withKI(Constants.DrivetrainConstants.DrivetrainParameters.KI)
         .withKD(Constants.DrivetrainConstants.DrivetrainParameters.KD)
         .withKF(Constants.DrivetrainConstants.DrivetrainParameters.KF)
+        .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.INVERTED)
         .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.PEAK_OUTPUT_REVERSE)
         .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.NEUTRAL_MODE).build();
@@ -57,6 +59,7 @@ public class Drivetrain extends SubsystemBase {
         .withKI(Constants.DrivetrainConstants.DrivetrainParameters.KI)
         .withKD(Constants.DrivetrainConstants.DrivetrainParameters.KD)
         .withKF(Constants.DrivetrainConstants.DrivetrainParameters.KF)
+        .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.INVERTED)
         .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.PEAK_OUTPUT_REVERSE)
         .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.NEUTRAL_MODE).build();
@@ -67,6 +70,7 @@ public class Drivetrain extends SubsystemBase {
             .withKI(Constants.DrivetrainConstants.DrivetrainParameters.KI)
             .withKD(Constants.DrivetrainConstants.DrivetrainParameters.KD)
             .withKF(Constants.DrivetrainConstants.DrivetrainParameters.KF)
+            .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.INVERTED)
             .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.PEAK_OUTPUT_FORWARD)
             .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.PEAK_OUTPUT_REVERSE)
             .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.NEUTRAL_MODE).build();
