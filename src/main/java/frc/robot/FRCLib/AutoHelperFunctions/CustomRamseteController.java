@@ -57,35 +57,30 @@ public class CustomRamseteController extends RamseteController {
     final double vRef = linearVelocityRefMeters;
     final double omegaRef = angularVelocityRefRadiansPerSecond;
 
-    
-
-
     double k = 2.0 * m_zeta * Math.sqrt(Math.pow(omegaRef, 2) + m_b * Math.pow(vRef, 2));
-    if(Constants.DrivetrainConstants.DEBUG){
+    if (Constants.DrivetrainConstants.DEBUG) {
       SmartDashboard.putNumber("Current X", currentPose.getTranslation().getX());
-    SmartDashboard.putNumber("Reference X", poseRef.getTranslation().getX());
+      SmartDashboard.putNumber("Reference X", poseRef.getTranslation().getX());
 
-    SmartDashboard.putNumber("eX", eX);
-    SmartDashboard.putNumber("eY", eY);
-    SmartDashboard.putNumber("eTheta", eTheta);
-    SmartDashboard.putNumber("vRef", vRef);
-    SmartDashboard.putNumber("omegaRef", omegaRef);
+      SmartDashboard.putNumber("eX", eX);
+      SmartDashboard.putNumber("eY", eY);
+      SmartDashboard.putNumber("eTheta", eTheta);
+      SmartDashboard.putNumber("vRef", vRef);
+      SmartDashboard.putNumber("omegaRef", omegaRef);
 
-    SmartDashboard.putNumber("k", k);
+      SmartDashboard.putNumber("k", k);
 
-    SmartDashboard.putNumber("vX [m/s]", vRef * m_poseError.getRotation().getCos() + k * eX);
-    SmartDashboard.putNumber("vY [m/s]", 0.0);
-    SmartDashboard.putNumber("vOmega [rad/s]", omegaRef + k * eTheta + m_b * vRef * sinc(eTheta) * eY);
+      SmartDashboard.putNumber("vX [m/s]", vRef * m_poseError.getRotation().getCos() + k * eX);
+      SmartDashboard.putNumber("vY [m/s]", 0.0);
+      SmartDashboard.putNumber("vOmega [rad/s]", omegaRef + k * eTheta + m_b * vRef * sinc(eTheta) * eY);
 
-    SmartDashboard.putNumber("vX [t/100ms]",
-        AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(
-            vRef * m_poseError.getRotation().getCos() + k * eX,
-            Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
-            Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV));
+      SmartDashboard.putNumber("vX [t/100ms]",
+          AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(
+              vRef * m_poseError.getRotation().getCos() + k * eX,
+              Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
+              Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV));
 
     }
-    
-    
 
     return new ChassisSpeeds(vRef * m_poseError.getRotation().getCos() + k * eX, 0.0,
         omegaRef + k * eTheta + m_b * vRef * sinc(eTheta) * eY);
