@@ -79,17 +79,13 @@ public class Drivetrain extends SubsystemBase {
     this.tankDrivePercentOutput(left, right);
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    
-  }
+  
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        leftMaster.drivePercentOutput(leftOutput * Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT);
-        rightMaster.drivePercentOutput(rightOutput * Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT);
+    }
+        
 
   public Pose2d getPose() {
     return odometry.getPoseMeters();
