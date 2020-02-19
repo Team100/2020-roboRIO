@@ -8,7 +8,6 @@
 package frc.robot.commands.supersystem.turret;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Turret.ActionState;
 
