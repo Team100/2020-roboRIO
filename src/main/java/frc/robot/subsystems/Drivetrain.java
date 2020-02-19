@@ -70,7 +70,7 @@ public class Drivetrain extends SubsystemBase {
       }
     
       public DifferentialDriveWheelSpeeds getWheelSpeeds(){
-        return new DifferentialDriveWheelSpeeds(AutonConversionFactors.convertTalonSRXNativeUnitsToWPILibTrajecoryUnits(this.leftLeader.getSelectedSensorVelocity(), Constants.DTConstants.WHEEL_DIAMETER, false, Constants.DTConstants.TICKS_PER_REV), AutonConversionFactors.convertTalonSRXNativeUnitsToWPILibTrajecoryUnits(this.rightLeader.getSelectedSensorVelocity(), Constants.DTConstants.WHEEL_DIAMETER, false, Constants.DTConstants.TICKS_PER_REV));
+        return new DifferentialDriveWheelSpeeds(AutonConversionFactors.convertTalonSRXNativeUnitsToWPILibTrajecoryUnits(this.leftMaster.getSensorVelocity(), Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV), AutonConversionFactors.convertTalonSRXNativeUnitsToWPILibTrajecoryUnits(this.rightMaster.getSensorVelocity(), Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV));
       }
     
     
@@ -83,14 +83,14 @@ public class Drivetrain extends SubsystemBase {
       public void tankDriveVelocity(double leftVel, double rightVel){
         System.out.println(leftVel + ","+ rightVel);  
     
-        double leftLeaderNativeVelocity = AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(leftVel, Constants.DTConstants.WHEEL_DIAMETER, false, Constants.DTConstants.TICKS_PER_REV);
-        double rightLeaderNativeVelocity = AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(rightVel, Constants.DTConstants.WHEEL_DIAMETER, false, Constants.DTConstants.TICKS_PER_REV);
+        double leftLeaderNativeVelocity = AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(leftVel, Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV);
+        double rightLeaderNativeVelocity = AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(rightVel, Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV);
         this.leftMaster.driveVelocity(leftLeaderNativeVelocity);
         this.rightMaster.driveVelocity(rightLeaderNativeVelocity);
         
     
         SmartDashboard.putNumber("LeftIntentedVelocity", leftLeaderNativeVelocity);
-        SmartDashboard.putNumber("LeftIntendedVsActual", leftLeaderNativeVelocity-this.leftLeader.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("LeftIntendedVsActual", leftLeaderNativeVelocity-this.leftMaster.getSensorVelocity());
       }
     
       public void resetEncoders(){

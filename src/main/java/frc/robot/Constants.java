@@ -25,6 +25,8 @@ public final class Constants {
         public static final class DrivetrainParameters {
             public static final double MAX_OUTPUT = 0.5;
             public static final NeutralMode NEUTRAL_MODE = NeutralMode.Coast;
+            public static final double WHEEL_DIAMETER = 4;// METERS
+            public static final int TICKS_PER_REV = 4096; //TODO FIGURE OUT ACTUAL VALUE
         }
         public static final class DrivetrainMotors {
             public static final class LeftMaster {
