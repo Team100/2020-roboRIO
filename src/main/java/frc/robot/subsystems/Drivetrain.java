@@ -20,6 +20,7 @@ import frc.robot.FRCLib.AutoHelperFunctions.AutonConversionFactors;
 import frc.robot.FRCLib.Motors.FRCTalonFX;
 
 public class Drivetrain extends SubsystemBase {
+    
   private FRCTalonFX leftMaster, leftFollower, rightMaster, rightFollower;
 
   public AHRS ahrs;
@@ -83,6 +84,12 @@ public class Drivetrain extends SubsystemBase {
     // This method will be called once per scheduler run
     
   }
+
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+        leftMaster.drivePercentOutput(leftOutput * Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT);
+        rightMaster.drivePercentOutput(rightOutput * Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT);
 
   public Pose2d getPose() {
     return odometry.getPoseMeters();

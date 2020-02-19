@@ -5,37 +5,36 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.supersystem.indexer.indexStageOne;
+package frc.robot.commands.supersystem.intake.intakePivot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakePivot;
 
-import frc.robot.subsystems.Indexer.ActionState;
-import frc.robot.subsystems.IndexerStageOne;
+public class IntakeMoveJoystick extends CommandBase {
+  IntakePivot pivot;
+  Joystick joystick;
 
-public class IndexerStageOneStop extends CommandBase {
   /**
-   * Creates a new IndexerStageOneStop.
+   * Creates a new IntakeMoveJoystick.
    */
-  public IndexerStageOne indexer;
-
-  public IndexerStageOneStop(IndexerStageOne indexer) {
+  public IntakeMoveJoystick(IntakePivot pivot, Joystick joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.indexer = indexer;
-    addRequirements(this.indexer);
+    this.pivot = pivot;
+    this.joystick = joystick;
+    addRequirements(this.pivot);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.indexer.actionState = ActionState.STOP;
-
-    indexer.indexerStageOne.drivePercentOutput(0);
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    pivot.pivot.drivePercentOutput(joystick.getRawAxis(0));
   }
 
   // Called once the command ends or is interrupted.

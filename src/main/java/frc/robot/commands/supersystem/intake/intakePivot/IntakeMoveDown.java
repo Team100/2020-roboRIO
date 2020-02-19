@@ -5,33 +5,33 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.supersystem.intake;
+package frc.robot.commands.supersystem.intake.intakePivot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Intake.LocationState;
-import frc.robot.subsystems.Intake.ValidAngles;
+import frc.robot.subsystems.IntakePivot;
 
 public class IntakeMoveDown extends CommandBase {
 
-  public Intake intake;
+  public IntakePivot pivot;
+
   /**
    * Creates a new IntakeMoveDown.
    */
-  public IntakeMoveDown(Intake intake) {
+  public IntakeMoveDown(IntakePivot pivot) {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    this.intake = intake;
-    addRequirements(this.intake);
+    this.pivot = pivot;
+    addRequirements(this.pivot);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.currentAngle = ValidAngles.UNCERTAIN;
-    intake.locationState = LocationState.MOVING;
-    intake.pivot.driveMotionMagic(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_DEGREES);
+    pivot.currentAngle = IntakePivot.ValidAngles.UNCERTAIN;
+    pivot.locationState = IntakePivot.LocationState.MOVING;
+    pivot.pivot.driveMotionMagic(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_DEGREES);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,8 +42,8 @@ public class IntakeMoveDown extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.currentAngle = ValidAngles.DOWN; //TODO Account for failure context
-    intake.locationState = LocationState.STATIONARY;
+    pivot.currentAngle = IntakePivot.ValidAngles.DOWN; // TODO Account for failure context
+    pivot.locationState = IntakePivot.LocationState.STATIONARY;
   }
 
   // Returns true when the command should end.

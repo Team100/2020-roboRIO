@@ -49,7 +49,7 @@ public final class Constants {
         public static final Port NAVX_PORT = SerialPort.Port.kUSB;
 
         public static final class DrivetrainParameters {
-            public static final double MAX_OUTPUT = 0.5;
+            public static final double MAX_OUTPUT = 1;
             public static final NeutralMode NEUTRAL_MODE = NeutralMode.Coast;
             public static final double WHEEL_DIAMETER = 0.1542;// METERS
             public static final int TICKS_PER_REV = 4096; // TODO FIGURE OUT ACTUAL VALUE
@@ -72,6 +72,7 @@ public final class Constants {
             public static final double RAMSETE_ZETA = 0.7; // From WPILib Doc
         }
 
+
         public static final class AutonConstants {
             public static final double DT = 0.05;
             public static final double MAX_VELOCITY = 7;
@@ -79,6 +80,7 @@ public final class Constants {
             public static final double MAX_JERK = .25;
 
         }
+
 
         public static final class DrivetrainMotors {
             public static final class LeftMaster {
@@ -153,8 +155,8 @@ public final class Constants {
             public static final double STAGE_ONE_PERCENT_OUTPUT_FORWARD = 0.5;
             public static final double STAGE_TWO_PERCENT_OUTPUT_FORWARD = 0.5;
 
-            public static final double STAGE_ONE_PERCENT_OUTPUT_BACKWARD = 0.5;
-            public static final double STAGE_TWO_PERCENT_OUTPUT_BACKWARD = 0.5;
+            public static final double STAGE_ONE_PERCENT_OUTPUT_BACKWARD = -0.5;
+            public static final double STAGE_TWO_PERCENT_OUTPUT_BACKWARD = -0.5;
         }
 
         public static final class IndexerMotors {
