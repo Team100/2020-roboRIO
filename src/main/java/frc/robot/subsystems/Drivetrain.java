@@ -94,12 +94,12 @@ public class Drivetrain extends SubsystemBase {
       }
     
       public void resetEncoders(){
-        leftLeader.setSelectedSensorPosition(0);
-        rightLeader.setSelectedSensorPosition(0);
+        leftMaster.setSensorPosition(0);
+        rightMaster.setSensorPosition(0);
       }
     
       public double getAverageEncoderDistance(){
-        return (leftLeader.getSelectedSensorPosition() + rightLeader.getSelectedSensorPosition())/2.0;
+        return (leftMaster.getSelectedSensorPosition() + rightMaster.getSelectedSensorPosition())/2.0;
       }
       public void zeroHeading() {
         gyro.reset();
