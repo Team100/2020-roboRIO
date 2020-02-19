@@ -7,10 +7,17 @@
 
 package frc.robot;
 
+import java.util.List;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
+import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
+
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.supersystem.indexer.IndexerDriveBackward;
 import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
@@ -79,6 +86,7 @@ public class RobotContainer {
         // Default Commands
         this.setDefaultCommands();
 
+
         // Button to Command Mapping
         configureButtonBindings();
     }
@@ -120,6 +128,7 @@ public class RobotContainer {
 
     }
 
+
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
@@ -127,6 +136,10 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return null;
+
+        Pose2d start = new Pose2d(0, 0, new Rotation2d(0));
+        List<Translation2d> waypoints = List.of();
+        Pose2d end = new Pose2d(2, 0, new Rotation2d(0));
+        return PathGenerator.createAutoNavigationCommand(drivetrain, start, waypoints, end);
     }
 }

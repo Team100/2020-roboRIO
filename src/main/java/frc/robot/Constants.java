@@ -1,3 +1,21 @@
+/////////////////////////////////////////////////////////////////
+//                                                             //
+// Hello Team 100                                              //
+//                                                             //
+/////////////////////////////////////////////////////////////////
+//                                                             //
+// This is Constants.java, where most code changes will occur. //
+//                                                             //
+// Please check with a programmer or programming mentor before //
+// making changes to this file.                                //
+//                                                             //
+// You most likely will not need to make any changes outside   //
+// of this file, unless it is a logic problem.                 //
+//                                                             //
+// Thanks!                                                     //
+//                                                             //
+/////////////////////////////////////////////////////////////////
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -9,6 +27,9 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import frc.robot.FRCLib.Conversions.EncoderConversionFactors;
 
 /**
@@ -24,10 +45,42 @@ import frc.robot.FRCLib.Conversions.EncoderConversionFactors;
 public final class Constants {
 
     public static final class DrivetrainConstants {
+        public static final boolean DEBUG = true;
+        public static final Port NAVX_PORT = SerialPort.Port.kUSB;
+
         public static final class DrivetrainParameters {
             public static final double MAX_OUTPUT = 1;
             public static final NeutralMode NEUTRAL_MODE = NeutralMode.Coast;
+            public static final double WHEEL_DIAMETER = 0.1542;// METERS
+            public static final int TICKS_PER_REV = 4096; // TODO FIGURE OUT ACTUAL VALUE
+
+            public static final double KP = 0.017; // 0.0027
+            public static final double KI = 0;
+            public static final double KD = 20;
+            public static final double KF = 0.085;
+            // public static final double KF = 11.41199782;
+
+            public static final double KS = 0.699;
+            public static final double KV = 0.694;
+            public static final double KTRACK_WIDTH = 0.6604; // TODO Change
+            public static final double KA = 0.0993;
+
+            public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(
+                    KTRACK_WIDTH);
+
+            public static final double RAMSETE_B = 2; // From WPILib Docs
+            public static final double RAMSETE_ZETA = 0.7; // From WPILib Doc
         }
+
+
+        public static final class AutonConstants {
+            public static final double DT = 0.05;
+            public static final double MAX_VELOCITY = 7;
+            public static final double MAX_ACCELERATION = .25;
+            public static final double MAX_JERK = .25;
+
+        }
+
 
         public static final class DrivetrainMotors {
             public static final class LeftMaster {

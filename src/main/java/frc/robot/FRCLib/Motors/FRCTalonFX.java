@@ -48,6 +48,10 @@ public class FRCTalonFX implements Sendable {
 
     }
 
+    public void setSensorPosition(int position){
+        this.motor.setSelectedSensorPosition(position);
+    }
+
     public void driveMotionMagic(double setpoint) {
         this.motor.set(ControlMode.MotionProfile, setpoint);
     }
