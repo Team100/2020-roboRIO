@@ -7,6 +7,9 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
@@ -17,9 +20,12 @@ import frc.robot.Constants;
 import frc.robot.FRCLib.AutoHelperFunctions.AutonConversionFactors;
 import frc.robot.FRCLib.Motors.FRCTalonFX;
 
+
 public class Drivetrain extends SubsystemBase {
     private FRCTalonFX leftMaster, leftFollower, rightMaster, rightFollower;
     private double leftOutput, rightOutput;
+
+    public AHRS ahrs;
 
     public DifferentialDriveOdometry odometry;
 
@@ -28,6 +34,9 @@ public class Drivetrain extends SubsystemBase {
      * Creates a new ExampleSubsystem.
      */
     public Drivetrain() {
+
+        ahrs = new AHRS(Port.kUSB);
+
         leftMaster = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.CAN_ID)
         .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_REVERSE)
@@ -50,7 +59,7 @@ public class Drivetrain extends SubsystemBase {
         .build();
 
         leftFollower.follow(leftMaster);
-        rightMaster.follow(rightMaster);
+        rightFollower.follow(rightMaster);
     }
 
     public void set(double left, double right) {
@@ -102,15 +111,15 @@ public class Drivetrain extends SubsystemBase {
         return (leftMaster.getSelectedSensorPosition() + rightMaster.getSelectedSensorPosition())/2.0;
       }
       public void zeroHeading() {
-        gyro.reset();
+        ahrs.zeroYaw();
       }
     
       public double getHeading(){
         //return Math.IEEEremainder(gyro.getAngle(), 360);
-        return -1 * Math.IEEEremainder(gyro.getAngle(),360);
+        return -1 * Math.IEEEremainder(ahrs.getFusedHeading(),360);
     
       }
       public double getTurnRate(){
-        return gyro.getRate();
+        return ahrs.getRate();
       }
 }
