@@ -20,7 +20,7 @@ import frc.robot.FRCLib.AutoHelperFunctions.AutonConversionFactors;
 import frc.robot.FRCLib.Motors.FRCTalonFX;
 
 public class Drivetrain extends SubsystemBase {
-    
+
   private FRCTalonFX leftMaster, leftFollower, rightMaster, rightFollower;
 
   public AHRS ahrs;
@@ -35,41 +35,41 @@ public class Drivetrain extends SubsystemBase {
     ahrs = new AHRS(Constants.DrivetrainConstants.NAVX_PORT);
 
     leftMaster = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.CAN_ID)
-        .withKP(Constants.DrivetrainConstants.DrivetrainParameters.KP)
-        .withKI(Constants.DrivetrainConstants.DrivetrainParameters.KI)
-        .withKD(Constants.DrivetrainConstants.DrivetrainParameters.KD)
-        .withKF(Constants.DrivetrainConstants.DrivetrainParameters.KF)
+        .withKP(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KP)
+        .withKI(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KI)
+        .withKD(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KD)
+        .withKF(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KF)
         .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.INVERTED)
         .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_REVERSE)
         .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.NEUTRAL_MODE).build();
 
     leftFollower = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.CAN_ID)
-        .withKP(Constants.DrivetrainConstants.DrivetrainParameters.KP)
-        .withKI(Constants.DrivetrainConstants.DrivetrainParameters.KI)
-        .withKD(Constants.DrivetrainConstants.DrivetrainParameters.KD)
-        .withKF(Constants.DrivetrainConstants.DrivetrainParameters.KF)
+        .withKP(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.KP)
+        .withKI(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.KI)
+        .withKD(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.KD)
+        .withKF(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.KF)
         .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.INVERTED)
         .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.PEAK_OUTPUT_REVERSE)
         .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.NEUTRAL_MODE).build();
 
     rightMaster = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.CAN_ID)
-        .withKP(Constants.DrivetrainConstants.DrivetrainParameters.KP)
-        .withKI(Constants.DrivetrainConstants.DrivetrainParameters.KI)
-        .withKD(Constants.DrivetrainConstants.DrivetrainParameters.KD)
-        .withKF(Constants.DrivetrainConstants.DrivetrainParameters.KF)
+        .withKP(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.KP)
+        .withKI(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.KI)
+        .withKD(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.KD)
+        .withKF(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.KF)
         .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.INVERTED)
         .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.PEAK_OUTPUT_REVERSE)
         .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.NEUTRAL_MODE).build();
-        
+
     rightFollower = new FRCTalonFX.FRCTalonFXBuilder(
         Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.CAN_ID)
-            .withKP(Constants.DrivetrainConstants.DrivetrainParameters.KP)
-            .withKI(Constants.DrivetrainConstants.DrivetrainParameters.KI)
-            .withKD(Constants.DrivetrainConstants.DrivetrainParameters.KD)
-            .withKF(Constants.DrivetrainConstants.DrivetrainParameters.KF)
+            .withKP(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.KP)
+            .withKI(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.KI)
+            .withKD(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.KD)
+            .withKF(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.KF)
             .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.INVERTED)
             .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.PEAK_OUTPUT_FORWARD)
             .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.PEAK_OUTPUT_REVERSE)
@@ -83,13 +83,10 @@ public class Drivetrain extends SubsystemBase {
     this.tankDrivePercentOutput(left, right);
   }
 
-  
-
-    @Override
-    public void periodic() {
-        // This method will be called once per scheduler run
-    }
-        
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
 
   public Pose2d getPose() {
     return odometry.getPoseMeters();
@@ -127,11 +124,11 @@ public class Drivetrain extends SubsystemBase {
     this.leftMaster.driveVelocity(leftLeaderNativeVelocity);
     this.rightMaster.driveVelocity(rightLeaderNativeVelocity);
 
-    if(Constants.DrivetrainConstants.DEBUG){
+    if (Constants.DrivetrainConstants.DEBUG) {
       SmartDashboard.putNumber("LeftIntentedVelocity", leftLeaderNativeVelocity);
-    SmartDashboard.putNumber("LeftIntendedVsActual", leftLeaderNativeVelocity - this.leftMaster.getSensorVelocity());
+      SmartDashboard.putNumber("LeftIntendedVsActual", leftLeaderNativeVelocity - this.leftMaster.getSensorVelocity());
     }
-    
+
   }
 
   public void resetEncoders() {

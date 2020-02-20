@@ -83,12 +83,22 @@ public final class Constants {
 
 
         public static final class DrivetrainMotors {
+            public static final double KP = 0.00026;
+            public static final double KI = 0;
+            public static final double KD = 0;
+            public static final double KF = 0.4455;
             public static final class LeftMaster {
                 public static final int CAN_ID = 0;
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
                 public static final boolean INVERTED = false;
+                public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
+                public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
+                public static final double KD = Constants.DrivetrainConstants.DrivetrainMotors.KD;
+                public static final double KF = Constants.DrivetrainConstants.DrivetrainMotors.KF;
+
+
             }
 
             public static final class LeftFollower {
@@ -97,6 +107,10 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
                 public static final boolean INVERTED = false;
+                public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
+                public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
+                public static final double KD = Constants.DrivetrainConstants.DrivetrainMotors.KD;
+                public static final double KF = Constants.DrivetrainConstants.DrivetrainMotors.KF;
 
             }
 
@@ -106,6 +120,10 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
                 public static final boolean INVERTED = true;
+                public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
+                public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
+                public static final double KD = Constants.DrivetrainConstants.DrivetrainMotors.KD;
+                public static final double KF = Constants.DrivetrainConstants.DrivetrainMotors.KF;
 
             }
 
@@ -115,6 +133,10 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
                 public static final boolean INVERTED = true;
+                public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
+                public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
+                public static final double KD = Constants.DrivetrainConstants.DrivetrainMotors.KD;
+                public static final double KF = Constants.DrivetrainConstants.DrivetrainMotors.KF;
 
             }
         }
