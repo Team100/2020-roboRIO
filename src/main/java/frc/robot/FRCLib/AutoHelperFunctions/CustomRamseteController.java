@@ -60,7 +60,7 @@ public class CustomRamseteController extends RamseteController {
     if (Constants.DrivetrainConstants.DEBUG) {
       SmartDashboard.putNumber("Current X", currentPose.getTranslation().getX());
       SmartDashboard.putNumber("Reference X", poseRef.getTranslation().getX());
-
+      SmartDashboard.putNumber("Current Y", currentPose.getTranslation().getY());
       SmartDashboard.putNumber("eX", eX);
       SmartDashboard.putNumber("eY", eY);
       SmartDashboard.putNumber("eTheta", eTheta);
