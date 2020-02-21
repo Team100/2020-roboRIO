@@ -105,6 +105,7 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Left Sensor Velocity",this.leftMaster.getSensorVelocity());
     SmartDashboard.putNumber("Right Sensor Velocity", this.rightMaster.getSensorVelocity());
     SmartDashboard.putString("Left Control Mode", this.leftMaster.motor.getControlMode().toString());
+    SmartDashboard.putNumber("Left Sensor Position", this.leftMaster.getSelectedSensorPosition());
 
   }
 
