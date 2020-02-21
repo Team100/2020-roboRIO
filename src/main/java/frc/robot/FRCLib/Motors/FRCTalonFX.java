@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 /**
@@ -40,6 +41,9 @@ public class FRCTalonFX implements Sendable {
     }
 
     public void driveVelocity(double velocity) {
+        if(Constants.DrivetrainConstants.DEBUG){
+            System.out.println("Current Velocity "+velocity);
+        }
         this.motor.set(ControlMode.Velocity, velocity);
     }
 
@@ -355,7 +359,10 @@ public class FRCTalonFX implements Sendable {
         motor.config_kP(0, this.getkP());
         motor.config_kI(0, this.getkI());
         motor.config_kD(0, this.getkD());
-        motor.config_kF(1, this.getkF());
+        motor.config_kF(0, this.getkF());
+
+
+        System.out.println("Wrote PID TO "+motor.getDeviceID() + " KF VALUE " + this.getkF());
 
     }
 
@@ -363,6 +370,7 @@ public class FRCTalonFX implements Sendable {
         motor = new WPI_TalonFX(this.getCanID());
         m_sensorCollection = motor.getSensorCollection();
         this.motor.configFactoryDefault();
+        motor.selectProfileSlot(0, 0);
         System.out.println("#################RESET");
         if (this.isInverted()) {
             motor.setInverted(this.isInverted());
@@ -433,6 +441,7 @@ public class FRCTalonFX implements Sendable {
             System.out.println("Setting Saturation");
 
         }
+        System.out.println("MOTOR "+this.motor.getDeviceID()+ "KF "+ this.getkF());
         if (this.getkP() != 0 || this.getkI() != 0 || this.getkD() != 0 || this.getkF() != 0) {
             updatePIDController();
             System.out.println("Setting PID Controller");

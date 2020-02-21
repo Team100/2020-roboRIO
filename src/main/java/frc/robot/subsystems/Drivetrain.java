@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
@@ -23,7 +24,9 @@ public class Drivetrain extends SubsystemBase {
 
   private FRCTalonFX leftMaster, leftFollower, rightMaster, rightFollower;
 
-  public AHRS ahrs;
+  //public AHRS ahrs;
+
+  public ADXRS450_Gyro gyro;
 
   public DifferentialDriveOdometry odometry;
 
@@ -32,14 +35,15 @@ public class Drivetrain extends SubsystemBase {
    */
   public Drivetrain() {
 
-    ahrs = new AHRS(Constants.DrivetrainConstants.NAVX_PORT);
-
+    //ahrs = new AHRS(Constants.DrivetrainConstants.NAVX_PORT);
+    gyro = new ADXRS450_Gyro();
     leftMaster = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.CAN_ID)
         .withKP(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KP)
         .withKI(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KI)
         .withKD(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KD)
         .withKF(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KF)
         .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.INVERTED)
+        .withSensorPhase(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.SENSOR_PHASE)
         .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.PEAK_OUTPUT_REVERSE)
         .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.NEUTRAL_MODE).build();
@@ -50,6 +54,8 @@ public class Drivetrain extends SubsystemBase {
         .withKD(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.KD)
         .withKF(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.KF)
         .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.INVERTED)
+        .withSensorPhase(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.SENSOR_PHASE)
+
         .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.PEAK_OUTPUT_REVERSE)
         .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.LeftFollower.NEUTRAL_MODE).build();
@@ -60,6 +66,7 @@ public class Drivetrain extends SubsystemBase {
         .withKD(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.KD)
         .withKF(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.KF)
         .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.INVERTED)
+        .withSensorPhase(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.SENSOR_PHASE)
         .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.PEAK_OUTPUT_REVERSE)
         .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightMaster.NEUTRAL_MODE).build();
@@ -71,12 +78,17 @@ public class Drivetrain extends SubsystemBase {
             .withKD(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.KD)
             .withKF(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.KF)
             .withInverted(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.INVERTED)
+            .withSensorPhase(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.SENSOR_PHASE)
             .withPeakOutputForward(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.PEAK_OUTPUT_FORWARD)
             .withPeakOutputReverse(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.PEAK_OUTPUT_REVERSE)
             .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.NEUTRAL_MODE).build();
 
     leftFollower.follow(leftMaster);
     rightFollower.follow(rightMaster);
+
+    
+    odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+
   }
 
   public void set(double left, double right) {
@@ -86,6 +98,14 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    double leftLeaderDistance = AutonConversionFactors.convertTalonEncoderTicksToMeters(leftMaster.getSelectedSensorPosition(), Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV, false);
+    double rightLeaderDistance = AutonConversionFactors.convertTalonEncoderTicksToMeters(rightMaster.getSelectedSensorPosition(), Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV, false);
+    SmartDashboard.putNumber("Current Compass",Rotation2d.fromDegrees(getHeading()).getRadians());
+    odometry.update(Rotation2d.fromDegrees(getHeading()), leftLeaderDistance, rightLeaderDistance);
+    SmartDashboard.putNumber("Left Sensor Velocity",this.leftMaster.getSensorVelocity());
+    SmartDashboard.putNumber("Right Sensor Velocity", this.rightMaster.getSensorVelocity());
+    SmartDashboard.putString("Left Control Mode", this.leftMaster.motor.getControlMode().toString());
+
   }
 
   public Pose2d getPose() {
@@ -113,7 +133,6 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void tankDriveVelocity(double leftVel, double rightVel) {
-    System.out.println(leftVel + "," + rightVel);
 
     double leftLeaderNativeVelocity = AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(leftVel,
         Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
@@ -121,12 +140,15 @@ public class Drivetrain extends SubsystemBase {
     double rightLeaderNativeVelocity = AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(
         rightVel, Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
         Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV);
+      
     this.leftMaster.driveVelocity(leftLeaderNativeVelocity);
     this.rightMaster.driveVelocity(rightLeaderNativeVelocity);
 
     if (Constants.DrivetrainConstants.DEBUG) {
       SmartDashboard.putNumber("LeftIntentedVelocity", leftLeaderNativeVelocity);
       SmartDashboard.putNumber("LeftIntendedVsActual", leftLeaderNativeVelocity - this.leftMaster.getSensorVelocity());
+      SmartDashboard.putNumber("Left Setpoint", this.leftMaster.motor.getClosedLoopTarget());
+
     }
 
   }
@@ -141,16 +163,18 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void zeroHeading() {
-    ahrs.zeroYaw();
+    //ahrs.zeroYaw();
+    gyro.reset();
   }
 
   public double getHeading() {
-    // return Math.IEEEremainder(gyro.getAngle(), 360);
-    return -1 * Math.IEEEremainder(ahrs.getFusedHeading(), 360);
-
+    return Math.IEEEremainder(gyro.getAngle(), 360);
+    //return -1 * Math.IEEEremainder(ahrs.getFusedHeading(), 360);
+    
   }
 
   public double getTurnRate() {
-    return ahrs.getRate();
+    //return ahrs.getRate();
+    return gyro.getRate();
   }
 }
