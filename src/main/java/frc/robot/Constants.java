@@ -91,8 +91,8 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
-                public static final boolean INVERTED = false; //TODO CHANGE BACK
-                public static final boolean SENSOR_PHASE = true; //TODO CHANGE BACK
+                public static final boolean INVERTED = true; //TODO CHANGE BACK
+                public static final boolean SENSOR_PHASE = false; //TODO CHANGE BACK
                 public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
                 public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
                 public static final double KD = Constants.DrivetrainConstants.DrivetrainMotors.KD;
@@ -105,8 +105,8 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
-                public static final boolean INVERTED = false; //TODO CHANGE BACK
-                public static final boolean SENSOR_PHASE = true; //TODO CHANGE BACK
+                public static final boolean INVERTED = true; //TODO CHANGE BACK
+                public static final boolean SENSOR_PHASE = false; //TODO CHANGE BACK
 
                 public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
                 public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
@@ -120,8 +120,8 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
-                public static final boolean INVERTED = true; //TODO CHANGE BACK
-                public static final boolean SENSOR_PHASE = false; //TODO CHANGE BACK
+                public static final boolean INVERTED = false; //TODO CHANGE BACK
+                public static final boolean SENSOR_PHASE = true; //TODO CHANGE BACK
                 public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
                 public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
                 public static final double KD = Constants.DrivetrainConstants.DrivetrainMotors.KD;
@@ -134,8 +134,8 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
-                public static final boolean INVERTED = true;//TODO CHANGE BACK
-                public static final boolean SENSOR_PHASE = false;//TODO CHANGE BACK
+                public static final boolean INVERTED = false;//TODO CHANGE BACK
+                public static final boolean SENSOR_PHASE = true;//TODO CHANGE BACK
                 public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
                 public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
                 public static final double KD = Constants.DrivetrainConstants.DrivetrainMotors.KD;
