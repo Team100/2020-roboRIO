@@ -54,16 +54,12 @@ public final class Constants {
             public static final double WHEEL_DIAMETER = 0.1542;// METERS
             public static final int TICKS_PER_REV = 4096; // TODO FIGURE OUT ACTUAL VALUE
 
-            public static final double KP = 0.017; // 0.0027
-            public static final double KI = 0;
-            public static final double KD = 20;
-            public static final double KF = 0.085;
             // public static final double KF = 11.41199782;
 
-            public static final double KS = 0.699;
-            public static final double KV = 0.694;
+            public static final double KS = 0.0846;
+            public static final double KV = 0.228;
             public static final double KTRACK_WIDTH = 0.6604; // TODO Change
-            public static final double KA = 0.0993;
+            public static final double KA = 0.0191;
 
             public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(
                     KTRACK_WIDTH);
