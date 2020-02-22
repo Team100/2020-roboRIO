@@ -74,10 +74,9 @@ public class CustomRamseteController extends RamseteController {
       SmartDashboard.putNumber("vOmega [rad/s]", omegaRef + k * eTheta + m_b * vRef * sinc(eTheta) * eY);
 
       SmartDashboard.putNumber("vX [t/100ms]",
-          AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(
-              vRef * m_poseError.getRotation().getCos() + k * eX,
-              Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
-              Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV));
+          AutonConversionFactors.convertWPILibUnitsToTalonSRXNativeUnits(
+              vRef * m_poseError.getRotation().getCos() + k * eX,Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV,
+              Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.GEARING_RATIO));
 
     }
 

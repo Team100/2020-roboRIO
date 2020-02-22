@@ -15,7 +15,7 @@ public class AutonConversionFactors {
 
 
     public static final double convertTalonSRXNativeUnitsToWPILibTrajecoryUnits(double talonVelocity, double tpr, double diameter, double gearRatio){
-        double ticksPerMeter = convertTalonEncoderTicksToMeters(diameter, tpr, gearRatio);
+        double ticksPerMeter = convertTalonEncoderTicksToMeters(talonVelocity, diameter, tpr, gearRatio);
         double metersPerTick = 1/ticksPerMeter;
 
         double ticksPerSecond = talonVelocity * 10;
@@ -35,12 +35,13 @@ public class AutonConversionFactors {
 
     }
 
-    public static double convertTalonEncoderTicksToMeters(double diameter, double tpr, double gearRatio){
+    public static double convertTalonEncoderTicksToMeters(double ticks, double diameter, double tpr, double gearRatio){
             double circumference = Math.PI *diameter;
             double wheelRevolutionsPerMeter = 1/circumference;
             double ticksPerWheelRevolution = tpr * gearRatio;
             double ticksPerMeter = ticksPerWheelRevolution * wheelRevolutionsPerMeter;
-            return ticksPerMeter;
+            double result = ticks * 1/ticksPerMeter;
+            return result;
     }
 
     public static double convertFeetToMeters(double value) {

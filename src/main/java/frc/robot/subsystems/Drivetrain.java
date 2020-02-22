@@ -98,8 +98,8 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    double leftLeaderDistance = AutonConversionFactors.convertTalonEncoderTicksToMeters(leftMaster.getSelectedSensorPosition(), Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV, false);
-    double rightLeaderDistance = AutonConversionFactors.convertTalonEncoderTicksToMeters(rightMaster.getSelectedSensorPosition(), Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV, false);
+    double leftLeaderDistance = AutonConversionFactors.convertTalonEncoderTicksToMeters(leftMaster.getSelectedSensorPosition(), Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV, Constants.DrivetrainConstants.DrivetrainParameters.GEARING_RATIO);
+    double rightLeaderDistance = AutonConversionFactors.convertTalonEncoderTicksToMeters(rightMaster.getSelectedSensorPosition(), Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV, Constants.DrivetrainConstants.DrivetrainParameters.GEARING_RATIO);
     SmartDashboard.putNumber("Current Compass",Rotation2d.fromDegrees(getHeading()).getRadians());
     odometry.update(Rotation2d.fromDegrees(getHeading()), leftLeaderDistance, rightLeaderDistance);
     SmartDashboard.putNumber("Left Sensor Velocity",this.leftMaster.getSensorVelocity());
@@ -116,11 +116,11 @@ public class Drivetrain extends SubsystemBase {
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(
         AutonConversionFactors.convertTalonSRXNativeUnitsToWPILibTrajecoryUnits(this.leftMaster.getSensorVelocity(),
-            Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
-            Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV),
+        Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV,
+            Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.GEARING_RATIO),
         AutonConversionFactors.convertTalonSRXNativeUnitsToWPILibTrajecoryUnits(this.rightMaster.getSensorVelocity(),
-            Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
-            Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV));
+        Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV,
+            Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.GEARING_RATIO));
   }
 
   public void resetOdometry(Pose2d pose) {
@@ -135,18 +135,19 @@ public class Drivetrain extends SubsystemBase {
 
   public void tankDriveVelocity(double leftVel, double rightVel) {
 
-    double leftLeaderNativeVelocity = AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(leftVel,
-        Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
-        Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV);
-    double rightLeaderNativeVelocity = AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(
-        rightVel, Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
-        Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV);
+    double leftLeaderNativeVelocity = AutonConversionFactors.convertWPILibUnitsToTalonSRXNativeUnits(leftVel, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV,
+        Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.GEARING_RATIO
+        );
+    double rightLeaderNativeVelocity = AutonConversionFactors.convertWPILibUnitsToTalonSRXNativeUnits(rightVel, Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV,
+    Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.GEARING_RATIO);
       
     this.leftMaster.driveVelocity(leftLeaderNativeVelocity);
     this.rightMaster.driveVelocity(rightLeaderNativeVelocity);
 
     if (Constants.DrivetrainConstants.DEBUG) {
       SmartDashboard.putNumber("LeftIntentedVelocity", leftLeaderNativeVelocity);
+      SmartDashboard.putNumber("RightIntentedVelocity", rightLeaderNativeVelocity);
+
       SmartDashboard.putNumber("LeftIntendedVsActual", leftLeaderNativeVelocity - this.leftMaster.getSensorVelocity());
       SmartDashboard.putNumber("Left Setpoint", this.leftMaster.motor.getClosedLoopTarget());
 
@@ -169,7 +170,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public double getHeading() {
-    return Math.IEEEremainder(gyro.getAngle(), 360);
+    return -1 * Math.IEEEremainder(gyro.getAngle(), 360);
     //return -1 * Math.IEEEremainder(ahrs.getFusedHeading(), 360);
     
   }
