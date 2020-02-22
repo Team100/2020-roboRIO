@@ -74,7 +74,7 @@ public final class Constants {
         public static final class AutonConstants {
             public static final double DT = 0.05;
             public static final double MAX_VELOCITY = 5;
-            public static final double MAX_ACCELERATION = .25;
+            public static final double MAX_ACCELERATION = 2;
             public static final double MAX_JERK = .25;
         
 
@@ -84,7 +84,7 @@ public final class Constants {
             public static final double KP = 0.00026;
             public static final double KI = 0;
             public static final double KD = 0;
-            public static final double KF = 0.4455;
+            public static final double KF = 0.04455;
 
             public static final class LeftMaster {
                 public static final int CAN_ID = 0;

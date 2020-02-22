@@ -361,6 +361,7 @@ public class FRCTalonFX implements Sendable {
         motor.config_kD(0, this.getkD());
         motor.config_kF(0, this.getkF());
 
+    
 
         System.out.println("Wrote PID TO "+motor.getDeviceID() + " KF VALUE " + this.getkF());
 

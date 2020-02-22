@@ -31,9 +31,9 @@ public class CustomRamseteController extends RamseteController {
   }
 
   public CustomRamseteController() {
-    super(2.0, 0.7);
-    this.m_b = 2.0;
-    this.m_zeta = 0.7;
+    super(Constants.DrivetrainConstants.DrivetrainParameters.RAMSETE_B, Constants.DrivetrainConstants.DrivetrainParameters.RAMSETE_ZETA);
+    this.m_b = Constants.DrivetrainConstants.DrivetrainParameters.RAMSETE_B;
+    this.m_zeta = Constants.DrivetrainConstants.DrivetrainParameters.RAMSETE_ZETA;
   }
 
   private static double sinc(double x) {
