@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
@@ -16,12 +17,13 @@ public class IndexerStageOne extends SubsystemBase {
   public FRCTalonSRX indexerStageOne;
 
   public Indexer.ActionState actionState;
+  public DigitalInput sensor;
 
   /**
    * Creates a new Indexer.
    */
   public IndexerStageOne() {
-
+    sensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.FrontSensor.ID);
     // Construct Motor Objects
     indexerStageOne = new FRCTalonSRX.FRCTalonSRXBuilder(
         Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
