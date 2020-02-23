@@ -15,7 +15,6 @@ import frc.robot.subsystems.Intake.ActionState;
 public class IntakeIntake extends CommandBase {
 
   public Intake intake;
-
   /**
    * Creates a new IntakeIntake.
    */
