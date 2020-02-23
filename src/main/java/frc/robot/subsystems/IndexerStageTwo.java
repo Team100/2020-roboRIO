@@ -15,7 +15,10 @@ import frc.robot.FRCLib.Motors.FRCTalonSRX;
 public class IndexerStageTwo extends SubsystemBase {
   public FRCTalonSRX indexerStageTwo;
 
-  public Indexer.ActionState actionState;
+  public static enum ActionState {
+    MOVE_FOWARD, MOVE_BACKWARDS, STOP
+  }
+  public ActionState actionState;
 
   public DigitalInput sensor;
   /**

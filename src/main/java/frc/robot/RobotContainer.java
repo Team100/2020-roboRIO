@@ -33,7 +33,6 @@ import frc.robot.commands.supersystem.shooter.ShooterStop;
 import frc.robot.commands.supersystem.turret.TurretStop;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.PDP;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -46,20 +45,17 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
-    public final Drivetrain drivetrain;
-    public final Indexer indexer;
-    public final IndexerStageOne stageOne;
-    public final IndexerStageTwo stageTwo;
-    public final Intake intake;
-    public final IntakePivot intakePivot;
-    public final Shooter shooter;
-    public final Turret turret;
-    public final Joystick leftJoystick;
-    public final Joystick rightJoystick;
-    public final Joystick gamepad;
     private final Drivetrain drivetrain;
-    private final PDP pdpSubsystem = new PDP();
-    private final Indexer indexer = new Indexer();
+    private final IndexerStageOne stageOne;
+    private final IndexerStageTwo stageTwo;
+    private final Intake intake;
+    private final IntakePivot intakePivot;
+    private final Shooter shooter;
+    private final Turret turret;
+    private final Joystick leftJoystick;
+    private final Joystick rightJoystick;
+    private final Joystick gamepad;
+    private final PDP pdpSubsystem;
 
     public JoystickButton wholeIndexerForward;
     public JoystickButton wholeIndexerReverse;
@@ -80,13 +76,13 @@ public class RobotContainer {
 
         // Subsystem Initiation
         drivetrain = new Drivetrain();
-        indexer = new Indexer();
         stageOne = new IndexerStageOne();
         stageTwo = new IndexerStageTwo();
         intake = new Intake();
         intakePivot = new IntakePivot();
         shooter = new Shooter();
         turret = new Turret();
+        pdpSubsystem = new PDP();
 
         // Default Commands
         this.setDefaultCommands();

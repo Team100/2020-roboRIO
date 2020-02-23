@@ -9,7 +9,7 @@ package frc.robot.commands.supersystem.indexer.indexStageTwo;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.Indexer.ActionState;
+import frc.robot.subsystems.IndexerStageTwo.ActionState;
 import frc.robot.subsystems.IndexerStageTwo;
 
 public class IndexerStageTwoStop extends CommandBase {

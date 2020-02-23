@@ -61,4 +61,14 @@ public class GlobalManager {
          */
         public FramePerimeterState colorFramePerimeterState;
     }
+
+    public static class IndexerManager {
+        public enum LocationState {
+            EMPTY, ONE_PC, TWO_PC, THREE_PC, THREE_PC_SHIFTED, FOUR_PC, FIVE_PC, UNCERTAIN
+        }
+        public enum ActionState {
+            LOADED, LOADING, WAITING_TO_LOAD, UNLOADING, WAITING_TO_UNLOAD, NEUTRAL
+        }
+        
+    }
 }
