@@ -1,6 +1,5 @@
 package frc.robot.FRCLib.Motors;
 
-import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class FRCVictorSPX {
@@ -9,7 +8,7 @@ public class FRCVictorSPX {
     private VictorSPX motor;
     private FRCTalonSRX master;
 
-    public FRCVictorSPX enableFollowing(){
+    public FRCVictorSPX enableFollowing() {
         motor.follow(master.getMotor());
         return this;
     }
@@ -46,17 +45,18 @@ public class FRCVictorSPX {
         this.master = master;
     }
 
-
     public static final class FRCVictorSPXBuilder {
         private int canID;
         private boolean inverted;
         private FRCTalonSRX master;
 
-        private FRCVictorSPXBuilder() {
+        public FRCVictorSPXBuilder(int canID) {
+            this.canID = canID;
+
         }
 
-        public static FRCVictorSPXBuilder aFRCVictorSPX() {
-            return new FRCVictorSPXBuilder();
+        public static FRCVictorSPXBuilder aFRCVictorSPX(int canID) {
+            return new FRCVictorSPXBuilder(canID);
         }
 
         public FRCVictorSPXBuilder withCanID(int canID) {

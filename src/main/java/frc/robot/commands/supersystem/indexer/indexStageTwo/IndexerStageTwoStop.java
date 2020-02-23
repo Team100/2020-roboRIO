@@ -5,31 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.supersystem.intake;
+package frc.robot.commands.supersystem.indexer.indexStageTwo;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Intake.ActionState;
 
-public class IntakeIntake extends CommandBase {
+import frc.robot.subsystems.Indexer.ActionState;
+import frc.robot.subsystems.IndexerStageTwo;
 
-  public Intake intake;
-
+public class IndexerStageTwoStop extends CommandBase {
   /**
-   * Creates a new IntakeIntake.
+   * Creates a new IndexerStageTwoStop.
    */
-  public IntakeIntake(Intake intake) {
+  public IndexerStageTwo indexer;
+
+  public IndexerStageTwoStop(IndexerStageTwo indexer) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.intake = intake;
-    addRequirements(this.intake);
+    this.indexer = indexer;
+    addRequirements(this.indexer);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.actionState = ActionState.INTAKING;
-    intake.spin.drivePercentOutput(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_PERCENT_OUTPUT);
+    this.indexer.actionState = ActionState.STOP;
+
+    indexer.indexerStageTwo.drivePercentOutput(0);
 
   }
 

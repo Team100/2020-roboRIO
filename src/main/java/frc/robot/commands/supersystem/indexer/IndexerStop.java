@@ -7,44 +7,22 @@
 
 package frc.robot.commands.supersystem.indexer;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Indexer.ActionState;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneStop;
+import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoStop;
+import frc.robot.subsystems.IndexerStageOne;
+import frc.robot.subsystems.IndexerStageTwo;
 
-public class IndexerStop extends CommandBase {
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
+public class IndexerStop extends ParallelCommandGroup {
   /**
    * Creates a new IndexerStop.
    */
-  public Indexer indexer;
-
-  public IndexerStop(Indexer indexer) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.indexer = indexer;
-    addRequirements(this.indexer);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    indexer.actionState = ActionState.MOVE_FOWARD;
-    indexer.indexerStageOne.drivePercentOutput(0);
-    indexer.indexerStageTwo.drivePercentOutput(0);
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
+  public IndexerStop(IndexerStageOne stageOne, IndexerStageTwo stageTwo) {
+    // Add your commands in the super() call, e.g.
+    // super(new FooCommand(), new BarCommand());super();
+    super(new IndexerStageOneStop(stageOne), new IndexerStageTwoStop(stageTwo));
   }
 }

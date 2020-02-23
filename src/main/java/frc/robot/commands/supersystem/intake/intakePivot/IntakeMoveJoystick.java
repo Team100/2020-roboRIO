@@ -5,37 +5,35 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.supersystem.intake;
+package frc.robot.commands.supersystem.intake.intakePivot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Intake.ActionState;
+import frc.robot.subsystems.IntakePivot;
 
-public class IntakeIntake extends CommandBase {
-
-  public Intake intake;
+public class IntakeMoveJoystick extends CommandBase {
+  IntakePivot pivot;
+  Joystick joystick;
 
   /**
-   * Creates a new IntakeIntake.
+   * Creates a new IntakeMoveJoystick.
    */
-  public IntakeIntake(Intake intake) {
+  public IntakeMoveJoystick(IntakePivot pivot, Joystick joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.intake = intake;
-    addRequirements(this.intake);
+    this.pivot = pivot;
+    this.joystick = joystick;
+    addRequirements(this.pivot);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.actionState = ActionState.INTAKING;
-    intake.spin.drivePercentOutput(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_PERCENT_OUTPUT);
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    pivot.pivot.drivePercentOutput(joystick.getRawAxis(0));
   }
 
   // Called once the command ends or is interrupted.

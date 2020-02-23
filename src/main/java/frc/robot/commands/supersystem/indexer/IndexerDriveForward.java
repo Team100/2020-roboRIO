@@ -7,44 +7,23 @@
 
 package frc.robot.commands.supersystem.indexer;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Indexer.ActionState;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
+import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoDriveForward;
+import frc.robot.subsystems.IndexerStageOne;
+import frc.robot.subsystems.IndexerStageTwo;
 
-public class IndexerDriveForward extends CommandBase {
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
+public class IndexerDriveForward extends ParallelCommandGroup {
   /**
    * Creates a new IndexerDriveForward.
    */
-  public Indexer indexer;
+  public IndexerDriveForward(IndexerStageOne stageOne, IndexerStageTwo stageTwo) {
+    // Add your commands in the super() call, e.g.
+    // super(new FooCommand(), new BarCommand());super();
+    super(new IndexerStageOneDriveForward(stageOne), new IndexerStageTwoDriveForward(stageTwo));
 
-  public IndexerDriveForward(Indexer indexer) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.indexer = indexer;
-    addRequirements(this.indexer);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    indexer.actionState = ActionState.MOVE_FOWARD;
-    indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FOWARD);
-    indexer.indexerStageTwo.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_FOWARD);
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
   }
 }

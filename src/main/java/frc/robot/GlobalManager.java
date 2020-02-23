@@ -14,7 +14,7 @@ public class GlobalManager {
     /**
      * Manages states that pertain to the Supersystem
      */
-    public static class SupersystemManager{
+    public static class SupersystemManager {
         /**
          * Is the Indexer full
          */
@@ -23,13 +23,14 @@ public class GlobalManager {
         /**
          * States that the supersystem can exist in
          */
-        public enum SupersystemState{
-            NEUTRAL,INTAKING,QUEUEING,ALIGNING,SHOOTING,JAMMED
+        public enum SupersystemState {
+            NEUTRAL, INTAKING, QUEUEING, ALIGNING, SHOOTING, JAMMED, REVERSING
         }
+
         /**
          * The current state of the supersystem
          */
-        public SupersystemState supersystemState;
+        public static SupersystemState supersystemState;
 
         /**
          * Is the shooter ready to shoot
@@ -42,13 +43,14 @@ public class GlobalManager {
         public static boolean turretReady = false;
 
         /**
-         * States for objects that extend outside of the frame perimeter
-         * INSIDE: Safely inside of the frame perimeter
-         * EXTENDED: Unsafe and outside of the frame perimeter
+         * States for objects that extend outside of the frame perimeter INSIDE: Safely
+         * inside of the frame perimeter EXTENDED: Unsafe and outside of the frame
+         * perimeter
          */
-        public enum FramePerimeterState{
-            INSIDE,EXTENDED
+        public enum FramePerimeterState {
+            INSIDE, EXTENDED
         }
+
         /**
          * Is the intake safely inside of the frame perimeter
          */

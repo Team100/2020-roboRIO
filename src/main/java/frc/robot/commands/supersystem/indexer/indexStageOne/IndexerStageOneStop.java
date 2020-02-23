@@ -5,33 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.supersystem.intake;
+package frc.robot.commands.supersystem.indexer.indexStageOne;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Intake.LocationState;
-import frc.robot.subsystems.Intake.ValidAngles;
 
-public class IntakeMoveDown extends CommandBase {
+import frc.robot.subsystems.Indexer.ActionState;
+import frc.robot.subsystems.IndexerStageOne;
 
-  public Intake intake;
+public class IndexerStageOneStop extends CommandBase {
   /**
-   * Creates a new IntakeMoveDown.
+   * Creates a new IndexerStageOneStop.
    */
-  public IntakeMoveDown(Intake intake) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public IndexerStageOne indexer;
 
-    this.intake = intake;
-    addRequirements(this.intake);
+  public IndexerStageOneStop(IndexerStageOne indexer) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.indexer = indexer;
+    addRequirements(this.indexer);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.currentAngle = ValidAngles.UNCERTAIN;
-    intake.locationState = LocationState.MOVING;
-    intake.pivot.driveMotionMagic(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_DEGREES);
+    this.indexer.actionState = ActionState.STOP;
+
+    indexer.indexerStageOne.drivePercentOutput(0);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,8 +41,6 @@ public class IntakeMoveDown extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.currentAngle = ValidAngles.DOWN; //TODO Account for failure context
-    intake.locationState = LocationState.STATIONARY;
   }
 
   // Returns true when the command should end.

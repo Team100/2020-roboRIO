@@ -4,33 +4,33 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
-package frc.robot.commands.supersystem.intake;
+package frc.robot.commands.supersystem.indexer.indexStageTwo;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Intake.ActionState;
+import frc.robot.subsystems.Indexer.ActionState;
+import frc.robot.subsystems.IndexerStageTwo;
 
-public class IntakeIntake extends CommandBase {
-
-  public Intake intake;
+public class IndexerStageTwoDriveBackward extends CommandBase {
+  IndexerStageTwo indexer;
 
   /**
-   * Creates a new IntakeIntake.
+   * Creates a new IndexerStageTwoDriveBackward.
    */
-  public IntakeIntake(Intake intake) {
+  public IndexerStageTwoDriveBackward(IndexerStageTwo indexer) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.intake = intake;
-    addRequirements(this.intake);
+    this.indexer = indexer;
+    addRequirements(this.indexer);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.actionState = ActionState.INTAKING;
-    intake.spin.drivePercentOutput(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_PERCENT_OUTPUT);
+    this.indexer.actionState = ActionState.MOVE_BACKWARDS;
 
+    this.indexer.indexerStageTwo
+        .drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_BACKWARD);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
