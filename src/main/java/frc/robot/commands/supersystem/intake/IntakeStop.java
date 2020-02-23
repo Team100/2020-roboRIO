@@ -13,13 +13,12 @@ import frc.robot.subsystems.Intake.ActionState;
 
 public class IntakeStop extends CommandBase {
   public Intake intake;
-
   /**
    * Creates a new IntakeStop.
    */
   public IntakeStop(Intake intake) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.intake = intake;
+    this.intake=intake;
     addRequirements(this.intake);
   }
 

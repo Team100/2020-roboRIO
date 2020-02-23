@@ -15,7 +15,6 @@ import frc.robot.subsystems.Shooter.ShooterState;
 public class ShooterRun extends CommandBase {
 
   public Shooter shooter;
-
   /**
    * Creates a new ShooterRun.
    */

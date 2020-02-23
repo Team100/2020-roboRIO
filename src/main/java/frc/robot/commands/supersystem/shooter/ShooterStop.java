@@ -15,7 +15,6 @@ import frc.robot.subsystems.Shooter.ShooterState;
 public class ShooterStop extends CommandBase {
 
   public Shooter shooter;
-
   /**
    * Creates a new ShooterRecover.
    */

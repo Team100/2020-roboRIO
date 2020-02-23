@@ -8,6 +8,7 @@
 package frc.robot.commands.supersystem.turret;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Turret.ActionState;
 
@@ -16,7 +17,6 @@ public class TurretStop extends CommandBase {
    * Creates a new TurretStop.
    */
   public Turret turret;
-
   public TurretStop(Turret turret) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.turret = turret;

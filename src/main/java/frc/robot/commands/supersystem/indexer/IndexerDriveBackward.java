@@ -7,23 +7,44 @@
 
 package frc.robot.commands.supersystem.indexer;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveBackward;
-import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoDriveBackward;
-import frc.robot.subsystems.IndexerStageOne;
-import frc.robot.subsystems.IndexerStageTwo;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Indexer.ActionState;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class IndexerDriveBackward extends ParallelCommandGroup {
+public class IndexerDriveBackward extends CommandBase {
   /**
    * Creates a new IndexerDriveBackward.
    */
-  public IndexerDriveBackward(IndexerStageOne stageOne, IndexerStageTwo stageTwo) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());super();
+  public Indexer indexer;
+  
+  public IndexerDriveBackward(Indexer indexer) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.indexer = indexer;
+    addRequirements(this.indexer);
+  }
 
-    super(new IndexerStageOneDriveBackward(stageOne), new IndexerStageTwoDriveBackward(stageTwo));
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    indexer.actionState = ActionState.MOVE_BACKWARDS;
+    indexer.indexerStageOne.drivePercentOutput(-(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_BACKWARD));
+    indexer.indexerStageTwo.drivePercentOutput(-(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_BACKWARD));
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
   }
 }
