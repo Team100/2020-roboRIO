@@ -8,7 +8,7 @@ public class FRCVictorSPX {
     private VictorSPX motor;
     private FRCTalonSRX master;
 
-    public FRCVictorSPX enableFollowing(){
+    public FRCVictorSPX enableFollowing() {
         motor.follow(master.getMotor());
         return this;
     }
@@ -44,7 +44,6 @@ public class FRCVictorSPX {
     public void setMaster(FRCTalonSRX master) {
         this.master = master;
     }
-
 
     public static final class FRCVictorSPXBuilder {
         private int canID;

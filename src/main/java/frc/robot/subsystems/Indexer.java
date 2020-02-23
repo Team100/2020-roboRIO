@@ -10,17 +10,16 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.FRCLib.Motors.FRCTalonSRX;
 
 public class Indexer extends SubsystemBase {
-
-  public FRCTalonSRX indexerStageOne;
-  public FRCTalonSRX indexerStageTwo;
+  public static enum ActionState {
+    MOVE_FOWARD, MOVE_BACKWARDS, STOP
+  }
 
   public DigitalInput frontSensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.FrontSensor.ID);
   public DigitalInput rearSensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.RearSensor.ID);
 
-    /**
+  /**
    * Keeps track of whether the last iteration was positive or not
    */
   public boolean lastIterateFront, lastIterateRear;
@@ -30,18 +29,11 @@ public class Indexer extends SubsystemBase {
    */
   public int frontCount, rearCount;
 
-  public static enum ActionState{
-    MOVE_FOWARD,
-    MOVE_BACKWARDS,
-    STOP
-  }
-  public ActionState stageOneActionState;
-  public ActionState stageTwoActionState;
-
   /**
    * Creates a new Indexer.
    */
   public Indexer() {
+
     // Construct Motor Objects
     indexerStageOne = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
     .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
@@ -75,23 +67,22 @@ public class Indexer extends SubsystemBase {
     addChild("rearSensor", rearSensor);
   }
 
-  public void processBallDetectionSensors(){
-    if(!frontSensor.get() && lastIterateFront){
+  public void processBallDetectionSensors() {
+    if (!frontSensor.get() && lastIterateFront) {
       lastIterateFront = false;
-    } else if(frontSensor.get() && !lastIterateFront){
+    } else if (frontSensor.get() && !lastIterateFront) {
       lastIterateFront = true;
       frontCount += 1;
-      System.out.println("Front Count: "+frontCount);
-      
+      System.out.println("Front Count: " + frontCount);
+
     }
 
-
-    if(!rearSensor.get() && lastIterateRear){
+    if (!rearSensor.get() && lastIterateRear) {
       lastIterateRear = false;
-    } else if(rearSensor.get() && !lastIterateRear){
+    } else if (rearSensor.get() && !lastIterateRear) {
       lastIterateRear = true;
       rearCount += 1;
-      System.out.println("Rear Count: "+rearCount);
+      System.out.println("Rear Count: " + rearCount);
 
     }
   }
@@ -99,7 +90,7 @@ public class Indexer extends SubsystemBase {
   /**
    * Update any states
    */
-  public void updateState(){
+  public void updateState() {
 
   }
 

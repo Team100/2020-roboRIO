@@ -10,17 +10,16 @@ package frc.robot.commands.supersystem.indexer.indexStageOne;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Constants;
-import frc.robot.GlobalManager;
-import frc.robot.GlobalManager.SupersystemManager.SupersystemState;
-import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Indexer.ActionState;
+import frc.robot.subsystems.IndexerStageOne;
 
 public class IndexerStageOneDriveForward extends CommandBase {
-  public Indexer indexer;
+  public IndexerStageOne indexer;
+
   /**
    * Creates a new IndexerStageOneDriveForward.
    */
-  public IndexerStageOneDriveForward(Indexer indexer) {
+  public IndexerStageOneDriveForward(IndexerStageOne indexer) {
     this.indexer = indexer;
     addRequirements(this.indexer);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,10 +28,11 @@ public class IndexerStageOneDriveForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.indexer.stageOneActionState = ActionState.MOVE_FOWARD;
+    this.indexer.actionState = ActionState.MOVE_FOWARD;
 
-    indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FORWARD);
-  
+    indexer.indexerStageOne
+        .drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FORWARD);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
