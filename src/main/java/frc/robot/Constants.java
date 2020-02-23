@@ -152,6 +152,14 @@ public final class Constants {
             public static final double PERCENT_OUTPUT_FORWARD = 0.5;
         }
 
+        public static final class TurretSensors {
+            public static final class FowardSensor {
+                public static final int ID = 4;
+            }
+            public static final class ReverseSensor {
+                public static final int ID = 5;
+            }
+        }
         public static final class TurretMotors {
             public static final class TurretMotor {
                 public static final int CAN_ID = 6;
@@ -293,6 +301,8 @@ public final class Constants {
 
         }
 
+        public static final class ShooterSensors {
+        }
         public static final class ShooterMotors {
             public static final class ShooterMaster {
                 public static final int CAN_ID = 2;
