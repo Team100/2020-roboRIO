@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.FRCLib.Motors.FRCTalonSRX;
 
 public class Indexer extends SubsystemBase {
   public static enum ActionState {
@@ -18,6 +19,9 @@ public class Indexer extends SubsystemBase {
 
   public DigitalInput frontSensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.FrontSensor.ID);
   public DigitalInput rearSensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.RearSensor.ID);
+
+  public FRCTalonSRX indexerStageOne;
+  public FRCTalonSRX indexerStageTwo;
 
   /**
    * Keeps track of whether the last iteration was positive or not

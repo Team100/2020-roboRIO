@@ -46,10 +46,8 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
-    public final Drivetrain drivetrain;
-    public final Indexer indexer;
-    public final IndexerStageOne stageOne;
-    public final IndexerStageTwo stageTwo;
+    public final IndexerStageOne indexerStageOne;
+    public final IndexerStageTwo indexerStageTwo;
     public final Intake intake;
     public final IntakePivot intakePivot;
     public final Shooter shooter;
@@ -59,7 +57,7 @@ public class RobotContainer {
     public final Joystick gamepad;
     private final Drivetrain drivetrain;
     private final PDP pdpSubsystem = new PDP();
-    private final Indexer indexer = new Indexer();
+    private final Indexer indexer;
 
     public JoystickButton wholeIndexerForward;
     public JoystickButton wholeIndexerReverse;
@@ -81,8 +79,8 @@ public class RobotContainer {
         // Subsystem Initiation
         drivetrain = new Drivetrain();
         indexer = new Indexer();
-        stageOne = new IndexerStageOne();
-        stageTwo = new IndexerStageTwo();
+        indexerStageOne = new IndexerStageOne();
+        indexerStageTwo = new IndexerStageTwo();
         intake = new Intake();
         intakePivot = new IntakePivot();
         shooter = new Shooter();
@@ -98,8 +96,8 @@ public class RobotContainer {
 
     public void setDefaultCommands() {
         drivetrain.setDefaultCommand(new ArcadeDrive(drivetrain, leftJoystick, rightJoystick));
-        stageOne.setDefaultCommand(new IndexerStageOneStop(stageOne));
-        stageTwo.setDefaultCommand(new IndexerStageTwoStop(stageTwo));
+        indexerStageOne.setDefaultCommand(new IndexerStageOneStop(indexerStageOne));
+        indexerStageTwo.setDefaultCommand(new IndexerStageTwoStop(indexerStageTwo));
         intake.setDefaultCommand(new IntakeStop(intake));
         intakePivot.setDefaultCommand(new IntakeMoveJoystick(intakePivot, gamepad));
         shooter.setDefaultCommand(new ShooterStop(shooter));
@@ -118,10 +116,10 @@ public class RobotContainer {
         indexerStageOneForward = new JoystickButton(gamepad, 2);
         indexerStageTwoForward = new JoystickButton(gamepad, 4);
 
-        wholeIndexerForward.whileHeld(new IndexerDriveForward(stageOne, stageTwo));
-        wholeIndexerReverse.whileHeld(new IndexerDriveBackward(stageOne, stageTwo));
-        indexerStageOneForward.whileHeld(new IndexerStageOneDriveForward(stageOne));
-        indexerStageTwoForward.whileHeld(new IndexerStageTwoDriveForward(stageTwo));
+        wholeIndexerForward.whileHeld(new IndexerDriveForward(indexerStageOne, indexerStageTwo));
+        wholeIndexerReverse.whileHeld(new IndexerDriveBackward(indexerStageOne, indexerStageTwo));
+        indexerStageOneForward.whileHeld(new IndexerStageOneDriveForward(indexerStageOne));
+        indexerStageTwoForward.whileHeld(new IndexerStageTwoDriveForward(indexerStageTwo));
 
         ////////////////////////////////////////////////////////////////////////////
         intakeIntake = new JoystickButton(gamepad, 5);
