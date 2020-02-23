@@ -31,9 +31,9 @@ public class CustomRamseteController extends RamseteController {
   }
 
   public CustomRamseteController() {
-    super(2.0, 0.7);
-    this.m_b = 2.0;
-    this.m_zeta = 0.7;
+    super(Constants.DrivetrainConstants.DrivetrainParameters.RAMSETE_B, Constants.DrivetrainConstants.DrivetrainParameters.RAMSETE_ZETA);
+    this.m_b = Constants.DrivetrainConstants.DrivetrainParameters.RAMSETE_B;
+    this.m_zeta = Constants.DrivetrainConstants.DrivetrainParameters.RAMSETE_ZETA;
   }
 
   private static double sinc(double x) {
@@ -60,7 +60,7 @@ public class CustomRamseteController extends RamseteController {
     if (Constants.DrivetrainConstants.DEBUG) {
       SmartDashboard.putNumber("Current X", currentPose.getTranslation().getX());
       SmartDashboard.putNumber("Reference X", poseRef.getTranslation().getX());
-
+      SmartDashboard.putNumber("Current Y", currentPose.getTranslation().getY());
       SmartDashboard.putNumber("eX", eX);
       SmartDashboard.putNumber("eY", eY);
       SmartDashboard.putNumber("eTheta", eTheta);
@@ -74,10 +74,9 @@ public class CustomRamseteController extends RamseteController {
       SmartDashboard.putNumber("vOmega [rad/s]", omegaRef + k * eTheta + m_b * vRef * sinc(eTheta) * eY);
 
       SmartDashboard.putNumber("vX [t/100ms]",
-          AutonConversionFactors.convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(
-              vRef * m_poseError.getRotation().getCos() + k * eX,
-              Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, false,
-              Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV));
+          AutonConversionFactors.convertWPILibUnitsToTalonSRXNativeUnits(
+              vRef * m_poseError.getRotation().getCos() + k * eX,Constants.DrivetrainConstants.DrivetrainParameters.TICKS_PER_REV,
+              Constants.DrivetrainConstants.DrivetrainParameters.WHEEL_DIAMETER, Constants.DrivetrainConstants.DrivetrainParameters.GEARING_RATIO));
 
     }
 

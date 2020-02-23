@@ -12,73 +12,36 @@ package frc.robot.FRCLib.AutoHelperFunctions;
  * Handles conversion between units for the Talon auton
  */
 public class AutonConversionFactors {
-    /**
-     * Convert the values from native Talon units (ticks/100ms) to WPITrajectory
-     * Units (m/s)
-     * 
-     * @param talonVelocity
-     * @param wheelDiameter
-     * @param usingMetric
-     * @param ticksPerRevolution
-     * @return
-     */
-    public static final double convertTalonSRXNativeUnitsToWPILibTrajecoryUnits(double talonVelocity,
-            double wheelDiameter, boolean usingMetric, int ticksPerRevolution) {
-        double result = talonVelocity;
-        result = result * 10; // Convert ticks/100ms to ticks/sec
 
-        double circumference = 0;
-        if (usingMetric) {
-            circumference = Math.PI * wheelDiameter;
-        } else {
-            double diameterInMeters = wheelDiameter * 0.3048;
-            circumference = Math.PI * diameterInMeters;
-        }
-        double metersPerTick = circumference / ticksPerRevolution;
-        result = result * metersPerTick;
-        return result;
+
+    public static final double convertTalonSRXNativeUnitsToWPILibTrajecoryUnits(double talonVelocity, double tpr, double diameter, double gearRatio){
+        double ticksPerMeter = convertTalonEncoderTicksToMeters(talonVelocity, diameter, tpr, gearRatio);
+        double metersPerTick = 1/ticksPerMeter;
+
+        double ticksPerSecond = talonVelocity * 10;
+        double metersPerSecond = ticksPerSecond * metersPerTick;
+        return metersPerSecond;
     }
 
-    /**
-     * Convert the values from WPITrajectory Units (m/s) to native Talon units
-     * (ticks/100ms)
-     * 
-     * @param metersPerSecond
-     * @param wheelDiameter
-     * @param givenMetric
-     * @param ticksPerRevolution
-     * @return
-     */
-    public static final double convertWPILibTrajectoryUnitsToTalonSRXNativeUnits(double metersPerSecond,
-            double wheelDiameter, boolean givenMetric, int ticksPerRevolution) {
-        double result = metersPerSecond;
-        double circumference = 0;
-        if (givenMetric) {
-            circumference = Math.PI * wheelDiameter;
-        } else {
-            double diameterInMeters = wheelDiameter * 0.3048;
-            circumference = Math.PI * diameterInMeters;
-        }
-        double ticksPerMeter = ticksPerRevolution / circumference;
-        result = result * ticksPerMeter;
-        result = result * .1;
 
-        return result;
+    public static double convertWPILibUnitsToTalonSRXNativeUnits(double metersPerSecond, double tpr, double diameter, double gearRatio){
+        double circumference = Math.PI * diameter;
+        double tprAtWheel = tpr * gearRatio;
+        double revPerMeterAtWheel = 1/circumference * metersPerSecond;
+        double ticksAtWheel = revPerMeterAtWheel * tprAtWheel;
+        double inTicksPerMillisecond = ticksAtWheel / 10;
+
+        return inTicksPerMillisecond;
+
     }
 
-    public static double convertTalonEncoderTicksToMeters(int ticks, double diameter, double ticksPerRevolution,
-            boolean givenMetric) {
-        double result = ticks;
-        double circumference = 0;
-        if (givenMetric) {
-            circumference = Math.PI * diameter;
-        } else {
-            double diameterInMeters = diameter * 0.3048;
-            circumference = Math.PI * diameterInMeters;
-        }
-        double metersPerTick = circumference / ticksPerRevolution;
-        result = result * metersPerTick;
-        return result;
+    public static double convertTalonEncoderTicksToMeters(double ticks, double diameter, double tpr, double gearRatio){
+            double circumference = Math.PI *diameter;
+            double wheelRevolutionsPerMeter = 1/circumference;
+            double ticksPerWheelRevolution = tpr * gearRatio;
+            double ticksPerMeter = ticksPerWheelRevolution * wheelRevolutionsPerMeter;
+            double result = ticks * 1/ticksPerMeter;
+            return result;
     }
 
     public static double convertFeetToMeters(double value) {
