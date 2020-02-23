@@ -69,6 +69,8 @@ public class Indexer extends SubsystemBase {
 
     addChild("frontSensor", frontSensor);
     addChild("rearSensor", rearSensor);
+    addChild("indexerStageOne", indexerStageOne);
+    addChild("indexerStageTwo", indexerStageTwo);
   }
 
   public void processBallDetectionSensors() {

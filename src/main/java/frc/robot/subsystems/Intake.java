@@ -39,6 +39,7 @@ public class Intake extends SubsystemBase {
         .withPeakOutputForward(Constants.IntakeConstants.IntakeMotors.IntakeSpin.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.IntakeConstants.IntakeMotors.IntakeSpin.PEAK_OUTPUT_REVERSE).build();
 
+        addChild("intakeSpin", spin);
   }
 
   /**
