@@ -8,24 +8,23 @@
 package frc.robot.FRCLib.Motors;
 
 import com.ctre.phoenix.motorcontrol.*;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 import frc.robot.Robot;
-
-
 
 /**
  * An abstraction for the Talon SRX for debugging information
  */
 public class FRCTalonFX implements Sendable {
-    public void follow(FRCTalonFX a){
+    public void follow(FRCTalonFX a) {
         this.master = a;
         this.motor.follow(this.master.motor);
+
     }
 
     @Override
@@ -37,19 +36,24 @@ public class FRCTalonFX implements Sendable {
         builder.addDoubleProperty("Rev Limit", this.m_sensorCollection::isRevLimitSwitchClosed, null);
     }
 
-
     public void reset() {
         this.motor.configFactoryDefault();
     }
 
     public void driveVelocity(double velocity) {
+        if(Constants.DrivetrainConstants.DEBUG){
+            System.out.println("Current Velocity "+velocity);
+        }
         this.motor.set(ControlMode.Velocity, velocity);
     }
 
     public void drivePercentOutput(double percentOutput) {
         this.motor.set(ControlMode.PercentOutput, percentOutput);
-        System.out.println(percentOutput);
 
+    }
+
+    public void setSensorPosition(int position){
+        this.motor.setSelectedSensorPosition(position);
     }
 
     public void driveMotionMagic(double setpoint) {
@@ -355,14 +359,19 @@ public class FRCTalonFX implements Sendable {
         motor.config_kP(0, this.getkP());
         motor.config_kI(0, this.getkI());
         motor.config_kD(0, this.getkD());
-        motor.config_kF(1, this.getkF());
+        motor.config_kF(0, this.getkF());
+
+    
+
+        System.out.println("Wrote PID TO "+motor.getDeviceID() + " KF VALUE " + this.getkF());
 
     }
 
     public FRCTalonFX configure() {
         motor = new WPI_TalonFX(this.getCanID());
         m_sensorCollection = motor.getSensorCollection();
-        System.out.println(this.motor.configFactoryDefault());
+        this.motor.configFactoryDefault();
+        motor.selectProfileSlot(0, 0);
         System.out.println("#################RESET");
         if (this.isInverted()) {
             motor.setInverted(this.isInverted());
@@ -433,6 +442,7 @@ public class FRCTalonFX implements Sendable {
             System.out.println("Setting Saturation");
 
         }
+        System.out.println("MOTOR "+this.motor.getDeviceID()+ "KF "+ this.getkF());
         if (this.getkP() != 0 || this.getkI() != 0 || this.getkD() != 0 || this.getkF() != 0) {
             updatePIDController();
             System.out.println("Setting PID Controller");
@@ -771,10 +781,10 @@ public class FRCTalonFX implements Sendable {
         private double nominalOutputForward = 0;
         private double nominalOutputReverse = 0;
         private double peakOutputForward = 1.0;
-        private double peakOutputReverse = -1.0 ;
+        private double peakOutputReverse = -1.0;
         private double neutralDeadband = 0.04;
         private double voltageCompensationSaturation = 0;
-        private VelocityMeasPeriod velocityMeasurementPeriod = VelocityMeasPeriod.Period_100Ms;//??
+        private VelocityMeasPeriod velocityMeasurementPeriod = VelocityMeasPeriod.Period_100Ms;// ??
         private int velocityMeasurementWindow = 64;
         private boolean forwardSoftLimitEnabled = false;
         private int forwardSoftLimitThreshold = 0;
@@ -793,7 +803,7 @@ public class FRCTalonFX implements Sendable {
         }
 
         // public static FRCTalonFXBuilder aFRCTalonFX() {
-        //     return new FRCTalonFXBuilder();
+        // return new FRCTalonFXBuilder();
         // }
 
         public FRCTalonFXBuilder withCanID(int canID) {
@@ -1024,6 +1034,4 @@ public class FRCTalonFX implements Sendable {
         }
     }
 
-    
-    
 }
