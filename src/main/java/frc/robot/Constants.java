@@ -60,11 +60,13 @@ public final class Constants {
             public static final double KTRACK_WIDTH = 0.6604; // TODO Change
             public static final double KA = 0.0191;
 
+            public static final double KINEMATICS_MAX_RATE_PER_SIDE = 1;
+
             public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(
                     KTRACK_WIDTH);
 
-            public static final double RAMSETE_B = 2; // From WPILib Docs
-            public static final double RAMSETE_ZETA = 0.7; // From WPILib Doc
+            public static final double RAMSETE_B = 0; // From WPILib Docs
+            public static final double RAMSETE_ZETA = 0; // From WPILib Doc
 
             public static final double GEARING_RATIO = 12.22;
             public static final double WHEEL_DIAMETER = 0.1542;// METERS
@@ -74,7 +76,7 @@ public final class Constants {
         public static final class AutonConstants {
             public static final double DT = 0.05;
             public static final double MAX_VELOCITY = 5;
-            public static final double MAX_ACCELERATION = 2;
+            public static final double MAX_ACCELERATION = .25;
             public static final double MAX_JERK = .25;
         
 

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveKinematicsConstraint;
 import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -33,13 +34,17 @@ public class PathGenerator {
                         Constants.DrivetrainConstants.DrivetrainParameters.KA),
                 Constants.DrivetrainConstants.DrivetrainParameters.kDriveKinematics, 10);
 
+        var kinematicsConstraint = new DifferentialDriveKinematicsConstraint(Constants.DrivetrainConstants.DrivetrainParameters.kDriveKinematics, Constants.DrivetrainConstants.DrivetrainParameters.KINEMATICS_MAX_RATE_PER_SIDE);
+
         // Create config for trajectory
         TrajectoryConfig config = new TrajectoryConfig(Constants.DrivetrainConstants.AutonConstants.MAX_VELOCITY,
                 Constants.DrivetrainConstants.AutonConstants.MAX_ACCELERATION)
                         // Add kinematics to ensure max speed is actually obeyed
                         .setKinematics(Constants.DrivetrainConstants.DrivetrainParameters.kDriveKinematics)
+                        
                         // Apply the voltage constraint
-                        .addConstraint(autoVoltageConstraint);
+                        .addConstraint(autoVoltageConstraint)
+                        .addConstraint(kinematicsConstraint);
 
         // An example trajectory to follow. All units in meters.
         AnnotatedTrajectory trajectory = new AnnotatedTrajectory(
