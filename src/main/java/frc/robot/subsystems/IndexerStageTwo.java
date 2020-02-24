@@ -52,6 +52,10 @@ public class IndexerStageTwo extends SubsystemBase {
 
   }
 
+  public boolean getSensorValue() {
+    return false; //sensor.get();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
