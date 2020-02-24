@@ -21,7 +21,7 @@ public class IntakePivot extends SubsystemBase {
   public LocationState locationState;
 
   public static enum ValidAngles {
-    DOWN, PARALLEL, UP, UNCERTAIN
+    DOWN, UP, UNCERTAIN
   }
 
   public ValidAngles currentAngle;
