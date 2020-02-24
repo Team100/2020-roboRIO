@@ -15,15 +15,12 @@ public class GlobalManager {
      * Manages states that pertain to the Supersystem
      */
     public static class SupersystemManager {
-        /**
-         * Is the Indexer full
-         */
-        public static boolean indexerFull = false;
+       
 
         /**
          * States that the supersystem can exist in
          */
-        public enum SupersystemState {
+        public static enum SupersystemState {
             NEUTRAL, INTAKING, QUEUEING, ALIGNING, SHOOTING, JAMMED, REVERSING
         }
 
@@ -47,18 +44,49 @@ public class GlobalManager {
          * inside of the frame perimeter EXTENDED: Unsafe and outside of the frame
          * perimeter
          */
-        public enum FramePerimeterState {
+        public static enum FramePerimeterState {
             INSIDE, EXTENDED
         }
 
         /**
          * Is the intake safely inside of the frame perimeter
          */
-        public FramePerimeterState intakeFramePerimeterState;
+        public static FramePerimeterState intakeFramePerimeterState;
 
         /**
          * Is the color wheel manipulator safely inside of the frame perimeter
          */
-        public FramePerimeterState colorFramePerimeterState;
+        public static FramePerimeterState colorFramePerimeterState;
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Agregations of states                                                     //
+        ///////////////////////////////////////////////////////////////////////////////
+
+        /**
+         * Is the device ready to shoot
+         */
+        public static boolean isReadyToShoot = shooterReady && turretReady;
+
+         /**
+         * Is the Indexer full
+         */
+        public static boolean indexerFull = IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC;
+        
+    }
+
+    public static class IndexerManager {
+
+        public static enum IndexerLocationState {
+            EMPTY, ONE_PC, TWO_PC, THREE_PC, THREE_PC_SHIFTED, FOUR_PC, FIVE_PC, UNCERTAIN
+        }
+
+        public static enum IndexerActionState {
+            LOADED, LOADING, WAITING_TO_LOAD, UNLOADING, WAITING_TO_UNLOAD, NEUTRAL
+        }
+
+        public static IndexerLocationState locationState;
+        public static IndexerActionState actionState;
+
+
     }
 }
