@@ -53,7 +53,7 @@ public class ChaChaController {
      * Sets the current path for the ChaChaController
      * @param currentPath The ChaChaPath to run
      */
-    public void setCurrentPath(ChaChaPath currentPath){
+    public void loadPath(ChaChaPath currentPath){
         this.currentPath = currentPath;
     }
 
@@ -115,12 +115,16 @@ public class ChaChaController {
         return path;
     }
 
+    /**
+     * Generates an autonomous command that can then be run by scheduler
+     * @return
+     */
     public Command generateAutonomous(){
         this.stripCurrentPath();
-        Pose2d start = this.currentPath.path.get(0).asPose2d();
+        Pose2d start = this.getRobotPose();
         Pose2d end = this.currentPath.path.get(this.currentPath.path.size() - 1).asPose2d();
         ArrayList<Translation2d> midpoints = new ArrayList<>();
-        for(int i = 1; i < this.currentPath.path.size() - 1; i++){
+        for(int i = 0; i < this.currentPath.path.size() - 1; i++){
             midpoints.add(this.currentPath.path.get(i).asWaypoint());
         }
         return PathGenerator.createAutoNavigationCommand(subsystems.drivetrain, start, midpoints, end);
