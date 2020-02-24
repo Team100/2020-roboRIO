@@ -62,6 +62,19 @@ public class ChaChaController {
     }
 
     /**
+     * Adds a ChaCha slide path modification to the path
+     *
+     * ChaCha slides should have requirement as true
+     * @param point
+     * @return the new command
+     */
+    public Command addChaChaSlide(ChaChaPoint point){
+        this.stripCurrentPath();
+        this.currentPath.prependNewChaChaPoint(point);
+        return this.generateAutonomous();
+    }
+
+    /**
      * Strips the current ChaChaPath of any extraneous data
      *
      * This can include points that have already been translated through
@@ -140,5 +153,14 @@ public class ChaChaController {
      */
     public Pose2d getRobotPose(){
         return this.subsystems.drivetrain.getPose();
+    }
+
+    /**
+     * A periodic call to the ChaChaController for anything that needs to happen often
+     *
+     * TODO MAP THIS IN PERIODIC
+     */
+    public void periodic(){
+
     }
 }
