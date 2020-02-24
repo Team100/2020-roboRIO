@@ -7,7 +7,7 @@ public class ChaChaController {
     /**
      * The current path that the ChaChaController is set to
      */
-    public ChaChaPregeneratedPath currentPath;
+    public ChaChaPath currentPath;
 
     /**
      * Whether the ChaChaController should be run or not
@@ -48,7 +48,7 @@ public class ChaChaController {
      * Sets the current path for the ChaChaController
      * @param currentPath The ChaChaPath to run
      */
-    public void setCurrentPath(ChaChaPregeneratedPath currentPath){
+    public void setCurrentPath(ChaChaPath currentPath){
         this.currentPath = currentPath;
     }
 
@@ -63,7 +63,7 @@ public class ChaChaController {
      */
     public void stripCurrentPath(){
         Pose2d currentPose = subsystems.drivetrain.getPose();
-        ChaChaPoint endPoint = this.currentPath.path.get(this.currentPath.path.size());
+        ChaChaPoint endPoint = this.currentPath.path.get(this.currentPath.path.size()-1);
 
         if(currentPose.getTranslation().getX() < endPoint.x){
             this.direction = ChaChaDirection.POSITIVE;
@@ -74,10 +74,41 @@ public class ChaChaController {
 
 
         if(this.direction == ChaChaDirection.POSITIVE){
+            for(int i = this.currentPath.path.size()-1; i >= 0; i--){
+
+            }
 
         }
         else if(this.direction == ChaChaDirection.NEGATIVE){
-            
+
         }
+    }
+
+    /**
+     * A recursive method for stripping extraneous data from a ChaChaPath
+     * @param path
+     * @param pose
+     * @return
+     */
+    public ChaChaPath recursiveStrip(ChaChaPath path, Pose2d pose){
+        if(path.path.size() <= 0) {
+            System.out.println("Completely stripped path");
+            return path;
+        }
+
+        if(this.direction == ChaChaDirection.POSITIVE){
+            if(pose.getTranslation().getX() >= path.path.get(0).x) {
+                //Currently more positive than point
+                path.path.remove(0);
+                return recursiveStrip(path, pose);
+            }
+        } else if(this.direction == ChaChaDirection.NEGATIVE){
+            if(pose.getTranslation().getX() <= path.path.get(0).x){
+                path.path.remove(0);
+                return recursiveStrip(path, pose);
+            }
+        }
+
+        return path;
     }
 }

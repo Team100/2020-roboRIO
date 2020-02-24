@@ -3,12 +3,12 @@ package frc.robot.FRCLib.Cyclone.ChaCha;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ChaChaPregeneratedPath {
+public class ChaChaPath {
     public ArrayList<ChaChaPoint> path;
-    public ChaChaPregeneratedPath(){
+    public ChaChaPath(){
         this.path = new ArrayList<>();
     }
-    public ChaChaPregeneratedPath(ChaChaPoint[] path){
+    public ChaChaPath(ChaChaPoint[] path){
         this.path = new ArrayList<>(Arrays.asList(path));
     }
 
