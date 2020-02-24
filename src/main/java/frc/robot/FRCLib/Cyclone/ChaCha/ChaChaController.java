@@ -15,15 +15,6 @@ public class ChaChaController {
     public ChaChaPath currentPath;
 
     /**
-     * Whether the ChaChaController should be run or not
-     *
-     * If true, the ChaChaController will start running the currentPath.
-     *
-     * Otherwise, the ChaChaController will have no effect.
-     */
-    public boolean chaChaEnabled = false;
-
-    /**
      * A refrence to all of the robot subsystems
      */
     public Subsystems subsystems;
@@ -55,6 +46,16 @@ public class ChaChaController {
      */
     public void loadPath(ChaChaPath currentPath){
         this.currentPath = currentPath;
+    }
+
+    /**
+     * Runs a given path
+     * @param currentPath the path to run
+     * @return autonomous command
+     */
+    public Command runPath(ChaChaPath currentPath){
+        this.loadPath(currentPath);
+        return this.generateAutonomous();
     }
 
     /**
