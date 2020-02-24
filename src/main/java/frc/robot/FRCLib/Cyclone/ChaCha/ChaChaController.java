@@ -1,7 +1,12 @@
 package frc.robot.FRCLib.Cyclone.ChaCha;
 
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
 import frc.robot.Subsystems;
+
+import java.util.ArrayList;
 
 public class ChaChaController {
     /**
@@ -62,7 +67,7 @@ public class ChaChaController {
      * To make a point be part of the ChaChaPath, add required to the ChaChaPoint
      */
     public void stripCurrentPath(){
-        Pose2d currentPose = subsystems.drivetrain.getPose();
+        Pose2d currentPose = this.getRobotPose();
         ChaChaPoint endPoint = this.currentPath.path.get(this.currentPath.path.size()-1);
 
         if(currentPose.getTranslation().getX() < endPoint.x){
@@ -72,37 +77,35 @@ public class ChaChaController {
             this.direction = ChaChaDirection.NEGATIVE;
         }
 
-
-        if(this.direction == ChaChaDirection.POSITIVE){
-            for(int i = this.currentPath.path.size()-1; i >= 0; i--){
-
-            }
-
-        }
-        else if(this.direction == ChaChaDirection.NEGATIVE){
-
-        }
+        recursiveStrip(this.currentPath, this.getRobotPose());
     }
 
     /**
      * A recursive method for stripping extraneous data from a ChaChaPath
      * @param path
      * @param pose
-     * @return
+     * @return a stripped ChaChaPath
      */
     public ChaChaPath recursiveStrip(ChaChaPath path, Pose2d pose){
+        if(path == null){
+            return null;
+        }
         if(path.path.size() <= 0) {
             System.out.println("Completely stripped path");
             return path;
         }
 
-        if(this.direction == ChaChaDirection.POSITIVE){
+        if(path.path.get(0).isRequired){
+            return path;
+        }
+        else if(this.direction == ChaChaDirection.POSITIVE){
             if(pose.getTranslation().getX() >= path.path.get(0).x) {
                 //Currently more positive than point
                 path.path.remove(0);
                 return recursiveStrip(path, pose);
             }
-        } else if(this.direction == ChaChaDirection.NEGATIVE){
+        }
+        else if(this.direction == ChaChaDirection.NEGATIVE){
             if(pose.getTranslation().getX() <= path.path.get(0).x){
                 path.path.remove(0);
                 return recursiveStrip(path, pose);
@@ -110,5 +113,24 @@ public class ChaChaController {
         }
 
         return path;
+    }
+
+    public Command generateAutonomous(){
+        this.stripCurrentPath();
+        Pose2d start = this.currentPath.path.get(0).asPose2d();
+        Pose2d end = this.currentPath.path.get(this.currentPath.path.size() - 1).asPose2d();
+        ArrayList<Translation2d> midpoints = new ArrayList<>();
+        for(int i = 1; i < this.currentPath.path.size() - 1; i++){
+            midpoints.add(this.currentPath.path.get(i).asWaypoint());
+        }
+        return PathGenerator.createAutoNavigationCommand(subsystems.drivetrain, start, midpoints, end);
+    }
+
+    /**
+     * Gets the current pose of the robot
+     * @return
+     */
+    public Pose2d getRobotPose(){
+        return this.subsystems.drivetrain.getPose();
     }
 }
