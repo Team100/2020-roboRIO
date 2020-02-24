@@ -8,6 +8,9 @@ import frc.robot.Subsystems;
 
 import java.util.ArrayList;
 
+/**
+ * Handles the management of a ChaCha-enabled robot
+ */
 public class ChaChaController {
     /**
      * The current path that the ChaChaController is set to
