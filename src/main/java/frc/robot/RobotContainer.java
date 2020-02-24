@@ -76,7 +76,6 @@ public class RobotContainer {
         // Default Commands
         this.setDefaultCommands();
 
-
         // Button to Command Mapping
         configureButtonBindings();
     }
