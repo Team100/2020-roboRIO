@@ -10,6 +10,7 @@ package frc.robot.commands.supersystem.indexer.indexStageTwo;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.IndexerStageTwo.ActionState;
+
 import frc.robot.subsystems.IndexerStageTwo;
 
 public class IndexerStageTwoStop extends CommandBase {
@@ -27,7 +28,7 @@ public class IndexerStageTwoStop extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.indexer.actionState = ActionState.STOP;
+    //this.indexer.actionState = ActionState.STOP;
 
     indexer.indexerStageTwo.drivePercentOutput(0);
 
