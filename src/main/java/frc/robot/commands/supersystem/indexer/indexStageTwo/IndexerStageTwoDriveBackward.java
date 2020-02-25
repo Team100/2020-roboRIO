@@ -9,7 +9,7 @@ package frc.robot.commands.supersystem.indexer.indexStageTwo;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Constants;
-import frc.robot.subsystems.Indexer.ActionState;
+//import frc.robot.subsystems.Indexer.ActionState;
 import frc.robot.subsystems.IndexerStageTwo;
 
 public class IndexerStageTwoDriveBackward extends CommandBase {
@@ -27,7 +27,7 @@ public class IndexerStageTwoDriveBackward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.indexer.actionState = ActionState.MOVE_BACKWARDS;
+    //this.indexer.actionState = ActionState.MOVE_BACKWARDS;
 
     this.indexer.indexerStageTwo
         .drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_TWO_PERCENT_OUTPUT_BACKWARD);

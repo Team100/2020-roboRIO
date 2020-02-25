@@ -16,7 +16,7 @@ public class IndexerStageOne extends SubsystemBase {
 
   public FRCTalonSRX indexerStageOne;
 
-  public Indexer.ActionState actionState;
+  //public Indexer.ActionState actionState;
   public DigitalInput sensor;
 
   /**
@@ -39,6 +39,9 @@ public class IndexerStageOne extends SubsystemBase {
             .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
             .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE)
             .build();
+
+            addChild("frontSensor", sensor);
+            addChild("indexerStageOne", indexerStageOne);
 
   }
 

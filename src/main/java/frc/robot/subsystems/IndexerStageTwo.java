@@ -15,7 +15,7 @@ import frc.robot.FRCLib.Motors.FRCTalonSRX;
 public class IndexerStageTwo extends SubsystemBase {
   public FRCTalonSRX indexerStageTwo;
 
-  public Indexer.ActionState actionState;
+  //public Indexer.ActionState actionState;
 
   public DigitalInput sensor;
   /**
@@ -40,6 +40,8 @@ public class IndexerStageTwo extends SubsystemBase {
             .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.PEAK_OUTPUT_REVERSE)
             .build();
 
+            addChild("rearSensor", sensor);
+            addChild("indexerStageTwo", indexerStageTwo);
   }
 
   /**

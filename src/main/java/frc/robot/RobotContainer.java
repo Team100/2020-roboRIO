@@ -33,7 +33,7 @@ import frc.robot.commands.supersystem.shooter.ShooterStop;
 import frc.robot.commands.supersystem.turret.TurretStop;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Indexer;
+//import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.PDP;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -57,7 +57,7 @@ public class RobotContainer {
     public final Joystick gamepad;
     private final Drivetrain drivetrain;
     private final PDP pdpSubsystem = new PDP();
-    private final Indexer indexer;
+    //private final Indexer indexer;
 
     public JoystickButton wholeIndexerForward;
     public JoystickButton wholeIndexerReverse;
@@ -78,7 +78,7 @@ public class RobotContainer {
 
         // Subsystem Initiation
         drivetrain = new Drivetrain();
-        indexer = new Indexer();
+        //indexer = new Indexer();
         indexerStageOne = new IndexerStageOne();
         indexerStageTwo = new IndexerStageTwo();
         intake = new Intake();
