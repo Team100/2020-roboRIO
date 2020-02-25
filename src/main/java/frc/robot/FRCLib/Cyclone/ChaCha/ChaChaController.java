@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
 import frc.robot.Subsystems;
-import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 
