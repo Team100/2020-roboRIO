@@ -16,7 +16,12 @@ public class IndexerStageOne extends SubsystemBase {
 
   public FRCTalonSRX indexerStageOne;
 
-  //public Indexer.ActionState actionState;
+
+  public static enum ActionState {
+    MOVE_FOWARD, MOVE_BACKWARDS, STOP
+  }
+  public ActionState actionState;
+
   public DigitalInput sensor;
 
   /**
@@ -50,6 +55,10 @@ public class IndexerStageOne extends SubsystemBase {
    */
   public void updateState() {
 
+  }
+
+  public boolean getSensorValue() {
+    return true; //sensor.get();
   }
 
   @Override
