@@ -57,9 +57,7 @@ public class RobotContainer {
     public final Joystick leftJoystick;
     public final Joystick rightJoystick;
     public final Joystick gamepad;
-    private final Drivetrain drivetrain;
     private final PDP pdpSubsystem = new PDP();
-    private final Indexer indexer = new Indexer();
 
     public JoystickButton wholeIndexerForward;
     public JoystickButton wholeIndexerReverse;
