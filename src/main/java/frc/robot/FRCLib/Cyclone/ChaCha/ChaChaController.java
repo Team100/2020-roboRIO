@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
 import frc.robot.Subsystems;
+import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,10 @@ public class ChaChaController {
      * The direction that the ChaChaController is currently driving in
      */
     public ChaChaDirection direction = ChaChaDirection.NEUTRAL;
+
+    public double acceptableError = 0.5;
+
+    public Pose2d endPosition;
 
 
     /**
@@ -140,6 +145,7 @@ public class ChaChaController {
         this.stripCurrentPath();
         Pose2d start = this.getRobotPose();
         Pose2d end = this.currentPath.path.get(this.currentPath.path.size() - 1).asPose2d();
+        endPosition = end;
         ArrayList<Translation2d> midpoints = new ArrayList<>();
         for(int i = 0; i < this.currentPath.path.size() - 1; i++){
             midpoints.add(this.currentPath.path.get(i).asWaypoint());
@@ -162,5 +168,13 @@ public class ChaChaController {
      */
     public void periodic(){
 
+    }
+
+    public boolean isInAccpetableRange(){
+        double deltaX = Math.abs(getRobotPose().getTranslation().getX() - endPosition.getTranslation().getX());
+        double deltaY = Math.abs(getRobotPose().getTranslation().getY() - endPosition.getTranslation().getY());
+
+
+        return (deltaX < acceptableError) && (deltaY < acceptableError);
     }
 }
