@@ -4,6 +4,8 @@ import frc.robot.Subsystems;
 
 /**
  * A ChaChaPoint based off of the current robot pose
+ *
+ * This is designed for use with the ChaCha slide
  */
 public class ChaChaRelativePoint extends ChaChaPoint {
     public Subsystems subsystems;

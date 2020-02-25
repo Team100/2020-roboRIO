@@ -169,6 +169,10 @@ public class ChaChaController {
 
     }
 
+    /**
+     * Returns whether the robot is complete or not
+     * @return whether deltaX and deltaY are within the acceptable range
+     */
     public boolean isInAccpetableRange(){
         double deltaX = Math.abs(getRobotPose().getTranslation().getX() - endPosition.getTranslation().getX());
         double deltaY = Math.abs(getRobotPose().getTranslation().getY() - endPosition.getTranslation().getY());
