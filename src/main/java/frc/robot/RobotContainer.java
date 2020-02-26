@@ -43,9 +43,11 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
+
     public final Joystick leftJoystick;
     public final Joystick rightJoystick;
     public final Joystick gamepad;
+
 
     public JoystickButton wholeIndexerForward;
     public JoystickButton wholeIndexerReverse;
@@ -68,10 +70,12 @@ public class RobotContainer {
         gamepad = new Joystick(2);
 
         // Subsystem Initiation
+
         subsystems = new Subsystems();
 
         //Trigger Initialization
         triggers = new Triggers(subsystems);
+
 
         // Default Commands
         this.setDefaultCommands();
@@ -82,6 +86,7 @@ public class RobotContainer {
     }
 
     public void setDefaultCommands() {
+
         subsystems.drivetrain.setDefaultCommand(new ArcadeDrive(subsystems.drivetrain, leftJoystick, rightJoystick));
         subsystems.stageOne.setDefaultCommand(new IndexerStageOneStop(subsystems.stageOne));
         subsystems.stageTwo.setDefaultCommand(new IndexerStageTwoStop(subsystems.stageTwo));
@@ -103,10 +108,12 @@ public class RobotContainer {
         indexerStageOneForward = new JoystickButton(gamepad, 2);
         indexerStageTwoForward = new JoystickButton(gamepad, 4);
 
+
         wholeIndexerForward.whileHeld(new IndexerDriveForward(subsystems.stageOne, subsystems.stageTwo));
         wholeIndexerReverse.whileHeld(new IndexerDriveBackward(subsystems.stageOne, subsystems.stageTwo));
         indexerStageOneForward.whileHeld(new IndexerStageOneDriveForward(subsystems.stageOne));
         indexerStageTwoForward.whileHeld(new IndexerStageTwoDriveForward(subsystems.stageTwo));
+
 
         ////////////////////////////////////////////////////////////////////////////
         intakeIntake = new JoystickButton(gamepad, 5);

@@ -39,6 +39,7 @@ public class Turret extends SubsystemBase {
         .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE).build();
 
+        addChild("turretMotor", turretMotor);
   }
 
   /**
