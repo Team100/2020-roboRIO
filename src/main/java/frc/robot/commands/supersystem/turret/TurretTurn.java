@@ -13,37 +13,37 @@ import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Turret.ActionState;
 
 public class TurretTurn extends CommandBase {
-  /**
-   * Creates a new TurretTurn.
-   */
-  public Turret turret;
+    /**
+     * Creates a new TurretTurn.
+     */
+    public Turret turret;
 
-  public TurretTurn(Turret turret) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.turret = turret;
-    addRequirements(this.turret);
-  }
+    public TurretTurn(Turret turret) {
+        // Use addRequirements() here to declare subsystem dependencies.
+        this.turret = turret;
+        addRequirements(this.turret);
+    }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    turret.actionState = ActionState.MOVING;
-    turret.turretMotor.drivePercentOutput(Constants.TurretConstants.TurretMotionParameters.PERCENT_OUTPUT_FORWARD);
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+        turret.actionState = ActionState.MOVING;
+        turret.turretMotor.drivePercentOutput(Constants.TurretConstants.TurretMotionParameters.PERCENT_OUTPUT_FORWARD);
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }
