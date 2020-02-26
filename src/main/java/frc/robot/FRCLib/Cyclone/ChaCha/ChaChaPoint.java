@@ -31,8 +31,8 @@ public class ChaChaPoint {
 
     /**
      * Creates a new ChaChaPoint given an x and y coordinate
-     * @param x
-     * @param y
+     * @param x The x coordinate for the point
+     * @param y The y coordinate for the point
      */
     public ChaChaPoint(double x, double y){
         this.x = x;
@@ -43,9 +43,9 @@ public class ChaChaPoint {
 
     /**
      * Creates a ChaChaPoint given an x and y coordinate as well as a requirement
-     * @param x
-     * @param y
-     * @param isRequired
+     * @param x The x coordinate for the point
+     * @param y The y coordinate for the point
+     * @param isRequired Is the point required as part of the path
      */
     public ChaChaPoint(double x, double y, boolean isRequired){
         this.x = x;
@@ -56,9 +56,9 @@ public class ChaChaPoint {
 
     /**
      * Creates a ChaChaPoint given an x and y coordinate as well as an angle
-     * @param x
-     * @param y
-     * @param theta
+     * @param x The x coordinate for the point
+     * @param y The y coordinate for the point
+     * @param theta The angle of the point
      */
     public ChaChaPoint(double x, double y, double theta) {
         this.x = x;
@@ -69,9 +69,9 @@ public class ChaChaPoint {
 
     /**
      * Creates a ChaChaPoint given an x and y coordinate as well as an angle and a requirement
-     * @param x
-     * @param y
-     * @param theta
+     * @param x The x coordinate for the point
+     * @param y The y coordinate for the point
+     * @param theta The angle of the point
      * @param isRequired
      */
     public ChaChaPoint(double x, double y, double theta, boolean isRequired) {

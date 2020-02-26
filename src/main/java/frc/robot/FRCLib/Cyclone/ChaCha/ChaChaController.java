@@ -18,7 +18,7 @@ public class ChaChaController {
     public ChaChaPath currentPath;
 
     /**
-     * A refrence to all of the robot subsystems
+     * A reference to all of the robot subsystems
      */
     public Subsystems subsystems;
 
@@ -34,8 +34,14 @@ public class ChaChaController {
      */
     public ChaChaDirection direction = ChaChaDirection.NEUTRAL;
 
+    /**
+     * The acceptable offset that the robot can be in for the ChaChaController to be complete
+     */
     public double acceptableError = 0.5;
 
+    /**
+     * The last waypoint in the trajectory
+     */
     public Pose2d endPosition;
 
 
