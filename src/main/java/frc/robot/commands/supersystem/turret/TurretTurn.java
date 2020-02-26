@@ -27,7 +27,7 @@ public class TurretTurn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    turret.actionState = ActionState.STOPPED;
+    turret.actionState = ActionState.MOVING;
     turret.turretMotor.drivePercentOutput(Constants.TurretConstants.TurretMotionParameters.PERCENT_OUTPUT_FORWARD);
   }
 
