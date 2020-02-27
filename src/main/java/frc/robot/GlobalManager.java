@@ -89,4 +89,8 @@ public class GlobalManager {
 
 
     }
+
+    public static class TurretManager {
+        public static boolean targetAcquired;
+    }
 }
