@@ -18,7 +18,7 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 /**
- * An abstraction for the Talon SRX for debugging information
+ * An abstraction for the Talon FX for debugging information
  */
 public class FRCTalonFX implements Sendable {
     public void follow(FRCTalonFX a) {
@@ -99,6 +99,7 @@ public class FRCTalonFX implements Sendable {
             SmartDashboard.putNumber(this.getSmartDashboardPath() + "/forwardSoftLimitThreshold",
                     this.getForwardSoftLimitThreshold());
             SmartDashboard.putBoolean(this.getSmartDashboardPath() + "/inverted", this.isInverted());
+            SmartDashboard.putString(this.getSmartDashboardPath() + "/invertType", this.getInvertType().toString());
             SmartDashboard.putNumber(this.getSmartDashboardPath() + "/kP", this.getkP());
             SmartDashboard.putNumber(this.getSmartDashboardPath() + "/kI", this.getkI());
             SmartDashboard.putNumber(this.getSmartDashboardPath() + "/kD", this.getkD());
@@ -169,6 +170,21 @@ public class FRCTalonFX implements Sendable {
      * true inverts the motor
      */
     private boolean inverted;
+
+    /**
+     * The inversion of the motor
+     *
+     * Uses CTRE InvertType
+     */
+    private InvertType invertType;
+
+    /**
+     * Determines what mode to use for inversion
+     * 
+     * true uses InvertType invertType
+     * false uses boolean inverted
+     */
+    private boolean useInvertType;
 
     /**
      * The feedback port of the motor Default is 0
@@ -373,8 +389,9 @@ public class FRCTalonFX implements Sendable {
         this.motor.configFactoryDefault();
         motor.selectProfileSlot(0, 0);
         System.out.println("#################RESET");
-        if (this.isInverted()) {
-            motor.setInverted(this.isInverted());
+        if (this.isInverted() || this.isInvertedWithType()) {
+            if (this.useInvertType) motor.setInverted(this.invertType);
+            else  motor.setInverted(this.isInverted());
             System.out.println("Configuring Inverted");
         }
         if (this.isCurrentLimitEnabled()) {
@@ -470,8 +487,24 @@ public class FRCTalonFX implements Sendable {
         return inverted;
     }
 
+    public boolean isInvertedWithType() {
+        return invertType != InvertType.None;
+    }
+
+    public InvertType getInvertType() {
+        return this.invertType;
+    }
+
     public void setInverted(boolean inverted) {
         this.inverted = inverted;
+        this.invertType = InvertType.None;
+        this.useInvertType = false;
+    }
+
+    public void setInverted(InvertType inverted) {
+        this.invertType = inverted;
+        this.inverted = false;
+        this.useInvertType = true;
     }
 
     public int getFeedbackPort() {
@@ -761,6 +794,8 @@ public class FRCTalonFX implements Sendable {
     public static final class FRCTalonFXBuilder {
         private int canID;
         private boolean inverted = false;
+        private InvertType invertType = InvertType.None;
+        private boolean useInvertType = false;
         private int feedbackPort = 0;
         private int timeout = 10;
         private boolean sensorPhase = false;
@@ -813,6 +848,13 @@ public class FRCTalonFX implements Sendable {
 
         public FRCTalonFXBuilder withInverted(boolean inverted) {
             this.inverted = inverted;
+            this.useInvertType = false;
+            return this;
+        }
+
+        public FRCTalonFXBuilder withInverted(InvertType inverted) {
+            this.invertType = inverted;
+            this.useInvertType = true;
             return this;
         }
 
@@ -994,7 +1036,8 @@ public class FRCTalonFX implements Sendable {
         public FRCTalonFX build() {
             FRCTalonFX fRCTalonFX = new FRCTalonFX();
             fRCTalonFX.setCanID(canID);
-            fRCTalonFX.setInverted(inverted);
+            if (useInvertType) fRCTalonFX.setInverted(invertType);
+            else fRCTalonFX.setInverted(inverted);
             fRCTalonFX.setFeedbackPort(feedbackPort);
             fRCTalonFX.setTimeout(timeout);
             fRCTalonFX.setSensorPhase(sensorPhase);
