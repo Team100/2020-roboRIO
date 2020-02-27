@@ -15,39 +15,37 @@ import frc.robot.subsystems.IndexerStageOne.ActionState;
 import frc.robot.subsystems.IndexerStageOne;
 
 public class IndexerStageOneDriveBackward extends CommandBase {
-  IndexerStageOne indexer;
+    IndexerStageOne indexer;
 
+    /**
+     * Creates a new IndexerStageOneDriveBackward.
+     */
+    public IndexerStageOneDriveBackward(IndexerStageOne indexer) {
+        // Use addRequirements() here to declare subsystem dependencies.
+        this.indexer = indexer;
+        addRequirements(this.indexer);
+    }
 
-  /**
-   * Creates a new IndexerStageOneDriveBackward.
-   */
-  public IndexerStageOneDriveBackward(IndexerStageOne indexer) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.indexer = indexer;
-    addRequirements(this.indexer);
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+        this.indexer.actionState = ActionState.MOVE_BACKWARDS;
+        this.indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_BACKWARD);
+    }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    //this.indexer.actionState = ActionState.MOVE_BACKWARDS;
-    this.indexer.indexerStageOne
-        .drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_BACKWARD);
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }
