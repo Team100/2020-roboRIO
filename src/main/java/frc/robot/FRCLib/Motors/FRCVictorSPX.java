@@ -125,7 +125,7 @@ public class FRCVictorSPX {
             fRCVictorSPX.setCanID(canID);
             if (useInvertType) fRCVictorSPX.setInverted(invertType);
             else fRCVictorSPX.setInverted(inverted);
-            fRCVictorSPX.setMaster(master);
+            if (master != null) fRCVictorSPX.setMaster(master);
             return fRCVictorSPX;
         }
     }

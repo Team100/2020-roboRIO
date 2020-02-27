@@ -21,8 +21,19 @@ import frc.robot.Robot;
  * An abstraction for the Talon FX for debugging information
  */
 public class FRCTalonFX implements Sendable {
-    public void follow(FRCTalonFX a) {
-        this.master = a;
+    
+    /**
+     * Tells Talon FX which motor controller to follow
+     * 
+     * Send null to stop following
+     *  
+     * @param master motor to follow
+     * 
+     * @deprecated use FRCTalonFXBuilder.withMaster() instead.  
+     */
+    @Deprecated
+    public void follow(FRCTalonFX master) {
+        this.master = master;
         this.motor.follow(this.master.motor);
 
     }
@@ -464,6 +475,9 @@ public class FRCTalonFX implements Sendable {
             updatePIDController();
             System.out.println("Setting PID Controller");
         }
+        if (this.master != null) {
+            motor.follow(master.motor);
+        }
         return this;
     }
 
@@ -791,6 +805,10 @@ public class FRCTalonFX implements Sendable {
         this.feedbackNotContinuous = feedbackNotContinuous;
     }
 
+    public void setMaster(FRCTalonFX master) {
+        this.master = master;
+    }
+
     public static final class FRCTalonFXBuilder {
         private int canID;
         private boolean inverted = false;
@@ -831,6 +849,7 @@ public class FRCTalonFX implements Sendable {
         private int motionCurveStrength = 0;
         private int motionProfileTrajectoryPeriod = 0;
         private boolean feedbackNotContinuous = false;
+        private FRCTalonFX master;
 
         public FRCTalonFXBuilder(int canID) {
             this.canID = canID;
@@ -1033,6 +1052,11 @@ public class FRCTalonFX implements Sendable {
             return this;
         }
 
+        public FRCTalonFXBuilder withMaster(FRCTalonFX master) {
+            this.master = master;
+            return this;
+        }
+
         public FRCTalonFX build() {
             FRCTalonFX fRCTalonFX = new FRCTalonFX();
             fRCTalonFX.setCanID(canID);
@@ -1069,6 +1093,7 @@ public class FRCTalonFX implements Sendable {
             fRCTalonFX.setMotionCurveStrength(motionCurveStrength);
             fRCTalonFX.setMotionProfileTrajectoryPeriod(motionProfileTrajectoryPeriod);
             fRCTalonFX.setFeedbackNotContinuous(feedbackNotContinuous);
+            fRCTalonFX.setMaster(master);
             fRCTalonFX.kF = this.kF;
             fRCTalonFX.kD = this.kD;
             fRCTalonFX.kI = this.kI;

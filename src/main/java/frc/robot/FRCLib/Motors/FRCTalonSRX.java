@@ -18,11 +18,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * An abstraction for the Talon SRX for debugging information
  */
 public class FRCTalonSRX implements Sendable {
-    public void follow(FRCTalonFX a) {
-        this.master = a;
-        this.motor.follow(this.master.motor);
-
-    }
 
     @Override
     public void initSendable(SendableBuilder builder) {
@@ -146,7 +141,7 @@ public class FRCTalonSRX implements Sendable {
     /**
      * The master that will be followed
      */
-    public FRCTalonFX master;
+    public FRCTalonSRX master;
     ///////////////////////////////////////////////////////////////////////////
     public SensorCollection m_sensorCollection;
 
@@ -451,6 +446,9 @@ public class FRCTalonSRX implements Sendable {
         if (this.getkP() != 0 || this.getkI() != 0 || this.getkD() != 0 || this.getkF() != 0) {
             updatePIDController();
             System.out.println("Setting PID Controller");
+        }
+        if (this.master != null) {
+            motor.follow(master.motor);
         }
         return this;
     }
@@ -779,6 +777,10 @@ public class FRCTalonSRX implements Sendable {
         this.feedbackNotContinuous = feedbackNotContinuous;
     }
 
+    public void setMaster(FRCTalonSRX master) {
+        this.master = master;
+    }
+
     public static final class FRCTalonSRXBuilder {
         private int canID;
         private boolean inverted = false;
@@ -819,6 +821,7 @@ public class FRCTalonSRX implements Sendable {
         private int motionCurveStrength = 0;
         private int motionProfileTrajectoryPeriod = 0;
         private boolean feedbackNotContinuous = false;
+        private FRCTalonSRX master;
 
         public FRCTalonSRXBuilder(int canID) {
             this.canID = canID;
@@ -1017,6 +1020,11 @@ public class FRCTalonSRX implements Sendable {
             return this;
         }
 
+        public FRCTalonSRXBuilder withMaster(FRCTalonSRX master) {
+            this.master = master;
+            return this;
+        }
+
         public FRCTalonSRX build() {
             FRCTalonSRX fRCTalonSRX = new FRCTalonSRX();
             fRCTalonSRX.setCanID(canID);
@@ -1053,6 +1061,7 @@ public class FRCTalonSRX implements Sendable {
             fRCTalonSRX.setMotionCurveStrength(motionCurveStrength);
             fRCTalonSRX.setMotionProfileTrajectoryPeriod(motionProfileTrajectoryPeriod);
             fRCTalonSRX.setFeedbackNotContinuous(feedbackNotContinuous);
+            fRCTalonSRX.setMaster(master);
             fRCTalonSRX.kF = this.kF;
             fRCTalonSRX.kD = this.kD;
             fRCTalonSRX.kI = this.kI;
