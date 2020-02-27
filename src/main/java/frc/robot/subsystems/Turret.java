@@ -21,6 +21,8 @@ public class Turret extends SubsystemBase {
 
     public ActionState actionState;
 
+    public int tickOffset = 0;
+
     /**
      * Creates a new Turret.
      */

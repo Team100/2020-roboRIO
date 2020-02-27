@@ -20,7 +20,6 @@ import frc.robot.Constants;
 public class CustomRamseteController extends RamseteController {
 
   private Pose2d m_poseError;
-  private Pose2d m_poseTolerance;
   private final double m_b;
   private final double m_zeta;
 
