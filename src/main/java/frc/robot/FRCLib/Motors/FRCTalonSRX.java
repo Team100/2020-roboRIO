@@ -18,6 +18,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * An abstraction for the Talon SRX for debugging information
  */
 public class FRCTalonSRX implements Sendable {
+    public void follow(FRCTalonFX a) {
+        this.master = a;
+        this.motor.follow(this.master.motor);
+
+    }
 
     @Override
     public void initSendable(SendableBuilder builder) {
@@ -137,6 +142,11 @@ public class FRCTalonSRX implements Sendable {
      * A direct reference to the TalonSRX motor, designed for direct control
      */
     public WPI_TalonSRX motor;
+
+    /**
+     * The master that will be followed
+     */
+    public FRCTalonFX master;
     ///////////////////////////////////////////////////////////////////////////
     public SensorCollection m_sensorCollection;
 
@@ -814,11 +824,6 @@ public class FRCTalonSRX implements Sendable {
             this.canID = canID;
             this.smartDashboardPath = "TalonSRX_" + canID;
         }
-
-        /*
-         * public static FRCTalonSRXBuilder aFRCTalonSRX() { return new
-         * FRCTalonSRXBuilder(); }
-         */
 
         public FRCTalonSRXBuilder withCanID(int canID) {
             this.canID = canID;
