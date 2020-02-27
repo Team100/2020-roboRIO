@@ -43,6 +43,7 @@ public class IntakePivot extends SubsystemBase {
         .withPeakOutputForward(Constants.IntakeConstants.IntakeMotors.IntakePivot.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.IntakeConstants.IntakeMotors.IntakePivot.PEAK_OUTPUT_REVERSE).build();
 
+        addChild("intakePivot", pivot);
   }
 
   @Override
