@@ -34,6 +34,9 @@ public class FRCTalonFX implements Sendable {
         builder.addDoubleProperty("EncoderSpeed", this::getSensorVelocity, null);
         builder.addDoubleProperty("Fwd Limit", this.m_sensorCollection::isFwdLimitSwitchClosed, null);
         builder.addDoubleProperty("Rev Limit", this.m_sensorCollection::isRevLimitSwitchClosed, null);
+        builder.addDoubleProperty("current", motor::getStatorCurrent, null);
+        builder.addBooleanProperty("Inverted", motor::getInverted, null);
+        builder.addStringProperty("Control Mode", () -> motor.getControlMode().toString(), null);
     }
 
     public void reset() {
