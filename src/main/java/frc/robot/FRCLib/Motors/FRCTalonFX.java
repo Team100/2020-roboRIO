@@ -37,6 +37,7 @@ public class FRCTalonFX implements Sendable {
         builder.addDoubleProperty("current", motor::getStatorCurrent, null);
         builder.addBooleanProperty("Inverted", motor::getInverted, null);
         builder.addStringProperty("Control Mode", () -> motor.getControlMode().toString(), null);
+        builder.addDoubleProperty("Voltage Output", motor::getMotorOutputVoltage, null);
     }
 
     public void reset() {
