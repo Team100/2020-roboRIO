@@ -11,9 +11,9 @@ public class ChaChaCriticalPoints {
     public static ChaChaPoint onTopOfSecondBall =           new ChaChaPoint(2.07, 0);
     public static ChaChaPoint onTopOfThirdBall =            new ChaChaPoint(2.97, 0);
     public static ChaChaPoint shootLineDirectLine =         new ChaChaPoint(6.03, 1.69);
-    public static ChaChaPoint colorWheelCenterpoint =       new ChaChaPoint(0, 0);
+    public static ChaChaPoint colorWheelCenterpoint =       new ChaChaPoint(0, 0);          // FIELD ORIGIN
     public static ChaChaPoint twoBallsNearControlPanel =    new ChaChaPoint(2.98, 1.99);
-    public static ChaChaPoint threeAwayBallsInsideStruct =  new ChaChaPoint(2.66, 3.06);
+    public static ChaChaPoint threeAwayBallsInsideStruct =  new ChaChaPoint(2.66, 3.06);    // NEED TO EXIT @ 45DEG
     public static ChaChaPoint threeAwayBallsOutsideStruct = new ChaChaPoint(3.92,3.61);
     public static ChaChaPoint shootTriangle =               new ChaChaPoint(8.37, 1.69);
 }
