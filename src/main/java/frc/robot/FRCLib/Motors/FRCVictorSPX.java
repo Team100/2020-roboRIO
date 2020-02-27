@@ -1,10 +1,14 @@
 package frc.robot.FRCLib.Motors;
 
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class FRCVictorSPX {
     private int canID;
     private boolean inverted;
+    private InvertType invertType;
+    private boolean useInvertType;
     private VictorSPX motor;
     private FRCTalonSRX master;
 
@@ -24,9 +28,25 @@ public class FRCVictorSPX {
     public boolean isInverted() {
         return inverted;
     }
+    
+    public boolean isInvertedWithType() {
+        return invertType != InvertType.None;
+    }
+
+    public InvertType getInvertType() {
+        return this.invertType;
+    }
 
     public void setInverted(boolean inverted) {
         this.inverted = inverted;
+        this.invertType = InvertType.None;
+        this.useInvertType = false;
+    }
+
+    public void setInverted(InvertType inverted) {
+        this.invertType = inverted;
+        this.inverted = false;
+        this.useInvertType = true;
     }
 
     public VictorSPX getMotor() {
@@ -45,9 +65,28 @@ public class FRCVictorSPX {
         this.master = master;
     }
 
+    public FRCVictorSPX configure() {
+        motor = new WPI_VictorSPX(this.getCanID());
+        System.out.println(this.motor.configFactoryDefault());
+        System.out.println("#################RESET");
+        if (this.isInverted() || this.isInvertedWithType()) {
+            if (this.useInvertType) motor.setInverted(this.invertType);
+            else  motor.setInverted(this.isInverted());
+            System.out.println("Configuring Inverted");
+        }
+        if (master != null) {
+            motor.follow(master.motor);
+            System.out.println("Configuring Master");
+        }
+
+        return this;
+    }
+
     public static final class FRCVictorSPXBuilder {
         private int canID;
-        private boolean inverted;
+        private boolean inverted = false;
+        private InvertType invertType = InvertType.None;
+        private boolean useInvertType = false;
         private FRCTalonSRX master;
 
         public FRCVictorSPXBuilder(int canID) {
@@ -66,6 +105,13 @@ public class FRCVictorSPX {
 
         public FRCVictorSPXBuilder withInverted(boolean inverted) {
             this.inverted = inverted;
+            this.useInvertType = false;
+            return this;
+        }
+
+        public FRCVictorSPXBuilder withInverted(InvertType inverted) {
+            this.invertType = inverted;
+            this.useInvertType = true;
             return this;
         }
 
@@ -77,7 +123,8 @@ public class FRCVictorSPX {
         public FRCVictorSPX build() {
             FRCVictorSPX fRCVictorSPX = new FRCVictorSPX();
             fRCVictorSPX.setCanID(canID);
-            fRCVictorSPX.setInverted(inverted);
+            if (useInvertType) fRCVictorSPX.setInverted(invertType);
+            else fRCVictorSPX.setInverted(inverted);
             fRCVictorSPX.setMaster(master);
             return fRCVictorSPX;
         }
