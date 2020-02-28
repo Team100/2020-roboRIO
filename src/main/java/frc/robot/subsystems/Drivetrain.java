@@ -89,6 +89,12 @@ public class Drivetrain extends SubsystemBase {
     
     odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
 
+    addChild("drivetrainLeftMaster", leftMaster);
+    addChild("drivetrainRightMaster", rightMaster);
+    addChild("drivetrainLeftFollower", leftFollower);
+    addChild("drivetrainRightFollower", rightFollower);
+    addChild("driveGyro", gyro);
+
   }
 
   public void set(double left, double right) {

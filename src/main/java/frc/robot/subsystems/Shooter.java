@@ -54,6 +54,8 @@ public class Shooter extends SubsystemBase {
 
     follower.follow(master);
 
+    addChild("shooterMaster", master);
+    addChild("shooterFollower", follower);
   }
 
   /**

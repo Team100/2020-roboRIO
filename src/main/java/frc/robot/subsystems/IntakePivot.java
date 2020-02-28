@@ -21,7 +21,7 @@ public class IntakePivot extends SubsystemBase {
   public LocationState locationState;
 
   public static enum ValidAngles {
-    DOWN, PARALLEL, UP, UNCERTAIN
+    DOWN, UP, UNCERTAIN
   }
 
   public ValidAngles currentAngle;
@@ -43,6 +43,7 @@ public class IntakePivot extends SubsystemBase {
         .withPeakOutputForward(Constants.IntakeConstants.IntakeMotors.IntakePivot.PEAK_OUTPUT_FORWARD)
         .withPeakOutputReverse(Constants.IntakeConstants.IntakeMotors.IntakePivot.PEAK_OUTPUT_REVERSE).build();
 
+        addChild("intakePivot", pivot);
   }
 
   @Override

@@ -31,10 +31,7 @@ import frc.robot.commands.supersystem.intake.intakePivot.IntakeMoveJoystick;
 import frc.robot.commands.supersystem.shooter.ShooterRun;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 import frc.robot.commands.supersystem.turret.TurretStop;
-import frc.robot.subsystems.*;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.PDP;
+import frc.robot.Subsystems;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -46,20 +43,11 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
-    public final Drivetrain drivetrain;
-    public final Indexer indexer;
-    public final IndexerStageOne stageOne;
-    public final IndexerStageTwo stageTwo;
-    public final Intake intake;
-    public final IntakePivot intakePivot;
-    public final Shooter shooter;
-    public final Turret turret;
+
     public final Joystick leftJoystick;
     public final Joystick rightJoystick;
     public final Joystick gamepad;
-    private final Drivetrain drivetrain;
-    private final PDP pdpSubsystem = new PDP();
-    private final Indexer indexer = new Indexer();
+
 
     public JoystickButton wholeIndexerForward;
     public JoystickButton wholeIndexerReverse;
@@ -68,6 +56,9 @@ public class RobotContainer {
 
     public JoystickButton intakeIntake;
     public JoystickButton shooterShoot;
+
+    public Triggers triggers;
+    public Subsystems subsystems;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -79,14 +70,12 @@ public class RobotContainer {
         gamepad = new Joystick(2);
 
         // Subsystem Initiation
-        drivetrain = new Drivetrain();
-        indexer = new Indexer();
-        stageOne = new IndexerStageOne();
-        stageTwo = new IndexerStageTwo();
-        intake = new Intake();
-        intakePivot = new IntakePivot();
-        shooter = new Shooter();
-        turret = new Turret();
+
+        subsystems = new Subsystems();
+
+        //Trigger Initialization
+        triggers = new Triggers(subsystems);
+
 
         // Default Commands
         this.setDefaultCommands();
@@ -97,13 +86,14 @@ public class RobotContainer {
     }
 
     public void setDefaultCommands() {
-        drivetrain.setDefaultCommand(new ArcadeDrive(drivetrain, leftJoystick, rightJoystick));
-        stageOne.setDefaultCommand(new IndexerStageOneStop(stageOne));
-        stageTwo.setDefaultCommand(new IndexerStageTwoStop(stageTwo));
-        intake.setDefaultCommand(new IntakeStop(intake));
-        intakePivot.setDefaultCommand(new IntakeMoveJoystick(intakePivot, gamepad));
-        shooter.setDefaultCommand(new ShooterStop(shooter));
-        turret.setDefaultCommand(new TurretStop(turret));
+
+        subsystems.drivetrain.setDefaultCommand(new ArcadeDrive(subsystems.drivetrain, leftJoystick, rightJoystick));
+        subsystems.stageOne.setDefaultCommand(new IndexerStageOneStop(subsystems.stageOne));
+        subsystems.stageTwo.setDefaultCommand(new IndexerStageTwoStop(subsystems.stageTwo));
+        subsystems.intake.setDefaultCommand(new IntakeStop(subsystems.intake));
+        subsystems.intakePivot.setDefaultCommand(new IntakeMoveJoystick(subsystems.intakePivot, gamepad));
+        subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
+        subsystems.turret.setDefaultCommand(new TurretStop(subsystems.turret));
     }
 
     /**
@@ -118,18 +108,20 @@ public class RobotContainer {
         indexerStageOneForward = new JoystickButton(gamepad, 2);
         indexerStageTwoForward = new JoystickButton(gamepad, 4);
 
-        wholeIndexerForward.whileHeld(new IndexerDriveForward(stageOne, stageTwo));
-        wholeIndexerReverse.whileHeld(new IndexerDriveBackward(stageOne, stageTwo));
-        indexerStageOneForward.whileHeld(new IndexerStageOneDriveForward(stageOne));
-        indexerStageTwoForward.whileHeld(new IndexerStageTwoDriveForward(stageTwo));
+
+        wholeIndexerForward.whileHeld(new IndexerDriveForward(subsystems.stageOne, subsystems.stageTwo));
+        wholeIndexerReverse.whileHeld(new IndexerDriveBackward(subsystems.stageOne, subsystems.stageTwo));
+        indexerStageOneForward.whileHeld(new IndexerStageOneDriveForward(subsystems.stageOne));
+        indexerStageTwoForward.whileHeld(new IndexerStageTwoDriveForward(subsystems.stageTwo));
+
 
         ////////////////////////////////////////////////////////////////////////////
         intakeIntake = new JoystickButton(gamepad, 5);
-        intakeIntake.whileHeld(new IntakeIntake(intake));
+        intakeIntake.whileHeld(new IntakeIntake(subsystems.intake));
 
         ////////////////////////////////////////////////////////////////////////////
         shooterShoot = new JoystickButton(gamepad, 6);
-        shooterShoot.whileHeld(new ShooterRun(shooter));
+        shooterShoot.whileHeld(new ShooterRun(subsystems.shooter));
 
     }
 
@@ -141,15 +133,15 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        drivetrain.zeroHeading();
-        drivetrain.resetOdometry(new Pose2d(0,0, new Rotation2d(0)));
+        subsystems.drivetrain.zeroHeading();
+        subsystems.drivetrain.resetOdometry(new Pose2d(0,0, new Rotation2d(0)));
         Pose2d start = new Pose2d(0, 0, new Rotation2d(0));
         List<Translation2d> waypoints = List.of(
             new Translation2d(1.5, -1)
         );
         Pose2d end = new Pose2d(3, 0, new Rotation2d(0));
 
-        return PathGenerator.createAutoNavigationCommand(drivetrain, start, waypoints, end);
+        return PathGenerator.createAutoNavigationCommand(subsystems.drivetrain, start, waypoints, end);
     }
 
     

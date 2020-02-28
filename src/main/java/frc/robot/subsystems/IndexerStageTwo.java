@@ -15,7 +15,12 @@ import frc.robot.FRCLib.Motors.FRCTalonSRX;
 public class IndexerStageTwo extends SubsystemBase {
   public FRCTalonSRX indexerStageTwo;
 
-  public Indexer.ActionState actionState;
+
+  public static enum ActionState {
+    MOVE_FOWARD, MOVE_BACKWARDS, STOP
+  }
+  public ActionState actionState;
+
 
   public DigitalInput sensor;
   /**
@@ -40,6 +45,8 @@ public class IndexerStageTwo extends SubsystemBase {
             .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.PEAK_OUTPUT_REVERSE)
             .build();
 
+            addChild("rearSensor", sensor);
+            addChild("indexerStageTwo", indexerStageTwo);
   }
 
   /**
@@ -47,6 +54,10 @@ public class IndexerStageTwo extends SubsystemBase {
    */
   public void updateState() {
 
+  }
+
+  public boolean getSensorValue() {
+    return false; //sensor.get();
   }
 
   @Override
