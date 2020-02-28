@@ -227,7 +227,7 @@ public final class Constants {
             }
 
             public static final class IndexerStageTwo {
-                public static final int CAN_ID = 11;
+                public static final int CAN_ID = 7;
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
@@ -348,5 +348,38 @@ public final class Constants {
             }
         }
     }
+    public static final class ControlPanelSpinnerConstants {
+        public static final class ControlPanelSpinnerMotors {
+            public static final int CAN_ID = 11;
 
+            public static final boolean INVERT = false;
+            public static final int FEEDBACK_PORT = 0;
+            public static final boolean SENSOR_PHASE = false;
+
+            public static final int TIMEOUT = 10;
+
+            public static final boolean ENABLE_CURRENT_LIMIT = true;
+            public static final int CURRENT_LIMIT = 25;
+            public static final double OPEN_LOOP_RAMP = 0.1;
+            public static final double PEAK_OUTPUT_FORWARD = .5;
+            public static final double PEAK_OUTPUT_REVERSE = -.5;
+
+            public static final double NOMINAL_OUTPUT_FORWARD = 0;
+            public static final double NOMINAL_OUTPUT_REVERSE = 0;
+        }
+        public static final class ControlPanelSpinnerColors {
+            public static final double RGB_RED_VALUE_FOR_YELLOW =0.301;
+            public static final double RGB_BLUE_VALUE_FOR_YELLOW =0.148;
+            public static final double RGB_GREEN_VALUE_FOR_YELLOW =0.550;
+            public static final double RGB_RED_VALUE_FOR_BLUE =0.196;
+            public static final double RGB_BLUE_VALUE_FOR_BLUE =0.311;
+            public static final double RGB_GREEN_VALUE_FOR_BLUE =0.491;
+            public static final double RGB_RED_VALUE_FOR_RED =0.483;
+            public static final double RGB_BLUE_VALUE_FOR_RED =0.148;
+            public static final double RGB_GREEN_VALUE_FOR_RED =0.371;
+            public static final double RGB_RED_VALUE_FOR_GREEN =0.197;
+            public static final double RGB_BLUE_VALUE_FOR_GREEN =0.240;
+            public static final double RGB_GREEN_VALUE_FOR_GREEN =0.561;
+        }
+    }
 }
