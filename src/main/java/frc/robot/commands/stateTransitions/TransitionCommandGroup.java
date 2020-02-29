@@ -23,7 +23,10 @@ public class TransitionCommandGroup {
         GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
         GlobalManager.IndexerManager.numBalls += 1;
     }
-    public Command incrementIntakeStage = new InstantCommand(this::addOneToIntakeStage);
+    public Command incrementIntakeStage(){
+        return new InstantCommand(this::addOneToIntakeStage);
+    }
+
 
     public Command bypassCommand(){
         return new PrintCommand("Bypassing");
@@ -34,6 +37,6 @@ public class TransitionCommandGroup {
     }
 
     public Command stopIndexer(){
-        return new SequentialCommandGroup(new IndexerStop(subsystems.stageOne, subsystems.stageTwo), incrementIntakeStage);
+        return new SequentialCommandGroup(new IndexerStop(subsystems.stageOne, subsystems.stageTwo), incrementIntakeStage());
     }
 }

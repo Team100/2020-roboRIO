@@ -3,6 +3,7 @@ package frc.robot.commands.stateTransitions;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
 import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
@@ -66,6 +67,10 @@ public class TriggerMap {
         STOP_MOTORS, NONE
     }
 
+    public Command newBall = new SequentialCommandGroup(
+            tcg.stopIndexer(),
+            tcg.incrementIntakeStage()
+    )
     public B1C2FAction evaluateB1C2F() {
         GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
         if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
