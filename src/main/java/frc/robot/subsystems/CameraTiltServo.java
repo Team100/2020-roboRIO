@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class CameraTiltServo extends SubsystemBase {
-  private Servo arm;
+  private Servo cameraTilt;
   private int setpoint;
   
   /**
@@ -21,13 +21,15 @@ public class CameraTiltServo extends SubsystemBase {
    */
   public CameraTiltServo() {
     setpoint = Constants.DriverCameraConstants.CameraTiltServo.SETPOINT_ONE;
-    arm = new Servo(Constants.DriverCameraConstants.CameraTiltServo.PWM_ID_SERVO);
+    cameraTilt = new Servo(Constants.DriverCameraConstants.CameraTiltServo.PWM_ID_SERVO);
+
+    addChild("frontSensor", cameraTilt);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    arm.setAngle(setpoint);
+    cameraTilt.setAngle(setpoint);
   }
 
   public void setpointOne() {
