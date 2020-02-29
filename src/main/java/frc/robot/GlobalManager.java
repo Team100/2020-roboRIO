@@ -11,6 +11,37 @@ package frc.robot;
  * Manages state for the entire robot
  */
 public class GlobalManager {
+
+    /**
+     * Possible control modes of the robot
+     */
+    public enum RobotControlMode{
+        CYCLONE, SEMI_AUTO, FULL_MANUAL
+    }
+
+    /**
+     * The robot's current control mode
+     */
+    public RobotControlMode robotControlMode;
+
+    /**
+     * All management that applies to the operation of the Cyclone
+     */
+    public static class CycloneManager{
+
+        /**
+         * Possible control modes for Cyclone to be in
+         */
+        public enum CycloneControlMode{
+            CHA_CHA, STATE_MACHINE
+        }
+
+        /**
+         * The current control mode of the CycloneController
+         */
+        public CycloneControlMode cycloneControlMode;
+    }
+
     /**
      * Manages states that pertain to the Supersystem
      */
