@@ -3,6 +3,7 @@ package frc.robot.commands.stateTransitions;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
 import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
@@ -11,6 +12,7 @@ import frc.robot.commands.supersystem.shooter.ShooterRecover;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 
 import java.util.Map;
+import java.util.Set;
 
 import static java.util.Map.entry;
 
@@ -38,7 +40,7 @@ public class TriggerMap {
         if (a == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
                 a == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
                 a == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
-                a == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED || 
+                a == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
                 a == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
             return IndexerMoveType.S1F;
         }
@@ -59,6 +61,7 @@ public class TriggerMap {
 
             this::indexerShouldMoveForward
     );
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
