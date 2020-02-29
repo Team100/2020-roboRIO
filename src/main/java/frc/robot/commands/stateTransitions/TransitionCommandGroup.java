@@ -17,6 +17,10 @@ public class TransitionCommandGroup {
         return new PrintCommand("Bypassing");
     }
 
+    public Command setIndexerUncertainCommand(){
+        return new PrintCommand("IMPLEMENT THIS");
+    }
+
     public Command stopIndexer(){
         return new SequentialCommandGroup(new IndexerStop(subsystems.stageOne, subsystems.stageTwo));
     }

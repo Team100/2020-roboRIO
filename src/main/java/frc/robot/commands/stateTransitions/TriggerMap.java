@@ -3,17 +3,14 @@ package frc.robot.commands.stateTransitions;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
 import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
-import frc.robot.commands.supersystem.indexer.IndexerStop;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
 import frc.robot.commands.supersystem.shooter.ShooterRecover;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 
 import java.util.Map;
-import java.util.Set;
 
 import static java.util.Map.entry;
 
@@ -72,6 +69,7 @@ public class TriggerMap {
         if(ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY || ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC || ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC || ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED || ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC){
             return B1C2FAction.STOP_MOTORS;
         }
+
         return B1C2FAction.NONE;
     }
     public final Command onB1C2F = new SelectCommand(
@@ -83,19 +81,24 @@ public class TriggerMap {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public enum B2C2TAction{
-        STOP_MOTORS, NONE
+        STOP_MOTORS, NONE, SET_UNCERTAIN
     }
     public B2C2TAction evaluateB2C2T(){
         GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
         if(ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC){
             return B2C2TAction.STOP_MOTORS;
         }
+        if(ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY || ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC || ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC){
+            return B2C2TAction.SET_UNCERTAIN;
+        }
         return B2C2TAction.NONE;
     }
     public final Command onB2C2T = new SelectCommand(
             Map.ofEntries(
                     entry(B2C2TAction.STOP_MOTORS, tcg.stopIndexer()),
+                    entry(B2C2TAction.SET_UNCERTAIN, tcg.setIndexerUncertainCommand()),
                     entry(B2C2TAction.NONE, tcg.bypassCommand())
+
             ), this::evaluateB2C2T);
 
 
