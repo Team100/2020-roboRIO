@@ -70,7 +70,7 @@ public class TriggerMap {
     public Command newBall = new SequentialCommandGroup(
             tcg.stopIndexer(),
             tcg.incrementIntakeStage()
-    )
+    );
     public B1C2FAction evaluateB1C2F() {
         GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
         if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
