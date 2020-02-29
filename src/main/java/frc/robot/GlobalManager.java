@@ -121,6 +121,8 @@ public class GlobalManager {
 
         public static int numBalls;
 
+        public static boolean isFull = false;
+
         public static boolean subsystemIsFull(){
             return locationState == IndexerLocationState.FIVE_PC;
         }

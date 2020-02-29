@@ -35,16 +35,16 @@ public class TriggerMap {
     }
 
     public IndexerMoveType indexerShouldMoveForward() {
-        GlobalManager.IndexerManager.IndexerLocationState a = GlobalManager.IndexerManager.locationState;
+        GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
 
-        if (a == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
-                a == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
-                a == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
-                a == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
-                a == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
+        if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
+                ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
+                ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
+                ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
+                ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
             return IndexerMoveType.S1F;
         }
-        if (a == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC) {
+        if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC) {
             return IndexerMoveType.S1FANDS2F;
         }
         return IndexerMoveType.NONE;
@@ -129,4 +129,8 @@ public class TriggerMap {
             ),
             this::shouldExit
     );
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 }

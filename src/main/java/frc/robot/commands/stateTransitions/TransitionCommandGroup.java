@@ -21,6 +21,7 @@ public class TransitionCommandGroup {
         int indexOfCurrent = java.util.Arrays.asList(GlobalManager.IndexerManager.locationStatesOrder).indexOf(GlobalManager.IndexerManager.locationState);
 
         GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
+        GlobalManager.IndexerManager.numBalls += 1;
     }
     public Command incrementIntakeStage = new InstantCommand(this::addOneToIntakeStage);
 
