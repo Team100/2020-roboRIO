@@ -51,7 +51,7 @@ public class GlobalManager {
         /**
          * States that the supersystem can exist in
          */
-        public static enum SupersystemState {
+        public enum SupersystemState {
             NEUTRAL, INTAKING, QUEUEING, ALIGNING, SHOOTING, JAMMED, REVERSING
         }
 
@@ -75,7 +75,7 @@ public class GlobalManager {
          * inside of the frame perimeter EXTENDED: Unsafe and outside of the frame
          * perimeter
          */
-        public static enum FramePerimeterState {
+        public enum FramePerimeterState {
             INSIDE, EXTENDED
         }
 
@@ -107,11 +107,11 @@ public class GlobalManager {
 
     public static class IndexerManager {
 
-        public static enum IndexerLocationState {
+        public enum IndexerLocationState {
             EMPTY, ONE_PC, TWO_PC, THREE_PC, THREE_PC_SHIFTED, FOUR_PC, FIVE_PC, UNCERTAIN
         }
 
-        public static enum IndexerActionState {
+        public enum IndexerActionState {
             LOADED, LOADING, WAITING_TO_LOAD, UNLOADING, WAITING_TO_UNLOAD, NEUTRAL
         }
 
