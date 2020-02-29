@@ -19,5 +19,5 @@ public class TriggerMap {
                     entry(GlobalManager.IndexerManager.IndexerLocationState.ONE_PC, null) //Replace null with actual
             ),
             this::selectLocationState
-    )
+    );
 }
