@@ -118,6 +118,8 @@ public class GlobalManager {
         public static IndexerLocationState locationState;
         public static IndexerActionState actionState;
 
+        public static int numBalls;
+
 
     }
 }
