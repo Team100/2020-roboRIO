@@ -46,6 +46,9 @@ public class Triggers {
         indexerExitSensor = new Trigger(subsystems.stageTwo::getSensorValue);
 
         this.triggerMap = new TriggerMap(this.subsystems);
+
+        this.indexerEntranceSensor.whenInactive(triggerMap.onB1C2F);
+        this.indexerExitSensor.whenActive(triggerMap.onB2C2T);
     }
 
    

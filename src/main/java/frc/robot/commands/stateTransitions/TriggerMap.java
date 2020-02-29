@@ -17,6 +17,7 @@ import static java.util.Map.entry;
 public class TriggerMap {
     public Subsystems subsystems;
     public TransitionCommandGroup tcg;
+
     public TriggerMap(Subsystems subsystems) {
         this.subsystems = subsystems;
         this.tcg = new TransitionCommandGroup(this.subsystems);
@@ -61,17 +62,23 @@ public class TriggerMap {
     );
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public enum B1C2FAction{
+    public enum B1C2FAction {
         STOP_MOTORS, NONE
     }
-    public B1C2FAction evaluateB1C2F(){
+
+    public B1C2FAction evaluateB1C2F() {
         GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
-        if(ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY || ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC || ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC || ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED || ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC){
+        if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
+                ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
+                ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
+                ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
+                ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
             return B1C2FAction.STOP_MOTORS;
         }
 
         return B1C2FAction.NONE;
     }
+
     public final Command onB1C2F = new SelectCommand(
             Map.ofEntries(
                     entry(B1C2FAction.STOP_MOTORS, tcg.stopIndexer()),
@@ -80,19 +87,23 @@ public class TriggerMap {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public enum B2C2TAction{
+    public enum B2C2TAction {
         STOP_MOTORS, NONE, SET_UNCERTAIN
     }
-    public B2C2TAction evaluateB2C2T(){
+
+    public B2C2TAction evaluateB2C2T() {
         GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
-        if(ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC){
+        if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC) {
             return B2C2TAction.STOP_MOTORS;
         }
-        if(ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY || ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC || ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC){
+        if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
+                ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
+                ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC) {
             return B2C2TAction.SET_UNCERTAIN;
         }
         return B2C2TAction.NONE;
     }
+
     public final Command onB2C2T = new SelectCommand(
             Map.ofEntries(
                     entry(B2C2TAction.STOP_MOTORS, tcg.stopIndexer()),
