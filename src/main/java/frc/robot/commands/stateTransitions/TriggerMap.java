@@ -68,15 +68,35 @@ public class TriggerMap {
         STOP_MOTORS, NONE
     }
     public B1C2FAction evaluateB1C2F(){
+        GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
+        if(ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY || ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC || ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC || ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED || ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC){
+            return B1C2FAction.STOP_MOTORS;
+        }
         return B1C2FAction.NONE;
     }
     public final Command onB1C2F = new SelectCommand(
             Map.ofEntries(
-                    entry(B1C2FAction.STOP_MOTORS, tcg.stopIndexer())
-)
-            , this::evaluateB1C2F
-            );
+                    entry(B1C2FAction.STOP_MOTORS, tcg.stopIndexer()),
+                    entry(B1C2FAction.NONE, tcg.bypassCommand())
+            ), this::evaluateB1C2F);
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public enum B2C2TAction{
+        STOP_MOTORS, NONE
+    }
+    public B2C2TAction evaluateB2C2T(){
+        GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
+        if(ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC){
+            return B2C2TAction.STOP_MOTORS;
+        }
+        return B2C2TAction.NONE;
+    }
+    public final Command onB2C2T = new SelectCommand(
+            Map.ofEntries(
+                    entry(B2C2TAction.STOP_MOTORS, tcg.stopIndexer()),
+                    entry(B2C2TAction.NONE, tcg.bypassCommand())
+            ), this::evaluateB2C2T);
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
