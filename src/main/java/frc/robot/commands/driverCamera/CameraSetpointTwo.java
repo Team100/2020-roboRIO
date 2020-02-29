@@ -4,14 +4,14 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CameraTiltServo;;
 
-public class CameraTilt extends CommandBase {
+public class CameraSetpointTwo extends CommandBase {
   private CameraTiltServo servo;
   private boolean done = false;
   
   /**
    * Creates a new UnlockClimber.
    */
-  public void setpointOne() {
+  public void setpointTwo() {
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(servo);
@@ -20,7 +20,7 @@ public class CameraTilt extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    servo.setpointOne();
+    servo.setpointTwo();
     done = true;
   }
 
