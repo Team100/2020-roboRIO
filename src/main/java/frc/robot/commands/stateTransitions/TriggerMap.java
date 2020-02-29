@@ -35,7 +35,11 @@ public class TriggerMap {
     public IndexerMoveType indexerShouldMoveForward() {
         GlobalManager.IndexerManager.IndexerLocationState a = GlobalManager.IndexerManager.locationState;
 
-        if (a == GlobalManager.IndexerManager.IndexerLocationState.EMPTY || a == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC || a == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC || a == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED || a == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
+        if (a == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
+                a == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
+                a == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
+                a == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED || 
+                a == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
             return IndexerMoveType.S1F;
         }
         if (a == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC) {
