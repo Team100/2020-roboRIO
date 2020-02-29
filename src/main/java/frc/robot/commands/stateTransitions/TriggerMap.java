@@ -15,6 +15,11 @@ import static java.util.Map.entry;
 public class TriggerMap {
     public Subsystems subsystems;
 
+    public TriggerMap(Subsystems subsystems){
+        this.subsystems = subsystems;
+
+    }
+
     public GlobalManager.IndexerManager.IndexerLocationState selectLocationState() {
         return GlobalManager.IndexerManager.locationState;
     }
@@ -29,7 +34,6 @@ public class TriggerMap {
                     entry(GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC, new IndexerStageOneDriveForward(subsystems.stageOne)),
                     entry(GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC, new InstantCommand(()->System.out.println("Bypassing, FIVEPC"))),
                     entry(GlobalManager.IndexerManager.IndexerLocationState.UNCERTAIN, new InstantCommand(()->System.out.println("Bypassing, UNCERTAIN")))
-
 
                     ),
             this::selectLocationState
