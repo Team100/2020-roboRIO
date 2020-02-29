@@ -26,6 +26,8 @@ public class Triggers {
      */
     public TriggerMap triggerMap;
 
+    public Trigger indexerFull;
+
     /**
      * The trigger for everything that happens re: the indexerEntranceSensor
      */
@@ -42,10 +44,12 @@ public class Triggers {
      */
     public Triggers(Subsystems subsystems) {
         this.subsystems = subsystems;
+        indexerFull = new Trigger(GlobalManager.IndexerManager::subsystemIsFull);
         indexerEntranceSensor = new Trigger(subsystems.stageOne::getSensorValue);
         indexerExitSensor = new Trigger(subsystems.stageTwo::getSensorValue);
 
         this.triggerMap = new TriggerMap(this.subsystems);
+
 
         this.indexerEntranceSensor.whenInactive(triggerMap.onB1C2F);
         this.indexerExitSensor.whenActive(triggerMap.onB2C2T);
