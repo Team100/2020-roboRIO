@@ -12,37 +12,42 @@ import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Turret.ActionState;
 
 public class TurretStop extends CommandBase {
-  /**
-   * Creates a new TurretStop.
-   */
-  public Turret turret;
+    /**
+     * Creates a new TurretStop.
+     */
+    public Turret turret;
 
-  public TurretStop(Turret turret) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.turret = turret;
-    addRequirements(this.turret);
-  }
+    /**
+     * Constructor
+     * @deprecated Use TurretSlew or TurretLock Instead
+     */
+    @Deprecated
+    public TurretStop(Turret turret) {
+        // Use addRequirements() here to declare subsystem dependencies.
+        this.turret = turret;
+        addRequirements(this.turret);
+    }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    turret.actionState = ActionState.STOPPED;
-    turret.turretMotor.drivePercentOutput(0);
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+        turret.actionState = ActionState.STOPPED;
+        turret.turretMotor.drivePercentOutput(0);
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

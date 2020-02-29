@@ -9,7 +9,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.GlobalManager;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
+import frc.robot.commands.supersystem.turret.camera.Server;
 
 public class Turret extends SubsystemBase {
 
@@ -47,7 +49,12 @@ public class Turret extends SubsystemBase {
      * Update any states
      */
     public void updateState() {
+        if(Server.target != null) GlobalManager.TurretManager.targetAcquired = Server.target.getDistance() != -1;
+        else GlobalManager.TurretManager.targetAcquired = false;
+    }
 
+    public FRCTalonSRX getMotor() {
+        return this.turretMotor;
     }
 
     @Override

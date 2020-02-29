@@ -10,7 +10,7 @@ package frc.robot;
 import frc.robot.subsystems.*;
 
 /**
- * Add your docs here.
+ * A subsystem cluster for easy initialization and distribution
  */
 public class Subsystems {
     public final Drivetrain drivetrain = new Drivetrain();
