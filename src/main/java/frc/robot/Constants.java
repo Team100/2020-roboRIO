@@ -382,4 +382,11 @@ public final class Constants {
             public static final double RGB_GREEN_VALUE_FOR_GREEN =0.561;
         }
     }
+    public static final class DriverCameraConstants {
+        public static final class CameraTiltServo {
+            public static final int PWM_ID_SERVO = 2;
+            public static final int SETPOINT_ONE = 20;
+            public static final int SETPOINT_TWO = 40;
+        }
+    }
 }
