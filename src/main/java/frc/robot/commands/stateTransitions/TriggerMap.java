@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
 import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
+import frc.robot.commands.supersystem.indexer.IndexerStop;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
 import frc.robot.commands.supersystem.shooter.ShooterRecover;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
@@ -18,9 +19,10 @@ import static java.util.Map.entry;
 
 public class TriggerMap {
     public Subsystems subsystems;
-
+    public TransitionCommandGroup tcg;
     public TriggerMap(Subsystems subsystems) {
         this.subsystems = subsystems;
+        this.tcg = new TransitionCommandGroup(this.subsystems);
 
     }
 
@@ -58,9 +60,23 @@ public class TriggerMap {
 
             ),
 
-
             this::indexerShouldMoveForward
     );
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public enum B1C2FAction{
+        STOP_MOTORS, NONE
+    }
+    public B1C2FAction evaluateB1C2F(){
+        return B1C2FAction.NONE;
+    }
+    public final Command onB1C2F = new SelectCommand(
+            Map.ofEntries(
+                    entry(B1C2FAction.STOP_MOTORS, tcg.stopIndexer())
+)
+            , this::evaluateB1C2F
+            );
+
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
