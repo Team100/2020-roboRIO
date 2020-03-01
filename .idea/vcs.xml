@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/bin/main/frc/robot/FRCLib" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/main/java/frc/robot/FRCLib" vcs="Git" />
   </component>
 </project>
