@@ -142,7 +142,21 @@ public class GlobalManager {
 
     }
 
+    public static class ShooterManager{
+        public enum ShooterActionState {
+            NONE, RECOVERING, SPINNING, STOPPED
+        }
+        public static ShooterActionState actionState;
+
+        public static boolean speedReached = ShooterManager.actionState == ShooterManager.ShooterActionState.SPINNING;
+    }
+
     public static class TurretManager {
+        public enum TurretActionState {
+            NONE, MOVING, LOCKED
+        }
         public static boolean targetAcquired;
     }
+
+
 }

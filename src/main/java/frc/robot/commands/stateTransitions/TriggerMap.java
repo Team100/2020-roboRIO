@@ -6,7 +6,9 @@ import frc.robot.Subsystems;
 import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
 import frc.robot.commands.supersystem.shooter.ShooterRecover;
+import frc.robot.commands.supersystem.shooter.ShooterRun;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
+import frc.robot.commands.supersystem.turret.TurretTurn;
 
 import java.util.Map;
 import java.util.Set;
@@ -49,7 +51,7 @@ public class TriggerMap {
         return IndexerMoveType.NONE;
     }
 
-    public final Command onIndexerShouldMoveForward = new SelectCommand(
+    public final Command onIndexerShouldMoveFoward = new SelectCommand(
             Map.ofEntries(
                     entry(IndexerMoveType.S1F, new IndexerStageOneDriveForward(subsystems.stageOne)),
                     entry(IndexerMoveType.S1FANDS2F, new IndexerDriveForward(subsystems.stageOne, subsystems.stageTwo)),
@@ -67,7 +69,7 @@ public class TriggerMap {
 
     public Command newBall = new SequentialCommandGroup(
             tcg.stopIndexer(),
-            tcg.incrementIntakeStage()
+            tcg.incrementIndexerStage()
     );
     public B1C2FAction evaluateB1C2F() {
         GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
@@ -152,6 +154,67 @@ public class TriggerMap {
             ),
             this::needsToShift
     );
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public enum ShooterMoveType {
+        NONE, SPINNING, SPINNINGUP, STOPPED
+    }
+        public ShooterMoveType shouldSpinup() {
+        boolean ta = GlobalManager.TurretManager.targetAcquired;
+        boolean sr = GlobalManager.ShooterManager.speedReached;
+        
 
+        if (ta == true && sr == false) {
+            return ShooterMoveType.SPINNINGUP;
+        }
+        if (ta == false) {
+            return ShooterMoveType.NONE;
+        }
+        if (ta == true && sr == true) {
+            return ShooterMoveType.SPINNING;
+        }
+        return ShooterMoveType.NONE;
+    }
 
+    public ShooterMoveType shouldRun(){
+        boolean ta = GlobalManager.TurretManager.targetAcquired;
+        boolean sr = GlobalManager.ShooterManager.speedReached;
+
+        if (ta == true && sr == true) {
+            return ShooterMoveType.SPINNING;
+        }
+        return ShooterMoveType.NONE;
+    }
+
+    public ShooterMoveType shouldStop(){
+        boolean ta = GlobalManager.TurretManager.targetAcquired;
+
+        if (ta == false) {
+            return ShooterMoveType.STOPPED;
+        }
+        return ShooterMoveType.NONE;
+    }
+    
+    public final Command shouldSpinnup = new SelectCommand(
+            Map.ofEntries(
+                    entry(ShooterMoveType.SPINNINGUP, new ShooterRecover(subsystems.shooter))
+            ),
+
+            this::shouldSpinup
+    );
+
+    public final Command shouldRun = new SelectCommand(
+        Map.ofEntries(
+                entry(ShooterMoveType.SPINNING, new ShooterRun(subsystems.shooter))
+        ),
+
+        this::shouldRun
+    );
+
+    public final Command shouldStop = new SelectCommand(
+        Map.ofEntries(
+                entry(ShooterMoveType.STOPPED, new ShooterStop(subsystems.shooter))
+        ),
+
+        this::shouldStop
+    );
 }
