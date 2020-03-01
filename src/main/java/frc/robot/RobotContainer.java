@@ -69,9 +69,6 @@ public class RobotContainer {
 
         subsystems = new Subsystems();
 
-        //Trigger Initialization
-        triggers = new Triggers(subsystems);
-
 
         // Default Commands
         this.setDefaultCommands();
@@ -79,6 +76,9 @@ public class RobotContainer {
 
         // Button to Command Mapping
         configureButtonBindings();
+
+        //Trigger Initialization
+        triggers = new Triggers(subsystems);
     }
 
     public void setDefaultCommands() {

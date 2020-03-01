@@ -8,10 +8,7 @@ import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDrive
 import frc.robot.commands.supersystem.shooter.ShooterRecover;
 import frc.robot.commands.supersystem.shooter.ShooterRun;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
-import frc.robot.commands.supersystem.turret.TurretTurn;
-
 import java.util.Map;
-import java.util.Set;
 
 import static java.util.Map.entry;
 
@@ -51,26 +48,34 @@ public class TriggerMap {
         return IndexerMoveType.NONE;
     }
 
-    public final Command onIndexerShouldMoveFoward = new SelectCommand(
+    public Command onIndexerShouldMoveFoward() {
+        return new SelectCommand(
             Map.ofEntries(
+                    entry(
+                        IndexerMoveType
+                    .S1FANDS2F, 
+                    new IndexerDriveForward
+                    (this.subsystems.stageOne, 
+                    this.subsystems.stageTwo)),
                     entry(IndexerMoveType.S1F, new IndexerStageOneDriveForward(subsystems.stageOne)),
-                    entry(IndexerMoveType.S1FANDS2F, new IndexerDriveForward(subsystems.stageOne, subsystems.stageTwo)),
                     entry(IndexerMoveType.NONE, new InstantCommand(() -> System.out.println("Bypassing")))
+                ),
 
-            ),
-
-            this::indexerShouldMoveForward
-    );
+                this::indexerShouldMoveForward
+        );
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public enum B1C2FAction {
         STOP_MOTORS, NONE
     }
 
-    public Command newBall = new SequentialCommandGroup(
+    public Command newBall() {
+        return new SequentialCommandGroup(
             tcg.stopIndexer(),
             tcg.incrementIndexerStage()
-    );
+        );
+    }
     public B1C2FAction evaluateB1C2F() {
         GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
         if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
@@ -84,12 +89,13 @@ public class TriggerMap {
         return B1C2FAction.NONE;
     }
 
-    public final Command onB1C2F = new SelectCommand(
+    public Command onB1C2F() {
+        return new SelectCommand(
             Map.ofEntries(
                     entry(B1C2FAction.STOP_MOTORS, tcg.stopIndexer()),
                     entry(B1C2FAction.NONE, tcg.bypassCommand())
             ), this::evaluateB1C2F);
-
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public enum B2C2TAction {
@@ -109,14 +115,15 @@ public class TriggerMap {
         return B2C2TAction.NONE;
     }
 
-    public final Command onB2C2T = new SelectCommand(
+    public Command onB2C2T() {
+        return new SelectCommand(
             Map.ofEntries(
                     entry(B2C2TAction.STOP_MOTORS, tcg.stopIndexer()),
                     entry(B2C2TAction.SET_UNCERTAIN, tcg.setIndexerUncertainCommand()),
                     entry(B2C2TAction.NONE, tcg.bypassCommand())
 
             ), this::evaluateB2C2T);
-
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -127,17 +134,18 @@ public class TriggerMap {
         return false;
     }
 
-    public final Command onHasShotBall = new SelectCommand(
+    public Command onHasShotBall() {
+        return new SelectCommand(
             Map.ofEntries(
                     entry(true, new ShooterStop(subsystems.shooter)),
                     entry(false, new ShooterRecover(subsystems.shooter))
             ),
             this::shouldExit
-    );
-
+        );
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public final Command shouldIntake = new IndexerStageOneDriveForward(subsystems.stageOne);
+    public Command shouldIntake() { return new IndexerStageOneDriveForward(subsystems.stageOne); }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -147,13 +155,15 @@ public class TriggerMap {
         }
         return false;
     }
-    public final Command shouldShift = new SelectCommand(
+    public Command shouldShift() {
+        return new SelectCommand(
             Map.ofEntries(
                     entry(true, new IndexerDriveForward(subsystems.stageOne, subsystems.stageTwo)),
                     entry(false, tcg.bypassCommand())
             ),
             this::needsToShift
-    );
+        );
+    }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public enum ShooterMoveType {
         NONE, SPINNING, SPINNINGUP, STOPPED
@@ -194,27 +204,32 @@ public class TriggerMap {
         return ShooterMoveType.NONE;
     }
     
-    public final Command shouldSpinnup = new SelectCommand(
+    public Command shouldSpinnup() {
+        return new SelectCommand(
             Map.ofEntries(
                     entry(ShooterMoveType.SPINNINGUP, new ShooterRecover(subsystems.shooter))
             ),
 
             this::shouldSpinup
-    );
+        );
+    }
+    public Command shouldRunCommand() {
+        return new SelectCommand(
+            Map.ofEntries(
+                    entry(ShooterMoveType.SPINNING, new ShooterRun(subsystems.shooter))
+            ),
 
-    public final Command shouldRun = new SelectCommand(
-        Map.ofEntries(
-                entry(ShooterMoveType.SPINNING, new ShooterRun(subsystems.shooter))
-        ),
+            this::shouldRun
+        );
+    }
 
-        this::shouldRun
-    );
+    public Command shouldStopCommand() {
+        return new SelectCommand(
+            Map.ofEntries(
+                    entry(ShooterMoveType.STOPPED, new ShooterStop(subsystems.shooter))
+            ),
 
-    public final Command shouldStop = new SelectCommand(
-        Map.ofEntries(
-                entry(ShooterMoveType.STOPPED, new ShooterStop(subsystems.shooter))
-        ),
-
-        this::shouldStop
-    );
+            this::shouldStop
+        );
+    }
 }
