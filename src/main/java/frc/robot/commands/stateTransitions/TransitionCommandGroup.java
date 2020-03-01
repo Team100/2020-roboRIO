@@ -35,7 +35,7 @@ public class TransitionCommandGroup {
         return new InstantCommand(this::zeroIndexerStage);
     }
 
-
+    
     public Command bypassCommand(){
         return new PrintCommand("Bypassing");
     }
