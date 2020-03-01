@@ -10,36 +10,69 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Subsystems;
+import frc.robot.commands.stateTransitions.TriggerMap;
 import frc.robot.commands.supersystem.turret.*;
 
 /**
- * Add your docs here.
+ * All of the virtual triggers for state transitions on the robot
  */
 public class Triggers {
+
+    /**
+     * The subsystems that the Trigger has access to
+     */
+    public Subsystems subsystems;
+
+    /**
+     * The triggermap for all of the commands
+     */
+    public TriggerMap triggerMap;
+
+    public Trigger indexerFull;
+
+    /**
+     * The trigger for everything that happens re: the indexerEntranceSensor
+     */
     
     //Indexer Triggers
     public Trigger indexerEntranceSensor;
+
+    /**
+     * The trigger for everthing that happens re: the indexerExitSensor
+     */
     public Trigger indexerExitSensor;
 
-    //Turret Triggers
-    public Trigger cameraTrigger;
+    public Trigger shouldIntake;
+    public Trigger indexerShouldShift;
+  
+      public Trigger cameraTrigger;
 
 
     /**
-     * Initialize Triggers
-     * 
-     * @param subsystems Subsystem cluster
+     * Create a new instance of all of the triggers
+     * @param subsystems the subsystems that can be impacted
      */
     public Triggers(Subsystems subsystems) {
-        //Indexer Triggers
+        this.subsystems = subsystems;
+        indexerFull = new Trigger(GlobalManager.IndexerManager::subsystemIsFull);
         indexerEntranceSensor = new Trigger(subsystems.stageOne::getSensorValue);
         indexerExitSensor = new Trigger(subsystems.stageTwo::getSensorValue);
 
-        //Turret Triggers
-        cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired); //subsystems.turret::hasTarget);
+        shouldIntake = new Trigger(GlobalManager.IndexerManager::shouldIntake);
+        indexerShouldShift = new Trigger(GlobalManager.IndexerManager::shouldShift);
+
+        this.triggerMap = new TriggerMap(this.subsystems);
+
+        this.shouldIntake.whenActive(triggerMap.shouldIntake);
+        this.indexerShouldShift.whenActive(triggerMap.shouldShift);
+
+        this.indexerEntranceSensor.whenInactive(triggerMap.onB1C2F);
+        this.indexerExitSensor.whenActive(triggerMap.onB2C2T);
+      cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired); //subsystems.turret::hasTarget);
 
         turretConditionals(subsystems.turret);
         indexerConditionals(subsystems.stageOne, subsystems.stageTwo);
+    //Turret Triggers
     }
 
     /**

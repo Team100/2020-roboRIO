@@ -11,6 +11,37 @@ package frc.robot;
  * Manages state for the entire robot
  */
 public class GlobalManager {
+
+    /**
+     * Possible control modes of the robot
+     */
+    public enum RobotControlMode{
+        CYCLONE, SEMI_AUTO, FULL_MANUAL
+    }
+
+    /**
+     * The robot's current control mode
+     */
+    public RobotControlMode robotControlMode;
+
+    /**
+     * All management that applies to the operation of the Cyclone
+     */
+    public static class CycloneManager{
+
+        /**
+         * Possible control modes for Cyclone to be in
+         */
+        public enum CycloneControlMode{
+            CHA_CHA, STATE_MACHINE
+        }
+
+        /**
+         * The current control mode of the CycloneController
+         */
+        public CycloneControlMode cycloneControlMode;
+    }
+
     /**
      * Manages states that pertain to the Supersystem
      */
@@ -20,7 +51,7 @@ public class GlobalManager {
         /**
          * States that the supersystem can exist in
          */
-        public static enum SupersystemState {
+        public enum SupersystemState {
             NEUTRAL, INTAKING, QUEUEING, ALIGNING, SHOOTING, JAMMED, REVERSING
         }
 
@@ -39,12 +70,14 @@ public class GlobalManager {
          */
         public static boolean turretReady = false;
 
+
+
         /**
          * States for objects that extend outside of the frame perimeter INSIDE: Safely
          * inside of the frame perimeter EXTENDED: Unsafe and outside of the frame
          * perimeter
          */
-        public static enum FramePerimeterState {
+        public enum FramePerimeterState {
             INSIDE, EXTENDED
         }
 
@@ -67,25 +100,44 @@ public class GlobalManager {
          */
         public static boolean isReadyToShoot = shooterReady && turretReady;
 
-         /**
-         * Is the Indexer full
-         */
-        public static boolean indexerFull = IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC;
+
         
     }
 
     public static class IndexerManager {
 
-        public static enum IndexerLocationState {
+        public static IndexerLocationState[] locationStatesOrder = {IndexerLocationState.EMPTY, IndexerLocationState.ONE_PC, IndexerLocationState.TWO_PC, IndexerLocationState.THREE_PC, IndexerLocationState.THREE_PC_SHIFTED, IndexerLocationState.FOUR_PC, IndexerLocationState.FIVE_PC};
+        public enum IndexerLocationState {
             EMPTY, ONE_PC, TWO_PC, THREE_PC, THREE_PC_SHIFTED, FOUR_PC, FIVE_PC, UNCERTAIN
         }
 
-        public static enum IndexerActionState {
+        public enum IndexerActionState {
             LOADED, LOADING, WAITING_TO_LOAD, UNLOADING, WAITING_TO_UNLOAD, NEUTRAL
         }
 
         public static IndexerLocationState locationState;
         public static IndexerActionState actionState;
+
+        public static int numBalls;
+
+        public static boolean isFull = false;
+
+        public static boolean subsystemIsFull(){
+            return locationState == IndexerLocationState.FIVE_PC;
+        }
+
+        /**
+         * Is the Indexer full
+         */
+        public static boolean indexerFull = IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC;
+
+        public static boolean shouldIntake(){
+            return true;
+        }
+
+        public static boolean shouldShift(){
+            return IndexerManager.locationState == IndexerManager.IndexerLocationState.THREE_PC;
+        }
 
 
     }
