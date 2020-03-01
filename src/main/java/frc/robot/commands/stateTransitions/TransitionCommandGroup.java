@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
+import frc.robot.commands.supersystem.indexer.IndexerDriveBackward;
 import frc.robot.commands.supersystem.indexer.IndexerStop;
 
 public class TransitionCommandGroup {
@@ -17,14 +18,21 @@ public class TransitionCommandGroup {
     }
 
 
-    public void addOneToIntakeStage(){
+    public void addOneToIndexerStage(){
         int indexOfCurrent = java.util.Arrays.asList(GlobalManager.IndexerManager.locationStatesOrder).indexOf(GlobalManager.IndexerManager.locationState);
 
         GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
         GlobalManager.IndexerManager.numBalls += 1;
     }
-    public Command incrementIntakeStage(){
-        return new InstantCommand(this::addOneToIntakeStage);
+    public Command incrementIndexerStage(){
+        return new InstantCommand(this::addOneToIndexerStage);
+    }
+
+    public void zeroIndexerStage(){
+        GlobalManager.IndexerManager.numBalls = 0;
+    }
+    public Command resetIndexerStage(){
+        return new InstantCommand(this::zeroIndexerStage);
     }
 
 
@@ -33,10 +41,10 @@ public class TransitionCommandGroup {
     }
 
     public Command setIndexerUncertainCommand(){
-        return new PrintCommand("IMPLEMENT THIS");
+        return new SequentialCommandGroup(new IndexerDriveBackward(subsystems.stageOne, subsystems.stageTwo), resetIndexerStage());
     }
 
     public Command stopIndexer(){
-        return new SequentialCommandGroup(new IndexerStop(subsystems.stageOne, subsystems.stageTwo), incrementIntakeStage());
+        return new SequentialCommandGroup(new IndexerStop(subsystems.stageOne, subsystems.stageTwo), incrementIndexerStage());
     }
 }
