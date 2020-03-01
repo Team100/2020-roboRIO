@@ -255,6 +255,8 @@ public final class Constants {
                     .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(-40);
             public static final double INTAKE_UP_DEGREES = EncoderConversionFactors
                     .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(90);
+
+            public static final int ACCEPTABLE_ERROR_TICKS = 10;
         }
 
         public static final class IntakeMotors {
