@@ -70,6 +70,8 @@ public class GlobalManager {
          */
         public static boolean turretReady = false;
 
+
+
         /**
          * States for objects that extend outside of the frame perimeter INSIDE: Safely
          * inside of the frame perimeter EXTENDED: Unsafe and outside of the frame
@@ -98,10 +100,7 @@ public class GlobalManager {
          */
         public static boolean isReadyToShoot = shooterReady && turretReady;
 
-         /**
-         * Is the Indexer full
-         */
-        public static boolean indexerFull = IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC;
+
         
     }
 
@@ -125,6 +124,19 @@ public class GlobalManager {
 
         public static boolean subsystemIsFull(){
             return locationState == IndexerLocationState.FIVE_PC;
+        }
+
+        /**
+         * Is the Indexer full
+         */
+        public static boolean indexerFull = IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC;
+
+        public static boolean shouldIntake(){
+            return true;
+        }
+
+        public static boolean shouldShift(){
+            return IndexerManager.locationState == IndexerManager.IndexerLocationState.THREE_PC;
         }
 
 

@@ -1,9 +1,6 @@
 package frc.robot.commands.stateTransitions;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SelectCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
 import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
@@ -12,6 +9,7 @@ import frc.robot.commands.supersystem.shooter.ShooterRecover;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 
 import java.util.Map;
+import java.util.Set;
 
 import static java.util.Map.entry;
 
@@ -136,6 +134,24 @@ public class TriggerMap {
     );
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public final Command shouldIntake = new IndexerStageOneDriveForward(subsystems.stageOne);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public Boolean needsToShift(){
+        if(GlobalManager.IndexerManager.locationState == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC){
+            return true;
+        }
+        return false;
+    }
+    public final Command shouldShift = new SelectCommand(
+            Map.ofEntries(
+                    entry(true, new IndexerDriveForward(subsystems.stageOne, subsystems.stageTwo)),
+                    entry(false, tcg.bypassCommand())
+            ),
+            this::needsToShift
+    );
 
 
 }

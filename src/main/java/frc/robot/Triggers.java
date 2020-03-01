@@ -38,6 +38,9 @@ public class Triggers {
      */
     public Trigger indexerExitSensor;
 
+    public Trigger shouldIntake;
+    public Trigger indexerShouldShift;
+
     /**
      * Create a new instance of all of the triggers
      * @param subsystems the subsystems that can be impacted
@@ -48,8 +51,13 @@ public class Triggers {
         indexerEntranceSensor = new Trigger(subsystems.stageOne::getSensorValue);
         indexerExitSensor = new Trigger(subsystems.stageTwo::getSensorValue);
 
+        shouldIntake = new Trigger(GlobalManager.IndexerManager::shouldIntake);
+        indexerShouldShift = new Trigger(GlobalManager.IndexerManager::shouldShift);
+
         this.triggerMap = new TriggerMap(this.subsystems);
 
+        this.shouldIntake.whenActive(triggerMap.shouldIntake);
+        this.indexerShouldShift.whenActive(triggerMap.shouldShift);
 
         this.indexerEntranceSensor.whenInactive(triggerMap.onB1C2F);
         this.indexerExitSensor.whenActive(triggerMap.onB2C2T);
