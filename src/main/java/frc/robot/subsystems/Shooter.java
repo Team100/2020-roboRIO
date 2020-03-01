@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.FRCLib.Motors.FRCTalonFX;
@@ -50,9 +49,8 @@ public class Shooter extends SubsystemBase {
         .withNominalOutputForward(Constants.ShooterConstants.ShooterMotors.ShooterFollower.NOMINAL_OUTPUT_FORWARD)
         .withNominalOutputReverse(Constants.ShooterConstants.ShooterMotors.ShooterFollower.NOMINAL_OUTPUT_REVERSE)
         .withPeakOutputForward(Constants.ShooterConstants.ShooterMotors.ShooterFollower.PEAK_OUTPUT_FORWARD)
-        .withPeakOutputReverse(Constants.ShooterConstants.ShooterMotors.ShooterFollower.PEAK_OUTPUT_REVERSE).build();
-
-    follower.follow(master);
+        .withPeakOutputReverse(Constants.ShooterConstants.ShooterMotors.ShooterFollower.PEAK_OUTPUT_REVERSE)
+        .withMaster(master).build();
 
     addChild("shooterMaster", master);
     addChild("shooterFollower", follower);

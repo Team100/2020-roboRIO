@@ -5,38 +5,51 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.supersystem.indexer.indexStageOne;
+package frc.robot.commands.supersystem.turret;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
 import frc.robot.Constants;
+import frc.robot.commands.supersystem.turret.camera.Server;
+import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.Turret.ActionState;
 
-import frc.robot.subsystems.IndexerStageOne.ActionState;
-
-import frc.robot.subsystems.IndexerStageOne;
-
-public class IndexerStageOneDriveForward extends CommandBase {
-    public IndexerStageOne indexer;
+public class TurretLock extends CommandBase {
+    /**
+     * Turret subsystem
+     */
+    public Turret turret;
 
     /**
-     * Creates a new IndexerStageOneDriveForward.
+     * Position Setpoint in encoder ticks
      */
-    public IndexerStageOneDriveForward(IndexerStageOne indexer) {
-        this.indexer = indexer;
-        addRequirements(this.indexer);
+    private double setpoint;
+
+    public TurretLock(Turret turret) {
         // Use addRequirements() here to declare subsystem dependencies.
+        this.turret = turret;
+        addRequirements(this.turret);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        this.indexer.actionState = ActionState.MOVE_FOWARD;
-        indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FORWARD);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        turret.actionState = ActionState.MOVING;
+            double cameraAngle = Server.target.getHAngle();
+            // double modifiedAngle = (Math.signum(cameraAngle) * 
+            //                         Math.pow(Math.abs(cameraAngle), 1.5) / 
+            //                         2);
+
+            this.setpoint = (cameraAngle * 
+                            Constants.TurretConstants.TurretMotionParameters.TICKS_PER_DEGREE) +
+                            turret.tickOffset + 
+                            turret.turretMotor.getSelectedSensorPosition();
+
+        turret.getMotor().drivePosition(setpoint);
     }
 
     // Called once the command ends or is interrupted.

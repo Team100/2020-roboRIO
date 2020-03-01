@@ -25,6 +25,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.SerialPort;
@@ -107,7 +108,7 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
-                public static final boolean INVERTED = false; //TODO CHANGE BACK
+                public static final InvertType INVERTED = InvertType.FollowMaster; //TODO CHANGE BACK
                 public static final boolean SENSOR_PHASE = false; //TODO CHANGE BACK
 
                 public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
@@ -136,7 +137,7 @@ public final class Constants {
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
-                public static final boolean INVERTED = true;//TODO CHANGE BACK
+                public static final InvertType INVERTED = InvertType.FollowMaster; //boolean INVERTED = true;//TODO CHANGE BACK
                 public static final boolean SENSOR_PHASE = false;//TODO CHANGE BACK
                 public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
                 public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
@@ -150,6 +151,8 @@ public final class Constants {
     public static final class TurretConstants {
         public static final class TurretMotionParameters {
             public static final double PERCENT_OUTPUT_FORWARD = 0.5;
+            public static final double TICKS_PER_DEGREE =   TurretMotors.TurretMotor.ENCODER_TICKS_PER_MOTOR_REVOLUTION *
+                                                            TurretMotors.TurretMotor.GEARING_RATIO / 360;
         }
 
         public static final class TurretSensors {
@@ -167,6 +170,8 @@ public final class Constants {
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
+                public static final int ENCODER_TICKS_PER_MOTOR_REVOLUTION = EncoderConversionFactors.CONVERT_ANGLE_TO_TALON_FX_ENCODER_TICKS(360);
+                public static final double GEARING_RATIO = 1/1;
 
                 public static final int TIMEOUT = 10;
 
