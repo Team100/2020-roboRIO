@@ -6,6 +6,7 @@ import frc.robot.Subsystems;
 import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
 import frc.robot.commands.supersystem.shooter.ShooterRecover;
+import frc.robot.commands.supersystem.shooter.ShooterRun;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 import frc.robot.commands.supersystem.turret.TurretTurn;
 
@@ -171,14 +172,49 @@ public class TriggerMap {
         if (ta == true && sr == true) {
             return ShooterMoveType.SPINNING;
         }
-        return ShooterMoveType.SPINNING;
+        return ShooterMoveType.NONE;
     }
 
+    public ShooterMoveType shouldRun(){
+        boolean ta = GlobalManager.TurretManager.targetAcquired;
+        boolean sr = GlobalManager.ShooterManager.speedReached;
+
+        if (ta == true && sr == true) {
+            return ShooterMoveType.SPINNING;
+        }
+        return ShooterMoveType.NONE;
+    }
+
+    public ShooterMoveType shouldStop(){
+        boolean ta = GlobalManager.TurretManager.targetAcquired;
+
+        if (ta == false) {
+            return ShooterMoveType.STOPPED;
+        }
+        return ShooterMoveType.NONE;
+    }
+    
     public final Command shouldSpinnup = new SelectCommand(
             Map.ofEntries(
-                    entry(IndexerMoveType.S1F, new TurretTurn(subsystems.turret))
+                    entry(ShooterMoveType.SPINNINGUP, new ShooterRecover(subsystems.shooter))
             ),
 
             this::shouldSpinup
+    );
+
+    public final Command shouldRun = new SelectCommand(
+        Map.ofEntries(
+                entry(ShooterMoveType.SPINNING, new ShooterRun(subsystems.shooter))
+        ),
+
+        this::shouldRun
+    );
+
+    public final Command shouldStop = new SelectCommand(
+        Map.ofEntries(
+                entry(ShooterMoveType.STOPPED, new ShooterStop(subsystems.shooter))
+        ),
+
+        this::shouldStop
     );
 }

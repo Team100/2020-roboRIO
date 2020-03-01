@@ -8,6 +8,9 @@ import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
 import frc.robot.commands.supersystem.indexer.IndexerDriveBackward;
 import frc.robot.commands.supersystem.indexer.IndexerStop;
+import frc.robot.commands.supersystem.shooter.ShooterRecover;
+import frc.robot.commands.supersystem.shooter.ShooterRun;
+import frc.robot.commands.supersystem.shooter.ShooterStop;
 
 public class TransitionCommandGroup {
     public Subsystems subsystems;
@@ -46,5 +49,17 @@ public class TransitionCommandGroup {
 
     public Command stopIndexer(){
         return new SequentialCommandGroup(new IndexerStop(subsystems.stageOne, subsystems.stageTwo), incrementIndexerStage());
+    }
+
+    public Command shouldSpinup(){
+        return new SequentialCommandGroup(new ShooterRecover(subsystems.shooter));
+    }
+
+    public Command shouldRun(){
+        return new SequentialCommandGroup(new ShooterRun(subsystems.shooter));
+    }
+
+    public Command shouldStop(){
+        return new SequentialCommandGroup(new ShooterStop(subsystems.shooter));
     }
 }
