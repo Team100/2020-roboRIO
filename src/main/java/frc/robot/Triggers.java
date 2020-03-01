@@ -63,11 +63,11 @@ public class Triggers {
 
         this.triggerMap = new TriggerMap(this.subsystems);
 
-        this.shouldIntake.whenActive(triggerMap.shouldIntake);
-        this.indexerShouldShift.whenActive(triggerMap.shouldShift);
+        this.shouldIntake.whenActive(triggerMap::shouldIntake);
+        this.indexerShouldShift.whenActive(triggerMap::shouldShift);
 
-        this.indexerEntranceSensor.whenInactive(triggerMap.onB1C2F);
-        this.indexerExitSensor.whenActive(triggerMap.onB2C2T);
+        this.indexerEntranceSensor.whenInactive(triggerMap::onB1C2F);
+        this.indexerExitSensor.whenActive(triggerMap::onB2C2T);
       cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired); //subsystems.turret::hasTarget);
 
         turretConditionals(subsystems.turret);
