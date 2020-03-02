@@ -36,6 +36,10 @@ public class ControlPanelSpinner extends SubsystemBase {
    */
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
 
+  private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
+  private final ColorMatch colorMatcher = new ColorMatch();
+  public FRCTalonSRX spinner;
+
   private int redCounter = 0;
   private int yellowCounter = 0;
   private int blueCounter = 0;
@@ -50,39 +54,52 @@ public class ControlPanelSpinner extends SubsystemBase {
   private int revolutionsCounter = 0;
   private boolean stop = false;
 
-  // = Preferences.getInstance().getDouble(".....",
-  // Constants.RGB_RED_VALUE_FOR_BLUE);)
-
-  private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
-
-  private final ColorMatch colorMatcher = new ColorMatch();
-
-  public FRCTalonSRX spinner;
-
-  private final Color kBlueTarget = ColorMatch.makeColor(
-      Preferences.getInstance().getDouble("RedTile_BlueComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_BLUE),
-      Preferences.getInstance().getDouble("GreenTile_BlueComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_GREEN_VALUE_FOR_BLUE),
-      Preferences.getInstance().getDouble("BlueTile_BlueComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_BLUE_VALUE_FOR_BLUE));
-  private final Color kGreenTarget = ColorMatch.makeColor(
-      Preferences.getInstance().getDouble("RedTile_GreenComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_GREEN),
-      Preferences.getInstance().getDouble("GreenTile_GreenComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_GREEN_VALUE_FOR_GREEN),
-      Preferences.getInstance().getDouble("BlueTile_GreenComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_BLUE_VALUE_FOR_GREEN));
-  private final Color kRedTarget = ColorMatch.makeColor(
-      Preferences.getInstance().getDouble("RedTile_RedComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_RED),
-      Preferences.getInstance().getDouble("GreenTile_RedComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_GREEN_VALUE_FOR_RED),
-      Preferences.getInstance().getDouble("BlueTile_RedComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_BLUE_VALUE_FOR_RED));
-  private final Color kYellowTarget = ColorMatch.makeColor(
-      Preferences.getInstance().getDouble("RedTile_YellowComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_YELLOW),
-      Preferences.getInstance().getDouble("GreenTile_YellowComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_GREEN_VALUE_FOR_YELLOW),
-      Preferences.getInstance().getDouble("BlueTile_YellowComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_BLUE_VALUE_FOR_YELLOW));
-  
-
   private final Color detectedColor = colorSensor.getColor();
   private final double red = detectedColor.red;
   private final double blue = detectedColor.blue;
   private final double green = detectedColor.green;
   private double configuratingColors;
 
+  // = Preferences.getInstance().getDouble(".....",
+  // Constants.RGB_RED_VALUE_FOR_BLUE);)
+
+  private final Color kBlueTarget = ColorMatch.makeColor(
+    Preferences.getInstance().getDouble("RedTile_BlueComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_BLUE),
+    Preferences.getInstance().getDouble("GreenTile_BlueComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_GREEN_VALUE_FOR_BLUE),
+    Preferences.getInstance().getDouble("BlueTile_BlueComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_BLUE_VALUE_FOR_BLUE));
+  private final Color kGreenTarget = ColorMatch.makeColor(
+    Preferences.getInstance().getDouble("RedTile_GreenComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_GREEN),
+    Preferences.getInstance().getDouble("GreenTile_GreenComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_GREEN_VALUE_FOR_GREEN),
+    Preferences.getInstance().getDouble("BlueTile_GreenComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_BLUE_VALUE_FOR_GREEN));
+  private final Color kRedTarget = ColorMatch.makeColor(
+    Preferences.getInstance().getDouble("RedTile_RedComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_RED),
+    Preferences.getInstance().getDouble("GreenTile_RedComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_GREEN_VALUE_FOR_RED),
+    Preferences.getInstance().getDouble("BlueTile_RedComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_BLUE_VALUE_FOR_RED));
+  private final Color kYellowTarget = ColorMatch.makeColor(
+    Preferences.getInstance().getDouble("RedTile_YellowComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_YELLOW),
+    Preferences.getInstance().getDouble("GreenTile_YellowComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_GREEN_VALUE_FOR_YELLOW),
+    Preferences.getInstance().getDouble("BlueTile_YellowComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_BLUE_VALUE_FOR_YELLOW));
+
+  public ControlPanelSpinner() {
+    spinner.setNeutralMode(NeutralMode.Brake);
+
+    spinner = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.CAN_ID)
+    .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
+    .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
+    .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.SENSOR_PHASE)
+    .withTimeout(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.TIMEOUT)
+    .withCurrentLimitEnabled(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.ENABLE_CURRENT_LIMIT)
+    .withCurrentLimit(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CURRENT_LIMIT)
+    .withOpenLoopRampRate(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.OPEN_LOOP_RAMP)
+    .withNominalOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_FORWARD)
+    .withNominalOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_REVERSE)
+    .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
+    .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE).build();
+
+    addChild("Control Panel Motor", spinner);
+    //addChild("Control Panel Sensor", m_colorSensor);
+    //addChild("Control Panel Sensor", m_colorMatcher);
+  }
 
   public void initDefaultCommand() {
     colorMatcher.addColorMatch(kBlueTarget);
@@ -99,8 +116,6 @@ public class ControlPanelSpinner extends SubsystemBase {
   public void spin(double speed) {
     //TODO fix(either implement again or move to command subsystem)
   }
-  
-
   /*
    * public void threeTImes(){ while (revolutionsCounter>=24){ spin(1); }
    */
@@ -172,10 +187,7 @@ public class ControlPanelSpinner extends SubsystemBase {
   }
   public void periodic() {
     final Color detectedColor = colorSensor.getColor();
-
-    /**
-     * Run the color match algorithm on our detected color
-     */
+    //Run the color match algorithm on our detected color
     String colorString;
 
     final ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
@@ -191,35 +203,19 @@ public class ControlPanelSpinner extends SubsystemBase {
       colorString = "Blue";
     } else if (match.color == kRedTarget) {
       currentColor = 3;
-      //if (nextColor == currentColor) {
-        //revolutionsCounter = revolutionsCounter + 1;
-        //nextColor = 4;
-      //} else {
         nextColor = 4;
-      //}
       colorString = "Red";
     } else if (match.color == kGreenTarget) {
       colorString = "Green";
       currentColor = 2;
-      //if (nextColor == currentColor) {
-        //revolutionsCounter = revolutionsCounter + 1;
-       // nextColor = 3;
-     // } else {
         nextColor = 3;
-     // }
     } else if (match.color == kYellowTarget) {
       colorString = "Yellow";
       currentColor = 4;
-      //if (nextColor == currentColor) {
-        //revolutionsCounter = revolutionsCounter + 1;
-       // nextColor = 1;
-      //} else {
         nextColor = 1;
-      //}
     } else {
       colorString = "Unknown";
     }
-
     /**
      * Open Smart Dashboard or Shuffleboard to see the color detected by the sensor.
      */
@@ -231,9 +227,7 @@ public class ControlPanelSpinner extends SubsystemBase {
     SmartDashboard.putNumber("Counter of Changes", revolutionsCounter);
     SmartDashboard.putData("Conrol Panel Spinner", this);
 
-    String gameData;
-
-    gameData = DriverStation.getInstance().getGameSpecificMessage();
+    String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
     if (match.color == kRedTarget) {
       if (redController) {
@@ -277,11 +271,10 @@ public class ControlPanelSpinner extends SubsystemBase {
     SmartDashboard.putNumber("Yellow Counter", yellowCounter);
     if (gameData.length() > 0) {
       switch (gameData.charAt(0)) {
-      case 'B':
+      case 'B':        // Blue case code
         if (match.color == kRedTarget) {
           stop = true;
         }
-        // Blue case code
         break;
       case 'G':
         if (match.color == kYellowTarget) {
@@ -319,26 +312,5 @@ public class ControlPanelSpinner extends SubsystemBase {
      */
     //revolutionsCounter=0;
     configuratingColors = SmartDashboard.getNumber("configurating Colors", 0);
-  }
-
-  public ControlPanelSpinner() {
-    spinner.setNeutralMode(NeutralMode.Brake);
-
-    spinner = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.CAN_ID)
-    .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
-    .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
-    .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.SENSOR_PHASE)
-    .withTimeout(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.TIMEOUT)
-    .withCurrentLimitEnabled(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.ENABLE_CURRENT_LIMIT)
-    .withCurrentLimit(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CURRENT_LIMIT)
-    .withOpenLoopRampRate(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.OPEN_LOOP_RAMP)
-    .withNominalOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_FORWARD)
-    .withNominalOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_REVERSE)
-    .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
-    .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE).build();
-
-    addChild("Control Panel Motor", spinner);
-    //addChild("Control Panel Sensor", m_colorSensor);
-    //addChild("Control Panel Sensor", m_colorMatcher);
   }
 }
