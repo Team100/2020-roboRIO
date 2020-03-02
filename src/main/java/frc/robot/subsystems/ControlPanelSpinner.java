@@ -19,7 +19,6 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -276,23 +275,20 @@ public class ControlPanelSpinner extends SubsystemBase {
           stop = true;
         }
         break;
-      case 'G':
+      case 'G':        // Green case code
         if (match.color == kYellowTarget) {
           stop = true;
         }
-        // Green case code
         break;
-      case 'R':
+      case 'R':        // Red case code
         if (match.color == kBlueTarget) {
           stop = true;
         }
-        // Red case code
         break;
-      case 'Y':
+      case 'Y':        // Yellow case code
         if (match.color == kGreenTarget) {
           stop = true;
         }
-        // Yellow case code
         break;
       default:
         // This is corrupt data
