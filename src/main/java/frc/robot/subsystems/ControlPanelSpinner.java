@@ -35,7 +35,6 @@ public class ControlPanelSpinner extends SubsystemBase {
    * Change the I2C port below to match the connection of your color sensor
    */
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  // private final WPI_TalonSRX m_motor = new WPI_TalonSRX(1);
 
   private int redCounter = 0;
   private int yellowCounter = 0;
@@ -54,11 +53,11 @@ public class ControlPanelSpinner extends SubsystemBase {
   // = Preferences.getInstance().getDouble(".....",
   // Constants.RGB_RED_VALUE_FOR_BLUE);)
 
-  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+  private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
 
-  private final ColorMatch m_colorMatcher = new ColorMatch();
+  private final ColorMatch colorMatcher = new ColorMatch();
 
-  public FRCTalonSRX m_motor;
+  public FRCTalonSRX spinner;
 
   private final Color kBlueTarget = ColorMatch.makeColor(
       Preferences.getInstance().getDouble("RedTile_BlueComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_BLUE),
@@ -78,7 +77,7 @@ public class ControlPanelSpinner extends SubsystemBase {
       Preferences.getInstance().getDouble("BlueTile_YellowComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_BLUE_VALUE_FOR_YELLOW));
   
 
-  private final Color detectedColor = m_colorSensor.getColor();
+  private final Color detectedColor = colorSensor.getColor();
   private final double red = detectedColor.red;
   private final double blue = detectedColor.blue;
   private final double green = detectedColor.green;
@@ -86,10 +85,10 @@ public class ControlPanelSpinner extends SubsystemBase {
 
 
   public void initDefaultCommand() {
-    m_colorMatcher.addColorMatch(kBlueTarget);
-    m_colorMatcher.addColorMatch(kGreenTarget);
-    m_colorMatcher.addColorMatch(kRedTarget);
-    m_colorMatcher.addColorMatch(kYellowTarget);
+    colorMatcher.addColorMatch(kBlueTarget);
+    colorMatcher.addColorMatch(kGreenTarget);
+    colorMatcher.addColorMatch(kRedTarget);
+    colorMatcher.addColorMatch(kYellowTarget);
 
     configuratingColors = SmartDashboard.getNumber("configurating Colors", 0);
     SmartDashboard.putNumber("configurating Colors", configuratingColors);
@@ -98,8 +97,7 @@ public class ControlPanelSpinner extends SubsystemBase {
   }
 
   public void spin(double speed) {
-    //m_motor.set(ControlMode.PercentOutput, speed);
-
+    //TODO fix(either implement again or move to command subsystem)
   }
   
 
@@ -109,7 +107,7 @@ public class ControlPanelSpinner extends SubsystemBase {
   // }
   public void calibrate() {
     configuratingColors = SmartDashboard.getNumber("configurating Colors", 0);
-    Color detectedColor1 = m_colorSensor.getColor();
+    Color detectedColor1 = colorSensor.getColor();
     double red1 = detectedColor1.red;
     double blue1 = detectedColor1.blue;
     double green1 = detectedColor1.green;
@@ -142,8 +140,8 @@ public class ControlPanelSpinner extends SubsystemBase {
   }
 
   public int getCurrentColor() {
-    final Color detectedColor = m_colorSensor.getColor();
-    final ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+    final Color detectedColor = colorSensor.getColor();
+    final ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
     if (match.color == kBlueTarget) {
       return 1;
     } else if (match.color == kRedTarget) {
@@ -173,14 +171,14 @@ public class ControlPanelSpinner extends SubsystemBase {
     stop = false;
   }
   public void periodic() {
-    final Color detectedColor = m_colorSensor.getColor();
+    final Color detectedColor = colorSensor.getColor();
 
     /**
      * Run the color match algorithm on our detected color
      */
     String colorString;
 
-    final ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+    final ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
 
     if (match.color == kBlueTarget) {
       currentColor = 1;
@@ -324,9 +322,9 @@ public class ControlPanelSpinner extends SubsystemBase {
   }
 
   public ControlPanelSpinner() {
-    m_motor.setNeutralMode(NeutralMode.Brake);
+    spinner.setNeutralMode(NeutralMode.Brake);
 
-    m_motor = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.CAN_ID)
+    spinner = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.CAN_ID)
     .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
     .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
     .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.SENSOR_PHASE)
@@ -339,7 +337,7 @@ public class ControlPanelSpinner extends SubsystemBase {
     .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
     .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE).build();
 
-    addChild("Control Panel Motor", m_motor);
+    addChild("Control Panel Motor", spinner);
     //addChild("Control Panel Sensor", m_colorSensor);
     //addChild("Control Panel Sensor", m_colorMatcher);
   }
