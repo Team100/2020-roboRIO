@@ -7,8 +7,6 @@
 
 package frc.robot.FRCLib.Conversions;
 
-import frc.robot.Constants;
-
 /**
  * Add your docs here.
  */
@@ -33,8 +31,6 @@ public class EncoderConversionFactors {
         } else {
             encoderTicksMA3 = (int) ((angle / 360) * 4096);
         }
-
-        encoderTicksMA3 += Constants.IntakeConstants.IntakeMotionParameters.INTAKE_ZERO;
         return encoderTicksMA3;
     }
 

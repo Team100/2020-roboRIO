@@ -31,7 +31,7 @@ public class FRCTalonFX implements Sendable {
      * 
      * @deprecated use FRCTalonFXBuilder.withMaster() instead.  
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     public void follow(FRCTalonFX master) {
         this.master = master;
         this.motor.follow(this.master.motor);
@@ -113,7 +113,6 @@ public class FRCTalonFX implements Sendable {
                     this.isForwardSoftLimitEnabled());
             SmartDashboard.putNumber(this.getSmartDashboardPath() + "/forwardSoftLimitThreshold",
                     this.getForwardSoftLimitThreshold());
-            SmartDashboard.putBoolean(this.getSmartDashboardPath() + "/inverted", this.isInverted());
             SmartDashboard.putString(this.getSmartDashboardPath() + "/invertType", this.getInvertType().toString());
             SmartDashboard.putNumber(this.getSmartDashboardPath() + "/kP", this.getkP());
             SmartDashboard.putNumber(this.getSmartDashboardPath() + "/kI", this.getkI());
@@ -182,24 +181,9 @@ public class FRCTalonFX implements Sendable {
     /**
      * The inversion of the motor
      *
-     * true inverts the motor
-     */
-    private boolean inverted;
-
-    /**
-     * The inversion of the motor
-     *
      * Uses CTRE InvertType
      */
     private InvertType invertType;
-
-    /**
-     * Determines what mode to use for inversion
-     * 
-     * true uses InvertType invertType
-     * false uses boolean inverted
-     */
-    private boolean useInvertType;
 
     /**
      * The feedback port of the motor Default is 0
@@ -401,12 +385,13 @@ public class FRCTalonFX implements Sendable {
     public FRCTalonFX configure() {
         motor = new WPI_TalonFX(this.getCanID());
         m_sensorCollection = motor.getSensorCollection();
-        this.motor.configFactoryDefault();
+        motor.configFactoryDefault();
+        motor.setSafetyEnabled(false);
+
         motor.selectProfileSlot(0, 0);
         System.out.println("#################RESET");
-        if (this.isInverted() || this.isInvertedWithType()) {
-            if (this.useInvertType) motor.setInverted(this.invertType);
-            else  motor.setInverted(this.isInverted());
+        if (this.isInvertedWithType()) {
+            motor.setInverted(this.invertType);
             System.out.println("Configuring Inverted");
         }
         if (this.isCurrentLimitEnabled()) {
@@ -501,10 +486,6 @@ public class FRCTalonFX implements Sendable {
         this.canID = canID;
     }
 
-    public boolean isInverted() {
-        return inverted;
-    }
-
     public boolean isInvertedWithType() {
         return invertType != InvertType.None;
     }
@@ -513,16 +494,8 @@ public class FRCTalonFX implements Sendable {
         return this.invertType;
     }
 
-    public void setInverted(boolean inverted) {
-        this.inverted = inverted;
-        this.invertType = InvertType.None;
-        this.useInvertType = false;
-    }
-
     public void setInverted(InvertType inverted) {
         this.invertType = inverted;
-        this.inverted = false;
-        this.useInvertType = true;
     }
 
     public int getFeedbackPort() {
@@ -815,9 +788,7 @@ public class FRCTalonFX implements Sendable {
 
     public static final class FRCTalonFXBuilder {
         private int canID;
-        private boolean inverted = false;
         private InvertType invertType = InvertType.None;
-        private boolean useInvertType = false;
         private int feedbackPort = 0;
         private int timeout = 10;
         private boolean sensorPhase = false;
@@ -869,15 +840,8 @@ public class FRCTalonFX implements Sendable {
             return this;
         }
 
-        public FRCTalonFXBuilder withInverted(boolean inverted) {
-            this.inverted = inverted;
-            this.useInvertType = false;
-            return this;
-        }
-
-        public FRCTalonFXBuilder withInverted(InvertType inverted) {
-            this.invertType = inverted;
-            this.useInvertType = true;
+        public FRCTalonFXBuilder withInverted(InvertType invert) {
+            this.invertType = invert;
             return this;
         }
 
@@ -1064,8 +1028,7 @@ public class FRCTalonFX implements Sendable {
         public FRCTalonFX build() {
             FRCTalonFX fRCTalonFX = new FRCTalonFX();
             fRCTalonFX.setCanID(canID);
-            if (useInvertType) fRCTalonFX.setInverted(invertType);
-            else fRCTalonFX.setInverted(inverted);
+            fRCTalonFX.setInverted(invertType);
             fRCTalonFX.setFeedbackPort(feedbackPort);
             fRCTalonFX.setTimeout(timeout);
             fRCTalonFX.setSensorPhase(sensorPhase);
