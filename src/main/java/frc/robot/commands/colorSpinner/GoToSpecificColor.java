@@ -36,11 +36,11 @@ public class GoToSpecificColor extends CommandBase {
   @Override
   public void execute() {
     controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SPIN_SPEED);
-    //if (Robot.controlPanelSpinner.getRevolutionsCounter()>=8){
-      if (controlPanelSpinner.reachedColor()==true){
+    if (controlPanelSpinner.getRevolutionsCounter()>=8){
+      if (controlPanelSpinner.reachedColor() == true){
          done = true;
      }
-   // }
+  }
    }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -53,7 +53,6 @@ public class ControlPanelSpinner extends SubsystemBase {
   private final double green = detectedColor.green;
   private double configuratingColors;
 
-
   private final Color kBlueTarget = ColorMatch.makeColor(
     Preferences.getInstance().getDouble("RedTile_BlueComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_BLUE),
     Preferences.getInstance().getDouble("GreenTile_BlueComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_GREEN_VALUE_FOR_BLUE),
@@ -170,6 +169,7 @@ public class ControlPanelSpinner extends SubsystemBase {
     stop = false;
   }
   public void periodic() {
+    SmartDashboard.putBoolean("you know who", reachedColor());
     final Color detectedColor = colorSensor.getColor();
     //Run the color match algorithm on our detected color
     String colorString;
