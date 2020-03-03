@@ -89,7 +89,7 @@ public final class Constants {
             public static final double KF = 0.04455;
 
             public static final class LeftMaster {
-                public static final int CAN_ID = 0;
+                public static final int CAN_ID = 15;
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
@@ -103,7 +103,7 @@ public final class Constants {
             }
 
             public static final class LeftFollower {
-                public static final int CAN_ID = 1;
+                public static final int CAN_ID = 14;
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
@@ -118,7 +118,7 @@ public final class Constants {
             }
 
             public static final class RightMaster {
-                public static final int CAN_ID = 15;
+                public static final int CAN_ID = 0;
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
@@ -132,7 +132,7 @@ public final class Constants {
             }
 
             public static final class RightFollower {
-                public static final int CAN_ID = 14;
+                public static final int CAN_ID = 1;
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
@@ -162,7 +162,7 @@ public final class Constants {
         }
         public static final class TurretMotors {
             public static final class TurretMotor {
-                public static final int CAN_ID = 6;
+                public static final int CAN_ID = 4;
 
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
@@ -203,7 +203,7 @@ public final class Constants {
 
         public static final class IndexerMotors {
             public static final class IndexerStageOne {
-                public static final int CAN_ID = 4;
+                public static final int CAN_ID = 8;
 
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
@@ -222,7 +222,7 @@ public final class Constants {
             }
 
             public static final class IndexerStageTwo {
-                public static final int CAN_ID = 11;
+                public static final int CAN_ID = 7;
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
@@ -254,7 +254,7 @@ public final class Constants {
 
         public static final class IntakeMotors {
             public static final class IntakeSpin {
-                public static final int CAN_ID = 5;
+                public static final int CAN_ID = 9;
 
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
@@ -324,7 +324,7 @@ public final class Constants {
             }
 
             public static final class ShooterFollower {
-                public static final int CAN_ID = 3;
+                public static final int CAN_ID = 13;
 
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
