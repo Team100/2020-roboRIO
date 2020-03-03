@@ -23,16 +23,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-/**
- * Add your docs here.
- */
 public class ControlPanelSpinner extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  /**
-   * Change the I2C port below to match the connection of your color sensor
-   */
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
 
   private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
@@ -59,8 +53,6 @@ public class ControlPanelSpinner extends SubsystemBase {
   private final double green = detectedColor.green;
   private double configuratingColors;
 
-  // = Preferences.getInstance().getDouble(".....",
-  // Constants.RGB_RED_VALUE_FOR_BLUE);)
 
   private final Color kBlueTarget = ColorMatch.makeColor(
     Preferences.getInstance().getDouble("RedTile_BlueComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_RED_VALUE_FOR_BLUE),
@@ -80,8 +72,6 @@ public class ControlPanelSpinner extends SubsystemBase {
     Preferences.getInstance().getDouble("BlueTile_YellowComponent", Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerColors.RGB_BLUE_VALUE_FOR_YELLOW));
 
   public ControlPanelSpinner() {
-    spinner.setNeutralMode(NeutralMode.Brake);
-
     spinner = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.CAN_ID)
     .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
     .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
@@ -95,9 +85,9 @@ public class ControlPanelSpinner extends SubsystemBase {
     .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
     .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE).build();
 
+    spinner.setNeutralMode(NeutralMode.Brake);
+
     addChild("Control Panel Motor", spinner);
-    //addChild("Control Panel Sensor", m_colorSensor);
-    //addChild("Control Panel Sensor", m_colorMatcher);
   }
 
   public void initDefaultCommand() {
@@ -108,17 +98,12 @@ public class ControlPanelSpinner extends SubsystemBase {
 
     configuratingColors = SmartDashboard.getNumber("configurating Colors", 0);
     SmartDashboard.putNumber("configurating Colors", configuratingColors);
-
-    //revolutionsCounter=0;
   }
 
   public void spin(double speed) {
     //TODO fix(either implement again or move to command subsystem)
   }
-  /*
-   * public void threeTImes(){ while (revolutionsCounter>=24){ spin(1); }
-   */
-  // }
+
   public void calibrate() {
     configuratingColors = SmartDashboard.getNumber("configurating Colors", 0);
     Color detectedColor1 = colorSensor.getColor();
@@ -215,9 +200,7 @@ public class ControlPanelSpinner extends SubsystemBase {
     } else {
       colorString = "Unknown";
     }
-    /**
-     * Open Smart Dashboard or Shuffleboard to see the color detected by the sensor.
-     */
+    //Open Smart Dashboard or Shuffleboard to see the color detected by the sensor.
     SmartDashboard.putNumber("Red", detectedColor.red);
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
@@ -290,8 +273,7 @@ public class ControlPanelSpinner extends SubsystemBase {
           stop = true;
         }
         break;
-      default:
-        // This is corrupt data
+      default:// This is corrupt data
         break;
       }
     } else {
@@ -302,11 +284,6 @@ public class ControlPanelSpinner extends SubsystemBase {
   }
 
   public void teleopInit() {
-    /*
-     * preferences = Preferences.getInstance(); configuratingColors =
-     * preferences.getDouble("configurating Color", 0);
-     */
-    //revolutionsCounter=0;
     configuratingColors = SmartDashboard.getNumber("configurating Colors", 0);
   }
 }

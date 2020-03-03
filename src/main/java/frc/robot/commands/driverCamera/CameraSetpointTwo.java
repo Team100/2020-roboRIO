@@ -11,7 +11,8 @@ public class CameraSetpointTwo extends CommandBase {
   /**
    * Creates a new UnlockClimber.
    */
-  public void setpointTwo() {
+  public CameraSetpointTwo(CameraTiltServo cts) {
+    servo = cts;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(servo);
