@@ -228,9 +228,9 @@ public final class Constants {
 
             public static final class IndexerStageTwo {
                 public static final int CAN_ID = 7;
-                public static final boolean INVERT = false;
+                public static final boolean INVERT = true;
                 public static final int FEEDBACK_PORT = 0;
-                public static final boolean SENSOR_PHASE = false;
+                public static final boolean SENSOR_PHASE = true;
 
                 public static final int TIMEOUT = 10;
 
@@ -265,7 +265,7 @@ public final class Constants {
             public static final class IntakeSpin {
                 public static final int CAN_ID = 9;
 
-                public static final boolean INVERT = false;
+                public static final boolean INVERT = true;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
 
@@ -335,7 +335,7 @@ public final class Constants {
             public static final class ShooterFollower {
                 public static final int CAN_ID = 13;
 
-                public static final InvertType INVERT = InvertType.OpposeMaster;
+                public static final InvertType INVERT = InvertType.InvertMotorOutput;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
 

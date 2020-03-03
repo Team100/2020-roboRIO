@@ -83,7 +83,7 @@ public class RobotContainer {
 
     public void setDefaultCommands() {
 
-        subsystems.drivetrain.setDefaultCommand(new ArcadeDrive(subsystems.drivetrain, leftJoystick, rightJoystick));
+        subsystems.drivetrain.setDefaultCommand(new ArcadeDrive(subsystems.drivetrain, leftJoystick, leftJoystick));//TODO Change back to two js
         subsystems.stageOne.setDefaultCommand(new IndexerStageOneStop(subsystems.stageOne));
         subsystems.stageTwo.setDefaultCommand(new IndexerStageTwoStop(subsystems.stageTwo));
         subsystems.intake.setDefaultCommand(new IntakeStop(subsystems.intake));
