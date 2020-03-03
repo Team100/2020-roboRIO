@@ -169,7 +169,6 @@ public class ControlPanelSpinner extends SubsystemBase {
     stop = false;
   }
   public void periodic() {
-    SmartDashboard.putBoolean("you know who", reachedColor());
     final Color detectedColor = colorSensor.getColor();
     //Run the color match algorithm on our detected color
     String colorString;
