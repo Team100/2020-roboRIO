@@ -373,17 +373,17 @@ public final class Constants {
         }
         public static final class ControlPanelSpinnerColors {
             public static final double RGB_RED_VALUE_FOR_YELLOW = 255;
-            public static final double RGB_BLUE_VALUE_FOR_YELLOW = 255;
-            public static final double RGB_GREEN_VALUE_FOR_YELLOW = 0;
+            public static final double RGB_GREEN_VALUE_FOR_YELLOW = 255;
+            public static final double RGB_BLUE_VALUE_FOR_YELLOW = 0;
             public static final double RGB_RED_VALUE_FOR_BLUE = 0;
-            public static final double RGB_BLUE_VALUE_FOR_BLUE = 0;
-            public static final double RGB_GREEN_VALUE_FOR_BLUE = 255;
+            public static final double RGB_GREEN_VALUE_FOR_BLUE = 0;
+            public static final double RGB_BLUE_VALUE_FOR_BLUE = 255;
             public static final double RGB_RED_VALUE_FOR_RED = 255;
-            public static final double RGB_BLUE_VALUE_FOR_RED = 0;
             public static final double RGB_GREEN_VALUE_FOR_RED = 0;
+            public static final double RGB_BLUE_VALUE_FOR_RED = 0;
             public static final double RGB_RED_VALUE_FOR_GREEN = 0;
-            public static final double RGB_BLUE_VALUE_FOR_GREEN = 255;
-            public static final double RGB_GREEN_VALUE_FOR_GREEN = 0;
+            public static final double RGB_GREEN_VALUE_FOR_GREEN = 255;
+            public static final double RGB_BLUE_VALUE_FOR_GREEN = 0;
         }
     }
     public static final class DriverCameraConstants {

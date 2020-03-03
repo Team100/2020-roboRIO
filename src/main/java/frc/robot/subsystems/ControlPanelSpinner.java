@@ -204,7 +204,7 @@ public class ControlPanelSpinner extends SubsystemBase {
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
-    SmartDashboard.putString("Detected Color", colorString);
+    SmartDashboard.putString("Detected Color", match.toString());
     SmartDashboard.putNumber("Counter of Changes", revolutionsCounter);
     SmartDashboard.putData("Conrol Panel Spinner", this);
 
