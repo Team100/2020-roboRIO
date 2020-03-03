@@ -371,7 +371,7 @@ public class FRCTalonSRX implements Sendable {
         motor.configFactoryDefault();
         motor.setSafetyEnabled(false);
         System.out.println("#################RESET");
-        m
+
         if (this.isInverted() || this.isInvertedWithType()) {
             if (this.useInvertType) motor.setInverted(this.invertType);
             else  motor.setInverted(this.isInverted());
