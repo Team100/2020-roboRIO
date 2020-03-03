@@ -8,6 +8,7 @@
 package frc.robot.commands.colorSpinner;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.ControlPanelSpinner;
 
 public class threeTimes extends CommandBase {
@@ -25,14 +26,14 @@ public ControlPanelSpinner controlPanelSpinner;
   @Override
   public void initialize() {
     controlPanelSpinner.resetTo0();
-    controlPanelSpinner.spin(.7);
+    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SPIN_SPEED);
     done = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    controlPanelSpinner.spin(.7);
+    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SPIN_SPEED);
     if (controlPanelSpinner.getRevolutionsCounter()>=6){
       done = true;
     }

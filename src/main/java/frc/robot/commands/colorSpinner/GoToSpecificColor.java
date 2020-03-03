@@ -6,8 +6,8 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot.commands.colorSpinner;
 
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.ControlPanelSpinner;;
 
 public class GoToSpecificColor extends CommandBase {
@@ -27,7 +27,7 @@ public class GoToSpecificColor extends CommandBase {
   public void initialize() {
     controlPanelSpinner.resetTo0();
     controlPanelSpinner.resetToFalse();
-    controlPanelSpinner.spin(0.5);
+    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SPIN_SPEED);
       done = false;
 
   }
@@ -35,7 +35,7 @@ public class GoToSpecificColor extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    controlPanelSpinner.spin(0.5);
+    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SPIN_SPEED);
     //if (Robot.controlPanelSpinner.getRevolutionsCounter()>=8){
       if (controlPanelSpinner.reachedColor()==true){
          done = true;

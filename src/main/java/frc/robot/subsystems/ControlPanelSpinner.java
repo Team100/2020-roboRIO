@@ -101,7 +101,7 @@ public class ControlPanelSpinner extends SubsystemBase {
   }
 
   public void spin(double speed) {
-    //TODO fix(either implement again or move to command subsystem)
+    spinner.drivePercentOutput(speed);
   }
 
   public void calibrate() {

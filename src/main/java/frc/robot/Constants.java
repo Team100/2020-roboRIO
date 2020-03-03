@@ -361,11 +361,15 @@ public final class Constants {
             public static final boolean ENABLE_CURRENT_LIMIT = true;
             public static final int CURRENT_LIMIT = 25;
             public static final double OPEN_LOOP_RAMP = 0.1;
-            public static final double PEAK_OUTPUT_FORWARD = .5;
-            public static final double PEAK_OUTPUT_REVERSE = -.5;
+            public static final double PEAK_OUTPUT_FORWARD = .75;
+            public static final double PEAK_OUTPUT_REVERSE = -.75;
 
             public static final double NOMINAL_OUTPUT_FORWARD = 0;
             public static final double NOMINAL_OUTPUT_REVERSE = 0;
+
+            public static final double SPIN_SPEED = 0.7;
+            public static final double RISE_SPEED = 1;
+            public static final double LOWER_SPEED = -1;
         }
         public static final class ControlPanelSpinnerColors {
             public static final double RGB_RED_VALUE_FOR_YELLOW =0.301;

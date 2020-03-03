@@ -7,8 +7,8 @@
 
 package frc.robot.commands.colorSpinner;
 
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.ControlPanelSpinner;;
 
 public class lowerSpinerWheel extends CommandBase {
@@ -25,13 +25,13 @@ public class lowerSpinerWheel extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    controlPanelSpinner.spin(-1);
+    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.LOWER_SPEED);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    controlPanelSpinner.spin(-1);
+    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.LOWER_SPEED);
   }
     
 
