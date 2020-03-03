@@ -13,26 +13,22 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
 
-import frc.robot.commands.drivetrain.ArcadeDrive;
-import frc.robot.commands.supersystem.indexer.IndexerDriveBackward;
-import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
-import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
-import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneStop;
-import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoDriveForward;
-import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoStop;
-import frc.robot.commands.supersystem.intake.IntakeIntake;
-import frc.robot.commands.supersystem.intake.IntakeStop;
-import frc.robot.commands.supersystem.intake.intakePivot.IntakeMoveJoystick;
-import frc.robot.commands.supersystem.shooter.ShooterRun;
-import frc.robot.commands.supersystem.shooter.ShooterStop;
-import frc.robot.commands.supersystem.turret.TurretStop;
+import frc.robot.commands.drivetrain.*;
+import frc.robot.commands.supersystem.indexer.*;
+import frc.robot.commands.supersystem.indexer.indexStageOne.*;
+import frc.robot.commands.supersystem.indexer.indexStageTwo.*;
+import frc.robot.commands.supersystem.intake.*;
+import frc.robot.commands.supersystem.intake.intakePivot.*;
+import frc.robot.commands.supersystem.shooter.*;
+import frc.robot.commands.supersystem.turret.*;
+
 import frc.robot.Subsystems;
-import edu.wpi.first.wpilibj2.command.Command;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -73,9 +69,6 @@ public class RobotContainer {
 
         subsystems = new Subsystems();
 
-        //Trigger Initialization
-        triggers = new Triggers(subsystems);
-
 
         // Default Commands
         this.setDefaultCommands();
@@ -83,17 +76,20 @@ public class RobotContainer {
 
         // Button to Command Mapping
         configureButtonBindings();
+
+        //Trigger Initialization
+        triggers = new Triggers(subsystems);
     }
 
     public void setDefaultCommands() {
 
-        subsystems.drivetrain.setDefaultCommand(new ArcadeDrive(subsystems.drivetrain, leftJoystick, rightJoystick));
+        subsystems.drivetrain.setDefaultCommand(new ArcadeDrive(subsystems.drivetrain, leftJoystick, leftJoystick));//TODO Change back to two js
         subsystems.stageOne.setDefaultCommand(new IndexerStageOneStop(subsystems.stageOne));
         subsystems.stageTwo.setDefaultCommand(new IndexerStageTwoStop(subsystems.stageTwo));
         subsystems.intake.setDefaultCommand(new IntakeStop(subsystems.intake));
         subsystems.intakePivot.setDefaultCommand(new IntakeMoveJoystick(subsystems.intakePivot, gamepad));
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
-        subsystems.turret.setDefaultCommand(new TurretStop(subsystems.turret));
+        subsystems.turret.setDefaultCommand(new TurretScan(subsystems.turret));
     }
 
     /**

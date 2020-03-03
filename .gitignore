@@ -1,3 +1,5 @@
+/src/main/java/frc/robot/FRCLib
+
 # Created by https://www.gitignore.io/api/c++,java,linux,macos,gradle,windows,visualstudiocode
 /src/main/java/frc/robot/FRCLib
 ### C++ ###
@@ -157,5 +159,7 @@ gradle-app.setting
 bin/
 imgui.ini
 
+src/main/java/frc/robot/FRCLib
 
 # End of https://www.gitignore.io/api/c++,java,linux,macos,gradle,windows,visualstudiocode
+src/main/java/frc/robot/FRCLib

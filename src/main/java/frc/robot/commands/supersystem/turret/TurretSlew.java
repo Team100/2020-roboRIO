@@ -8,23 +8,19 @@
 package frc.robot.commands.supersystem.turret;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
-import frc.robot.subsystems.Turret.ActionState;
 
-public class TurretTurn extends CommandBase {
-    /**
-     * Creates a new TurretTurn.
-     * 
-     */
-    public Turret turret;
+public class TurretSlew extends CommandBase {
 
     /**
-     * Constructor
-     * @deprecated Use TurretSlew or TurretLock Instead
+     * Turret subsystem
      */
-    @Deprecated
-    public TurretTurn(Turret turret) {
+    private Turret turret;
+
+    /**
+     * Creates a new TurretSlew.
+     */
+    public TurretSlew(Turret turret) {
         // Use addRequirements() here to declare subsystem dependencies.
         this.turret = turret;
         addRequirements(this.turret);
@@ -33,8 +29,6 @@ public class TurretTurn extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        turret.actionState = ActionState.MOVING;
-        turret.turretMotor.drivePercentOutput(Constants.TurretConstants.TurretMotionParameters.PERCENT_OUTPUT_FORWARD);
     }
 
     // Called every time the scheduler runs while the command is scheduled.

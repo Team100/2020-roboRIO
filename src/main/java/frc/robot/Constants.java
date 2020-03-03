@@ -90,11 +90,11 @@ public final class Constants {
             public static final double KF = 0.04455;
 
             public static final class LeftMaster {
-                public static final int CAN_ID = 0;
+                public static final int CAN_ID = 15;
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
-                public static final boolean INVERTED = false; //TODO CHANGE BACK
+                public static final InvertType INVERTED = InvertType.None; //TODO CHANGE BACK
                 public static final boolean SENSOR_PHASE = false; //TODO CHANGE BACK
                 public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
                 public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
@@ -104,7 +104,7 @@ public final class Constants {
             }
 
             public static final class LeftFollower {
-                public static final int CAN_ID = 1;
+                public static final int CAN_ID = 14;
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
@@ -119,11 +119,11 @@ public final class Constants {
             }
 
             public static final class RightMaster {
-                public static final int CAN_ID = 15;
+                public static final int CAN_ID = 0;
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
-                public static final boolean INVERTED = true; //TODO CHANGE BACK
+                public static final InvertType INVERTED = InvertType.InvertMotorOutput; //TODO CHANGE BACK
                 public static final boolean SENSOR_PHASE = false; //TODO CHANGE BACK
                 public static final double KP = Constants.DrivetrainConstants.DrivetrainMotors.KP;
                 public static final double KI = Constants.DrivetrainConstants.DrivetrainMotors.KI;
@@ -133,7 +133,7 @@ public final class Constants {
             }
 
             public static final class RightFollower {
-                public static final int CAN_ID = 14;
+                public static final int CAN_ID = 1;
                 public static final double PEAK_OUTPUT_FORWARD = Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final double PEAK_OUTPUT_REVERSE = -Constants.DrivetrainConstants.DrivetrainParameters.MAX_OUTPUT;
                 public static final NeutralMode NEUTRAL_MODE = Constants.DrivetrainConstants.DrivetrainParameters.NEUTRAL_MODE;
@@ -165,7 +165,7 @@ public final class Constants {
         }
         public static final class TurretMotors {
             public static final class TurretMotor {
-                public static final int CAN_ID = 6;
+                public static final int CAN_ID = 4;
 
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
@@ -208,7 +208,7 @@ public final class Constants {
 
         public static final class IndexerMotors {
             public static final class IndexerStageOne {
-                public static final int CAN_ID = 4;
+                public static final int CAN_ID = 8;
 
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
@@ -228,9 +228,10 @@ public final class Constants {
 
             public static final class IndexerStageTwo {
                 public static final int CAN_ID = 7;
-                public static final boolean INVERT = false;
+              
+                public static final boolean INVERT = true;
                 public static final int FEEDBACK_PORT = 0;
-                public static final boolean SENSOR_PHASE = false;
+                public static final boolean SENSOR_PHASE = true;
 
                 public static final int TIMEOUT = 10;
 
@@ -251,17 +252,21 @@ public final class Constants {
             public static final double INTAKE_PERCENT_OUTPUT = 0.7;
             public static final double INTAKE_ZERO = 0;
 
+            public static final int ZEROED_ENCODER_TICKS = 100;
+
             public static final double INTAKE_DOWN_DEGREES = EncoderConversionFactors
                     .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(-40);
             public static final double INTAKE_UP_DEGREES = EncoderConversionFactors
                     .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(90);
+
+            public static final int ACCEPTABLE_ERROR_TICKS = 10;
         }
 
         public static final class IntakeMotors {
             public static final class IntakeSpin {
-                public static final int CAN_ID = 5;
+                public static final int CAN_ID = 9;
 
-                public static final boolean INVERT = false;
+                public static final boolean INVERT = true;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
 
@@ -312,7 +317,7 @@ public final class Constants {
             public static final class ShooterMaster {
                 public static final int CAN_ID = 2;
 
-                public static final boolean INVERT = false;
+                public static final InvertType INVERT = InvertType.None;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
 
@@ -329,9 +334,9 @@ public final class Constants {
             }
 
             public static final class ShooterFollower {
-                public static final int CAN_ID = 3;
+                public static final int CAN_ID = 13;
 
-                public static final boolean INVERT = false;
+                public static final InvertType INVERT = InvertType.InvertMotorOutput;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
 
