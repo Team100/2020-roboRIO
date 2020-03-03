@@ -172,7 +172,7 @@ public final class Constants {
                 //public static final boolean INVERT = false;
                 public static final InvertType INVERT = InvertType.None;
                 public static final int FEEDBACK_PORT = 0;
-                public static final boolean SENSOR_PHASE = false;
+                public static final boolean SENSOR_PHASE = true;
                 public static final int ENCODER_TICKS_PER_MOTOR_REVOLUTION = EncoderConversionFactors.CONVERT_ANGLE_TO_TALON_FX_ENCODER_TICKS(360);
                 public static final double GEARING_RATIO = 1/1;
 
