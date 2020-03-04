@@ -87,6 +87,14 @@ public class ControlPanelSpinner extends SubsystemBase {
     spinner.setNeutralMode(NeutralMode.Brake);
 
     addChild("Control Panel Motor", spinner);
+
+     colorMatcher.addColorMatch(kBlueTarget);
+    colorMatcher.addColorMatch(kGreenTarget);
+    colorMatcher.addColorMatch(kRedTarget);
+    colorMatcher.addColorMatch(kYellowTarget);
+
+    configuratingColors = SmartDashboard.getNumber("configurating Colors", 0);
+    SmartDashboard.putNumber("configurating Colors", configuratingColors);
   }
 
   public void initDefaultCommand() {
