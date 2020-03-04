@@ -7,8 +7,8 @@
 
 package frc.robot.subsystems;
 
-
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -30,6 +30,7 @@ public class CameraTiltServo extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     cameraTilt.setAngle(setpoint);
+    SmartDashboard.putNumber("Servo Command", setpoint);
   }
 
   public void setpointOne() {

@@ -372,9 +372,9 @@ public final class Constants {
             public static final double NOMINAL_OUTPUT_FORWARD = 0;
             public static final double NOMINAL_OUTPUT_REVERSE = 0;
 
-            public static final double SPIN_SPEED = 0.7;
-            public static final double RISE_SPEED = 1;
-            public static final double LOWER_SPEED = -1;
+            public static final double SPIN_SPEED = 0.1;
+            public static final double RISE_SPEED = 0.11;
+            public static final double LOWER_SPEED = -0.11;
         }
         public static final class ControlPanelSpinnerColors {
             public static final double RGB_RED_VALUE_FOR_YELLOW =0.301;
