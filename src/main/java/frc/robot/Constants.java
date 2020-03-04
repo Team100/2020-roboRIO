@@ -251,14 +251,19 @@ public final class Constants {
             public static final double INTAKE_PERCENT_OUTPUT = 0.7;
             public static final double INTAKE_ZERO = 0;
 
-            public static final int ZEROED_ENCODER_TICKS = 100;
+            public static final int ZEROED_ENCODER_TICKS = 65;
 
             public static final double INTAKE_DOWN_DEGREES = EncoderConversionFactors
-                    .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(-40);
+                    .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(-40);  //Ultimate down = 22ticks @ ~-15deg
             public static final double INTAKE_UP_DEGREES = EncoderConversionFactors
                     .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(90);
 
             public static final int ACCEPTABLE_ERROR_TICKS = 10;
+
+            public static final double KP = 6;
+            public static final double KI = 0;
+            public static final double KD = 3;
+            public static final double KF = 0;
         }
 
         public static final class IntakeMotors {
