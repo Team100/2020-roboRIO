@@ -52,7 +52,7 @@ public final class Constants {
         public static final class DrivetrainParameters {
             public static final double MAX_OUTPUT = 1;
             public static final NeutralMode NEUTRAL_MODE = NeutralMode.Brake;
-            public static final int TICKS_PER_REV =(int)(2048); // TODO FIGURE OUT ACTUAL VALUE
+            public static final int TICKS_PER_REV = 2048; // TODO FIGURE OUT ACTUAL VALUE
 
             // public static final double KF = 11.41199782;
 

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
@@ -63,6 +64,8 @@ public class RobotContainer {
 
     public JoystickButton cameraSetpointOne;
     public JoystickButton cameraSetpointTwo;
+
+    
 
     public Triggers triggers;
     public Subsystems subsystems;
@@ -125,7 +128,8 @@ public class RobotContainer {
 
         ////////////////////////////////////////////////////////////////////////////
         intakeIntake = new JoystickButton(gamepad, 5);
-        intakeIntake.whileHeld(new IntakeIntake(subsystems.intake));
+        //intakeIntake.whileHeld(new IntakeIntake(subsystems.intake));
+        intakeIntake.whileHeld(new InstantCommand(()->GlobalManager.SupersystemManager.shouldIntake = true)).whenInactive(new InstantCommand(()->GlobalManager.SupersystemManager.shouldIntake = false));
 
         ////////////////////////////////////////////////////////////////////////////
         shooterShoot = new JoystickButton(gamepad, 6);

@@ -55,10 +55,13 @@ public class GlobalManager {
             NEUTRAL, INTAKING, QUEUEING, ALIGNING, SHOOTING, JAMMED, REVERSING
         }
 
+
         /**
          * The current state of the supersystem
          */
         public static SupersystemState supersystemState;
+
+        public static boolean shouldIntake = false;
 
         /**
          * Is the shooter ready to shoot
@@ -131,8 +134,9 @@ public class GlobalManager {
          */
         public static boolean indexerFull = IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC;
 
+     
         public static boolean shouldIntake(){
-            return true;
+            return GlobalManager.SupersystemManager.shouldIntake;
         }
 
         public static boolean shouldShift(){
