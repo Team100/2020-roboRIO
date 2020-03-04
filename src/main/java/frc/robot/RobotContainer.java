@@ -21,6 +21,7 @@ import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
 
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.supersystem.indexer.*;
+import frc.robot.commands.colorSpinner.*;
 import frc.robot.commands.supersystem.indexer.indexStageOne.*;
 import frc.robot.commands.supersystem.indexer.indexStageTwo.*;
 import frc.robot.commands.supersystem.intake.*;
@@ -89,7 +90,7 @@ public class RobotContainer {
         subsystems.intake.setDefaultCommand(new IntakeStop(subsystems.intake));
         subsystems.intakePivot.setDefaultCommand(new IntakeMoveJoystick(subsystems.intakePivot, gamepad));
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
-        subsystems.turret.setDefaultCommand(new TurretScan(subsystems.turret));
+        subsystems.spinner.setDefaultCommand(new ColorReader(subsystems.spinner));
     }
 
     /**
