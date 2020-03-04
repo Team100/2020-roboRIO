@@ -90,6 +90,8 @@ public class ControlPanelSpinner extends SubsystemBase {
   }
 
   public void initDefaultCommand() {
+    calibrate();
+
     colorMatcher.addColorMatch(kBlueTarget);
     colorMatcher.addColorMatch(kGreenTarget);
     colorMatcher.addColorMatch(kRedTarget);

@@ -8,16 +8,23 @@
 package frc.robot.commands.colorSpinner;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ControlPanelSpinner;
 
 public class ColorReader extends CommandBase {
-  public ColorReader() {
+
+  private ControlPanelSpinner controlPanelSpinner;
+
+  public ColorReader(ControlPanelSpinner controlPanelSpinner) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    this.controlPanelSpinner = controlPanelSpinner;
+    addRequirements(this.controlPanelSpinner);
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
+    controlPanelSpinner.initDefaultCommand();
   }
 
   // Called repeatedly when this Command is scheduled to run
