@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.ControlPanelSpinner;
 
-public class threeTimes extends CommandBase {
+public class ThreeTimes extends CommandBase {
 
-private boolean done = false;
-public ControlPanelSpinner controlPanelSpinner;
+  private boolean done = false;
+  public ControlPanelSpinner controlPanelSpinner;
 
-  public threeTimes(ControlPanelSpinner controlPanelSpinner) {
+  public ThreeTimes(ControlPanelSpinner controlPanelSpinner) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     this.controlPanelSpinner = controlPanelSpinner;

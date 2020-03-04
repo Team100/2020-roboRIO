@@ -372,30 +372,30 @@ public final class Constants {
             public static final double NOMINAL_OUTPUT_FORWARD = 0;
             public static final double NOMINAL_OUTPUT_REVERSE = 0;
 
-            public static final double SPIN_SPEED = 0.7;
-            public static final double RISE_SPEED = 1;
-            public static final double LOWER_SPEED = -1;
+            public static final double SPIN_SPEED = 0.6;
+            public static final double RISE_SPEED = 0.7;
+            public static final double LOWER_SPEED = -0.7;
         }
         public static final class ControlPanelSpinnerColors {
-            public static final double RGB_RED_VALUE_FOR_YELLOW = 255;
-            public static final double RGB_GREEN_VALUE_FOR_YELLOW = 255;
-            public static final double RGB_BLUE_VALUE_FOR_YELLOW = 0;
-            public static final double RGB_RED_VALUE_FOR_BLUE = 0;
-            public static final double RGB_GREEN_VALUE_FOR_BLUE = 0;
-            public static final double RGB_BLUE_VALUE_FOR_BLUE = 255;
-            public static final double RGB_RED_VALUE_FOR_RED = 255;
-            public static final double RGB_GREEN_VALUE_FOR_RED = 0;
-            public static final double RGB_BLUE_VALUE_FOR_RED = 0;
-            public static final double RGB_RED_VALUE_FOR_GREEN = 0;
-            public static final double RGB_GREEN_VALUE_FOR_GREEN = 255;
-            public static final double RGB_BLUE_VALUE_FOR_GREEN = 0;
+            public static final double RGB_RED_VALUE_FOR_YELLOW =0.301;
+            public static final double RGB_BLUE_VALUE_FOR_YELLOW =0.148;
+            public static final double RGB_GREEN_VALUE_FOR_YELLOW =0.550;
+            public static final double RGB_RED_VALUE_FOR_BLUE =0.196;
+            public static final double RGB_BLUE_VALUE_FOR_BLUE =0.311;
+            public static final double RGB_GREEN_VALUE_FOR_BLUE =0.491;
+            public static final double RGB_RED_VALUE_FOR_RED =0.483;
+            public static final double RGB_BLUE_VALUE_FOR_RED =0.148;
+            public static final double RGB_GREEN_VALUE_FOR_RED =0.371;
+            public static final double RGB_RED_VALUE_FOR_GREEN =0.197;
+            public static final double RGB_BLUE_VALUE_FOR_GREEN =0.240;
+            public static final double RGB_GREEN_VALUE_FOR_GREEN =0.561;
         }
     }
     public static final class DriverCameraConstants {
         public static final class CameraTiltServo {
             public static final int PWM_ID_SERVO = 2;
-            public static final int SETPOINT_ONE = 20;
-            public static final int SETPOINT_TWO = 40;
+            public static final double SETPOINT_ONE = 20;
+            public static final double SETPOINT_TWO = 40;
         }
     }
 }
