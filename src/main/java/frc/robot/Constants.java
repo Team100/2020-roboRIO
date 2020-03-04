@@ -228,9 +228,10 @@ public final class Constants {
 
             public static final class IndexerStageTwo {
                 public static final int CAN_ID = 7;
-                public static final boolean INVERT = false;
+              
+                public static final boolean INVERT = true;
                 public static final int FEEDBACK_PORT = 0;
-                public static final boolean SENSOR_PHASE = false;
+                public static final boolean SENSOR_PHASE = true;
 
                 public static final int TIMEOUT = 10;
 
@@ -251,21 +252,26 @@ public final class Constants {
             public static final double INTAKE_PERCENT_OUTPUT = 0.7;
             public static final double INTAKE_ZERO = 0;
 
-            public static final int ZEROED_ENCODER_TICKS = 100;
+            public static final int ZEROED_ENCODER_TICKS = 65;
 
             public static final double INTAKE_DOWN_DEGREES = EncoderConversionFactors
-                    .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(-40);
+                    .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(-40);  //Ultimate down = 22ticks @ ~-15deg
             public static final double INTAKE_UP_DEGREES = EncoderConversionFactors
                     .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(90);
 
             public static final int ACCEPTABLE_ERROR_TICKS = 10;
+
+            public static final double KP = 6;
+            public static final double KI = 0;
+            public static final double KD = 3;
+            public static final double KF = 0;
         }
 
         public static final class IntakeMotors {
             public static final class IntakeSpin {
                 public static final int CAN_ID = 9;
 
-                public static final boolean INVERT = false;
+                public static final boolean INVERT = true;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
 
@@ -335,7 +341,7 @@ public final class Constants {
             public static final class ShooterFollower {
                 public static final int CAN_ID = 13;
 
-                public static final InvertType INVERT = InvertType.OpposeMaster;
+                public static final InvertType INVERT = InvertType.InvertMotorOutput;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
 
@@ -352,5 +358,49 @@ public final class Constants {
             }
         }
     }
+    public static final class ControlPanelSpinnerConstants {
+        public static final class ControlPanelSpinnerMotors {
+            public static final int CAN_ID = 11;
 
+            public static final boolean INVERT = false;
+            public static final int FEEDBACK_PORT = 0;
+            public static final boolean SENSOR_PHASE = false;
+
+            public static final int TIMEOUT = 10;
+
+            public static final boolean ENABLE_CURRENT_LIMIT = true;
+            public static final int CURRENT_LIMIT = 25;
+            public static final double OPEN_LOOP_RAMP = 0.1;
+            public static final double PEAK_OUTPUT_FORWARD = .75;
+            public static final double PEAK_OUTPUT_REVERSE = -.75;
+
+            public static final double NOMINAL_OUTPUT_FORWARD = 0;
+            public static final double NOMINAL_OUTPUT_REVERSE = 0;
+
+            public static final double SPIN_SPEED = 0.6;
+            public static final double RISE_SPEED = 0.7;
+            public static final double LOWER_SPEED = -0.7;
+        }
+        public static final class ControlPanelSpinnerColors {
+            public static final double RGB_RED_VALUE_FOR_YELLOW =0.301;
+            public static final double RGB_BLUE_VALUE_FOR_YELLOW =0.148;
+            public static final double RGB_GREEN_VALUE_FOR_YELLOW =0.550;
+            public static final double RGB_RED_VALUE_FOR_BLUE =0.196;
+            public static final double RGB_BLUE_VALUE_FOR_BLUE =0.311;
+            public static final double RGB_GREEN_VALUE_FOR_BLUE =0.491;
+            public static final double RGB_RED_VALUE_FOR_RED =0.483;
+            public static final double RGB_BLUE_VALUE_FOR_RED =0.148;
+            public static final double RGB_GREEN_VALUE_FOR_RED =0.371;
+            public static final double RGB_RED_VALUE_FOR_GREEN =0.197;
+            public static final double RGB_BLUE_VALUE_FOR_GREEN =0.240;
+            public static final double RGB_GREEN_VALUE_FOR_GREEN =0.561;
+        }
+    }
+    public static final class DriverCameraConstants {
+        public static final class CameraTiltServo {
+            public static final int PWM_ID_SERVO = 2;
+            public static final double SETPOINT_ONE = 20;
+            public static final double SETPOINT_TWO = 40;
+        }
+    }
 }

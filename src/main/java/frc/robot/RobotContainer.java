@@ -17,10 +17,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
 
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.supersystem.indexer.*;
+import frc.robot.commands.colorSpinner.*;
+import frc.robot.commands.driverCamera.CameraSetpointOne;
+import frc.robot.commands.driverCamera.CameraSetpointTwo;
 import frc.robot.commands.supersystem.indexer.indexStageOne.*;
 import frc.robot.commands.supersystem.indexer.indexStageTwo.*;
 import frc.robot.commands.supersystem.intake.*;
@@ -53,6 +57,13 @@ public class RobotContainer {
     public JoystickButton intakeIntake;
     public JoystickButton shooterShoot;
 
+    public JoystickButton spinnerRise;
+    public JoystickButton spinnerFall;
+    public JoystickButton spinnerThreeTimes;
+
+    public JoystickButton cameraSetpointOne;
+    public JoystickButton cameraSetpointTwo;
+
     public Triggers triggers;
     public Subsystems subsystems;
 
@@ -78,7 +89,7 @@ public class RobotContainer {
         configureButtonBindings();
 
         //Trigger Initialization
-        triggers = new Triggers(subsystems);
+        triggers = new Triggers(subsystems, this);
     }
 
     public void setDefaultCommands() {
@@ -89,7 +100,8 @@ public class RobotContainer {
         subsystems.intake.setDefaultCommand(new IntakeStop(subsystems.intake));
         subsystems.intakePivot.setDefaultCommand(new IntakeMoveJoystick(subsystems.intakePivot, gamepad));
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
-        subsystems.turret.setDefaultCommand(new TurretScan(subsystems.turret));
+        subsystems.spinner.setDefaultCommand(new ColorReader(subsystems.spinner));
+        subsystems.tiltServo.setDefaultCommand(new CameraSetpointOne(subsystems.tiltServo));
     }
 
     /**
@@ -119,6 +131,22 @@ public class RobotContainer {
         shooterShoot = new JoystickButton(gamepad, 6);
         shooterShoot.whileHeld(new ShooterRun(subsystems.shooter));
 
+        /////////////////////////////////////////////////////////////////////////////
+        spinnerRise = new JoystickButton(gamepad, 7);
+        spinnerRise.whenPressed(new RiseSpinerWheel(subsystems.spinner));
+
+        spinnerFall = new JoystickButton(gamepad, 8);
+        spinnerFall.whenPressed(new LowerSpinerWheel(subsystems.spinner));
+
+        spinnerThreeTimes = new JoystickButton(gamepad, 9);
+        spinnerThreeTimes.whenPressed(new ThreeTimes(subsystems.spinner));
+        //////////////////////////////////////////////////////////////////////////////
+        cameraSetpointOne = new JoystickButton(gamepad, 10);
+        cameraSetpointOne.whenPressed(new CameraSetpointOne(subsystems.tiltServo));
+
+        cameraSetpointTwo = new JoystickButton(gamepad, 11);
+        cameraSetpointTwo.whenPressed(new CameraSetpointTwo(subsystems.tiltServo));
+        ///////////////////////////////////////////////////////////////////////////////
     }
 
 

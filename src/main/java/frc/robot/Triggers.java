@@ -51,8 +51,9 @@ public class Triggers {
     /**
      * Create a new instance of all of the triggers
      * @param subsystems the subsystems that can be impacted
+     * @param container a map to the RobotContainer for getting Joystick access
      */
-    public Triggers(Subsystems subsystems) {
+    public Triggers(Subsystems subsystems, RobotContainer container) {
         this.subsystems = subsystems;
         indexerFull = new Trigger(GlobalManager.IndexerManager::subsystemIsFull);
         indexerEntranceSensor = new Trigger(subsystems.stageOne::getSensorValue);
@@ -68,7 +69,7 @@ public class Triggers {
 
         this.indexerEntranceSensor.whenInactive(triggerMap::onB1C2F);
         this.indexerExitSensor.whenActive(triggerMap::onB2C2T);
-      cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired); //subsystems.turret::hasTarget);
+      cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired);
 
         turretConditionals(subsystems.turret);
         indexerConditionals(subsystems.stageOne, subsystems.stageTwo);
