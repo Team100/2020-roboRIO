@@ -57,15 +57,12 @@ public class RobotContainer {
     public JoystickButton intakeIntake;
     public JoystickButton shooterShoot;
 
-    /////////////////////////////////////////////for spinner testing, change or delete later
     public JoystickButton spinnerRise;
     public JoystickButton spinnerFall;
     public JoystickButton spinnerThreeTimes;
-    /////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////for servo testing, change or delete later
+
     public JoystickButton cameraSetpointOne;
     public JoystickButton cameraSetpointTwo;
-    /////////////////////////////////////////////////////////////////////////////////////
 
     public Triggers triggers;
     public Subsystems subsystems;
@@ -134,7 +131,7 @@ public class RobotContainer {
         shooterShoot = new JoystickButton(gamepad, 6);
         shooterShoot.whileHeld(new ShooterRun(subsystems.shooter));
 
-        ///////////////////////////////////////////////////////////////////////////// for testing spinner, change/delete later
+        /////////////////////////////////////////////////////////////////////////////
         spinnerRise = new JoystickButton(gamepad, 7);
         spinnerRise.whenPressed(new RiseSpinerWheel(subsystems.spinner));
 
@@ -143,7 +140,7 @@ public class RobotContainer {
 
         spinnerThreeTimes = new JoystickButton(gamepad, 9);
         spinnerThreeTimes.whenPressed(new ThreeTimes(subsystems.spinner));
-        //////////////////////////////////////////////////////////////////////////////for testing servo, change/delete later
+        //////////////////////////////////////////////////////////////////////////////
         cameraSetpointOne = new JoystickButton(gamepad, 10);
         cameraSetpointOne.whenPressed(new CameraSetpointOne(subsystems.tiltServo));
 
