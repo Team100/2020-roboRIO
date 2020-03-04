@@ -89,7 +89,7 @@ public class RobotContainer {
         configureButtonBindings();
 
         //Trigger Initialization
-        triggers = new Triggers(subsystems);
+        triggers = new Triggers(subsystems, this);
     }
 
     public void setDefaultCommands() {
