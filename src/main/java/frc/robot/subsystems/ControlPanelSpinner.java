@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
 import com.revrobotics.ColorMatch;
@@ -41,7 +41,7 @@ public class ControlPanelSpinner extends SubsystemBase {
   private boolean blueController = true;
   private boolean yellowController = true;
   private boolean greenController = true;
-  private int[] colorSequence = { 1, 2, 3, 4 };
+ 
   private int currentColor;
   private int nextColor;
   private int revolutionsCounter = 0;
@@ -204,7 +204,7 @@ public class ControlPanelSpinner extends SubsystemBase {
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
-    SmartDashboard.putString("Detected Color", match.toString());
+    SmartDashboard.putString("Detected Color", colorString);
     SmartDashboard.putNumber("Counter of Changes", revolutionsCounter);
     SmartDashboard.putData("Conrol Panel Spinner", this);
 
