@@ -68,7 +68,7 @@ public class Triggers {
 
         this.indexerEntranceSensor.whenInactive(triggerMap::onB1C2F);
         this.indexerExitSensor.whenActive(triggerMap::onB2C2T);
-      cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired); //subsystems.turret::hasTarget);
+      cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired);
 
         turretConditionals(subsystems.turret);
         indexerConditionals(subsystems.stageOne, subsystems.stageTwo);
