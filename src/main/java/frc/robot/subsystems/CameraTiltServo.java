@@ -20,7 +20,7 @@ public class CameraTiltServo extends SubsystemBase {
    * Creates a new CameraTiltServo.
    */
   public CameraTiltServo() {
-    setpoint = 0;//Constants.DriverCameraConstants.CameraTiltServo.SETPOINT_ONE;
+    setpoint = Constants.DriverCameraConstants.CameraTiltServo.SETPOINT_ONE;
     cameraTilt = new Servo(Constants.DriverCameraConstants.CameraTiltServo.PWM_ID_SERVO);
 
     addChild("frontSensor", cameraTilt);
