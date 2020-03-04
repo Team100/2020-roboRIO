@@ -138,15 +138,15 @@ public class RobotContainer {
         spinnerFall = new JoystickButton(gamepad, 8);
         spinnerFall.whenPressed(new LowerSpinerWheel(subsystems.spinner));
 
-        spinnerThreeTimes = new JoystickButton(gamepad, 9);
-        spinnerThreeTimes.whenPressed(new ThreeTimes(subsystems.spinner));
-        //////////////////////////////////////////////////////////////////////////////
-        cameraSetpointOne = new JoystickButton(gamepad, 10);
-        cameraSetpointOne.whenPressed(new CameraSetpointOne(subsystems.tiltServo));
+        // spinnerThreeTimes = new JoystickButton(gamepad, 9);
+        // spinnerThreeTimes.whenPressed(new ThreeTimes(subsystems.spinner));
+        // //////////////////////////////////////////////////////////////////////////////
+        // cameraSetpointOne = new JoystickButton(gamepad, 10);
+        // cameraSetpointOne.whenPressed(new CameraSetpointOne(subsystems.tiltServo));
 
-        cameraSetpointTwo = new JoystickButton(gamepad, 11);
-        cameraSetpointTwo.whenPressed(new CameraSetpointTwo(subsystems.tiltServo));
-        ///////////////////////////////////////////////////////////////////////////////
+        // cameraSetpointTwo = new JoystickButton(gamepad, 11);
+        // cameraSetpointTwo.whenPressed(new CameraSetpointTwo(subsystems.tiltServo));
+        // ///////////////////////////////////////////////////////////////////////////////
     }
 
 
