@@ -24,7 +24,7 @@ public class ColorReader extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    controlPanelSpinner.initDefaultCommand();
+    controlPanelSpinner.calibrate();
   }
 
   // Called repeatedly when this Command is scheduled to run
