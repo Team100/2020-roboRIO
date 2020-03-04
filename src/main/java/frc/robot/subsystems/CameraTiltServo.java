@@ -14,13 +14,13 @@ import frc.robot.Constants;
 
 public class CameraTiltServo extends SubsystemBase {
   private Servo cameraTilt;
-  private int setpoint;
+  public double setpoint;
   
   /**
    * Creates a new CameraTiltServo.
    */
   public CameraTiltServo() {
-    setpoint = Constants.DriverCameraConstants.CameraTiltServo.SETPOINT_ONE;
+    setpoint = 0;//Constants.DriverCameraConstants.CameraTiltServo.SETPOINT_ONE;
     cameraTilt = new Servo(Constants.DriverCameraConstants.CameraTiltServo.PWM_ID_SERVO);
 
     addChild("frontSensor", cameraTilt);

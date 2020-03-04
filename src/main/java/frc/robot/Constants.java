@@ -394,8 +394,8 @@ public final class Constants {
     public static final class DriverCameraConstants {
         public static final class CameraTiltServo {
             public static final int PWM_ID_SERVO = 2;
-            public static final int SETPOINT_ONE = 20;
-            public static final int SETPOINT_TWO = 40;
+            public static final double SETPOINT_ONE = 20;
+            public static final double SETPOINT_TWO = 40;
         }
     }
 }
