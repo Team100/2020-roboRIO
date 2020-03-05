@@ -48,22 +48,7 @@ public class TriggerMap {
         return IndexerMoveType.NONE;
     }
 
-    public Command onIndexerShouldMoveFoward() {
-        return new SelectCommand(
-            Map.ofEntries(
-                    entry(
-                        IndexerMoveType
-                    .S1FANDS2F, 
-                    new IndexerDriveForward
-                    (this.subsystems.stageOne, 
-                    this.subsystems.stageTwo)),
-                    entry(IndexerMoveType.S1F, new IndexerStageOneDriveForward(subsystems.stageOne)),
-                    entry(IndexerMoveType.NONE, new InstantCommand(() -> System.out.println("Bypassing")))
-                ),
-
-                this::indexerShouldMoveForward
-        );
-    }
+  
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private Entry entry(IndexerMoveType s1fands2f, IndexerDriveForward indexerDriveForward) {

@@ -175,7 +175,7 @@ public class GlobalManager {
             NONE, S1F, S1FANDS2F
         }
         
-        public IndexerMoveType indexerShouldMoveForward() {
+        public static IndexerMoveType indexerShouldMoveForward() {
             GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
         
             if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
