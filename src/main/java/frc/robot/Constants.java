@@ -249,7 +249,7 @@ public final class Constants {
 
     public static final class IntakeConstants {
         public static final class IntakeMotionParameters {
-            public static final double INTAKE_PERCENT_OUTPUT = 0.7;
+            public static final double INTAKE_PERCENT_OUTPUT = 0.5;
             public static final double INTAKE_ZERO = 0;
 
             public static final int ZEROED_ENCODER_TICKS = 65;
@@ -310,8 +310,8 @@ public final class Constants {
 
     public static final class ShooterConstants {
         public static final class ShooterMotionParameters {
-            public static final double RECOVER_PO = 0.8;
-            public static final double SHOOT_PO = 0.5;
+            public static final double RECOVER_PO = ShooterMotionParameters.SHOOT_PO;
+            public static final double SHOOT_PO = 0.72;
             public static final double STOP_PO = 0;
 
         }
@@ -331,8 +331,8 @@ public final class Constants {
                 public static final boolean ENABLE_CURRENT_LIMIT = true;
                 public static final int CURRENT_LIMIT = 25;
                 public static final double OPEN_LOOP_RAMP = 0.1;
-                public static final double PEAK_OUTPUT_FORWARD = .5;
-                public static final double PEAK_OUTPUT_REVERSE = -.5;
+                public static final double PEAK_OUTPUT_FORWARD = 1;
+                public static final double PEAK_OUTPUT_REVERSE = -1;
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;
@@ -350,8 +350,8 @@ public final class Constants {
                 public static final boolean ENABLE_CURRENT_LIMIT = true;
                 public static final int CURRENT_LIMIT = 25;
                 public static final double OPEN_LOOP_RAMP = 0.1;
-                public static final double PEAK_OUTPUT_FORWARD = .5;
-                public static final double PEAK_OUTPUT_REVERSE = -.5;
+                public static final double PEAK_OUTPUT_FORWARD = 1;
+                public static final double PEAK_OUTPUT_REVERSE = -1;
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;

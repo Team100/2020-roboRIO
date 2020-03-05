@@ -369,6 +369,7 @@ public class FRCTalonSRX implements Sendable {
         motor = new WPI_TalonSRX(this.getCanID());
         m_sensorCollection = motor.getSensorCollection();
         System.out.println(this.motor.configFactoryDefault());
+        this.motor.setSafetyEnabled(false);
         System.out.println("#################RESET");
         if (this.isInverted() || this.isInvertedWithType()) {
             if (this.useInvertType) motor.setInverted(this.invertType);

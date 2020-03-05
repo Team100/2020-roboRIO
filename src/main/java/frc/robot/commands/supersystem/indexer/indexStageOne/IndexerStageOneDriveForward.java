@@ -32,6 +32,7 @@ public class IndexerStageOneDriveForward extends CommandBase {
     public void initialize() {
         this.indexer.actionState = ActionState.MOVE_FOWARD;
         indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FORWARD);
+        System.out.println("WE DONT HAVE ACCESS TO THE ROBOT");
     }
 
     // Called every time the scheduler runs while the command is scheduled.

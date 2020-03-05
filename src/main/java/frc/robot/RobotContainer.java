@@ -103,7 +103,7 @@ public class RobotContainer {
         subsystems.intake.setDefaultCommand(new IntakeStop(subsystems.intake));
         subsystems.intakePivot.setDefaultCommand(new IntakeMoveJoystick(subsystems.intakePivot, gamepad));
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
-        subsystems.spinner.setDefaultCommand(new ColorReader(subsystems.spinner));
+        subsystems.spinner.setDefaultCommand(new StopSpinnerWheel(subsystems.spinner));
         subsystems.tiltServo.setDefaultCommand(new CameraSetpointOne(subsystems.tiltServo));
     }
 
@@ -128,8 +128,8 @@ public class RobotContainer {
 
         ////////////////////////////////////////////////////////////////////////////
         intakeIntake = new JoystickButton(gamepad, 5);
-        //intakeIntake.whileHeld(new IntakeIntake(subsystems.intake));
-        intakeIntake.whileHeld(new InstantCommand(()->GlobalManager.SupersystemManager.shouldIntake = true)).whenInactive(new InstantCommand(()->GlobalManager.SupersystemManager.shouldIntake = false));
+        intakeIntake.whileHeld(new IntakeIntake(subsystems.intake));
+        // intakeIntake.whileHeld(new InstantCommand(()->GlobalManager.SupersystemManager.shouldIntake = true)).whenInactive(new InstantCommand(()->GlobalManager.SupersystemManager.shouldIntake = false));
 
         ////////////////////////////////////////////////////////////////////////////
         shooterShoot = new JoystickButton(gamepad, 6);
@@ -137,10 +137,10 @@ public class RobotContainer {
 
         /////////////////////////////////////////////////////////////////////////////
         spinnerRise = new JoystickButton(gamepad, 7);
-        spinnerRise.whenPressed(new RiseSpinerWheel(subsystems.spinner));
+        spinnerRise.whileHeld(new RiseSpinerWheel(subsystems.spinner));
 
         spinnerFall = new JoystickButton(gamepad, 8);
-        spinnerFall.whenPressed(new LowerSpinerWheel(subsystems.spinner));
+        spinnerFall.whileHeld(new LowerSpinerWheel(subsystems.spinner));
 
         spinnerThreeTimes = new JoystickButton(gamepad, 9);
         spinnerThreeTimes.whenPressed(new ThreeTimes(subsystems.spinner));
