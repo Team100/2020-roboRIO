@@ -9,7 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Subsystems;
+import frc.robot.commands.stateTransitions.Conditional.OnShouldIntake;
 import frc.robot.commands.stateTransitions.TriggerMap;
 import frc.robot.commands.supersystem.turret.*;
 
@@ -65,7 +65,7 @@ public class Triggers {
 
         this.triggerMap = new TriggerMap(this.subsystems);
 
-        this.shouldIntake.whileActiveContinuous(triggerMap::shouldIntake);
+        this.shouldIntake.whileActiveContinuous(new OnShouldIntake(subsystems));
         this.indexerShouldShift.whenActive(triggerMap::shouldShift);
 
         this.indexerEntranceSensor.whenInactive(triggerMap::onB1C2F);

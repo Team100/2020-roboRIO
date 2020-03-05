@@ -24,15 +24,17 @@ public class IndexerStageOneDriveForward extends CommandBase {
     public IndexerStageOneDriveForward(IndexerStageOne indexer) {
         this.indexer = indexer;
         addRequirements(this.indexer);
+        System.out.println("Instantiated INdexer Stage One Drive Forward");
         // Use addRequirements() here to declare subsystem dependencies.
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        System.out.println("WE DONT HAVE ACCESS TO THE ROBOT");
+
         this.indexer.actionState = ActionState.MOVE_FOWARD;
         indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FORWARD);
-        System.out.println("WE DONT HAVE ACCESS TO THE ROBOT");
     }
 
     // Called every time the scheduler runs while the command is scheduled.

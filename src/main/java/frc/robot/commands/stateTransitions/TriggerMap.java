@@ -9,8 +9,8 @@ import frc.robot.commands.supersystem.shooter.ShooterRecover;
 import frc.robot.commands.supersystem.shooter.ShooterRun;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 import java.util.Map;
+import java.util.Map.Entry;
 
-import static java.util.Map.entry;
 
 public class TriggerMap {
     public Subsystems subsystems;
@@ -66,7 +66,11 @@ public class TriggerMap {
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public enum B1C2FAction {
+    private Entry entry(IndexerMoveType s1fands2f, IndexerDriveForward indexerDriveForward) {
+		return null;
+	}
+
+	public enum B1C2FAction {
         STOP_MOTORS, NONE
     }
 
@@ -145,7 +149,10 @@ public class TriggerMap {
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public Command shouldIntake() { System.out.println("Starting ShouldIntake"); return new ParallelCommandGroup(new IndexerStageOneDriveForward(subsystems.stageOne), new InstantCommand(()->System.out.println("Running ShouldIntake"))); }
+    public Command shouldIntake() { System.out.println("Starting ShouldIntake"); 
+    Command cmd = new IndexerStageOneDriveForward(subsystems.stageOne); 
+    return cmd;
+}
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
