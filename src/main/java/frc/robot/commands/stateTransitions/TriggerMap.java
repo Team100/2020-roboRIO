@@ -28,32 +28,10 @@ public class TriggerMap {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public enum IndexerMoveType {
-        NONE, S1F, S1FANDS2F
-    }
 
-    public IndexerMoveType indexerShouldMoveForward() {
-        GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
-
-        if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
-                ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
-                ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
-                ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
-                ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
-            return IndexerMoveType.S1F;
-        }
-        if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC) {
-            return IndexerMoveType.S1FANDS2F;
-        }
-        return IndexerMoveType.NONE;
-    }
-
-  
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private Entry entry(IndexerMoveType s1fands2f, IndexerDriveForward indexerDriveForward) {
-		return null;
-	}
+
 
 	public enum B1C2FAction {
         STOP_MOTORS, NONE
