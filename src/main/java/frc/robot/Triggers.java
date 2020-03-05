@@ -59,12 +59,13 @@ public class Triggers {
         indexerEntranceSensor = new Trigger(subsystems.stageOne::getSensorValue);
         indexerExitSensor = new Trigger(subsystems.stageTwo::getSensorValue);
 
-        shouldIntake = new Trigger(GlobalManager.IndexerManager::shouldIntake);
+      
+        shouldIntake = new Trigger(GlobalManager.SupersystemManager::getShouldIntake);
         indexerShouldShift = new Trigger(GlobalManager.IndexerManager::shouldShift);
 
         this.triggerMap = new TriggerMap(this.subsystems);
 
-        this.shouldIntake.whenActive(triggerMap::shouldIntake);
+        this.shouldIntake.whileActiveContinuous(triggerMap::shouldIntake);
         this.indexerShouldShift.whenActive(triggerMap::shouldShift);
 
         this.indexerEntranceSensor.whenInactive(triggerMap::onB1C2F);

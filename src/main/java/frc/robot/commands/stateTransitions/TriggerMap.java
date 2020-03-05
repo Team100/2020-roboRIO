@@ -145,7 +145,7 @@ public class TriggerMap {
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public Command shouldIntake() { return new IndexerStageOneDriveForward(subsystems.stageOne); }
+    public Command shouldIntake() { System.out.println("Starting ShouldIntake"); return new ParallelCommandGroup(new IndexerStageOneDriveForward(subsystems.stageOne), new InstantCommand(()->System.out.println("Running ShouldIntake"))); }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

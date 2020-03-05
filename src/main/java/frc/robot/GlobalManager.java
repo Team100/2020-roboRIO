@@ -63,6 +63,14 @@ public class GlobalManager {
 
         public static boolean shouldIntake = false;
 
+        public static void setShouldIntake(boolean si){
+            shouldIntake = si;
+        }
+
+        public static boolean getShouldIntake(){
+            return shouldIntake;
+        }
+
         /**
          * Is the shooter ready to shoot
          */

@@ -128,8 +128,8 @@ public class RobotContainer {
 
         ////////////////////////////////////////////////////////////////////////////
         intakeIntake = new JoystickButton(gamepad, 5);
-        intakeIntake.whileHeld(new IntakeIntake(subsystems.intake));
-        // intakeIntake.whileHeld(new InstantCommand(()->GlobalManager.SupersystemManager.shouldIntake = true)).whenInactive(new InstantCommand(()->GlobalManager.SupersystemManager.shouldIntake = false));
+        //intakeIntake.whileHeld(new IntakeIntake(subsystems.intake));
+        intakeIntake.whileHeld(new InstantCommand(()->GlobalManager.SupersystemManager.setShouldIntake(true))).whenInactive(new InstantCommand(()->GlobalManager.SupersystemManager.setShouldIntake(false)));
 
         ////////////////////////////////////////////////////////////////////////////
         shooterShoot = new JoystickButton(gamepad, 6);
