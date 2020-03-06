@@ -7,12 +7,9 @@
 
 package frc.robot.commands.stateTransitions.Conditional;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
-import frc.robot.GlobalManager.CommandConditionals.*;
 import frc.robot.commands.stateTransitions.TriggerMap.ShooterMoveType;
 import frc.robot.commands.stateTransitions.transitionCommandGroups.BypassCommand;
 import frc.robot.commands.supersystem.shooter.ShooterStop;

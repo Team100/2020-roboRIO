@@ -204,13 +204,13 @@ public class GlobalManager {
             }
             return B2C2TAction.NONE;
         }
-        public enum ShooterMoveType {
+        public static enum ShooterMoveType {
             NONE, SPINNING, SPINNINGUP, STOPPED
         }
-            public ShooterMoveType shouldSpinup() {
+        
+        public static ShooterMoveType shouldSpinup(){
             boolean ta = GlobalManager.TurretManager.targetAcquired;
             boolean sr = GlobalManager.ShooterManager.speedReached;
-            
     
             if (ta == true && sr == false) {
                 return ShooterMoveType.SPINNINGUP;
@@ -224,7 +224,7 @@ public class GlobalManager {
             return ShooterMoveType.NONE;
         }
     
-        public ShooterMoveType shouldRun(){
+        public static ShooterMoveType shouldRun(){
             boolean ta = GlobalManager.TurretManager.targetAcquired;
             boolean sr = GlobalManager.ShooterManager.speedReached;
     
@@ -234,7 +234,7 @@ public class GlobalManager {
             return ShooterMoveType.NONE;
         }
     
-        public ShooterMoveType shouldStop(){
+        public static ShooterMoveType shouldStop(){
             boolean ta = GlobalManager.TurretManager.targetAcquired;
     
             if (ta == false) {

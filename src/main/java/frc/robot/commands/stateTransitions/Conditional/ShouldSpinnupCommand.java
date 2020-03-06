@@ -27,7 +27,7 @@ public class ShouldSpinnupCommand extends SelectCommand {
     super(Map.ofEntries(
             entry(ShooterMoveType.SPINNINGUP, new ShooterRecover(subsystems.shooter)),
             entry(ShooterMoveType.NONE, new BypassCommand())
-        ), GlobalManager.CommandConditionals::shouldSpinnup
+        ), GlobalManager.CommandConditionals::shouldSpinup
     );
   }
 }
