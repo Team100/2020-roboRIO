@@ -53,7 +53,8 @@ public class Triggers {
 
 
     /**
-     * Create a new instance of all of the triggers
+     * Create a new 
+     * instance of all of the triggers
      * @param subsystems the subsystems that can be impacted
      * @param container a map to the RobotContainer for getting Joystick access
      */
@@ -68,9 +69,8 @@ public class Triggers {
         indexerShouldShift = new Trigger(GlobalManager.IndexerManager::shouldShift);
 
         this.triggerMap = new TriggerMap(this.subsystems);
-        this.indexerShouldShift.whenActive(new InstantCommand(()->System.out.println("Try-catch me outside, how 'bout dat'")));
         this.shouldIntake.whenActive(new OnShouldIntake(this.subsystems));
-        //this.indexerShouldShift.whenActive(new ShouldShift(this.subsystems));
+        this.indexerShouldShift.whenActive(new ShouldShift(this.subsystems));
         //this.indexerEntranceSensor.whenActive(new InstantCommand(()->System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")));
         this.indexerEntranceSensor.whenActive(new OnB1C2F(this.subsystems));
         this.indexerExitSensor.whenInactive(new OnB2C2T(this.subsystems));

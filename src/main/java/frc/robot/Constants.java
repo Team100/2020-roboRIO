@@ -218,7 +218,7 @@ public final class Constants {
 
                 public static final boolean ENABLE_CURRENT_LIMIT = true;
                 public static final int CURRENT_LIMIT = 25;
-                public static final double OPEN_LOOP_RAMP = 0.1;
+                public static final double OPEN_LOOP_RAMP = 0;
                 public static final double PEAK_OUTPUT_FORWARD = .5;
                 public static final double PEAK_OUTPUT_REVERSE = -.5;
 
@@ -237,7 +237,7 @@ public final class Constants {
 
                 public static final boolean ENABLE_CURRENT_LIMIT = true;
                 public static final int CURRENT_LIMIT = 25;
-                public static final double OPEN_LOOP_RAMP = 0.1;
+                public static final double OPEN_LOOP_RAMP = 0;
                 public static final double PEAK_OUTPUT_FORWARD = .5;
                 public static final double PEAK_OUTPUT_REVERSE = -.5;
 
