@@ -35,11 +35,16 @@ public class TransitionCommandGroup {
         return new InstantCommand(this::zeroIndexerStage);
     }
 
-    
+     /**
+     * @deprecated instead use {@link frc.robot.commands.stateTransitions.transitionCommandGroups.BypassCommand}
+     */
     public Command bypassCommand(){
         return new PrintCommand("Bypassing");
     }
 
+     /**
+     * @deprecated instead use {@link frc.robot.commands.stateTransitions.transitionCommandGroups.SetIndexerLocationState}
+     */
     public Command setIndexerUncertainCommand(){
         return new SequentialCommandGroup(new IndexerDriveBackward(subsystems.stageOne, subsystems.stageTwo), resetIndexerStage());
     }
