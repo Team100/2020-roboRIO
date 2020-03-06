@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
 import frc.robot.GlobalManager.CommandConditionals.B1C2FAction;
+import frc.robot.commands.stateTransitions.transitionCommandGroups.BypassCommand;
+import frc.robot.commands.stateTransitions.transitionCommandGroups.StopIndexer;
 
 /**
  * Add your docs here.
@@ -20,8 +22,8 @@ import frc.robot.GlobalManager.CommandConditionals.B1C2FAction;
 public class OnB1C2F extends ConditionalCommand {
     public OnB1C2F(Subsystems subsystems){
         super( Map.ofEntries(
-            entry(B1C2FAction.STOP_MOTORS, tcg.stopIndexer()),
-            entry(B1C2FAction.NONE, tcg.bypassCommand())
+            entry(B1C2FAction.STOP_MOTORS, new StopIndexer(subsystems)),
+            entry(B1C2FAction.NONE, new BypassCommand())
     ), GlobalManager.CommandConditionals::evaluateB1C2F);
     }
 }
