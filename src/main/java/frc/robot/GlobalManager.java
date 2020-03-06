@@ -210,6 +210,9 @@ public class GlobalManager {
         public static boolean shouldSpinnup(){
             return false;//TODO implement logic
         }
+        public static boolean shouldRun(){
+            return false;//TODO implement logic
+        }
 
         public enum IndexerMoveType {
             NONE, S1F, S1FANDS2F
