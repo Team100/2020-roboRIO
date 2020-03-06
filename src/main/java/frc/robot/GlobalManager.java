@@ -202,7 +202,22 @@ public class GlobalManager {
             return B1C2FAction.NONE;
         }
     
-
+        public enum B2C2TAction {
+            STOP_MOTORS, NONE, SET_UNCERTAIN
+        }
+    
+        public static B2C2TAction evaluateB2C2T() {
+            GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC) {
+                return B2C2TAction.STOP_MOTORS;
+            }
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC) {
+                return B2C2TAction.SET_UNCERTAIN;
+            }
+            return B2C2TAction.NONE;
+        }
 
 
 

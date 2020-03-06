@@ -10,6 +10,7 @@ import frc.robot.commands.supersystem.shooter.ShooterRun;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 import java.util.Map;
 import java.util.Map.Entry;
+import static java.util.Map.entry;
 
 
 public class TriggerMap {
@@ -33,9 +34,11 @@ public class TriggerMap {
 
 
 
+    /**@deprecated */
 	public enum B1C2FAction {
         STOP_MOTORS, NONE
     }
+    /**@deprecated */
 
     public Command newBall() {
         return new SequentialCommandGroup(
@@ -43,6 +46,8 @@ public class TriggerMap {
             tcg.incrementIndexerStage()
         );
     }
+        /**@deprecated */
+
     public B1C2FAction evaluateB1C2F() {
         GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
         if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
@@ -58,11 +63,12 @@ public class TriggerMap {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**@deprecated */
 
     public enum B2C2TAction {
         STOP_MOTORS, NONE, SET_UNCERTAIN
     }
-
+    /**@deprecated */
     public B2C2TAction evaluateB2C2T() {
         GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
         if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC) {
@@ -75,6 +81,7 @@ public class TriggerMap {
         }
         return B2C2TAction.NONE;
     }
+    /**@deprecated */
 
     public Command onB2C2T() {
         return new SelectCommand(
