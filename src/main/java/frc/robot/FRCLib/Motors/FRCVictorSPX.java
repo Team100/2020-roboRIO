@@ -68,7 +68,6 @@ public class FRCVictorSPX {
     public FRCVictorSPX configure() {
         motor = new WPI_VictorSPX(this.getCanID());
 
-        motor.setSafetyEnabled(false);
 
         motor.configFactoryDefault();
         System.out.println("#################RESET");

@@ -10,15 +10,11 @@ package frc.robot.commands.stateTransitions.Conditional;
 import java.util.Map;
 import static java.util.Map.entry;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
 import frc.robot.commands.stateTransitions.transitionCommandGroups.BypassCommand;
 import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
-import frc.robot.commands.supersystem.indexer.IndexerStop;
 
 /**
  * Add your docs here.
