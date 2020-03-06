@@ -7,7 +7,6 @@
 
 package frc.robot.commands.stateTransitions.Conditional;
 
-
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
@@ -15,8 +14,7 @@ import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
 import frc.robot.GlobalManager.CommandConditionals.*;
 import frc.robot.commands.stateTransitions.TriggerMap.ShooterMoveType;
-import frc.robot.commands.supersystem.indexer.IndexerDriveForward;
-import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
+import frc.robot.commands.stateTransitions.transitionCommandGroups.BypassCommand;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 
 import java.util.Map;
@@ -26,18 +24,11 @@ import static java.util.Map.entry;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class ShouldStopCommand extends SelectCommand {
-  /**
-   * Creates a new OnShouldIntake.
-   */
   public ShouldStopCommand(Subsystems subsystems) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());super();
-
-    super(
-        Map.ofEntries(
-            entry(ShooterMoveType.STOPPED, new ShooterStop(subsystems.shooter))
-        ),
-        GlobalManager.CommandConditionals::shouldStop
+    super(Map.ofEntries(
+            entry(ShooterMoveType.STOPPED, new ShooterStop(subsystems.shooter)),
+            entry(ShooterMoveType.NONE, new BypassCommand())
+        ), GlobalManager.CommandConditionals::shouldStop
     );
   }
 }
