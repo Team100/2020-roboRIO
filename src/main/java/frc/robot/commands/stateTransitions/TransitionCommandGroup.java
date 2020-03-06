@@ -44,6 +44,9 @@ public class TransitionCommandGroup {
         return new SequentialCommandGroup(new IndexerDriveBackward(subsystems.stageOne, subsystems.stageTwo), resetIndexerStage());
     }
 
+    /**
+     * @deprecated instead use {@link frc.robot.commands.stateTransitions.transitionCommandGroups.StopIndexer}
+     */
     public Command stopIndexer(){
         return new SequentialCommandGroup(new IndexerStop(subsystems.stageOne, subsystems.stageTwo), incrementIndexerStage());
     }
