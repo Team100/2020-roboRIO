@@ -190,11 +190,11 @@ public final class Constants {
     public static final class IndexerConstants {
         public static final class IndexerSensors {
             public static final class FrontSensor {
-                public static final int ID = 3;
+                public static final int ID = 0;
             }
 
             public static final class RearSensor {
-                public static final int ID = 0;
+                public static final int ID = 3;
             }
         }
 

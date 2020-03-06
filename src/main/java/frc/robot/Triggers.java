@@ -8,7 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.stateTransitions.Conditional.OnB1C2F;
 import frc.robot.commands.stateTransitions.Conditional.OnB2C2T;
 import frc.robot.commands.stateTransitions.Conditional.OnShouldIntake;
 import frc.robot.commands.stateTransitions.Conditional.ShouldShift;
@@ -66,11 +68,12 @@ public class Triggers {
         indexerShouldShift = new Trigger(GlobalManager.IndexerManager::shouldShift);
 
         this.triggerMap = new TriggerMap(this.subsystems);
-
-        this.shouldIntake.whileActiveContinuous(new OnShouldIntake(this.subsystems));
-        this.indexerShouldShift.whenActive(new ShouldShift(this.subsystems));
-
-        this.indexerExitSensor.whenActive(new OnB2C2T(this.subsystems));
+        this.indexerShouldShift.whenActive(new InstantCommand(()->System.out.println("Try-catch me outside, how 'bout dat'")));
+        this.shouldIntake.whenActive(new OnShouldIntake(this.subsystems));
+        //this.indexerShouldShift.whenActive(new ShouldShift(this.subsystems));
+        //this.indexerEntranceSensor.whenActive(new InstantCommand(()->System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")));
+        this.indexerEntranceSensor.whenActive(new OnB1C2F(this.subsystems));
+        this.indexerExitSensor.whenInactive(new OnB2C2T(this.subsystems));
       cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired); //subsystems.turret::hasTarget);
 
         turretConditionals(subsystems.turret);

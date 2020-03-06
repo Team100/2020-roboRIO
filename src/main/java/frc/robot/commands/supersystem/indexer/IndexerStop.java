@@ -7,6 +7,7 @@
 
 package frc.robot.commands.supersystem.indexer;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneStop;
 import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoStop;
@@ -20,9 +21,9 @@ public class IndexerStop extends ParallelCommandGroup {
   /**
    * Creates a new IndexerStop.
    */
-  public IndexerStop(IndexerStageOne stageOne, IndexerStageTwo stageTwo) {
+  public IndexerStop(IndexerStageOne stageOne, IndexerStageTwo stageTwo, boolean def) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    super(new IndexerStageOneStop(stageOne), new IndexerStageTwoStop(stageTwo));
+    super(new IndexerStageOneStop(stageOne, def), new IndexerStageTwoStop(stageTwo, def), new InstantCommand(()->System.out.println("################################################################################################################################")));
   }
 }

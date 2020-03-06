@@ -7,6 +7,7 @@
 
 package frc.robot.commands.stateTransitions.transitionCommandGroups;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Subsystems;
@@ -16,13 +17,15 @@ import frc.robot.commands.supersystem.indexer.IndexerStop;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class StopIndexer extends ParallelCommandGroup {
+public class StopIndexer extends SequentialCommandGroup {
   /**
    * Creates a new StopIndexer.
    */
   public StopIndexer(Subsystems subsystems) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new IndexerStop(subsystems.stageOne, subsystems.stageTwo), new IncrementIndexerCounter());
+    super( new IncrementIndexerCounter(),
+    new IndexerStop(subsystems.stageOne, subsystems.stageTwo, false),
+     new InstantCommand(()->System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")));
   }
 }

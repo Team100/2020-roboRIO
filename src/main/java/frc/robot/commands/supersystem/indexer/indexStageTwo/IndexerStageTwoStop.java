@@ -17,10 +17,13 @@ public class IndexerStageTwoStop extends CommandBase {
      */
     public IndexerStageTwo indexer;
 
-    public IndexerStageTwoStop(IndexerStageTwo indexer) {
+    public boolean def;
+
+    public IndexerStageTwoStop(IndexerStageTwo indexer, boolean def) {
         // Use addRequirements() here to declare subsystem dependencies.
         this.indexer = indexer;
         addRequirements(this.indexer);
+        this.def = def;
     }
 
     // Called when the command is initially scheduled.
@@ -43,6 +46,6 @@ public class IndexerStageTwoStop extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return !this.def;
     }
 }

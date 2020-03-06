@@ -9,6 +9,7 @@ package frc.robot.commands.stateTransitions.Conditional;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.GlobalManager;
+import frc.robot.GlobalManager.IndexerManager;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -25,6 +26,8 @@ public class IncrementIndexerCounter extends InstantCommand {
 
         GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
         GlobalManager.IndexerManager.numBalls += 1;
+        System.out.println("**************************************************************"+GlobalManager.IndexerManager.numBalls + IndexerManager.locationState);
+
   }
 
 }

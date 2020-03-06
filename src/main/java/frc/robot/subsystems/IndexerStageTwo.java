@@ -57,7 +57,7 @@ public class IndexerStageTwo extends SubsystemBase {
   }
 
   public boolean getSensorValue() {
-    return false; //sensor.get();
+    return sensor.get(); //sensor.get();
   }
 
   @Override

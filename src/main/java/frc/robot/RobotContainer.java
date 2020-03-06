@@ -98,8 +98,8 @@ public class RobotContainer {
     public void setDefaultCommands() {
 
         subsystems.drivetrain.setDefaultCommand(new ArcadeDrive(subsystems.drivetrain, leftJoystick, rightJoystick));
-        subsystems.stageOne.setDefaultCommand(new IndexerStageOneStop(subsystems.stageOne));
-        subsystems.stageTwo.setDefaultCommand(new IndexerStageTwoStop(subsystems.stageTwo));
+        subsystems.stageOne.setDefaultCommand(new IndexerStageOneStop(subsystems.stageOne, true));
+        subsystems.stageTwo.setDefaultCommand(new IndexerStageTwoStop(subsystems.stageTwo, true));
         subsystems.intake.setDefaultCommand(new IntakeStop(subsystems.intake));
         subsystems.intakePivot.setDefaultCommand(new IntakeMoveJoystick(subsystems.intakePivot, gamepad));
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));

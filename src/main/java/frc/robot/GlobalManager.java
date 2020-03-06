@@ -126,7 +126,7 @@ public class GlobalManager {
             LOADED, LOADING, WAITING_TO_LOAD, UNLOADING, WAITING_TO_UNLOAD, NEUTRAL
         }
 
-        public static IndexerLocationState locationState;
+        public static IndexerLocationState locationState = IndexerLocationState.EMPTY;
         public static IndexerActionState actionState;
 
         public static int numBalls;
