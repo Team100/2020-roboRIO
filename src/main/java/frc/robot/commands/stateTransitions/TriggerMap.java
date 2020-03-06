@@ -120,12 +120,14 @@ public class TriggerMap {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**@deprecated */
     public Boolean needsToShift(){
         if(GlobalManager.IndexerManager.locationState == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC){
             return true;
         }
         return false;
     }
+    /**@deprecated */
     public Command shouldShift() {
         return new SelectCommand(
             Map.ofEntries(
