@@ -212,13 +212,13 @@ public class GlobalManager {
             boolean ta = GlobalManager.TurretManager.targetAcquired;
             boolean sr = GlobalManager.ShooterManager.speedReached;
     
-            if (ta == true && sr == false) {
+            if (ta && !sr) {
                 return ShooterMoveType.SPINNINGUP;
             }
-            if (ta == false) {
+            if (!ta) {
                 return ShooterMoveType.NONE;
             }
-            if (ta == true && sr == true) {
+            if (ta && sr) {
                 return ShooterMoveType.SPINNING;
             }
             return ShooterMoveType.NONE;
@@ -228,7 +228,7 @@ public class GlobalManager {
             boolean ta = GlobalManager.TurretManager.targetAcquired;
             boolean sr = GlobalManager.ShooterManager.speedReached;
     
-            if (ta == true && sr == true) {
+            if (ta && sr) {
                 return ShooterMoveType.SPINNING;
             }
             return ShooterMoveType.NONE;
@@ -237,7 +237,7 @@ public class GlobalManager {
         public static ShooterMoveType shouldStop(){
             boolean ta = GlobalManager.TurretManager.targetAcquired;
     
-            if (ta == false) {
+            if (!ta) {
                 return ShooterMoveType.STOPPED;
             }
             return ShooterMoveType.NONE;
