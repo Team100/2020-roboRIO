@@ -161,6 +161,10 @@ public class GlobalManager {
         public static ShooterActionState actionState;
 
         public static boolean speedReached = ShooterManager.actionState == ShooterManager.ShooterActionState.SPINNING;
+
+        public static boolean shouldStop(){
+            return false;//TODO implement logic
+        }
     }
 
     public static class TurretManager {
