@@ -204,15 +204,46 @@ public class GlobalManager {
             }
             return B2C2TAction.NONE;
         }
-        public static boolean shouldStop(){
-            return false;//TODO implement logic
+        public enum ShooterMoveType {
+            NONE, SPINNING, SPINNINGUP, STOPPED
         }
-        public static boolean shouldSpinnup(){
-            return false;//TODO implement logic
+            public ShooterMoveType shouldSpinup() {
+            boolean ta = GlobalManager.TurretManager.targetAcquired;
+            boolean sr = GlobalManager.ShooterManager.speedReached;
+            
+    
+            if (ta == true && sr == false) {
+                return ShooterMoveType.SPINNINGUP;
+            }
+            if (ta == false) {
+                return ShooterMoveType.NONE;
+            }
+            if (ta == true && sr == true) {
+                return ShooterMoveType.SPINNING;
+            }
+            return ShooterMoveType.NONE;
         }
-        public static boolean shouldRun(){
-            return false;//TODO implement logic
+    
+        public ShooterMoveType shouldRun(){
+            boolean ta = GlobalManager.TurretManager.targetAcquired;
+            boolean sr = GlobalManager.ShooterManager.speedReached;
+    
+            if (ta == true && sr == true) {
+                return ShooterMoveType.SPINNING;
+            }
+            return ShooterMoveType.NONE;
         }
+    
+        public ShooterMoveType shouldStop(){
+            boolean ta = GlobalManager.TurretManager.targetAcquired;
+    
+            if (ta == false) {
+                return ShooterMoveType.STOPPED;
+            }
+            return ShooterMoveType.NONE;
+        }
+
+
 
         public enum IndexerMoveType {
             NONE, S1F, S1FANDS2F
