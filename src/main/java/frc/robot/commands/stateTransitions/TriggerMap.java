@@ -56,13 +56,7 @@ public class TriggerMap {
         return B1C2FAction.NONE;
     }
 
-    public Command onB1C2F() {
-        return new SelectCommand(
-            Map.ofEntries(
-                    entry(B1C2FAction.STOP_MOTORS, tcg.stopIndexer()),
-                    entry(B1C2FAction.NONE, tcg.bypassCommand())
-            ), this::evaluateB1C2F);
-    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public enum B2C2TAction {
