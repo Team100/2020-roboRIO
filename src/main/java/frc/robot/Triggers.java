@@ -8,8 +8,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Subsystems;
+import frc.robot.commands.stateTransitions.Conditional.OnB1C2F;
+import frc.robot.commands.stateTransitions.Conditional.OnB2C2T;
+import frc.robot.commands.stateTransitions.Conditional.OnShouldIntake;
+import frc.robot.commands.stateTransitions.Conditional.ShouldShift;
 import frc.robot.commands.stateTransitions.TriggerMap;
 import frc.robot.commands.supersystem.turret.*;
 
@@ -49,7 +53,8 @@ public class Triggers {
 
 
     /**
-     * Create a new instance of all of the triggers
+     * Create a new 
+     * instance of all of the triggers
      * @param subsystems the subsystems that can be impacted
      * @param container a map to the RobotContainer for getting Joystick access
      */
@@ -59,17 +64,18 @@ public class Triggers {
         indexerEntranceSensor = new Trigger(subsystems.stageOne::getSensorValue);
         indexerExitSensor = new Trigger(subsystems.stageTwo::getSensorValue);
 
-        shouldIntake = new Trigger(GlobalManager.IndexerManager::shouldIntake);
+      
+        shouldIntake = new Trigger(GlobalManager.SupersystemManager::getShouldIntake);
         indexerShouldShift = new Trigger(GlobalManager.IndexerManager::shouldShift);
 
         this.triggerMap = new TriggerMap(this.subsystems);
+        this.shouldIntake.whenActive(new OnShouldIntake(this.subsystems));
+        this.indexerShouldShift.whenActive(new ShouldShift(this.subsystems));
+        //this.indexerEntranceSensor.whenActive(new InstantCommand(()->System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")));
+        this.indexerEntranceSensor.whenActive(new OnB1C2F(this.subsystems));
+        this.indexerExitSensor.whenInactive(new OnB2C2T(this.subsystems));
+      cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired); //subsystems.turret::hasTarget);
 
-        this.shouldIntake.whenActive(triggerMap::shouldIntake);
-        this.indexerShouldShift.whenActive(triggerMap::shouldShift);
-
-        this.indexerEntranceSensor.whenInactive(triggerMap::onB1C2F);
-        this.indexerExitSensor.whenActive(triggerMap::onB2C2T);
-      cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired);
 
         turretConditionals(subsystems.turret);
         indexerConditionals(subsystems.stageOne, subsystems.stageTwo);

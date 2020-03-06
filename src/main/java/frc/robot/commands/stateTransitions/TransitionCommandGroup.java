@@ -22,10 +22,7 @@ public class TransitionCommandGroup {
 
 
     public void addOneToIndexerStage(){
-        int indexOfCurrent = java.util.Arrays.asList(GlobalManager.IndexerManager.locationStatesOrder).indexOf(GlobalManager.IndexerManager.locationState);
-
-        GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
-        GlobalManager.IndexerManager.numBalls += 1;
+        
     }
     public Command incrementIndexerStage(){
         return new InstantCommand(this::addOneToIndexerStage);
@@ -38,17 +35,25 @@ public class TransitionCommandGroup {
         return new InstantCommand(this::zeroIndexerStage);
     }
 
-    
+     /**
+     * @deprecated instead use {@link frc.robot.commands.stateTransitions.transitionCommandGroups.BypassCommand}
+     */
     public Command bypassCommand(){
         return new PrintCommand("Bypassing");
     }
 
+     /**
+     * @deprecated instead use {@link frc.robot.commands.stateTransitions.transitionCommandGroups.SetIndexerLocationState}
+     */
     public Command setIndexerUncertainCommand(){
         return new SequentialCommandGroup(new IndexerDriveBackward(subsystems.stageOne, subsystems.stageTwo), resetIndexerStage());
     }
 
+    /**
+     * @deprecated instead use {@link frc.robot.commands.stateTransitions.transitionCommandGroups.StopIndexer}
+     */
     public Command stopIndexer(){
-        return new SequentialCommandGroup(new IndexerStop(subsystems.stageOne, subsystems.stageTwo), incrementIndexerStage());
+        return new SequentialCommandGroup(new IndexerStop(subsystems.stageOne, subsystems.stageTwo, false), incrementIndexerStage());
     }
 
     public Command shouldSpinup(){

@@ -8,8 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.GlobalManager;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
 
 public class IndexerStageOne extends SubsystemBase {
@@ -54,11 +56,13 @@ public class IndexerStageOne extends SubsystemBase {
    * Update any states
    */
   public void updateState() {
+    SmartDashboard.putNumber("INDEXER BALL INDEX VALUE", GlobalManager.IndexerManager.numBalls);
+    SmartDashboard.putString("INDEXER BALL INDEX ENUM", GlobalManager.IndexerManager.locationState.toString());
 
   }
 
   public boolean getSensorValue() {
-    return true; //sensor.get();
+    return sensor.get(); //sensor.get();
   }
 
   @Override

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
@@ -64,6 +65,8 @@ public class RobotContainer {
     public JoystickButton cameraSetpointOne;
     public JoystickButton cameraSetpointTwo;
 
+    
+
     public Triggers triggers;
     public Subsystems subsystems;
 
@@ -95,12 +98,12 @@ public class RobotContainer {
     public void setDefaultCommands() {
 
         subsystems.drivetrain.setDefaultCommand(new ArcadeDrive(subsystems.drivetrain, leftJoystick, rightJoystick));
-        subsystems.stageOne.setDefaultCommand(new IndexerStageOneStop(subsystems.stageOne));
-        subsystems.stageTwo.setDefaultCommand(new IndexerStageTwoStop(subsystems.stageTwo));
+        subsystems.stageOne.setDefaultCommand(new IndexerStageOneStop(subsystems.stageOne, true));
+        subsystems.stageTwo.setDefaultCommand(new IndexerStageTwoStop(subsystems.stageTwo, true));
         subsystems.intake.setDefaultCommand(new IntakeStop(subsystems.intake));
         subsystems.intakePivot.setDefaultCommand(new IntakeMoveJoystick(subsystems.intakePivot, gamepad));
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
-        subsystems.spinner.setDefaultCommand(new ColorReader(subsystems.spinner));
+        subsystems.spinner.setDefaultCommand(new StopSpinnerWheel(subsystems.spinner));
         subsystems.tiltServo.setDefaultCommand(new CameraSetpointOne(subsystems.tiltServo));
     }
 
@@ -125,7 +128,8 @@ public class RobotContainer {
 
         ////////////////////////////////////////////////////////////////////////////
         intakeIntake = new JoystickButton(gamepad, 5);
-        intakeIntake.whileHeld(new IntakeIntake(subsystems.intake));
+        //intakeIntake.whileHeld(new IntakeIntake(subsystems.intake));
+        intakeIntake.whileHeld(new InstantCommand(()->GlobalManager.SupersystemManager.setShouldIntake(true))).whenInactive(new InstantCommand(()->GlobalManager.SupersystemManager.setShouldIntake(false)));
 
         ////////////////////////////////////////////////////////////////////////////
         shooterShoot = new JoystickButton(gamepad, 6);
@@ -133,10 +137,10 @@ public class RobotContainer {
 
         /////////////////////////////////////////////////////////////////////////////
         spinnerRise = new JoystickButton(gamepad, 7);
-        spinnerRise.whenPressed(new RiseSpinerWheel(subsystems.spinner));
+        spinnerRise.whileHeld(new RiseSpinerWheel(subsystems.spinner));
 
         spinnerFall = new JoystickButton(gamepad, 8);
-        spinnerFall.whenPressed(new LowerSpinerWheel(subsystems.spinner));
+        spinnerFall.whileHeld(new LowerSpinerWheel(subsystems.spinner));
 
         spinnerThreeTimes = new JoystickButton(gamepad, 9);
         spinnerThreeTimes.whenPressed(new ThreeTimes(subsystems.spinner));
