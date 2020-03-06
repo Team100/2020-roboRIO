@@ -76,6 +76,7 @@ public class Triggers {
         this.indexerExitSensor.whenInactive(new OnB2C2T(this.subsystems));
       cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired); //subsystems.turret::hasTarget);
 
+
         turretConditionals(subsystems.turret);
         indexerConditionals(subsystems.stageOne, subsystems.stageTwo);
     //Turret Triggers
