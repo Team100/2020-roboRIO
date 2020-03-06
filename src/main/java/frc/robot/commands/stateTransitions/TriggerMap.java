@@ -10,6 +10,7 @@ import frc.robot.commands.supersystem.shooter.ShooterRun;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 import java.util.Map;
 import java.util.Map.Entry;
+import static java.util.Map.entry;
 
 
 public class TriggerMap {
