@@ -161,20 +161,6 @@ public class GlobalManager {
         public static ShooterActionState actionState;
 
         public static boolean speedReached = ShooterManager.actionState == ShooterManager.ShooterActionState.SPINNING;
-
-        public static boolean shouldStop = false;
-
-        public static void shouldStop(boolean ss){
-            shouldStop = ss;
-        }
-
-        public static boolean getShouldStop(){
-            return shouldStop;
-        }
-
-        public static boolean shouldStop(){
-            return false;//TODO implement logic
-        }
     }
 
     public static class TurretManager {
@@ -218,8 +204,12 @@ public class GlobalManager {
             }
             return B2C2TAction.NONE;
         }
-
-
+        public static boolean shouldStop(){
+            return false;//TODO implement logic
+        }
+        public static boolean shouldSpinnup(){
+            return false;//TODO implement logic
+        }
 
         public enum IndexerMoveType {
             NONE, S1F, S1FANDS2F
