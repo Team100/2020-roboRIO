@@ -264,6 +264,20 @@ public class GlobalManager {
             }
             return IndexerMoveType.NONE;
         }
+
+        public static boolean needsToShift(){
+            if(GlobalManager.IndexerManager.locationState == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC){
+                return true;
+            }
+            return false;
+        }
+
+        public static boolean shouldExit() {
+            if (GlobalManager.IndexerManager.numBalls <= 0) {
+                return true;
+            }
+            return false;
+        }
     }
 
 
