@@ -9,7 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.stateTransitions.Conditional.OnB2C2T;
 import frc.robot.commands.stateTransitions.Conditional.OnShouldIntake;
+import frc.robot.commands.stateTransitions.Conditional.ShouldShift;
 import frc.robot.commands.stateTransitions.TriggerMap;
 import frc.robot.commands.supersystem.turret.*;
 
@@ -65,10 +67,10 @@ public class Triggers {
 
         this.triggerMap = new TriggerMap(this.subsystems);
 
-        this.shouldIntake.whileActiveContinuous(new OnShouldIntake(subsystems));
-        this.indexerShouldShift.whenActive(triggerMap::shouldShift);
+        this.shouldIntake.whileActiveContinuous(new OnShouldIntake(this.subsystems));
+        this.indexerShouldShift.whenActive(new ShouldShift(this.subsystems));
 
-        this.indexerExitSensor.whenActive(triggerMap::onB2C2T);
+        this.indexerExitSensor.whenActive(new OnB2C2T(this.subsystems));
       cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired); //subsystems.turret::hasTarget);
 
         turretConditionals(subsystems.turret);
