@@ -27,7 +27,7 @@ public class ShouldShift extends SelectCommand{
     public ShouldShift(Subsystems subsystems){
         super(
             Map.ofEntries(
-                    entry(true, new SequentialCommandGroup(new IndexerDriveForward(subsystems.stageOne, subsystems.stageTwo), new WaitCommand(0.125), new IndexerStop(subsystems.stageOne, subsystems.stageTwo, false))),
+                    entry(true, new IndexerDriveForward(subsystems.stageOne, subsystems.stageTwo)), 
                     entry(false, new BypassCommand())
             ),
             GlobalManager.CommandConditionals::needsToShift
