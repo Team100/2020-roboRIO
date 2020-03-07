@@ -30,17 +30,23 @@ public class IntakeMoveDown extends CommandBase {
   public void initialize() {
     pivot.currentAngle = IntakePivot.ValidAngles.UNCERTAIN;
     pivot.locationState = IntakePivot.LocationState.MOVING;
-    pivot.pivot.driveMotionMagic(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_DEGREES);
+    pivot.pivot.drivePosition(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_TICKS);
+    System.out.println("GOING DOWN");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+        System.out.println("@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@");
+        System.out.println(Math.abs(pivot.pivot.getRawAnalogSensor() - Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_TICKS));
+        
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    
+    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
     pivot.currentAngle = IntakePivot.ValidAngles.DOWN; // TODO Account for failure context
     pivot.locationState = IntakePivot.LocationState.STATIONARY;
   }
@@ -48,6 +54,6 @@ public class IntakeMoveDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Math.abs(pivot.pivot.getRawAnalogSensor() - Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_TICKS)<Constants.IntakeConstants.IntakeMotionParameters.ACCEPTABLE_ERROR_TICKS;
   }
 }
