@@ -10,6 +10,7 @@ package frc.robot.commands.stateTransitions.Conditional;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.GlobalManager;
 import frc.robot.GlobalManager.IndexerManager;
+import frc.robot.GlobalManager.IndexerManager.IndexerLocationState;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -22,10 +23,23 @@ public class IncrementIndexerCounter extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    int indexOfCurrent = java.util.Arrays.asList(GlobalManager.IndexerManager.locationStatesOrder).indexOf(GlobalManager.IndexerManager.locationState);
 
-        GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
-        GlobalManager.IndexerManager.numBalls += 1;
+    
+
+    if(GlobalManager.IndexerManager.locationState == IndexerLocationState.THREE_PC || GlobalManager.IndexerManager.locationState == IndexerLocationState.FOUR_PC || GlobalManager.IndexerManager.locationState == IndexerLocationState.FIVE_PC){
+      GlobalManager.IndexerManager.numBalls += 0;
+
+    }else{
+      GlobalManager.IndexerManager.numBalls += 1;
+
+
+    }
+    if(GlobalManager.IndexerManager.locationState != IndexerLocationState.FIVE_PC_SHIFTED){
+      int indexOfCurrent = java.util.Arrays.asList(GlobalManager.IndexerManager.locationStatesOrder).indexOf(GlobalManager.IndexerManager.locationState);
+
+      GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
+    }
+    
         System.out.println("**************************************************************"+GlobalManager.IndexerManager.numBalls + IndexerManager.locationState);
 
   }

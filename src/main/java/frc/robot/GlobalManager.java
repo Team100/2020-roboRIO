@@ -150,7 +150,9 @@ public class GlobalManager {
         }
 
         public static boolean shouldShift(){
-            return IndexerManager.locationState == IndexerManager.IndexerLocationState.THREE_PC || IndexerManager.locationState == IndexerLocationState.FOUR_PC || IndexerManager.locationState == IndexerLocationState.FIVE_PC;
+            return IndexerManager.locationState == IndexerManager.IndexerLocationState.THREE_PC 
+                || IndexerManager.locationState == IndexerManager.IndexerLocationState.FOUR_PC 
+                || IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC;
         }
 
 
@@ -192,20 +194,30 @@ public class GlobalManager {
                     ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
                     ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
                     ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED ||
-                    ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC_SHIFTED) {
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC_SHIFTED){
                 return B1C2FAction.STOP_MOTORS;
             }
     
             return B1C2FAction.NONE;
+        }
+        public enum B2C2FAction{
+            STOP_MOTORS, NONE, SET_UNCERTAIN
         }
     
         public enum B2C2TAction {
             STOP_MOTORS, NONE, SET_UNCERTAIN
         }
     
+        public static B2C2FAction evaluateB2C2F() {
+            GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
+            // if (ls == IndexerLocationState.FOUR_PC || ls == IndexerLocationState.FIVE_PC) {
+            //     return B2C2FAction.STOP_MOTORS;
+            // }
+            return B2C2FAction.NONE;
+        }
         public static B2C2TAction evaluateB2C2T() {
             GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
-            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || ls == IndexerLocationState.FOUR_PC || ls == IndexerLocationState.FIVE_PC) {
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC) {
                 return B2C2TAction.STOP_MOTORS;
             }
             /*if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||

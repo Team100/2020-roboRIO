@@ -10,7 +10,9 @@ package frc.robot.commands.stateTransitions.Conditional;
 import java.util.Map;
 import static java.util.Map.entry;
 
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
 import frc.robot.GlobalManager.CommandConditionals.B1C2FAction;
@@ -23,7 +25,7 @@ import frc.robot.commands.stateTransitions.transitionCommandGroups.StopIndexer;
 public class OnB1C2F extends SelectCommand {
     public OnB1C2F(Subsystems subsystems){
         super(Map.ofEntries(
-            entry(B1C2FAction.STOP_MOTORS, new StopIndexer(subsystems)),
+            entry(B1C2FAction.STOP_MOTORS, new SequentialCommandGroup(new PrintCommand("Stopping B1C2F"), new StopIndexer(subsystems))),
             entry(B1C2FAction.NONE, new BypassCommand())
     ), GlobalManager.CommandConditionals::evaluateB1C2F);
     }
