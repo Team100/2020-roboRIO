@@ -8,14 +8,13 @@
 package frc.robot.commands.colorSpinner;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.ControlPanelSpinner;
 
-public class riseSpinerWheel extends CommandBase {
+public class StopSpinnerWheel extends CommandBase {
 
   public ControlPanelSpinner controlPanelSpinner;
 
-  public riseSpinerWheel(ControlPanelSpinner controlPanelSpinner) {
+  public StopSpinnerWheel(ControlPanelSpinner controlPanelSpinner) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     this.controlPanelSpinner = controlPanelSpinner;
@@ -25,13 +24,13 @@ public class riseSpinerWheel extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.RISE_SPEED);
+    controlPanelSpinner.spin(0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.RISE_SPEED);
+    controlPanelSpinner.spin(0);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import frc.robot.GlobalManager.IndexerManager.IndexerLocationState;
+
 /**
  * Manages state for the entire robot
  */
@@ -55,10 +57,21 @@ public class GlobalManager {
             NEUTRAL, INTAKING, QUEUEING, ALIGNING, SHOOTING, JAMMED, REVERSING
         }
 
+
         /**
          * The current state of the supersystem
          */
         public static SupersystemState supersystemState;
+
+        public static boolean shouldIntake = false;
+
+        public static void setShouldIntake(boolean si){
+            shouldIntake = si;
+        }
+
+        public static boolean getShouldIntake(){
+            return shouldIntake;
+        }
 
         /**
          * Is the shooter ready to shoot
@@ -106,16 +119,16 @@ public class GlobalManager {
 
     public static class IndexerManager {
 
-        public static IndexerLocationState[] locationStatesOrder = {IndexerLocationState.EMPTY, IndexerLocationState.ONE_PC, IndexerLocationState.TWO_PC, IndexerLocationState.THREE_PC, IndexerLocationState.THREE_PC_SHIFTED, IndexerLocationState.FOUR_PC, IndexerLocationState.FIVE_PC};
+        public static IndexerLocationState[] locationStatesOrder = {IndexerLocationState.EMPTY, IndexerLocationState.ONE_PC, IndexerLocationState.TWO_PC, IndexerLocationState.THREE_PC, IndexerLocationState.THREE_PC_SHIFTED, IndexerLocationState.FOUR_PC, IndexerLocationState.FIVE_PC, IndexerLocationState.FIVE_PC_SHIFTED};
         public enum IndexerLocationState {
-            EMPTY, ONE_PC, TWO_PC, THREE_PC, THREE_PC_SHIFTED, FOUR_PC, FIVE_PC, UNCERTAIN
+            EMPTY, ONE_PC, TWO_PC, THREE_PC, THREE_PC_SHIFTED, FOUR_PC, FOUR_PC_SHIFTED, FIVE_PC, FIVE_PC_SHIFTED, UNCERTAIN
         }
 
         public enum IndexerActionState {
             LOADED, LOADING, WAITING_TO_LOAD, UNLOADING, WAITING_TO_UNLOAD, NEUTRAL
         }
 
-        public static IndexerLocationState locationState;
+        public static IndexerLocationState locationState = IndexerLocationState.EMPTY;
         public static IndexerActionState actionState;
 
         public static int numBalls;
@@ -123,20 +136,21 @@ public class GlobalManager {
         public static boolean isFull = false;
 
         public static boolean subsystemIsFull(){
-            return locationState == IndexerLocationState.FIVE_PC;
+            return locationState == IndexerLocationState.FIVE_PC_SHIFTED;
         }
 
         /**
          * Is the Indexer full
          */
-        public static boolean indexerFull = IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC;
+        public static boolean indexerFull = IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC_SHIFTED;
 
+     
         public static boolean shouldIntake(){
-            return true;
+            return GlobalManager.SupersystemManager.shouldIntake;
         }
 
         public static boolean shouldShift(){
-            return IndexerManager.locationState == IndexerManager.IndexerLocationState.THREE_PC;
+            return IndexerManager.locationState == IndexerManager.IndexerLocationState.THREE_PC || IndexerManager.locationState == IndexerLocationState.FOUR_PC || IndexerManager.locationState == IndexerLocationState.FIVE_PC;
         }
 
 
@@ -156,6 +170,125 @@ public class GlobalManager {
             NONE, MOVING, LOCKED
         }
         public static boolean targetAcquired;
+    }
+
+    public static class CommandConditionals{
+
+
+        public enum IntakeMoveType{
+            INTAKING, STOPPED
+        }
+        public static IntakeMoveType intakeMoveType;
+
+
+
+        public enum B1C2FAction {
+            STOP_MOTORS, NONE
+        }
+        public static B1C2FAction evaluateB1C2F() {
+            GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC_SHIFTED) {
+                return B1C2FAction.STOP_MOTORS;
+            }
+    
+            return B1C2FAction.NONE;
+        }
+    
+        public enum B2C2TAction {
+            STOP_MOTORS, NONE, SET_UNCERTAIN
+        }
+    
+        public static B2C2TAction evaluateB2C2T() {
+            GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || ls == IndexerLocationState.FOUR_PC || ls == IndexerLocationState.FIVE_PC) {
+                return B2C2TAction.STOP_MOTORS;
+            }
+            /*if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC) {
+                return B2C2TAction.SET_UNCERTAIN;
+            }*/
+            return B2C2TAction.NONE;
+        }
+        public static enum ShooterMoveType {
+            NONE, SPINNING, SPINNINGUP, STOPPED
+        }
+        
+        public static ShooterMoveType shouldSpinup(){
+            boolean ta = GlobalManager.TurretManager.targetAcquired;
+            boolean sr = GlobalManager.ShooterManager.speedReached;
+    
+            if (ta && !sr) {
+                return ShooterMoveType.SPINNINGUP;
+            }
+            if (!ta) {
+                return ShooterMoveType.NONE;
+            }
+            if (ta && sr) {
+                return ShooterMoveType.SPINNING;
+            }
+            return ShooterMoveType.NONE;
+        }
+    
+        public static ShooterMoveType shouldRun(){
+            boolean ta = GlobalManager.TurretManager.targetAcquired;
+            boolean sr = GlobalManager.ShooterManager.speedReached;
+    
+            if (ta && sr) {
+                return ShooterMoveType.SPINNING;
+            }
+            return ShooterMoveType.NONE;
+        }
+    
+        public static ShooterMoveType shouldStop(){
+            boolean ta = GlobalManager.TurretManager.targetAcquired;
+    
+            if (!ta) {
+                return ShooterMoveType.STOPPED;
+            }
+            return ShooterMoveType.NONE;
+        }
+
+
+
+        public enum IndexerMoveType {
+            NONE, S1F, S1FANDS2F
+        }
+        
+        public static IndexerMoveType indexerShouldMoveForward() {
+            GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
+        
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED) {
+                return IndexerMoveType.S1F;
+            }
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || ls == IndexerLocationState.FOUR_PC || ls == IndexerLocationState.FIVE_PC) {
+                return IndexerMoveType.S1FANDS2F;
+            }
+            return IndexerMoveType.NONE;
+        }
+
+        public static boolean needsToShift(){
+            if(GlobalManager.IndexerManager.locationState == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || GlobalManager.IndexerManager.locationState == IndexerLocationState.FOUR_PC || GlobalManager.IndexerManager.locationState == IndexerLocationState.FIVE_PC){
+                return true;
+            }
+            return false;
+        }
+
+        public static boolean shouldExit() {
+            if (GlobalManager.IndexerManager.numBalls <= 0) {
+                return true;
+            }
+            return false;
+        }
     }
 
 

@@ -364,12 +364,19 @@ public class FRCTalonSRX implements Sendable {
         motor.config_kF(1, this.getkF());
 
     }
+	
+	public int getRawAnalogSensor(){
+        return m_sensorCollection.getAnalogInRaw();
+    }
 
     public FRCTalonSRX configure() {
         motor = new WPI_TalonSRX(this.getCanID());
         m_sensorCollection = motor.getSensorCollection();
-        System.out.println(this.motor.configFactoryDefault());
+
+        motor.configFactoryDefault();
+        motor.setSafetyEnabled(false);
         System.out.println("#################RESET");
+
         if (this.isInverted() || this.isInvertedWithType()) {
             if (this.useInvertType) motor.setInverted(this.invertType);
             else  motor.setInverted(this.isInverted());

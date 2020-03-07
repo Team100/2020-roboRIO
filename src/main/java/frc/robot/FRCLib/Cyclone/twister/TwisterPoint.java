@@ -1,13 +1,13 @@
-package frc.robot.FRCLib.Cyclone.ChaCha;
+package frc.robot.FRCLib.Cyclone.twister;
 
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 
 /**
- * A waypoint for a ChaChaController
+ * A waypoint for a TwisterController
  */
-public class ChaChaPoint {
+public class TwisterPoint {
     /**
      * The x coordinate of the waypoint (absolute)
      */
@@ -24,17 +24,17 @@ public class ChaChaPoint {
     /**
      * Is the waypoint required to be navigated through
      *
-     * If true, the stripping in the ChaChaController will
+     * If true, the stripping in the TwisterController will
      * automatically stop when this point is first
      */
     public boolean isRequired;
 
     /**
-     * Creates a new ChaChaPoint given an x and y coordinate
+     * Creates a new TwisterPoint given an x and y coordinate
      * @param x The x coordinate for the point
      * @param y The y coordinate for the point
      */
-    public ChaChaPoint(double x, double y){
+    public TwisterPoint(double x, double y){
         this.x = x;
         this.y = y;
         this.theta = 0;
@@ -42,12 +42,12 @@ public class ChaChaPoint {
     }
 
     /**
-     * Creates a ChaChaPoint given an x and y coordinate as well as a requirement
+     * Creates a TwisterPoint given an x and y coordinate as well as a requirement
      * @param x The x coordinate for the point
      * @param y The y coordinate for the point
      * @param isRequired Is the point required as part of the path
      */
-    public ChaChaPoint(double x, double y, boolean isRequired){
+    public TwisterPoint(double x, double y, boolean isRequired){
         this.x = x;
         this.y = y;
         this.theta = 0;
@@ -55,12 +55,12 @@ public class ChaChaPoint {
     }
 
     /**
-     * Creates a ChaChaPoint given an x and y coordinate as well as an angle
+     * Creates a TwisterPoint given an x and y coordinate as well as an angle
      * @param x The x coordinate for the point
      * @param y The y coordinate for the point
      * @param theta The angle of the point
      */
-    public ChaChaPoint(double x, double y, double theta) {
+    public TwisterPoint(double x, double y, double theta) {
         this.x = x;
         this.y = y;
         this.theta = theta;
@@ -68,13 +68,13 @@ public class ChaChaPoint {
     }
 
     /**
-     * Creates a ChaChaPoint given an x and y coordinate as well as an angle and a requirement
+     * Creates a TwisterPoint given an x and y coordinate as well as an angle and a requirement
      * @param x The x coordinate for the point
      * @param y The y coordinate for the point
      * @param theta The angle of the point
      * @param isRequired
      */
-    public ChaChaPoint(double x, double y, double theta, boolean isRequired) {
+    public TwisterPoint(double x, double y, double theta, boolean isRequired) {
         this.x = x;
         this.y = y;
         this.theta = theta;
