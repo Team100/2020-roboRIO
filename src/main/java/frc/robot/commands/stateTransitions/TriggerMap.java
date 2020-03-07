@@ -12,6 +12,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import static java.util.Map.entry;
 
+/**
+ * @deprecated
+ */
 
 public class TriggerMap {
     public Subsystems subsystems;
@@ -54,7 +57,7 @@ public class TriggerMap {
                 ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
                 ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
                 ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
-                ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
+                ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED) {
             return B1C2FAction.STOP_MOTORS;
         }
 

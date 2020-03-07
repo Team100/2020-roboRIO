@@ -193,6 +193,10 @@ public final class Constants {
                 public static final int ID = 0;
             }
 
+            public static final class ShiftSensor{
+                public static final int ID = 2;
+            }
+
             public static final class RearSensor {
                 public static final int ID = 3;
             }
@@ -254,12 +258,14 @@ public final class Constants {
 
             public static final int ZEROED_ENCODER_TICKS = 65;
 
-            public static final double INTAKE_DOWN_DEGREES = EncoderConversionFactors
-                    .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(-40);  //Ultimate down = 22ticks @ ~-15deg
-            public static final double INTAKE_UP_DEGREES = EncoderConversionFactors
-                    .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(90);
+            //public static final double INTAKE_DOWN_DEGREES = EncoderConversionFactors
+                   // .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(-40);  //Ultimate down = 22ticks @ ~-15deg
+            //public static final double INTAKE_UP_DEGREES = EncoderConversionFactors
+                   // .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(90);
 
-            public static final int ACCEPTABLE_ERROR_TICKS = 10;
+                   public static final double INTAKE_DOWN_TICKS = 94;
+                   public static final double INTAKE_UP_TICKS = 300;
+            public static final int ACCEPTABLE_ERROR_TICKS = 20;
 
             public static final double KP = 6;
             public static final double KI = 0;
@@ -311,7 +317,7 @@ public final class Constants {
     public static final class ShooterConstants {
         public static final class ShooterMotionParameters {
             public static final double RECOVER_PO = ShooterMotionParameters.SHOOT_PO;
-            public static final double SHOOT_PO = 0.72;
+            public static final double SHOOT_PO = 0.30;
             public static final double STOP_PO = 0;
 
         }
