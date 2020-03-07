@@ -40,9 +40,15 @@ public class ArcadeDrive extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double left = -leftJoystick.getY() + rightJoystick.getX();
-        double right = -leftJoystick.getY() - rightJoystick.getX();
-        drivetrain.set(left, right);
+        double ly = -leftJoystick.getY();
+        double rx = rightJoystick.getX();
+
+        if (Math.abs(ly) < 0.1) ly = 0;
+        if (Math.abs(rx) < 0.1) rx = 0;
+
+        double left = ly + rx;
+        double right = ly - rx;
+        drivetrain.set(left*0.75, right*0.75);
     }
 
     // Called once the command ends or is interrupted.

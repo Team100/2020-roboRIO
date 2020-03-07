@@ -1,4 +1,4 @@
-package frc.robot.FRCLib.Cyclone.ChaCha;
+package frc.robot.FRCLib.Cyclone.twister;
 
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
@@ -9,13 +9,13 @@ import frc.robot.Subsystems;
 import java.util.ArrayList;
 
 /**
- * Handles the management of a ChaCha-enabled robot
+ * Handles the management of a Twister-enabled robot
  */
-public class ChaChaController {
+public class TwisterController {
     /**
-     * The current path that the ChaChaController is set to
+     * The current path that the TwisterController is set to
      */
-    public ChaChaPath currentPath;
+    public TwisterPath currentPath;
 
     /**
      * A reference to all of the robot subsystems
@@ -23,19 +23,19 @@ public class ChaChaController {
     public Subsystems subsystems;
 
     /**
-     * Navigation directions for the ChaChaPath
+     * Navigation directions for the TwisterPath
      */
-    public enum ChaChaDirection{
+    public enum ChaChaDirection{ //TODO CHANGE THIS
         NEUTRAL, POSITIVE, NEGATIVE
     }
 
     /**
-     * The direction that the ChaChaController is currently driving in
+     * The direction that the TwisterController is currently driving in
      */
     public ChaChaDirection direction = ChaChaDirection.NEUTRAL;
 
     /**
-     * The acceptable offset that the robot can be in for the ChaChaController to be complete
+     * The acceptable offset that the robot can be in for the TwisterController to be complete
      */
     public double acceptableError = 0.5;
 
@@ -46,18 +46,18 @@ public class ChaChaController {
 
 
     /**
-     * Creates a new ChaChaController given a set of subsystems
+     * Creates a new TwisterController given a set of subsystems
      * @param subsystems the reference to all subsystems on the robot
      */
-    public ChaChaController(Subsystems subsystems){
+    public TwisterController(Subsystems subsystems){
         this.subsystems = subsystems;
     }
 
     /**
-     * Sets the current path for the ChaChaController
-     * @param currentPath The ChaChaPath to run
+     * Sets the current path for the TwisterController
+     * @param currentPath The TwisterPath to run
      */
-    public void loadPath(ChaChaPath currentPath){
+    public void loadPath(TwisterPath currentPath){
         this.currentPath = currentPath;
     }
 
@@ -66,7 +66,7 @@ public class ChaChaController {
      * @param currentPath the path to run
      * @return autonomous command
      */
-    public Command runPath(ChaChaPath currentPath){
+    public Command runPath(TwisterPath currentPath){
         this.loadPath(currentPath);
         return this.generateAutonomous();
     }
@@ -78,24 +78,24 @@ public class ChaChaController {
      * @param point
      * @return the new command
      */
-    public Command addChaChaSlide(ChaChaPoint point){
+    public Command addChaChaSlide(TwisterPoint point){ //TODO Change This
         this.stripCurrentPath();
         this.currentPath.prependNewChaChaPoint(point);
         return this.generateAutonomous();
     }
 
     /**
-     * Strips the current ChaChaPath of any extraneous data
+     * Strips the current TwisterPath of any extraneous data
      *
      * This can include points that have already been translated through
      * as well as any other data that is not beneficial for the operation of
-     * the ChaChaController
+     * the TwisterController
      *
-     * To make a point be part of the ChaChaPath, add required to the ChaChaPoint
+     * To make a point be part of the TwisterPath, add required to the TwisterPoint
      */
     public void stripCurrentPath(){
         Pose2d currentPose = this.getRobotPose();
-        ChaChaPoint endPoint = this.currentPath.path.get(this.currentPath.path.size()-1);
+        TwisterPoint endPoint = this.currentPath.path.get(this.currentPath.path.size()-1);
 
         if(currentPose.getTranslation().getX() < endPoint.x){
             this.direction = ChaChaDirection.POSITIVE;
@@ -108,12 +108,12 @@ public class ChaChaController {
     }
 
     /**
-     * A recursive method for stripping extraneous data from a ChaChaPath
+     * A recursive method for stripping extraneous data from a TwisterPath
      * @param path
      * @param pose
-     * @return a stripped ChaChaPath
+     * @return a stripped TwisterPath
      */
-    public ChaChaPath recursiveStrip(ChaChaPath path, Pose2d pose){
+    public TwisterPath recursiveStrip(TwisterPath path, Pose2d pose){
         if(path == null){
             return null;
         }
@@ -167,7 +167,7 @@ public class ChaChaController {
     }
 
     /**
-     * A periodic call to the ChaChaController for anything that needs to happen often
+     * A periodic call to the TwisterController for anything that needs to happen often
      *
      * TODO MAP THIS IN PERIODIC
      */

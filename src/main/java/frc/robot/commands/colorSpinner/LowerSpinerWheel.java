@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.ControlPanelSpinner;;
 
-public class lowerSpinerWheel extends CommandBase {
+public class LowerSpinerWheel extends CommandBase {
 
   public ControlPanelSpinner controlPanelSpinner;
 
-  public lowerSpinerWheel(ControlPanelSpinner controlPanelSpinner) {
+  public LowerSpinerWheel(ControlPanelSpinner controlPanelSpinner) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     this.controlPanelSpinner = controlPanelSpinner;

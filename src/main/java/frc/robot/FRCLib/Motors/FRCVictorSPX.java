@@ -67,7 +67,9 @@ public class FRCVictorSPX {
 
     public FRCVictorSPX configure() {
         motor = new WPI_VictorSPX(this.getCanID());
-        System.out.println(this.motor.configFactoryDefault());
+
+
+        motor.configFactoryDefault();
         System.out.println("#################RESET");
         if (this.isInverted() || this.isInvertedWithType()) {
             if (this.useInvertType) motor.setInverted(this.invertType);
@@ -123,6 +125,7 @@ public class FRCVictorSPX {
         public FRCVictorSPX build() {
             FRCVictorSPX fRCVictorSPX = new FRCVictorSPX();
             fRCVictorSPX.setCanID(canID);
+
             if (useInvertType) fRCVictorSPX.setInverted(invertType);
             else fRCVictorSPX.setInverted(inverted);
             if (master != null) fRCVictorSPX.setMaster(master);

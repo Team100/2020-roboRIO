@@ -5,25 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.supersystem.indexer;
+package frc.robot.commands.stateTransitions.Conditional;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneStop;
-import frc.robot.commands.supersystem.indexer.indexStageTwo.IndexerStageTwoStop;
-import frc.robot.subsystems.IndexerStageOne;
-import frc.robot.subsystems.IndexerStageTwo;
+import frc.robot.Subsystems;
+import frc.robot.commands.supersystem.indexer.indexStageOne.IndexerStageOneDriveForward;
+import frc.robot.commands.supersystem.intake.IntakeIntake;
+import frc.robot.commands.supersystem.intake.intakePivot.IntakeMoveDown;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class IndexerStop extends ParallelCommandGroup {
+public class OnShouldIntake extends ParallelCommandGroup {
   /**
-   * Creates a new IndexerStop.
+   * Creates a new OnShouldIntake.
    */
-  public IndexerStop(IndexerStageOne stageOne, IndexerStageTwo stageTwo, boolean def) {
+  public OnShouldIntake(Subsystems s) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    super(new IndexerStageOneStop(stageOne, def), new IndexerStageTwoStop(stageTwo, def), new InstantCommand(()->System.out.println("################################################################################################################################")));
+
+    super(
+    new IndexerStageOneDriveForward(s.stageOne),
+    new IntakeIntake(s.intake),
+    new IntakeMoveDown(s.intakePivot)
+
+    );
   }
 }

@@ -1,6 +1,6 @@
 package frc.robot.FRCLib.Cyclone;
 
-import frc.robot.FRCLib.Cyclone.ChaCha.ChaChaController;
+import frc.robot.FRCLib.Cyclone.twister.TwisterController;
 
 public class CycloneController {
     public enum CycloneState{
@@ -8,13 +8,13 @@ public class CycloneController {
     }
     public CycloneState cycloneState;
 
-    public ChaChaController chaChaController;
+    public TwisterController twisterController;
 
     public void periodic(){
-        chaChaController.periodic();
+        twisterController.periodic();
     }
 
     public boolean isChaChaComplete(){
-        return chaChaController.isInAccpetableRange();
+        return twisterController.isInAccpetableRange();
     }
 }
