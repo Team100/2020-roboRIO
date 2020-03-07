@@ -16,32 +16,24 @@ import frc.robot.GlobalManager.IndexerManager.IndexerLocationState;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class IncrementIndexerCounter extends InstantCommand {
-  public IncrementIndexerCounter() {
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+    public IncrementIndexerCounter() {
+        // Use addRequirements() here to declare subsystem dependencies.
+    }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+        int indexOfCurrent = java.util.Arrays.asList(GlobalManager.IndexerManager.locationStatesOrder).indexOf(GlobalManager.IndexerManager.locationState);
 
-    
-
-    if(GlobalManager.IndexerManager.locationState == IndexerLocationState.THREE_PC || GlobalManager.IndexerManager.locationState == IndexerLocationState.FOUR_PC || GlobalManager.IndexerManager.locationState == IndexerLocationState.FIVE_PC){
-      GlobalManager.IndexerManager.numBalls += 0;
-
-    }else{
-      GlobalManager.IndexerManager.numBalls += 1;
-
+            //GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
+            GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
+            if(
+            GlobalManager.IndexerManager.locationState != IndexerLocationState.FOUR_PC_SHIFTED &&
+            GlobalManager.IndexerManager.locationState != IndexerLocationState.THREE_PC_SHIFTED){
+            GlobalManager.IndexerManager.numBalls += 1;
+            }
+            System.out.println("++++++++++++++++++++++++Index of current+++++++++++++++++++++++"+indexOfCurrent);
 
     }
-    if(GlobalManager.IndexerManager.locationState != IndexerLocationState.FIVE_PC_SHIFTED){
-      int indexOfCurrent = java.util.Arrays.asList(GlobalManager.IndexerManager.locationStatesOrder).indexOf(GlobalManager.IndexerManager.locationState);
-
-      GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
-    }
-    
-        System.out.println("**************************************************************"+GlobalManager.IndexerManager.numBalls + IndexerManager.locationState);
-
-  }
 
 }

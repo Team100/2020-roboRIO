@@ -18,11 +18,11 @@ import static java.util.Map.entry;
 
 public class TriggerMap {
     public Subsystems subsystems;
-    public TransitionCommandGroup tcg;
+    //public TransitionCommandGroup tcg;
 
     public TriggerMap(Subsystems subsystems) {
         this.subsystems = subsystems;
-        this.tcg = new TransitionCommandGroup(this.subsystems);
+        //this.tcg = new TransitionCommandGroup(this.subsystems);
 
     }
 
@@ -45,8 +45,8 @@ public class TriggerMap {
 
     public Command newBall() {
         return new SequentialCommandGroup(
-            tcg.stopIndexer(),
-            tcg.incrementIndexerStage()
+            //tcg.stopIndexer(),
+            //tcg.incrementIndexerStage()
         );
     }
         /**@deprecated */
@@ -89,9 +89,9 @@ public class TriggerMap {
     public Command onB2C2T() {
         return new SelectCommand(
             Map.ofEntries(
-                    entry(B2C2TAction.STOP_MOTORS, tcg.stopIndexer()),
-                    entry(B2C2TAction.SET_UNCERTAIN, tcg.setIndexerUncertainCommand()),
-                    entry(B2C2TAction.NONE, tcg.bypassCommand())
+                    //entry(B2C2TAction.STOP_MOTORS, tcg.stopIndexer()),
+                    //entry(B2C2TAction.SET_UNCERTAIN, tcg.setIndexerUncertainCommand()),
+                    //entry(B2C2TAction.NONE, tcg.bypassCommand())
 
             ), this::evaluateB2C2T);
     }
@@ -134,8 +134,8 @@ public class TriggerMap {
     public Command shouldShift() {
         return new SelectCommand(
             Map.ofEntries(
-                    entry(true, new IndexerDriveForward(subsystems.stageOne, subsystems.stageTwo)),
-                    entry(false, tcg.bypassCommand())
+                    entry(true, new IndexerDriveForward(subsystems.stageOne, subsystems.stageTwo))
+                    //entry(false, tcg.bypassCommand())
             ),
             this::needsToShift
         );
