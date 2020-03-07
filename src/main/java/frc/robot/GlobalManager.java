@@ -217,7 +217,9 @@ public class GlobalManager {
         }
         public static B2C2TAction evaluateB2C2T() {
             GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
-            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC) {
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC
+            || ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC
+            || ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC ) {
                 return B2C2TAction.STOP_MOTORS;
             }
             /*if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
@@ -282,14 +284,18 @@ public class GlobalManager {
                     ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED) {
                 return IndexerMoveType.S1F;
             }
-            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || ls == IndexerLocationState.FOUR_PC || ls == IndexerLocationState.FIVE_PC) {
+            if (ls == IndexerLocationState.THREE_PC 
+             || ls == IndexerLocationState.FOUR_PC 
+             || ls == IndexerLocationState.FIVE_PC) {
                 return IndexerMoveType.S1FANDS2F;
             }
             return IndexerMoveType.NONE;
         }
 
         public static boolean needsToShift(){
-            if(GlobalManager.IndexerManager.locationState == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || GlobalManager.IndexerManager.locationState == IndexerLocationState.FOUR_PC || GlobalManager.IndexerManager.locationState == IndexerLocationState.FIVE_PC){
+            if(GlobalManager.IndexerManager.locationState == IndexerLocationState.THREE_PC 
+            || GlobalManager.IndexerManager.locationState == IndexerLocationState.FOUR_PC 
+            || GlobalManager.IndexerManager.locationState == IndexerLocationState.FIVE_PC){
                 return true;
             }
             return false;
