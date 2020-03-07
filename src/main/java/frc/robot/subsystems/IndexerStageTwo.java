@@ -23,12 +23,13 @@ public class IndexerStageTwo extends SubsystemBase {
 
 
   public DigitalInput sensor;
+  public DigitalInput shiftSensor;
   /**
    * Creates a new Indexer.
    */
   public IndexerStageTwo() {
     sensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.RearSensor.ID);
-
+    shiftSensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.ShiftSensor.ID);
 
     indexerStageTwo = new FRCTalonSRX.FRCTalonSRXBuilder(
         Constants.IndexerConstants.IndexerMotors.IndexerStageTwo.CAN_ID)
@@ -57,7 +58,10 @@ public class IndexerStageTwo extends SubsystemBase {
   }
 
   public boolean getSensorValue() {
-    return false; //sensor.get();
+    return sensor.get(); //sensor.get();
+  }
+  public boolean getShiftSensorValue(){
+    return shiftSensor.get();
   }
 
   @Override

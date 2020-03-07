@@ -30,7 +30,7 @@ public class IntakeIntake extends CommandBase {
   public void initialize() {
     intake.actionState = ActionState.INTAKING;
     intake.spin.drivePercentOutput(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_PERCENT_OUTPUT);
-
+    //intake.spin.drivePosition(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_DEGREES);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

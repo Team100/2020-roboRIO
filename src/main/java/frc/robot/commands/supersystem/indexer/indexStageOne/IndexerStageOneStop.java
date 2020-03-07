@@ -19,11 +19,13 @@ public class IndexerStageOneStop extends CommandBase {
      * Creates a new IndexerStageOneStop.
      */
     public IndexerStageOne indexer;
+    public boolean def = false;
 
-    public IndexerStageOneStop(IndexerStageOne indexer) {
+    public IndexerStageOneStop(IndexerStageOne indexer, boolean def) {
         // Use addRequirements() here to declare subsystem dependencies.
         this.indexer = indexer;
         addRequirements(this.indexer);
+        this.def = def;
     }
 
     // Called when the command is initially scheduled.
@@ -31,6 +33,7 @@ public class IndexerStageOneStop extends CommandBase {
     public void initialize() {
         this.indexer.actionState = ActionState.STOP;
         indexer.indexerStageOne.drivePercentOutput(0);
+    
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -46,6 +49,6 @@ public class IndexerStageOneStop extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return !this.def;
     }
 }
