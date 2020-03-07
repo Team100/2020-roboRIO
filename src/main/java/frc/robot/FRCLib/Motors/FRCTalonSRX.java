@@ -365,9 +365,6 @@ public class FRCTalonSRX implements Sendable {
 
     }
 
-    public int getRawAnalogSensor(){
-        return m_sensorCollection.getAnalogInRaw();
-    }
     public FRCTalonSRX configure() {
         motor = new WPI_TalonSRX(this.getCanID());
         m_sensorCollection = motor.getSensorCollection();
