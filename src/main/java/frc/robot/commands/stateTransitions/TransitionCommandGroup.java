@@ -12,6 +12,9 @@ import frc.robot.commands.supersystem.shooter.ShooterRecover;
 import frc.robot.commands.supersystem.shooter.ShooterRun;
 import frc.robot.commands.supersystem.shooter.ShooterStop;
 
+/**
+ * @deprecated
+ */
 public class TransitionCommandGroup {
     public Subsystems subsystems;
 

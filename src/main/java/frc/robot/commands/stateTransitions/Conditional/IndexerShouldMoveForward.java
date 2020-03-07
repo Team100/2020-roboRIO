@@ -10,7 +10,6 @@ package frc.robot.commands.stateTransitions.Conditional;
 import java.util.Map;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
