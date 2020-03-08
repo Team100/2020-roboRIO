@@ -409,4 +409,50 @@ public final class Constants {
             public static final double SETPOINT_TWO = 40;
         }
     }
+    public static final class ClimberConstants {
+        public static final class RetractSpeed {
+            public static final double EXTEND_SPEED = 0.1;
+            public static final double RETRACT_SPEED = -0.1;
+        }
+        public static final class LeftWinch {
+            public static final int CAN_ID = 12;
+
+            public static final boolean INVERT = false;
+            public static final int FEEDBACK_PORT = 0;
+            public static final boolean SENSOR_PHASE = false;
+
+            public static final int TIMEOUT = 10;
+
+            public static final boolean ENABLE_CURRENT_LIMIT = true;
+            public static final int CURRENT_LIMIT = 25;
+            public static final double OPEN_LOOP_RAMP = 0.1;
+            public static final double PEAK_OUTPUT_FORWARD = .75;
+            public static final double PEAK_OUTPUT_REVERSE = -.75;
+
+            public static final double NOMINAL_OUTPUT_FORWARD = 0;
+            public static final double NOMINAL_OUTPUT_REVERSE = 0;
+
+            public static final double SPIN_SPEED = 0.6;
+        }
+        public static final class RightWinch {
+            public static final int CAN_ID = 3;
+
+            public static final boolean INVERT = false;
+            public static final int FEEDBACK_PORT = 0;
+            public static final boolean SENSOR_PHASE = false;
+
+            public static final int TIMEOUT = 10;
+
+            public static final boolean ENABLE_CURRENT_LIMIT = true;
+            public static final int CURRENT_LIMIT = 25;
+            public static final double OPEN_LOOP_RAMP = 0.1;
+            public static final double PEAK_OUTPUT_FORWARD = .75;
+            public static final double PEAK_OUTPUT_REVERSE = -.75;
+
+            public static final double NOMINAL_OUTPUT_FORWARD = 0;
+            public static final double NOMINAL_OUTPUT_REVERSE = 0;
+
+            public static final double SPIN_SPEED = 0.6;
+        }
+    }
 }
