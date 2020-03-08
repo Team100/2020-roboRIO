@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.FRCLib.AutoHelperFunctions.AutonConversionFactors;
+import frc.robot.FRCLib.Cyclone.twister.TwisterController;
 import frc.robot.FRCLib.Motors.FRCTalonFX;
 
 public class Drivetrain extends SubsystemBase {
@@ -28,12 +29,14 @@ public class Drivetrain extends SubsystemBase {
 
   public DifferentialDriveOdometry odometry;
 
+
   /**
    * Creates a new ExampleSubsystem.
    */
   public Drivetrain() {
 
     //ahrs = new AHRS(Constants.DrivetrainConstants.NAVX_PORT);
+    
     gyro = new ADXRS450_Gyro();
     leftMaster = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.CAN_ID)
         .withKP(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KP)
@@ -108,6 +111,8 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Right Sensor Velocity", this.rightMaster.getSensorVelocity());
     SmartDashboard.putString("Left Control Mode", this.leftMaster.motor.getControlMode().toString());
     SmartDashboard.putNumber("Left Sensor Position", this.leftMaster.getSelectedSensorPosition());
+
+
 
 
   }

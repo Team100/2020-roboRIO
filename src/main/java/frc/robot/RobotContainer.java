@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
-
+import frc.robot.FRCLib.Cyclone.CycloneController;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.supersystem.indexer.*;
 import frc.robot.commands.colorSpinner.*;
@@ -65,6 +65,8 @@ public class RobotContainer {
     public JoystickButton cameraSetpointOne;
     public JoystickButton cameraSetpointTwo;
 
+    public CycloneController cyclone;
+
     
 
     public Triggers triggers;
@@ -82,6 +84,8 @@ public class RobotContainer {
         // Subsystem Initiation
 
         subsystems = new Subsystems();
+
+        cyclone = new CycloneController(subsystems);
 
 
         // Default Commands
@@ -153,6 +157,9 @@ public class RobotContainer {
         ///////////////////////////////////////////////////////////////////////////////
     }
 
+    public void periodic(){
+        
+    }
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
