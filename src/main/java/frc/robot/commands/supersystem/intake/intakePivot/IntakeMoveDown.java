@@ -31,13 +31,11 @@ public class IntakeMoveDown extends CommandBase {
     pivot.currentAngle = IntakePivot.ValidAngles.UNCERTAIN;
     pivot.locationState = IntakePivot.LocationState.MOVING;
     pivot.pivot.drivePosition(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_TICKS);
-    System.out.println("GOING DOWN");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-        System.out.println("@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@*@");
         System.out.println(Math.abs(pivot.pivot.getRawAnalogSensor() - Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_TICKS));
         
   }
@@ -45,8 +43,6 @@ public class IntakeMoveDown extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
-    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
     pivot.currentAngle = IntakePivot.ValidAngles.DOWN; // TODO Account for failure context
     pivot.locationState = IntakePivot.LocationState.STATIONARY;
   }

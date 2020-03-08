@@ -32,7 +32,6 @@ public class IncrementIndexerCounter extends InstantCommand {
             
             GlobalManager.IndexerManager.numBalls += 1;
         }
-        System.out.println("++++++++++++++++++++++++Index of current+++++++++++++++++++++++"+indexOfCurrent);
 
     }
 

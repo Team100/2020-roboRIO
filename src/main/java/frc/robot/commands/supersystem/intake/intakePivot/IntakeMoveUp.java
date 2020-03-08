@@ -31,21 +31,17 @@ public class IntakeMoveUp extends CommandBase {
     pivot.currentAngle = IntakePivot.ValidAngles.UNCERTAIN;
     pivot.locationState = IntakePivot.LocationState.MOVING;
     pivot.pivot.drivePosition(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_UP_TICKS);
-    System.out.println("GOING UP");
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$");
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("GOING UP DONE");
     pivot.currentAngle = IntakePivot.ValidAngles.UP; // TODO Account for failure context
     pivot.locationState = IntakePivot.LocationState.STATIONARY;
   }

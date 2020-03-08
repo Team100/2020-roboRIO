@@ -201,12 +201,10 @@ public class GlobalManager {
                     ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
                     ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
                     ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED) {
-                        System.out.println("@*@*@*@*@*@*@*@*@*@"+GlobalManager.IndexerManager.locationState);
                 return B1C2FAction.STOP_MOTORS_AND_INCREMENT;
             } else if (ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC) {
                 return B1C2FAction.STOP_MOTORS;
             } else {
-                System.out.println("ABABABABABABABABA"+GlobalManager.IndexerManager.locationState);
                 return B1C2FAction.NONE;
             }
         }
@@ -229,7 +227,6 @@ public class GlobalManager {
             GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
             if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC
             || ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
-                System.out.println("$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%");
                 System.out.println(GlobalManager.IndexerManager.locationState.toString());
                 return B2C2TAction.STOP_MOTORS;
             }
@@ -239,7 +236,6 @@ public class GlobalManager {
                 return B2C2TAction.SET_UNCERTAIN;
             }*/
 
-            System.out.println("*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&");
             System.out.println(GlobalManager.IndexerManager.locationState.toString());
 
             return B2C2TAction.NONE;
