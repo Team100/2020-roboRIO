@@ -184,7 +184,7 @@ public class ControlPanelSpinner extends SubsystemBase {
     String colorString;
 
     final ColorMatchResult match = colorMatcher.matchClosestColor(detectedColor);
-
+    if (match.confidence>.91){
     if (match.color == kBlueTarget) {
       currentColor = 1;
       if (nextColor == currentColor) {
@@ -207,6 +207,9 @@ public class ControlPanelSpinner extends SubsystemBase {
       currentColor = 4;
         nextColor = 1;
     } else {
+      colorString = "Unknown";
+    }}
+    else{
       colorString = "Unknown";
     }
     //Open Smart Dashboard or Shuffleboard to see the color detected by the sensor.
@@ -263,24 +266,28 @@ public class ControlPanelSpinner extends SubsystemBase {
     if (gameData.length() > 0) {
       switch (gameData.charAt(0)) {
       case 'B':        // Blue case code
+      if (match.confidence>.95){
         if (match.color == kRedTarget) {
           stop = true;
-        }
+        }}
         break;
       case 'G':        // Green case code
+      if (match.confidence>.95) {
         if (match.color == kYellowTarget) {
           stop = true;
-        }
+        }}
         break;
       case 'R':        // Red case code
+      if (match.confidence>.95) {
         if (match.color == kBlueTarget) {
           stop = true;
-        }
+        }}
         break;
       case 'Y':        // Yellow case code
+      if (match.confidence>.95){
         if (match.color == kGreenTarget) {
           stop = true;
-        }
+        }}
         break;
       default:// This is corrupt data
         break;
