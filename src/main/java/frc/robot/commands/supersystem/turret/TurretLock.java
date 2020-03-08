@@ -7,6 +7,7 @@
 
 package frc.robot.commands.supersystem.turret;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.commands.supersystem.turret.camera.Server;
@@ -39,7 +40,7 @@ public class TurretLock extends CommandBase {
     @Override
     public void execute() {
         turret.actionState = ActionState.MOVING;
-            double cameraAngle = Server.target.getHAngle();
+            double cameraAngle = new Joystick(0).getDirectionDegrees(); //Server.target.getHAngle();
             // double modifiedAngle = (Math.signum(cameraAngle) * 
             //                         Math.pow(Math.abs(cameraAngle), 1.5) / 
             //                         2);
@@ -49,7 +50,7 @@ public class TurretLock extends CommandBase {
                             turret.tickOffset + 
                             turret.turretMotor.getSelectedSensorPosition();
 
-        turret.getMotor().drivePosition(setpoint);
+        turret.turretMotor.drivePosition(setpoint);
     }
 
     // Called once the command ends or is interrupted.

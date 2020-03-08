@@ -105,10 +105,10 @@ public class Triggers {
      * @param turret Turret subsystem
      */
     private void turretConditionals(frc.robot.subsystems.Turret turret) {
-        cameraTrigger.whenActive(new ConditionalCommand(    new TurretSlew(turret),
-                                                            new TurretLock(turret),
-                                                            () -> (true)));
-        cameraTrigger.whenInactive(new TurretScan(turret));
+        // cameraTrigger.whenActive(new ConditionalCommand(    new TurretSlew(turret),
+        //                                                     new TurretLock(turret),
+        //                                                     () -> (true)));
+        // cameraTrigger.whenInactive(new TurretScan(turret));
     
     }
 }

@@ -7,6 +7,10 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.GlobalManager;
@@ -29,18 +33,21 @@ public class Turret extends SubsystemBase {
      * Creates a new Turret.
      */
     public Turret() {
-        turretMotor = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
-            .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
-            .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
-            .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.SENSOR_PHASE)
-            .withTimeout(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.TIMEOUT)
-            .withCurrentLimitEnabled(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.ENABLE_CURRENT_LIMIT)
-            .withCurrentLimit(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CURRENT_LIMIT)
-            .withOpenLoopRampRate(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.OPEN_LOOP_RAMP)
-            .withNominalOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_FORWARD)
-            .withNominalOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_REVERSE)
-            .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
-            .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE).build();
+        turretMotor = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.TurretConstants.TurretMotors.TurretMotor.CAN_ID)
+            .withInverted(Constants.TurretConstants.TurretMotors.TurretMotor.INVERT)
+            .withFeedbackPort(Constants.TurretConstants.TurretMotors.TurretMotor.FEEDBACK_PORT)
+            .withSensorPhase(Constants.TurretConstants.TurretMotors.TurretMotor.SENSOR_PHASE)
+            .withTimeout(Constants.TurretConstants.TurretMotors.TurretMotor.TIMEOUT)
+            .withCurrentLimitEnabled(Constants.TurretConstants.TurretMotors.TurretMotor.ENABLE_CURRENT_LIMIT)
+            .withCurrentLimit(Constants.TurretConstants.TurretMotors.TurretMotor.CURRENT_LIMIT)
+            .withOpenLoopRampRate(Constants.TurretConstants.TurretMotors.TurretMotor.OPEN_LOOP_RAMP)
+            .withNominalOutputForward(Constants.TurretConstants.TurretMotors.TurretMotor.NOMINAL_OUTPUT_FORWARD)
+            .withNominalOutputReverse(Constants.TurretConstants.TurretMotors.TurretMotor.NOMINAL_OUTPUT_REVERSE)
+            .withPeakOutputForward(Constants.TurretConstants.TurretMotors.TurretMotor.PEAK_OUTPUT_FORWARD)
+            .withPeakOutputReverse(Constants.TurretConstants.TurretMotors.TurretMotor.PEAK_OUTPUT_REVERSE)
+            .withKP(0).withKI(0).withKD(0).withKF(0)
+            .withMotionAcceleration(1024).withMotionCruiseVelocity(1024).build();
+            turretMotor.motor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
 
             addChild("turretMotor", turretMotor);
     }

@@ -44,7 +44,7 @@ public class FRCTalonSRX implements Sendable {
     }
 
     public void driveMotionMagic(double setpoint) {
-        this.motor.set(ControlMode.MotionProfile, setpoint);
+        this.motor.set(ControlMode.MotionMagic, setpoint);
     }
 
     public void drivePosition(double setpoint) {
