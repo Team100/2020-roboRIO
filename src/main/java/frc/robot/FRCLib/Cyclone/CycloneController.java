@@ -4,7 +4,7 @@ import frc.robot.FRCLib.Cyclone.twister.TwisterController;
 
 public class CycloneController {
     public enum CycloneState{
-        UNKNOWN, HOMING, INTAKING, DRIVING, STOPPED, SHOOTING, COLOR_WHEEL, CLIMBING, ERROR
+        UNKNOWN, HOMING, INTAKING, DRIVING, SHOOTING, COLOR_WHEEL, CLIMBING, ERROR
     }
     public CycloneState cycloneState;
 
@@ -16,5 +16,5 @@ public class CycloneController {
 
     public boolean isChaChaComplete(){
         return twisterController.isInAccpetableRange();
-    } //TODO Change This
+    }
 }
