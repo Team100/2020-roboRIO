@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
 import frc.robot.FRCLib.Cyclone.CycloneController;
+import frc.robot.FRCLib.Cyclone.twister.TwisterPathLibrary;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.supersystem.indexer.*;
 import frc.robot.commands.colorSpinner.*;
@@ -64,6 +65,9 @@ public class RobotContainer {
 
     public JoystickButton cameraSetpointOne;
     public JoystickButton cameraSetpointTwo;
+
+    public JoystickButton dashLeft;
+    public JoystickButton dashRight;
 
     public CycloneController cyclone;
 
@@ -133,7 +137,8 @@ public class RobotContainer {
         ////////////////////////////////////////////////////////////////////////////
         intakeIntake = new JoystickButton(gamepad, 5);
         //intakeIntake.whileHeld(new IntakeIntake(subsystems.intake));
-        intakeIntake.whileHeld(new InstantCommand(()->GlobalManager.SupersystemManager.setShouldIntake(true))).whenInactive(new InstantCommand(()->GlobalManager.SupersystemManager.setShouldIntake(false)));
+        intakeIntake.whileHeld(new InstantCommand(()->GlobalManager.SupersystemManager.setShouldIntake(true)));
+        intakeIntake.whenInactive(new InstantCommand(()->GlobalManager.SupersystemManager.setShouldIntake(false)));
 
         ////////////////////////////////////////////////////////////////////////////
         shooterShoot = new JoystickButton(gamepad, 6);
@@ -155,9 +160,16 @@ public class RobotContainer {
         cameraSetpointTwo = new JoystickButton(gamepad, 11);
         cameraSetpointTwo.whenPressed(new CameraSetpointTwo(subsystems.tiltServo));
         ///////////////////////////////////////////////////////////////////////////////
+        dashLeft = new JoystickButton(leftJoystick, 5);
+        dashLeft.whenPressed(this.cyclone.dash(TwisterPathLibrary.straightFourMeters, -90.0));
+
+        dashRight = new JoystickButton(leftJoystick, 6);
+        dashLeft.whenPressed(this.cyclone.dash(TwisterPathLibrary.straightFourMeters, 90.0));
+        ///////////////////////////////////////////////////////////////////////////////
     }
 
     public void periodic(){
+        cyclone.periodic();
         
     }
 
@@ -170,13 +182,8 @@ public class RobotContainer {
         // An ExampleCommand will run in autonomous
         subsystems.drivetrain.zeroHeading();
         subsystems.drivetrain.resetOdometry(new Pose2d(0,0, new Rotation2d(0)));
-        Pose2d start = new Pose2d(0, 0, new Rotation2d(0));
-        List<Translation2d> waypoints = List.of(
-            new Translation2d(1.5, -1)
-        );
-        Pose2d end = new Pose2d(3, 0, new Rotation2d(0));
-
-        return PathGenerator.createAutoNavigationCommand(subsystems.drivetrain, start, waypoints, end);
+        
+        return cyclone.getAutoCommand(TwisterPathLibrary.straightTwoMeters);
     }
 
     

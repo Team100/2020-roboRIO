@@ -1,7 +1,9 @@
 package frc.robot.FRCLib.Cyclone;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems;
 import frc.robot.FRCLib.Cyclone.twister.TwisterController;
+import frc.robot.FRCLib.Cyclone.twister.TwisterPath;
 
 public class CycloneController {
     public enum CycloneState{
@@ -20,6 +22,15 @@ public class CycloneController {
 
     public void periodic(){
         twisterController.periodic();
+    }
+
+    public Command getAutoCommand(TwisterPath path){
+        twisterController.loadPath(path);
+        return twisterController.generateAutonomous();
+    }
+
+    public Command dash(TwisterPath path, double angle){
+        return twisterController.runPathWithDash(path, angle);
     }
 
     public boolean isTwisterComplete(){
