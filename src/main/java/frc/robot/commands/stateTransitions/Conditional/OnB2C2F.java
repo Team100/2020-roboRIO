@@ -25,7 +25,7 @@ import frc.robot.commands.stateTransitions.transitionCommandGroups.StopIndexer;
 public class OnB2C2F extends SelectCommand {
     public OnB2C2F(Subsystems subsystems){
         super(Map.ofEntries(
-            entry(B2C2FAction.STOP_MOTORS, new SequentialCommandGroup(new PrintCommand("STOPPING IN B2C2F"), new StopIndexer(subsystems))),
+            entry(B2C2FAction.STOP_MOTORS, new SequentialCommandGroup(new PrintCommand("STOPPING IN B2C2F"), new StopIndexer(subsystems), new IncrementIndexerCounter())),
             //entry(B2C2TAction.SET_UNCERTAIN,new SetIndexerLocationState(IndexerLocationState.UNCERTAIN)),
             entry(B2C2FAction.NONE, new BypassCommand())
     

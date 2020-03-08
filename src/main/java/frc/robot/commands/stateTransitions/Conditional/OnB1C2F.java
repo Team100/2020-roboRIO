@@ -25,6 +25,7 @@ import frc.robot.commands.stateTransitions.transitionCommandGroups.StopIndexer;
 public class OnB1C2F extends SelectCommand {
     public OnB1C2F(Subsystems subsystems){
         super(Map.ofEntries(
+            entry(B1C2FAction.STOP_MOTORS_AND_INCREMENT, new SequentialCommandGroup(new PrintCommand("Stopping B1C2F"), new StopIndexer(subsystems), new IncrementIndexerCounter())),
             entry(B1C2FAction.STOP_MOTORS, new SequentialCommandGroup(new PrintCommand("Stopping B1C2F"), new StopIndexer(subsystems))),
             entry(B1C2FAction.NONE, new BypassCommand())
     ), GlobalManager.CommandConditionals::evaluateB1C2F);

@@ -192,7 +192,7 @@ public class GlobalManager {
 
 
         public enum B1C2FAction {
-            STOP_MOTORS, NONE
+            STOP_MOTORS, STOP_MOTORS_AND_INCREMENT, NONE
         }
         public static B1C2FAction evaluateB1C2F() {
             GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
@@ -200,16 +200,15 @@ public class GlobalManager {
                     ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
                     ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
                     ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
-                    ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED ||
-                    ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC) {
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED) {
                         System.out.println("@*@*@*@*@*@*@*@*@*@"+GlobalManager.IndexerManager.locationState);
+                return B1C2FAction.STOP_MOTORS_AND_INCREMENT;
+            } else if (ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC) {
                 return B1C2FAction.STOP_MOTORS;
+            } else {
+                System.out.println("ABABABABABABABABA"+GlobalManager.IndexerManager.locationState);
+                return B1C2FAction.NONE;
             }
-    
-            
-            else {System.out.println("ABABABABABABABABA"+GlobalManager.IndexerManager.locationState);
-
-            return B1C2FAction.NONE;}
         }
         public enum B2C2FAction{
             STOP_MOTORS, NONE, SET_UNCERTAIN
@@ -229,8 +228,7 @@ public class GlobalManager {
         public static B2C2TAction evaluateB2C2T() {
             GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
             if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC
-            || ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC
-            || ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC ) {
+            || ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
                 System.out.println("$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%");
                 System.out.println(GlobalManager.IndexerManager.locationState.toString());
                 return B2C2TAction.STOP_MOTORS;
