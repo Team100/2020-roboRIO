@@ -119,7 +119,14 @@ public class GlobalManager {
 
     public static class IndexerManager {
 
-        public static IndexerLocationState[] locationStatesOrder = {IndexerLocationState.EMPTY, IndexerLocationState.ONE_PC, IndexerLocationState.TWO_PC, IndexerLocationState.THREE_PC, IndexerLocationState.THREE_PC_SHIFTED, IndexerLocationState.FOUR_PC, IndexerLocationState.FOUR_PC_SHIFTED, IndexerLocationState.FIVE_PC};
+        public static IndexerLocationState[] locationStatesOrder = {IndexerLocationState.EMPTY, 
+                                                                    IndexerLocationState.ONE_PC, 
+                                                                    IndexerLocationState.TWO_PC, 
+                                                                    IndexerLocationState.THREE_PC, 
+                                                                    IndexerLocationState.THREE_PC_SHIFTED, 
+                                                                    IndexerLocationState.FOUR_PC, 
+                                                                    IndexerLocationState.FOUR_PC_SHIFTED, 
+                                                                    IndexerLocationState.FIVE_PC};
         public enum IndexerLocationState {
             EMPTY, ONE_PC, TWO_PC, THREE_PC, THREE_PC_SHIFTED, FOUR_PC, FOUR_PC_SHIFTED, FIVE_PC, UNCERTAIN
         }
@@ -150,7 +157,8 @@ public class GlobalManager {
         }
 
         public static boolean shouldShift(){
-            return IndexerManager.locationState == IndexerManager.IndexerLocationState.THREE_PC || IndexerManager.locationState == IndexerLocationState.FOUR_PC;
+            return IndexerManager.locationState == IndexerManager.IndexerLocationState.THREE_PC 
+                || IndexerManager.locationState == IndexerManager.IndexerLocationState.FOUR_PC;
         }
 
 
@@ -184,7 +192,7 @@ public class GlobalManager {
 
 
         public enum B1C2FAction {
-            STOP_MOTORS, NONE
+            STOP_MOTORS, STOP_MOTORS_AND_INCREMENT, NONE
         }
         public static B1C2FAction evaluateB1C2F() {
             GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
@@ -192,12 +200,15 @@ public class GlobalManager {
                     ls == GlobalManager.IndexerManager.IndexerLocationState.ONE_PC ||
                     ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
                     ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
-                    ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED ||
-                    ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC) {
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED) {
+                        System.out.println("@*@*@*@*@*@*@*@*@*@"+GlobalManager.IndexerManager.locationState);
+                return B1C2FAction.STOP_MOTORS_AND_INCREMENT;
+            } else if (ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC) {
                 return B1C2FAction.STOP_MOTORS;
+            } else {
+                System.out.println("ABABABABABABABABA"+GlobalManager.IndexerManager.locationState);
+                return B1C2FAction.NONE;
             }
-    
-            return B1C2FAction.NONE;
         }
         public enum B2C2FAction{
             STOP_MOTORS, NONE, SET_UNCERTAIN
@@ -217,8 +228,9 @@ public class GlobalManager {
         public static B2C2TAction evaluateB2C2T() {
             GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
             if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC
-            || ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC
-            || ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC ) {
+            || ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC) {
+                System.out.println("$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%$%");
+                System.out.println(GlobalManager.IndexerManager.locationState.toString());
                 return B2C2TAction.STOP_MOTORS;
             }
             /*if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
@@ -226,6 +238,10 @@ public class GlobalManager {
                     ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC) {
                 return B2C2TAction.SET_UNCERTAIN;
             }*/
+
+            System.out.println("*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&");
+            System.out.println(GlobalManager.IndexerManager.locationState.toString());
+
             return B2C2TAction.NONE;
         }
         public static enum ShooterMoveType {
@@ -288,7 +304,8 @@ public class GlobalManager {
                     ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED) {
                 return IndexerMoveType.S1F;
             }
-            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || ls == IndexerLocationState.FOUR_PC) {
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC 
+             || ls == IndexerLocationState.FOUR_PC) {
                 return IndexerMoveType.S1FANDS2F;
             }
             return IndexerMoveType.NONE;

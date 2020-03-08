@@ -25,14 +25,14 @@ public class IncrementIndexerCounter extends InstantCommand {
     public void initialize() {
         int indexOfCurrent = java.util.Arrays.asList(GlobalManager.IndexerManager.locationStatesOrder).indexOf(GlobalManager.IndexerManager.locationState);
 
-            //GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
-            GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
-            if(
-            GlobalManager.IndexerManager.locationState != IndexerLocationState.FOUR_PC_SHIFTED &&
-            GlobalManager.IndexerManager.locationState != IndexerLocationState.THREE_PC_SHIFTED){
+        GlobalManager.IndexerManager.locationState = GlobalManager.IndexerManager.locationStatesOrder[indexOfCurrent + 1];
+
+        if(GlobalManager.IndexerManager.locationState != IndexerLocationState.FOUR_PC_SHIFTED &&
+            GlobalManager.IndexerManager.locationState != IndexerLocationState.THREE_PC_SHIFTED) {
+            
             GlobalManager.IndexerManager.numBalls += 1;
-            }
-            System.out.println("++++++++++++++++++++++++Index of current+++++++++++++++++++++++"+indexOfCurrent);
+        }
+        System.out.println("++++++++++++++++++++++++Index of current+++++++++++++++++++++++"+indexOfCurrent);
 
     }
 
