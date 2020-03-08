@@ -26,6 +26,5 @@ public class StopIndexer extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super(
       new IndexerStop(subsystems.stageOne, subsystems.stageTwo, false),
-      new InstantCommand(()->System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")));
   }
 }
