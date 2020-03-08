@@ -44,9 +44,19 @@ public class IntakePivot extends SubsystemBase {
         .withNominalOutputForward(Constants.IntakeConstants.IntakeMotors.IntakePivot.NOMINAL_OUTPUT_FORWARD)
         .withNominalOutputReverse(Constants.IntakeConstants.IntakeMotors.IntakePivot.NOMINAL_OUTPUT_REVERSE)
         .withPeakOutputForward(Constants.IntakeConstants.IntakeMotors.IntakePivot.PEAK_OUTPUT_FORWARD)
-        .withPeakOutputReverse(Constants.IntakeConstants.IntakeMotors.IntakePivot.PEAK_OUTPUT_REVERSE).build();
+        .withPeakOutputReverse(Constants.IntakeConstants.IntakeMotors.IntakePivot.PEAK_OUTPUT_REVERSE)
+        .withKP(Constants.IntakeConstants.IntakeMotionParameters.KP)
+        .withKI(Constants.IntakeConstants.IntakeMotionParameters.KI)
+        .withKD(Constants.IntakeConstants.IntakeMotionParameters.KD)
+        .withKF(Constants.IntakeConstants.IntakeMotionParameters.KF)
+        .build();
+
+
+        pivot.motor.configAllowableClosedloopError(0, 2, 10);
+
 
         pivot.motor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
+        pivot.motor.setSelectedSensorPosition(pivot.getRawAnalogSensor());
         addChild("intakePivot", pivot);
       
   }

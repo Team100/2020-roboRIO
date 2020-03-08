@@ -119,9 +119,9 @@ public class GlobalManager {
 
     public static class IndexerManager {
 
-        public static IndexerLocationState[] locationStatesOrder = {IndexerLocationState.EMPTY, IndexerLocationState.ONE_PC, IndexerLocationState.TWO_PC, IndexerLocationState.THREE_PC, IndexerLocationState.THREE_PC_SHIFTED, IndexerLocationState.FOUR_PC, IndexerLocationState.FIVE_PC, IndexerLocationState.FIVE_PC_SHIFTED};
+        public static IndexerLocationState[] locationStatesOrder = {IndexerLocationState.EMPTY, IndexerLocationState.ONE_PC, IndexerLocationState.TWO_PC, IndexerLocationState.THREE_PC, IndexerLocationState.THREE_PC_SHIFTED, IndexerLocationState.FOUR_PC, IndexerLocationState.FOUR_PC_SHIFTED, IndexerLocationState.FIVE_PC};
         public enum IndexerLocationState {
-            EMPTY, ONE_PC, TWO_PC, THREE_PC, THREE_PC_SHIFTED, FOUR_PC, FOUR_PC_SHIFTED, FIVE_PC, FIVE_PC_SHIFTED, UNCERTAIN
+            EMPTY, ONE_PC, TWO_PC, THREE_PC, THREE_PC_SHIFTED, FOUR_PC, FOUR_PC_SHIFTED, FIVE_PC, UNCERTAIN
         }
 
         public enum IndexerActionState {
@@ -136,13 +136,13 @@ public class GlobalManager {
         public static boolean isFull = false;
 
         public static boolean subsystemIsFull(){
-            return locationState == IndexerLocationState.FIVE_PC_SHIFTED;
+            return locationState == IndexerLocationState.FIVE_PC;
         }
 
         /**
          * Is the Indexer full
          */
-        public static boolean indexerFull = IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC_SHIFTED;
+        public static boolean indexerFull = IndexerManager.locationState == IndexerManager.IndexerLocationState.FIVE_PC;
 
      
         public static boolean shouldIntake(){
@@ -150,7 +150,7 @@ public class GlobalManager {
         }
 
         public static boolean shouldShift(){
-            return IndexerManager.locationState == IndexerManager.IndexerLocationState.THREE_PC || IndexerManager.locationState == IndexerLocationState.FOUR_PC || IndexerManager.locationState == IndexerLocationState.FIVE_PC;
+            return IndexerManager.locationState == IndexerManager.IndexerLocationState.THREE_PC || IndexerManager.locationState == IndexerLocationState.FOUR_PC;
         }
 
 
@@ -175,6 +175,7 @@ public class GlobalManager {
     public static class CommandConditionals{
 
 
+
         public enum IntakeMoveType{
             INTAKING, STOPPED
         }
@@ -192,20 +193,32 @@ public class GlobalManager {
                     ls == GlobalManager.IndexerManager.IndexerLocationState.TWO_PC ||
                     ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC_SHIFTED ||
                     ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED ||
-                    ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC_SHIFTED) {
+                    ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC) {
                 return B1C2FAction.STOP_MOTORS;
             }
     
             return B1C2FAction.NONE;
+        }
+        public enum B2C2FAction{
+            STOP_MOTORS, NONE, SET_UNCERTAIN
         }
     
         public enum B2C2TAction {
             STOP_MOTORS, NONE, SET_UNCERTAIN
         }
     
+        public static B2C2FAction evaluateB2C2F() {
+            GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
+            // if (ls == IndexerLocationState.FOUR_PC || ls == IndexerLocationState.FIVE_PC) {
+            //     return B2C2FAction.STOP_MOTORS;
+            // }
+            return B2C2FAction.NONE;
+        }
         public static B2C2TAction evaluateB2C2T() {
             GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
-            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || ls == IndexerLocationState.FOUR_PC || ls == IndexerLocationState.FIVE_PC) {
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC
+            || ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC
+            || ls == GlobalManager.IndexerManager.IndexerLocationState.FIVE_PC ) {
                 return B2C2TAction.STOP_MOTORS;
             }
             /*if (ls == GlobalManager.IndexerManager.IndexerLocationState.EMPTY ||
@@ -222,7 +235,7 @@ public class GlobalManager {
         public static ShooterMoveType shouldSpinup(){
             boolean ta = GlobalManager.TurretManager.targetAcquired;
             boolean sr = GlobalManager.ShooterManager.speedReached;
-    
+            /*
             if (ta && !sr) {
                 return ShooterMoveType.SPINNINGUP;
             }
@@ -232,17 +245,21 @@ public class GlobalManager {
             if (ta && sr) {
                 return ShooterMoveType.SPINNING;
             }
-            return ShooterMoveType.NONE;
+            */
+            //TODO Uncomment Above
+            return ShooterMoveType.SPINNINGUP;
         }
     
         public static ShooterMoveType shouldRun(){
-            boolean ta = GlobalManager.TurretManager.targetAcquired;
+            /*boolean ta = GlobalManager.TurretManager.targetAcquired;
             boolean sr = GlobalManager.ShooterManager.speedReached;
     
             if (ta && sr) {
                 return ShooterMoveType.SPINNING;
-            }
-            return ShooterMoveType.NONE;
+            }*/
+
+            //TODO Uncomment Above
+            return ShooterMoveType.SPINNING;
         }
     
         public static ShooterMoveType shouldStop(){
@@ -253,6 +270,7 @@ public class GlobalManager {
             }
             return ShooterMoveType.NONE;
         }
+
 
 
 
@@ -270,14 +288,16 @@ public class GlobalManager {
                     ls == GlobalManager.IndexerManager.IndexerLocationState.FOUR_PC_SHIFTED) {
                 return IndexerMoveType.S1F;
             }
-            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || ls == IndexerLocationState.FOUR_PC || ls == IndexerLocationState.FIVE_PC) {
+            if (ls == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || ls == IndexerLocationState.FOUR_PC) {
                 return IndexerMoveType.S1FANDS2F;
             }
             return IndexerMoveType.NONE;
         }
 
         public static boolean needsToShift(){
-            if(GlobalManager.IndexerManager.locationState == GlobalManager.IndexerManager.IndexerLocationState.THREE_PC || GlobalManager.IndexerManager.locationState == IndexerLocationState.FOUR_PC || GlobalManager.IndexerManager.locationState == IndexerLocationState.FIVE_PC){
+            if(GlobalManager.IndexerManager.locationState == IndexerLocationState.THREE_PC 
+            || GlobalManager.IndexerManager.locationState == IndexerLocationState.FOUR_PC 
+            || GlobalManager.IndexerManager.locationState == IndexerLocationState.FIVE_PC){
                 return true;
             }
             return false;

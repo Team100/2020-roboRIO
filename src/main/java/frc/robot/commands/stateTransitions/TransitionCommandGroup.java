@@ -56,7 +56,9 @@ public class TransitionCommandGroup {
      * @deprecated instead use {@link frc.robot.commands.stateTransitions.transitionCommandGroups.StopIndexer}
      */
     public Command stopIndexer(){
-        return new SequentialCommandGroup(new IndexerStop(subsystems.stageOne, subsystems.stageTwo, false), incrementIndexerStage());
+        return new SequentialCommandGroup(
+            new IndexerStop(subsystems.stageOne, subsystems.stageTwo, false),
+            incrementIndexerStage());
     }
 
     public Command shouldSpinup(){

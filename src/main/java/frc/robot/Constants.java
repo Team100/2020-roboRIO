@@ -263,13 +263,13 @@ public final class Constants {
             //public static final double INTAKE_UP_DEGREES = EncoderConversionFactors
                    // .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(90);
 
-                   public static final double INTAKE_DOWN_TICKS = 94;
+                   public static final double INTAKE_DOWN_TICKS = 110;
                    public static final double INTAKE_UP_TICKS = 300;
             public static final int ACCEPTABLE_ERROR_TICKS = 20;
 
-            public static final double KP = 6;
+            public static final double KP = 5; //6
             public static final double KI = 0;
-            public static final double KD = 3;
+            public static final double KD = 5; //3
             public static final double KF = 0;
         }
 
@@ -296,9 +296,9 @@ public final class Constants {
             public static final class IntakePivot {
                 public static final int CAN_ID = 10;
 
-                public static final boolean INVERT = false;
+                public static final InvertType INVERT = InvertType.InvertMotorOutput;
                 public static final int FEEDBACK_PORT = 0;
-                public static final boolean SENSOR_PHASE = false;
+                public static final boolean SENSOR_PHASE = true;
 
                 public static final int TIMEOUT = 10;
 

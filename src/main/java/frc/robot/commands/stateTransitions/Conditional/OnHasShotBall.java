@@ -10,23 +10,23 @@ package frc.robot.commands.stateTransitions.Conditional;
 import java.util.Map;
 import static java.util.Map.entry;
 
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.GlobalManager;
 import frc.robot.Subsystems;
-import frc.robot.GlobalManager.CommandConditionals.B1C2FAction;
-import frc.robot.commands.stateTransitions.transitionCommandGroups.BypassCommand;
-import frc.robot.commands.stateTransitions.transitionCommandGroups.StopIndexer;
+import frc.robot.commands.supersystem.shooter.ShooterRecover;
+import frc.robot.commands.supersystem.shooter.ShooterStop;
 
 /**
  * Add your docs here.
  */
-public class OnB1C2F extends SelectCommand {
-    public OnB1C2F(Subsystems subsystems){
-        super(Map.ofEntries(
-            entry(B1C2FAction.STOP_MOTORS, new SequentialCommandGroup(new PrintCommand("Stopping B1C2F"), new StopIndexer(subsystems))),
-            entry(B1C2FAction.NONE, new BypassCommand())
-    ), GlobalManager.CommandConditionals::evaluateB1C2F);
+public class OnHasShotBall extends SelectCommand {
+    public OnHasShotBall(Subsystems subsystems){
+        super(
+            Map.ofEntries(
+                    entry(true, new ShooterStop(subsystems.shooter)),
+                    entry(false, new ShooterRecover(subsystems.shooter))
+            ),
+            GlobalManager.CommandConditionals::shouldExit
+        );
     }
 }
