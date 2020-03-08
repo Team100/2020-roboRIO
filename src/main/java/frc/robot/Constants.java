@@ -317,7 +317,7 @@ public final class Constants {
     public static final class ShooterConstants {
         public static final class ShooterMotionParameters {
             public static final double RECOVER_PO = ShooterMotionParameters.SHOOT_PO;
-            public static final double SHOOT_PO = 0.30;
+            public static final double SHOOT_PO = 10;
             public static final double STOP_PO = 0;
 
         }
@@ -337,7 +337,7 @@ public final class Constants {
                 public static final boolean ENABLE_CURRENT_LIMIT = true;
                 public static final int CURRENT_LIMIT = 25;
                 public static final double OPEN_LOOP_RAMP = 0.1;
-                public static final double PEAK_OUTPUT_FORWARD = 1;
+                public static final double PEAK_OUTPUT_FORWARD = .3;
                 public static final double PEAK_OUTPUT_REVERSE = -1;
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
@@ -377,16 +377,16 @@ public final class Constants {
             public static final boolean ENABLE_CURRENT_LIMIT = true;
             public static final int CURRENT_LIMIT = 25;
             public static final double OPEN_LOOP_RAMP = 0.1;
-            public static final double PEAK_OUTPUT_FORWARD = .75;
-            public static final double PEAK_OUTPUT_REVERSE = -.75;
+            public static final double PEAK_OUTPUT_FORWARD = 1;
+            public static final double PEAK_OUTPUT_REVERSE = -1;
 
             public static final double NOMINAL_OUTPUT_FORWARD = 0;
             public static final double NOMINAL_OUTPUT_REVERSE = 0;
 
             public static final double SPIN_SPEED = 1;
             public static final double SPIN_SPEED_FOR_POSITION_CONTROL = .5;
-            public static final double RISE_SPEED = 0.7;
-            public static final double LOWER_SPEED = -0.7;
+            public static final double RISE_SPEED = 1;
+            public static final double LOWER_SPEED = -1;
         }
         public static final class ControlPanelSpinnerColors {
             public static final double RGB_RED_VALUE_FOR_YELLOW =0.301;

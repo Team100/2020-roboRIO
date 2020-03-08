@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.GlobalManager;
+import frc.robot.Constants.IndexerConstants.IndexerSensors.ShiftSensor;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
 
 public class IndexerStageOne extends SubsystemBase {
