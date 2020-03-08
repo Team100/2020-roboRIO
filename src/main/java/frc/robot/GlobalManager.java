@@ -175,6 +175,7 @@ public class GlobalManager {
     public static class CommandConditionals{
 
 
+
         public enum IntakeMoveType{
             INTAKING, STOPPED
         }
@@ -234,7 +235,7 @@ public class GlobalManager {
         public static ShooterMoveType shouldSpinup(){
             boolean ta = GlobalManager.TurretManager.targetAcquired;
             boolean sr = GlobalManager.ShooterManager.speedReached;
-    
+            /*
             if (ta && !sr) {
                 return ShooterMoveType.SPINNINGUP;
             }
@@ -244,17 +245,21 @@ public class GlobalManager {
             if (ta && sr) {
                 return ShooterMoveType.SPINNING;
             }
-            return ShooterMoveType.NONE;
+            */
+            //TODO Uncomment Above
+            return ShooterMoveType.SPINNINGUP;
         }
     
         public static ShooterMoveType shouldRun(){
-            boolean ta = GlobalManager.TurretManager.targetAcquired;
+            /*boolean ta = GlobalManager.TurretManager.targetAcquired;
             boolean sr = GlobalManager.ShooterManager.speedReached;
     
             if (ta && sr) {
                 return ShooterMoveType.SPINNING;
-            }
-            return ShooterMoveType.NONE;
+            }*/
+
+            //TODO Uncomment Above
+            return ShooterMoveType.SPINNING;
         }
     
         public static ShooterMoveType shouldStop(){
@@ -265,6 +270,7 @@ public class GlobalManager {
             }
             return ShooterMoveType.NONE;
         }
+
 
 
 
