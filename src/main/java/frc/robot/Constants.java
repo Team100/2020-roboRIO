@@ -383,7 +383,8 @@ public final class Constants {
             public static final double NOMINAL_OUTPUT_FORWARD = 0;
             public static final double NOMINAL_OUTPUT_REVERSE = 0;
 
-            public static final double SPIN_SPEED = 0.6;
+            public static final double SPIN_SPEED = 1;
+            public static final double SPIN_SPEED_FOR_POSITION_CONTROL = .5;
             public static final double RISE_SPEED = 0.7;
             public static final double LOWER_SPEED = -0.7;
         }

@@ -27,7 +27,7 @@ public class GoToSpecificColor extends CommandBase {
   public void initialize() {
     controlPanelSpinner.resetTo0();
     controlPanelSpinner.resetToFalse();
-    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SPIN_SPEED);
+    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SPIN_SPEED_FOR_POSITION_CONTROL);
       done = false;
 
   }
@@ -35,13 +35,12 @@ public class GoToSpecificColor extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SPIN_SPEED);
-    if (controlPanelSpinner.getRevolutionsCounter()>=8){
+    controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SPIN_SPEED_FOR_POSITION_CONTROL);
       if (controlPanelSpinner.reachedColor() == true){
          done = true;
      }
   }
-   }
+   
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
