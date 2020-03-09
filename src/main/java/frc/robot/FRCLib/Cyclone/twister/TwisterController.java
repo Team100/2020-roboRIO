@@ -68,6 +68,19 @@ public class TwisterController {
      */
     public Command runPath(TwisterPath currentPath){
         this.loadPath(currentPath);
+        this.stripCurrentPath();
+        return this.generateAutonomous();
+    }
+
+    /**
+     * Runs a given path
+     * @param currentPath the path to run
+     * @param angle angle in degrees
+     * @return autonomous command
+     */
+    public Command runPathWithDash(TwisterPath currentPath, double angle){
+        this.loadPath(currentPath);
+        this.addChaChaSlide(this.generateDashPoint(angle));
         return this.generateAutonomous();
     }
 
@@ -82,6 +95,27 @@ public class TwisterController {
         this.stripCurrentPath();
         this.currentPath.prependNewChaChaPoint(point);
         return this.generateAutonomous();
+    }
+
+    /**
+     * Creates a new point given a direction to dash to
+     * 
+     * @param angle direction to dash in degrees
+     * 
+     */
+    public TwisterPoint generateDashPoint(double angle) {
+        System.out.println("&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&* = " + angle);
+        // double x = this.getRobotPose().getTranslation().getX()
+        //          + Math.sin(Math.toRadians(angle)
+        //          + this.getRobotPose().getRotation().getRadians());
+        // double y = this.getRobotPose().getTranslation().getY()
+        //          + Math.cos(Math.toRadians(angle)
+        //          + this.getRobotPose().getRotation().getRadians());
+        double x = this.getRobotPose().getTranslation().getX() + 2;
+        double y = this.getRobotPose().getTranslation().getY() + 1;
+
+
+        return new TwisterPoint(x, y, false);
     }
 
     /**
@@ -147,7 +181,7 @@ public class TwisterController {
      * @return
      */
     public Command generateAutonomous(){
-        this.stripCurrentPath();
+        // this.stripCurrentPath();
         Pose2d start = this.getRobotPose();
         Pose2d end = this.currentPath.path.get(this.currentPath.path.size() - 1).asPose2d();
         endPosition = end;
@@ -155,6 +189,8 @@ public class TwisterController {
         for(int i = 0; i < this.currentPath.path.size() - 1; i++){
             midpoints.add(this.currentPath.path.get(i).asWaypoint());
         }
+
+        // System.out.println("%%#%%%#%%#%%#%%#%%# Returning path: " + this.currentPath.getName());
         return PathGenerator.createAutoNavigationCommand(subsystems.drivetrain, start, midpoints, end);
     }
 
@@ -169,7 +205,6 @@ public class TwisterController {
     /**
      * A periodic call to the TwisterController for anything that needs to happen often
      *
-     * TODO MAP THIS IN PERIODIC
      */
     public void periodic(){
 
