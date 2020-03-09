@@ -1,5 +1,6 @@
 package frc.robot.FRCLib.Cyclone;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems;
 import frc.robot.FRCLib.Cyclone.twister.TwisterController;
@@ -22,6 +23,9 @@ public class CycloneController {
 
     public void periodic(){
         twisterController.periodic();
+        SmartDashboard.putNumber("X", twisterController.getRobotPose().getTranslation().getX());
+        SmartDashboard.putNumber("Y", twisterController.getRobotPose().getTranslation().getY());
+        SmartDashboard.putNumber("Heading", twisterController.getRobotPose().getRotation().getDegrees());
     }
 
     public Command getAutoCommand(TwisterPath path){

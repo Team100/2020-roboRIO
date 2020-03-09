@@ -24,6 +24,6 @@ public class IndexerStop extends ParallelCommandGroup {
   public IndexerStop(IndexerStageOne stageOne, IndexerStageTwo stageTwo, boolean def) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    super(new IndexerStageOneStop(stageOne, def), new IndexerStageTwoStop(stageTwo, def)));
+    super(new IndexerStageOneStop(stageOne, def), new IndexerStageTwoStop(stageTwo, def));
   }
 }

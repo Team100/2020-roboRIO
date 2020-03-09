@@ -56,18 +56,18 @@ public final class Constants {
 
             // public static final double KF = 11.41199782;
 
-            public static final double KS = 0.0846;
-            public static final double KV = 0.228;
-            public static final double KTRACK_WIDTH = 0.6604; // TODO Change
-            public static final double KA = 0.0191;
+            public static final double KS = 0.162;
+            public static final double KV = 0.229;
+            public static final double KTRACK_WIDTH = 0.6514; // TODO Change
+            public static final double KA = 0.0225;
 
             public static final double KINEMATICS_MAX_RATE_PER_SIDE = 1;
 
             public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(
                     KTRACK_WIDTH);
 
-            public static final double RAMSETE_B = 0; // From WPILib Docs
-            public static final double RAMSETE_ZETA = 0; // From WPILib Doc
+            public static final double RAMSETE_B = 0.7; // From WPILib Docs
+            public static final double RAMSETE_ZETA = 2.0; // From WPILib Doc
 
             public static final double GEARING_RATIO = 12.22;
             public static final double WHEEL_DIAMETER = 0.1542;// METERS
@@ -84,9 +84,13 @@ public final class Constants {
         }
 
         public static final class DrivetrainMotors {
-            public static final double KP = 0.00026;
+            // public static final double KP = 0.00026;
+            // public static final double KI = 0;
+            // public static final double KD = 0;
+            // public static final double KF = 0.04455;
+            public static final double KP = 0.00211;
             public static final double KI = 0;
-            public static final double KD = 0;
+            public static final double KD = 0.000211;
             public static final double KF = 0.04455;
 
             public static final class LeftMaster {

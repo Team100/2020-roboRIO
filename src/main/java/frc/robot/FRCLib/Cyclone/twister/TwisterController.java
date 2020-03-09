@@ -68,6 +68,7 @@ public class TwisterController {
      */
     public Command runPath(TwisterPath currentPath){
         this.loadPath(currentPath);
+        this.stripCurrentPath();
         return this.generateAutonomous();
     }
 
@@ -103,14 +104,18 @@ public class TwisterController {
      * 
      */
     public TwisterPoint generateDashPoint(double angle) {
-        double x = this.getRobotPose().getTranslation().getX()
-                 + Math.sin(Math.toRadians(angle)
-                 + this.getRobotPose().getRotation().getRadians());
-        double y = this.getRobotPose().getTranslation().getY()
-                 + Math.cos(Math.toRadians(angle)
-                 + this.getRobotPose().getRotation().getRadians());
+        System.out.println("&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&* = " + angle);
+        // double x = this.getRobotPose().getTranslation().getX()
+        //          + Math.sin(Math.toRadians(angle)
+        //          + this.getRobotPose().getRotation().getRadians());
+        // double y = this.getRobotPose().getTranslation().getY()
+        //          + Math.cos(Math.toRadians(angle)
+        //          + this.getRobotPose().getRotation().getRadians());
+        double x = this.getRobotPose().getTranslation().getX() + 2;
+        double y = this.getRobotPose().getTranslation().getY() + 1;
 
-        return new TwisterPoint(x, y);
+
+        return new TwisterPoint(x, y, false);
     }
 
     /**
@@ -176,7 +181,7 @@ public class TwisterController {
      * @return
      */
     public Command generateAutonomous(){
-        this.stripCurrentPath();
+        // this.stripCurrentPath();
         Pose2d start = this.getRobotPose();
         Pose2d end = this.currentPath.path.get(this.currentPath.path.size() - 1).asPose2d();
         endPosition = end;
@@ -184,6 +189,8 @@ public class TwisterController {
         for(int i = 0; i < this.currentPath.path.size() - 1; i++){
             midpoints.add(this.currentPath.path.get(i).asWaypoint());
         }
+
+        // System.out.println("%%#%%%#%%#%%#%%#%%# Returning path: " + this.currentPath.getName());
         return PathGenerator.createAutoNavigationCommand(subsystems.drivetrain, start, midpoints, end);
     }
 

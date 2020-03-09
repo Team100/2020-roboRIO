@@ -68,6 +68,7 @@ public class RobotContainer {
 
     public JoystickButton dashLeft;
     public JoystickButton dashRight;
+    public JoystickButton zeroPose;
 
     public CycloneController cyclone;
 
@@ -161,10 +162,16 @@ public class RobotContainer {
         cameraSetpointTwo.whenPressed(new CameraSetpointTwo(subsystems.tiltServo));
         ///////////////////////////////////////////////////////////////////////////////
         dashLeft = new JoystickButton(leftJoystick, 5);
-        dashLeft.whenPressed(this.cyclone.dash(TwisterPathLibrary.straightFourMeters, -90.0));
+        dashLeft.whenPressed(new InstantCommand(() -> this.cyclone.dash(TwisterPathLibrary.straightFourMeters, -90.0).schedule(true)));
 
         dashRight = new JoystickButton(leftJoystick, 6);
-        dashLeft.whenPressed(this.cyclone.dash(TwisterPathLibrary.straightFourMeters, 90.0));
+        dashLeft.whenPressed(new InstantCommand(() -> this.cyclone.dash(TwisterPathLibrary.straightFourMeters, 90.0).schedule(true)));
+
+        zeroPose = new JoystickButton(rightJoystick, 2);
+        zeroPose.whenPressed(new InstantCommand(() -> {
+            subsystems.drivetrain.zeroHeading();
+            subsystems.drivetrain.resetOdometry(new Pose2d(0,0, new Rotation2d(0)));
+        }));
         ///////////////////////////////////////////////////////////////////////////////
     }
 

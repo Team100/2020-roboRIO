@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -23,9 +25,9 @@ public class Drivetrain extends SubsystemBase {
 
   private FRCTalonFX leftMaster, leftFollower, rightMaster, rightFollower;
 
-  //public AHRS ahrs;
+  public AHRS ahrs;
 
-  public ADXRS450_Gyro gyro;
+  // public ADXRS450_Gyro gyro;
 
   public DifferentialDriveOdometry odometry;
 
@@ -35,9 +37,9 @@ public class Drivetrain extends SubsystemBase {
    */
   public Drivetrain() {
 
-    //ahrs = new AHRS(Constants.DrivetrainConstants.NAVX_PORT);
+    ahrs = new AHRS(Constants.DrivetrainConstants.NAVX_PORT);
     
-    gyro = new ADXRS450_Gyro();
+    // gyro = new ADXRS450_Gyro();
     leftMaster = new FRCTalonFX.FRCTalonFXBuilder(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.CAN_ID)
         .withKP(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KP)
         .withKI(Constants.DrivetrainConstants.DrivetrainMotors.LeftMaster.KI)
@@ -92,7 +94,7 @@ public class Drivetrain extends SubsystemBase {
     addChild("drivetrainRightMaster", rightMaster);
     addChild("drivetrainLeftFollower", leftFollower);
     addChild("drivetrainRightFollower", rightFollower);
-    addChild("driveGyro", gyro);
+    addChild("driveGyro", ahrs);
 
   }
 
@@ -111,7 +113,7 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Right Sensor Velocity", this.rightMaster.getSensorVelocity());
     SmartDashboard.putString("Left Control Mode", this.leftMaster.motor.getControlMode().toString());
     SmartDashboard.putNumber("Left Sensor Position", this.leftMaster.getSelectedSensorPosition());
-
+    SmartDashboard.putNumber("AHRS", ahrs.getCompassHeading());
 
 
 
@@ -173,18 +175,18 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void zeroHeading() {
-    //ahrs.zeroYaw();
-    gyro.reset();
+    ahrs.zeroYaw();
+    // gyro.reset();
   }
 
   public double getHeading() {
-    return -1 * Math.IEEEremainder(gyro.getAngle(), 360);
-    //return -1 * Math.IEEEremainder(ahrs.getFusedHeading(), 360);
+    // return -1 * Math.IEEEremainder(gyro.getAngle(), 360);
+    return -1 * Math.IEEEremainder(ahrs.getFusedHeading(), 360);
     
   }
 
   public double getTurnRate() {
-    //return ahrs.getRate();
-    return gyro.getRate();
+    return ahrs.getRate();
+    // return gyro.getRate();
   }
 }
