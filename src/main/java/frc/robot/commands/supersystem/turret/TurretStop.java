@@ -7,6 +7,8 @@
 
 package frc.robot.commands.supersystem.turret;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Turret.ActionState;
@@ -19,9 +21,10 @@ public class TurretStop extends CommandBase {
 
     /**
      * Constructor
-     * @deprecated Use TurretSlew or TurretLock Instead
+     * 
+     * may be deprecated in the future: Use TurretScan Instead?
      */
-    @Deprecated
+    // @Deprecated
     public TurretStop(Turret turret) {
         // Use addRequirements() here to declare subsystem dependencies.
         this.turret = turret;
@@ -32,7 +35,7 @@ public class TurretStop extends CommandBase {
     @Override
     public void initialize() {
         turret.actionState = ActionState.STOPPED;
-        turret.turretMotor.drivePercentOutput(0);
+        turret.set(ControlMode.PercentOutput, 0);
     }
 
     // Called every time the scheduler runs while the command is scheduled.

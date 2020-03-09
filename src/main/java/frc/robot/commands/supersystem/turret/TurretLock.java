@@ -7,10 +7,12 @@
 
 package frc.robot.commands.supersystem.turret;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.commands.supersystem.turret.camera.Server;
+import frc.robot.GlobalManager;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Turret.ActionState;
 
@@ -47,10 +49,9 @@ public class TurretLock extends CommandBase {
 
             this.setpoint = (cameraAngle * 
                             Constants.TurretConstants.TurretMotionParameters.TICKS_PER_DEGREE) +
-                            turret.tickOffset + 
-                            turret.turretMotor.getSelectedSensorPosition();
+                            turret.getMotor().getSelectedSensorPosition();
 
-        turret.turretMotor.drivePosition(setpoint);
+        turret.set(ControlMode.Position, setpoint);
     }
 
     // Called once the command ends or is interrupted.

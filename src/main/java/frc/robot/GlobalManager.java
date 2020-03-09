@@ -8,6 +8,7 @@
 package frc.robot;
 
 import frc.robot.GlobalManager.IndexerManager.IndexerLocationState;
+import frc.robot.GlobalManager.TurretManager.TurretActionState;
 
 /**
  * Manages state for the entire robot
@@ -175,14 +176,56 @@ public class GlobalManager {
 
     public static class TurretManager {
         public enum TurretActionState {
-            NONE, MOVING, LOCKED
+            STOPPED, SCANNING, SLEWING, LOCKED
         }
-        public static boolean targetAcquired;
+        public static TurretActionState currentState;
+        public static boolean targetAcquired = false;
+        public static boolean targetLocked;
     }
 
     public static class CommandConditionals{
 
+        public static class TurretConditionals {
+            public enum TurretAction {
+                NONE, STOP, SCAN, SLEW, LOCK
+            }
 
+
+            /**
+             * Determines what the turret should do when the vision status changes
+             * 
+             * I translated all the statements to English - you are welcome
+             *      If turret is stopped, it was probably set manually, so stay stopped and don't make any further checks.
+             *      When camera sees target:
+             *          If target is within locking range then lock
+             *          Otherwise:
+             *              If turret is currently scanning, then start slewing toward target
+             *              Otherwise, do nothing, as it is already either slewing* or locked.
+             *      When camera loses sight of target:
+             *          If it is currently scanning*, stay scanning.
+             *          Otherwise, turret is currently either slewing or locked, so revert to scanning mode.
+             * 
+             * *In theory, since this method only activates when the camera state 
+             *  changes, these should never actually happen. But this is programming
+             *  so it's probably a good idea to put these cases in anyway.
+             * 
+             * @return enum corresponding to a command
+             */
+            public static TurretAction targetAction() {
+                if(TurretManager.currentState == TurretActionState.STOPPED) return TurretAction.NONE;
+
+                if(GlobalManager.TurretManager.targetAcquired) {
+                    if(TurretManager.targetLocked) return TurretAction.LOCK;
+                    else if(TurretManager.currentState == TurretActionState.SCANNING) {
+                        return TurretAction.SLEW;
+                    } else return TurretAction.NONE;
+                } else {
+                    if(TurretManager.currentState == TurretActionState.SCANNING) {
+                        return TurretAction.NONE;
+                    } else return TurretAction.SCAN;
+                }
+            }
+        }
 
         public enum IntakeMoveType{
             INTAKING, STOPPED
@@ -217,7 +260,7 @@ public class GlobalManager {
         }
     
         public static B2C2FAction evaluateB2C2F() {
-            GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
+            // GlobalManager.IndexerManager.IndexerLocationState ls = GlobalManager.IndexerManager.locationState;
             // if (ls == IndexerLocationState.FOUR_PC || ls == IndexerLocationState.FIVE_PC) {
             //     return B2C2FAction.STOP_MOTORS;
             // }
@@ -245,8 +288,8 @@ public class GlobalManager {
         }
         
         public static ShooterMoveType shouldSpinup(){
-            boolean ta = GlobalManager.TurretManager.targetAcquired;
-            boolean sr = GlobalManager.ShooterManager.speedReached;
+            // boolean ta = GlobalManager.TurretManager.targetAcquired;
+            // boolean sr = GlobalManager.ShooterManager.speedReached;
             /*
             if (ta && !sr) {
                 return ShooterMoveType.SPINNINGUP;
@@ -284,6 +327,7 @@ public class GlobalManager {
         }
 
 
+        
 
 
         public enum IndexerMoveType {

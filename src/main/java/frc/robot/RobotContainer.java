@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import java.util.List;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -17,9 +15,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
 import frc.robot.FRCLib.Cyclone.CycloneController;
 import frc.robot.FRCLib.Cyclone.twister.TwisterPathLibrary;
 import frc.robot.commands.drivetrain.*;
@@ -114,7 +109,7 @@ public class RobotContainer {
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
         subsystems.spinner.setDefaultCommand(new StopSpinnerWheel(subsystems.spinner));
         subsystems.tiltServo.setDefaultCommand(new CameraSetpointOne(subsystems.tiltServo));
-        subsystems.turret.setDefaultCommand(new TurretSlew(subsystems.turret, leftJoystick));
+        subsystems.turret.setDefaultCommand(new TurretSlew(subsystems.turret));
     }
 
     /**

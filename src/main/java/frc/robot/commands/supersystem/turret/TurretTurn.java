@@ -7,6 +7,8 @@
 
 package frc.robot.commands.supersystem.turret;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
@@ -34,7 +36,7 @@ public class TurretTurn extends CommandBase {
     @Override
     public void initialize() {
         turret.actionState = ActionState.MOVING;
-        turret.turretMotor.drivePercentOutput(Constants.TurretConstants.TurretMotionParameters.PERCENT_OUTPUT_FORWARD);
+        turret.set(ControlMode.PercentOutput, Constants.TurretConstants.TurretMotionParameters.PERCENT_OUTPUT_FORWARD);
     }
 
     // Called every time the scheduler runs while the command is scheduled.

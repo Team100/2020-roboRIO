@@ -7,9 +7,12 @@
 
 package frc.robot.commands.supersystem.turret;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.GlobalManager;
 import frc.robot.FRCLib.Conversions.EncoderConversionFactors;
 import frc.robot.FRCLib.Cyclone.CycloneController;
 import frc.robot.subsystems.Turret;
@@ -36,8 +39,6 @@ public class TurretScan extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        turret.getMotor().drivePercentOutput(0);
-        //wait
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -64,7 +65,8 @@ public class TurretScan extends CommandBase {
         ));
         double theta_t = theta_r - rotation.getDegrees();
 
-        turret.turretMotor.drivePosition(EncoderConversionFactors.CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(theta_t));
+        turret.set(ControlMode.Position, EncoderConversionFactors.CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(theta_t));
+        //That wasn't too bad, was it?
     }
 
     // Called once the command ends or is interrupted.

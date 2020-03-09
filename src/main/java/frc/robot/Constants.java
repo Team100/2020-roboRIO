@@ -154,19 +154,12 @@ public final class Constants {
 
     public static final class TurretConstants {
         public static final class TurretMotionParameters {
-            public static final double PERCENT_OUTPUT_FORWARD = 0.5;
+            public static final double PERCENT_OUTPUT_FORWARD = 0.2;
             public static final double TICKS_PER_DEGREE =   TurretMotors.TurretMotor.ENCODER_TICKS_PER_MOTOR_REVOLUTION *
                                                             TurretMotors.TurretMotor.GEARING_RATIO / 360;
+            public static final double LOCKED_ANGLE_THRESHOLD = 10;
         }
 
-        public static final class TurretSensors {
-            public static final class FowardSensor {
-                public static final int ID = 4;
-            }
-            public static final class ReverseSensor {
-                public static final int ID = 5;
-            }
-        }
         public static final class TurretMotors {
             public static final class TurretMotor {
                 public static final int CAN_ID = 4;
@@ -174,7 +167,7 @@ public final class Constants {
                 public static final boolean INVERT = false;
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
-                public static final int ENCODER_TICKS_PER_MOTOR_REVOLUTION = EncoderConversionFactors.CONVERT_ANGLE_TO_TALON_FX_ENCODER_TICKS(360);
+                public static final int ENCODER_TICKS_PER_MOTOR_REVOLUTION = EncoderConversionFactors.CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(360);
                 public static final double GEARING_RATIO = 1/1;
 
                 public static final int TIMEOUT = 10;

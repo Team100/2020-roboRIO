@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -19,7 +20,7 @@ import frc.robot.commands.supersystem.turret.camera.Server;
 
 public class Turret extends SubsystemBase {
 
-    public FRCTalonSRX turretMotor;
+    private FRCTalonSRX turretMotor;
 
     public static enum ActionState {
         MOVING, STOPPED
@@ -27,7 +28,8 @@ public class Turret extends SubsystemBase {
 
     public ActionState actionState;
 
-    public int tickOffset = 0;
+    private double setpoint;
+    private ControlMode controlMode;
 
     /**
      * Creates a new Turret.
@@ -56,7 +58,12 @@ public class Turret extends SubsystemBase {
      * Update any states
      */
     public void updateState() {
-        if(Server.target != null) GlobalManager.TurretManager.targetAcquired = Server.target.getDistance() != -1;
+        if(Server.target != null) {
+            if(Server.target.getDistance() != -1) {
+                GlobalManager.TurretManager.targetAcquired = true;
+                GlobalManager.TurretManager.targetLocked = Server.target.getHAngle() <= Constants.TurretConstants.TurretMotionParameters.LOCKED_ANGLE_THRESHOLD;
+            }
+        }
         else GlobalManager.TurretManager.targetAcquired = false;
     }
 
@@ -64,9 +71,15 @@ public class Turret extends SubsystemBase {
         return this.turretMotor;
     }
 
+    public void set(ControlMode cm, double sp) {
+        this.controlMode = cm;
+        this.setpoint = sp;
+    }
+
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
         updateState();
+        this.turretMotor.motor.set(controlMode, setpoint);
     }
 }
