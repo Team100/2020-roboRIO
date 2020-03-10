@@ -154,7 +154,7 @@ public final class Constants {
 
     public static final class TurretConstants {
         public static final class TurretMotionParameters {
-            public static final double PERCENT_OUTPUT_FORWARD = 0.2;
+            public static final double PERCENT_OUTPUT_FORWARD = 0.15;
             public static final double TICKS_PER_DEGREE =   TurretMotors.TurretMotor.ENCODER_TICKS_PER_MOTOR_REVOLUTION *
                                                             TurretMotors.TurretMotor.GEARING_RATIO / 360;
             public static final double LOCKED_ANGLE_THRESHOLD = 10;
@@ -168,15 +168,15 @@ public final class Constants {
                 public static final int FEEDBACK_PORT = 0;
                 public static final boolean SENSOR_PHASE = false;
                 public static final int ENCODER_TICKS_PER_MOTOR_REVOLUTION = EncoderConversionFactors.CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(360);
-                public static final double GEARING_RATIO = 1/1;
+                public static final double GEARING_RATIO = 40/18;
 
                 public static final int TIMEOUT = 10;
 
-                public static final boolean ENABLE_CURRENT_LIMIT = true;
+                public static final boolean ENABLE_CURRENT_LIMIT = false; //true;
                 public static final int CURRENT_LIMIT = 25;
                 public static final double OPEN_LOOP_RAMP = 0.1;
-                public static final double PEAK_OUTPUT_FORWARD = .5;
-                public static final double PEAK_OUTPUT_REVERSE = -.5;
+                public static final double PEAK_OUTPUT_FORWARD = .15;
+                public static final double PEAK_OUTPUT_REVERSE = -.15;
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
                 public static final double NOMINAL_OUTPUT_REVERSE = 0;
@@ -371,18 +371,18 @@ public final class Constants {
 
             public static final int TIMEOUT = 10;
 
-            public static final boolean ENABLE_CURRENT_LIMIT = true;
-            public static final int CURRENT_LIMIT = 25;
-            public static final double OPEN_LOOP_RAMP = 0.1;
-            public static final double PEAK_OUTPUT_FORWARD = .75;
-            public static final double PEAK_OUTPUT_REVERSE = -.75;
+            public static final boolean ENABLE_CURRENT_LIMIT = false;
+            public static final int CURRENT_LIMIT = 30; //25;
+            public static final double OPEN_LOOP_RAMP = 0; //0.1;
+            public static final double PEAK_OUTPUT_FORWARD = 1; //.75;
+            public static final double PEAK_OUTPUT_REVERSE = -1; //-.75;
 
             public static final double NOMINAL_OUTPUT_FORWARD = 0;
             public static final double NOMINAL_OUTPUT_REVERSE = 0;
 
-            public static final double SPIN_SPEED = 0.6;
-            public static final double RISE_SPEED = 0.7;
-            public static final double LOWER_SPEED = -0.7;
+            public static final double SPIN_SPEED = 1; //0.6;
+            public static final double RISE_SPEED = 1; //0.7;
+            public static final double LOWER_SPEED = -1; //-0.7;
         }
         public static final class ControlPanelSpinnerColors {
             public static final double RGB_RED_VALUE_FOR_YELLOW =0.301;

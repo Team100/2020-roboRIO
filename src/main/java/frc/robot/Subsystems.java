@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.*;
 
 /**
@@ -19,7 +20,7 @@ public class Subsystems {
     public final Intake intake = new Intake();
     public final IntakePivot intakePivot = new IntakePivot();
     public final Shooter shooter = new Shooter();
-    public final Turret turret = new Turret();
+    public final Turret turret = new Turret(new Joystick(2));
     public final PDP pdpSubsystem = new PDP();
     public final CameraTiltServo tiltServo = new CameraTiltServo();
     public final ControlPanelSpinner spinner = new ControlPanelSpinner();

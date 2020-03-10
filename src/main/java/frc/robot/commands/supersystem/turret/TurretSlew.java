@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.GlobalManager;
+import frc.robot.RobotContainer;
 import frc.robot.FRCLib.Conversions.EncoderConversionFactors;
 import frc.robot.commands.supersystem.turret.camera.Server;
 import frc.robot.subsystems.Turret;
@@ -47,17 +48,11 @@ public class TurretSlew extends CommandBase {
     @Override
     public void execute() {
         turret.actionState = ActionState.MOVING;
-        double cameraAngle = Server.target.getHAngle();
+        double cameraAngle = 0; //RobotContainer.mockHAngle(); //Server.target.getHAngle();
         this.setpoint = EncoderConversionFactors.CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(cameraAngle) +
                         turret.getMotor().getSelectedSensorPosition();
 
         turret.set(ControlMode.MotionMagic, setpoint);
-        
-        SmartDashboard.putNumber("Joystick degrees", Server.target.getHAngle());
-        SmartDashboard.putNumber("motor target", turret.getMotor().motor.getClosedLoopTarget());
-        SmartDashboard.putNumber("motor voltage", turret.getMotor().motor.getMotorOutputVoltage());
-        SmartDashboard.putNumber("motor setpoint", this.setpoint);
-        SmartDashboard.putString("CurrentCommand", turret.getCurrentCommand().getName());
     }
 
     // Called once the command ends or is interrupted.

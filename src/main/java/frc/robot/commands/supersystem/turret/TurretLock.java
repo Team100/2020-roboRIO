@@ -42,16 +42,16 @@ public class TurretLock extends CommandBase {
     @Override
     public void execute() {
         turret.actionState = ActionState.MOVING;
-            double cameraAngle = new Joystick(0).getDirectionDegrees(); //Server.target.getHAngle();
+            double cameraAngle = 1; //RobotContainer.mockHAngle(); //Server.target.getHAngle();
             // double modifiedAngle = (Math.signum(cameraAngle) * 
             //                         Math.pow(Math.abs(cameraAngle), 1.5) / 
             //                         2);
 
             this.setpoint = (cameraAngle * 
-                            Constants.TurretConstants.TurretMotionParameters.TICKS_PER_DEGREE) +
-                            turret.getMotor().getSelectedSensorPosition();
+                            Constants.TurretConstants.TurretMotionParameters.TICKS_PER_DEGREE); //+
+                            // turret.getMotor().getSelectedSensorPosition();
 
-        turret.set(ControlMode.Position, setpoint);
+        turret.set(ControlMode.Velocity, setpoint);
     }
 
     // Called once the command ends or is interrupted.

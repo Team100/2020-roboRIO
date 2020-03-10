@@ -109,7 +109,7 @@ public class RobotContainer {
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
         subsystems.spinner.setDefaultCommand(new StopSpinnerWheel(subsystems.spinner));
         subsystems.tiltServo.setDefaultCommand(new CameraSetpointOne(subsystems.tiltServo));
-        subsystems.turret.setDefaultCommand(new TurretSlew(subsystems.turret));
+        subsystems.turret.setDefaultCommand(new TurretLock(subsystems.turret));
     }
 
     /**
@@ -189,6 +189,8 @@ public class RobotContainer {
         return cyclone.getAutoCommand(TwisterPathLibrary.straightTwoMeters);
     }
 
-    
+    public double mockDistance() {
+        return 10;
+    }
 }
 
