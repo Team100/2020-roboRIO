@@ -31,6 +31,7 @@ import frc.robot.commands.supersystem.indexer.indexStageTwo.*;
 import frc.robot.commands.supersystem.intake.*;
 import frc.robot.commands.supersystem.intake.intakePivot.*;
 import frc.robot.commands.supersystem.shooter.*;
+import frc.robot.commands.climberConstants.*;
 import frc.robot.commands.supersystem.turret.*;
 
 import frc.robot.Subsystems;
@@ -64,6 +65,9 @@ public class RobotContainer {
 
     public JoystickButton cameraSetpointOne;
     public JoystickButton cameraSetpointTwo;
+
+    public JoystickButton extend;
+    public JoystickButton retract;
 
     
 
@@ -105,6 +109,7 @@ public class RobotContainer {
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
         subsystems.spinner.setDefaultCommand(new StopSpinnerWheel(subsystems.spinner));
         subsystems.tiltServo.setDefaultCommand(new CameraSetpointOne(subsystems.tiltServo));
+        subsystems.climber.setDefaultCommand(new Hold(subsystems.climber));
     }
 
     /**
@@ -136,20 +141,27 @@ public class RobotContainer {
         shooterShoot.whileHeld(new ShooterRun(subsystems.shooter));
 
         /////////////////////////////////////////////////////////////////////////////
-        spinnerRise = new JoystickButton(gamepad, 7);
+        spinnerRise = new JoystickButton(gamepad, 10);
         spinnerRise.whileHeld(new RiseSpinerWheel(subsystems.spinner));
 
-        spinnerFall = new JoystickButton(gamepad, 8);
+        spinnerFall = new JoystickButton(gamepad, 11);
         spinnerFall.whileHeld(new LowerSpinerWheel(subsystems.spinner));
 
-        spinnerThreeTimes = new JoystickButton(gamepad, 9);
-        spinnerThreeTimes.whenPressed(new ThreeTimes(subsystems.spinner));
-        //////////////////////////////////////////////////////////////////////////////
-        cameraSetpointOne = new JoystickButton(gamepad, 10);
-        cameraSetpointOne.whenPressed(new CameraSetpointOne(subsystems.tiltServo));
+        /////////////////////////////////////////////////////////////////////////////
+        extend = new JoystickButton(gamepad, 7);
+        retract = new JoystickButton(gamepad, 8);
 
-        cameraSetpointTwo = new JoystickButton(gamepad, 11);
-        cameraSetpointTwo.whenPressed(new CameraSetpointTwo(subsystems.tiltServo));
+        extend.whenHeld(new Extend(subsystems.climber));
+        retract.whenHeld(new Retract(subsystems.climber));
+
+        //spinnerThreeTimes = new JoystickButton(gamepad, 9);
+        //spinnerThreeTimes.whenPressed(new ThreeTimes(subsystems.spinner));
+        //////////////////////////////////////////////////////////////////////////////
+        //cameraSetpointOne = new JoystickButton(gamepad, 10);
+        //cameraSetpointOne.whenPressed(new CameraSetpointOne(subsystems.tiltServo));
+
+        //cameraSetpointTwo = new JoystickButton(gamepad, 11);
+        //cameraSetpointTwo.whenPressed(new CameraSetpointTwo(subsystems.tiltServo));
         ///////////////////////////////////////////////////////////////////////////////
     }
 

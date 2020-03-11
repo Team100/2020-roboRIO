@@ -9,13 +9,16 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.stateTransitions.TriggerMap;
 import frc.robot.commands.stateTransitions.Conditional.OnB1C2F;
+import frc.robot.commands.stateTransitions.Conditional.OnB2C2F;
 import frc.robot.commands.stateTransitions.Conditional.OnB2C2T;
 import frc.robot.commands.stateTransitions.Conditional.OnRobotFull;
 import frc.robot.commands.stateTransitions.Conditional.OnShouldIntake;
 import frc.robot.commands.stateTransitions.Conditional.ShouldShift;
-import frc.robot.commands.stateTransitions.TriggerMap;
-import frc.robot.commands.supersystem.turret.*;
+import frc.robot.commands.supersystem.turret.TurretLock;
+import frc.robot.commands.supersystem.turret.TurretScan;
+import frc.robot.commands.supersystem.turret.TurretSlew;
 
 /**
  * All of the virtual triggers for state transitions on the robot
@@ -30,7 +33,7 @@ public class Triggers {
     /**
      * The triggermap for all of the commands
      */
-    public TriggerMap triggerMap;
+    //public TriggerMap triggerMap;
 
     public Trigger indexerFull;
 
@@ -73,12 +76,13 @@ public class Triggers {
         shouldIntake = new Trigger(GlobalManager.SupersystemManager::getShouldIntake);
         indexerShouldShift = new Trigger(GlobalManager.IndexerManager::shouldShift);
 
-        this.triggerMap = new TriggerMap(this.subsystems);
+        //this.triggerMap = new TriggerMap(this.subsystems);
         this.shouldIntake.whenActive(new OnShouldIntake(this.subsystems));
         this.indexerShouldShift.whenActive(new ShouldShift(this.subsystems));
         //this.indexerEntranceSensor.whenActive(new InstantCommand(()->System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")));
         this.indexerEntranceSensor.whenActive(new OnB1C2F(this.subsystems));
-        this.indexerShiftSensor.whenActive(new OnB2C2T(this.subsystems)); //TODO Change name of cmd to B2C2F
+        this.indexerShiftSensor.whenInactive(new OnB2C2T(this.subsystems)); //TODO Change name of cmd to B2C2F
+        //this.indexerShiftSensor.whenInactive(new OnB2C2F(this.subsystems));
 
         this.indexerFull.whenActive(new OnRobotFull(this.subsystems));
       cameraTrigger = new Trigger(() -> GlobalManager.TurretManager.targetAcquired); //subsystems.turret::hasTarget);

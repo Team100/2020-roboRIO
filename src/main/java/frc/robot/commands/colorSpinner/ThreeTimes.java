@@ -34,7 +34,7 @@ public class ThreeTimes extends CommandBase {
   @Override
   public void execute() {
     controlPanelSpinner.spin(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SPIN_SPEED);
-    if (controlPanelSpinner.getRevolutionsCounter()>=6){
+    if (controlPanelSpinner.getRevolutionsCounter()>=7){
       done = true;
     }
   }

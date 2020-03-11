@@ -263,13 +263,13 @@ public final class Constants {
             //public static final double INTAKE_UP_DEGREES = EncoderConversionFactors
                    // .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(90);
 
-                   public static final double INTAKE_DOWN_TICKS = 94;
+                   public static final double INTAKE_DOWN_TICKS = 110;
                    public static final double INTAKE_UP_TICKS = 300;
             public static final int ACCEPTABLE_ERROR_TICKS = 20;
 
-            public static final double KP = 6;
+            public static final double KP = 5; //6
             public static final double KI = 0;
-            public static final double KD = 3;
+            public static final double KD = 5; //3
             public static final double KF = 0;
         }
 
@@ -296,9 +296,9 @@ public final class Constants {
             public static final class IntakePivot {
                 public static final int CAN_ID = 10;
 
-                public static final boolean INVERT = false;
+                public static final InvertType INVERT = InvertType.InvertMotorOutput;
                 public static final int FEEDBACK_PORT = 0;
-                public static final boolean SENSOR_PHASE = false;
+                public static final boolean SENSOR_PHASE = true;
 
                 public static final int TIMEOUT = 10;
 
@@ -317,7 +317,7 @@ public final class Constants {
     public static final class ShooterConstants {
         public static final class ShooterMotionParameters {
             public static final double RECOVER_PO = ShooterMotionParameters.SHOOT_PO;
-            public static final double SHOOT_PO = 0.30;
+            public static final double SHOOT_PO = 10;
             public static final double STOP_PO = 0;
 
         }
@@ -337,7 +337,7 @@ public final class Constants {
                 public static final boolean ENABLE_CURRENT_LIMIT = true;
                 public static final int CURRENT_LIMIT = 25;
                 public static final double OPEN_LOOP_RAMP = 0.1;
-                public static final double PEAK_OUTPUT_FORWARD = 1;
+                public static final double PEAK_OUTPUT_FORWARD = .3;
                 public static final double PEAK_OUTPUT_REVERSE = -1;
 
                 public static final double NOMINAL_OUTPUT_FORWARD = 0;
@@ -377,15 +377,16 @@ public final class Constants {
             public static final boolean ENABLE_CURRENT_LIMIT = true;
             public static final int CURRENT_LIMIT = 25;
             public static final double OPEN_LOOP_RAMP = 0.1;
-            public static final double PEAK_OUTPUT_FORWARD = .75;
-            public static final double PEAK_OUTPUT_REVERSE = -.75;
+            public static final double PEAK_OUTPUT_FORWARD = 1;
+            public static final double PEAK_OUTPUT_REVERSE = -1;
 
             public static final double NOMINAL_OUTPUT_FORWARD = 0;
             public static final double NOMINAL_OUTPUT_REVERSE = 0;
 
-            public static final double SPIN_SPEED = 0.6;
-            public static final double RISE_SPEED = 0.7;
-            public static final double LOWER_SPEED = -0.7;
+            public static final double SPIN_SPEED = 1;
+            public static final double SPIN_SPEED_FOR_POSITION_CONTROL = .5;
+            public static final double RISE_SPEED = 1;
+            public static final double LOWER_SPEED = -1;
         }
         public static final class ControlPanelSpinnerColors {
             public static final double RGB_RED_VALUE_FOR_YELLOW =0.301;
@@ -407,6 +408,52 @@ public final class Constants {
             public static final int PWM_ID_SERVO = 2;
             public static final double SETPOINT_ONE = 20;
             public static final double SETPOINT_TWO = 40;
+        }
+    }
+    public static final class ClimberConstants {
+        public static final class RetractSpeed {
+            public static final double EXTEND_SPEED = 0.1;
+            public static final double RETRACT_SPEED = -0.1;
+        }
+        public static final class LeftWinch {
+            public static final int CAN_ID = 12;
+
+            public static final boolean INVERT = false;
+            public static final int FEEDBACK_PORT = 0;
+            public static final boolean SENSOR_PHASE = false;
+
+            public static final int TIMEOUT = 10;
+
+            public static final boolean ENABLE_CURRENT_LIMIT = true;
+            public static final int CURRENT_LIMIT = 25;
+            public static final double OPEN_LOOP_RAMP = 0.1;
+            public static final double PEAK_OUTPUT_FORWARD = .75;
+            public static final double PEAK_OUTPUT_REVERSE = -.75;
+
+            public static final double NOMINAL_OUTPUT_FORWARD = 0;
+            public static final double NOMINAL_OUTPUT_REVERSE = 0;
+
+            public static final double SPIN_SPEED = 0.6;
+        }
+        public static final class RightWinch {
+            public static final int CAN_ID = 3;
+
+            public static final boolean INVERT = false;
+            public static final int FEEDBACK_PORT = 0;
+            public static final boolean SENSOR_PHASE = false;
+
+            public static final int TIMEOUT = 10;
+
+            public static final boolean ENABLE_CURRENT_LIMIT = true;
+            public static final int CURRENT_LIMIT = 25;
+            public static final double OPEN_LOOP_RAMP = 0.1;
+            public static final double PEAK_OUTPUT_FORWARD = .75;
+            public static final double PEAK_OUTPUT_REVERSE = -.75;
+
+            public static final double NOMINAL_OUTPUT_FORWARD = 0;
+            public static final double NOMINAL_OUTPUT_REVERSE = 0;
+
+            public static final double SPIN_SPEED = 0.6;
         }
     }
 }

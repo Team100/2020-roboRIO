@@ -24,8 +24,8 @@ public class StopIndexer extends SequentialCommandGroup {
   public StopIndexer(Subsystems subsystems) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super( new IncrementIndexerCounter(),
-    new IndexerStop(subsystems.stageOne, subsystems.stageTwo, false),
-     new InstantCommand(()->System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")));
+    super(
+      new IndexerStop(subsystems.stageOne, subsystems.stageTwo, false),
+      new InstantCommand(()->System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")));
   }
 }
