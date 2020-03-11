@@ -14,6 +14,6 @@ public class PDP extends SubsystemBase {
   private final PowerDistributionPanel pdp = new PowerDistributionPanel();
 
   public PDP() {
-    addChild("PDP", pdp);
+    addChild("pdp", pdp);
   }
 }
