@@ -271,7 +271,7 @@ public final class Constants {
                    public static final double INTAKE_UP_TICKS = 300;
             public static final int ACCEPTABLE_ERROR_TICKS = 20;
 
-            public static final double KP = 5; //6
+            public static final double KP = 3; //6
             public static final double KI = 0;
             public static final double KD = 5; //3
             public static final double KF = 0;

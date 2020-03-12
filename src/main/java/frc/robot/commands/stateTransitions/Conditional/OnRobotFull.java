@@ -19,9 +19,9 @@ import frc.robot.commands.supersystem.intake.intakePivot.IntakeMoveUp;
 public class OnRobotFull extends ParallelCommandGroup {
   public OnRobotFull(Subsystems s) {
     // Use addRequirements() here to declare subsystem dependencies.
-    super(new IntakeMoveUp(s.intakePivot));
+    super(new IntakeMoveUp(s.intakePivot, false));
   }
-
+  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {

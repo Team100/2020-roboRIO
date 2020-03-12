@@ -14,13 +14,14 @@ import frc.robot.subsystems.IntakePivot;
 public class IntakeMoveUp extends CommandBase {
 
   public IntakePivot pivot;
+  private boolean def;
 
   /**
    * Creates a new IntakeMoveUp.
    */
-  public IntakeMoveUp(IntakePivot pivot) {
+  public IntakeMoveUp(IntakePivot pivot, boolean def) {
     // Use addRequirements() here to declare subsystem dependencies.
-
+    this.def = def;
     this.pivot = pivot;
     addRequirements(this.pivot);
   }
@@ -49,6 +50,6 @@ public class IntakeMoveUp extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(pivot.pivot.getRawAnalogSensor() - Constants.IntakeConstants.IntakeMotionParameters.INTAKE_UP_TICKS)<Constants.IntakeConstants.IntakeMotionParameters.ACCEPTABLE_ERROR_TICKS;
+    return false; //!this.def && Math.abs(pivot.pivot.getRawAnalogSensor() - Constants.IntakeConstants.IntakeMotionParameters.INTAKE_UP_TICKS)<Constants.IntakeConstants.IntakeMotionParameters.ACCEPTABLE_ERROR_TICKS;
   }
 }

@@ -64,6 +64,6 @@ public class IntakePivot extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Raw Pivot", pivot.getRawAnalogSensor());
+    SmartDashboard.putNumber("Raw Pivot", pivot.getSelectedSensorPosition());
   }
 }
