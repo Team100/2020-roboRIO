@@ -30,13 +30,13 @@ public class IntakeMoveDown extends CommandBase {
   public void initialize() {
     pivot.currentAngle = IntakePivot.ValidAngles.UNCERTAIN;
     pivot.locationState = IntakePivot.LocationState.MOVING;
-    pivot.pivot.drivePosition(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_TICKS);
+    pivot.pivot.drivePosition(Constants.IntakeConstants.IntakeMotionParameters.INTAKE_INTAKE_TICKS);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-        System.out.println(Math.abs(pivot.pivot.getRawAnalogSensor() - Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_TICKS));
+        System.out.println(Math.abs(pivot.pivot.getRawAnalogSensor() - Constants.IntakeConstants.IntakeMotionParameters.INTAKE_INTAKE_TICKS));
         
   }
 
@@ -50,6 +50,6 @@ public class IntakeMoveDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(pivot.pivot.getRawAnalogSensor() - Constants.IntakeConstants.IntakeMotionParameters.INTAKE_DOWN_TICKS)<Constants.IntakeConstants.IntakeMotionParameters.ACCEPTABLE_ERROR_TICKS;
+    return Math.abs(pivot.pivot.getRawAnalogSensor() - Constants.IntakeConstants.IntakeMotionParameters.INTAKE_INTAKE_TICKS)<Constants.IntakeConstants.IntakeMotionParameters.ACCEPTABLE_ERROR_TICKS;
   }
 }
