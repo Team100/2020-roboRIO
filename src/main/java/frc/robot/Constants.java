@@ -269,8 +269,8 @@ public final class Constants {
 
                    public static final double INTAKE_DOWN_TICKS = 288;
                    public static final double INTAKE_UP_TICKS = 520;
-                   public static final double INTAKE_INTAKE_TICKS = 337;
-            public static final int ACCEPTABLE_ERROR_TICKS = 20;
+                   public static final double INTAKE_INTAKE_TICKS = 325;
+            public static final int ACCEPTABLE_ERROR_TICKS = 10;
 
             public static final double KP = 6; //6
             public static final double KI = 0;
