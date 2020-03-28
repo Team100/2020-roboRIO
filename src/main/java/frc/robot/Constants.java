@@ -267,9 +267,9 @@ public final class Constants {
             //public static final double INTAKE_UP_DEGREES = EncoderConversionFactors
                    // .CONVERT_ANGLE_TO_MA3_ENCODER_TICKS(90);
 
-                   public static final double INTAKE_DOWN_TICKS = -81;
-                   public static final double INTAKE_UP_TICKS = 30;
-                   public static final double INTAKE_INTAKE_TICKS = -81;
+                   public static final double INTAKE_DOWN_TICKS = 757;
+                   public static final double INTAKE_UP_TICKS = 1000;
+                   public static final double INTAKE_INTAKE_TICKS = 757;
             public static final int ACCEPTABLE_ERROR_TICKS = 20;
 
             public static final double KP = 6; //6
