@@ -110,7 +110,8 @@ public class RobotContainer {
         subsystems.stageOne.setDefaultCommand(new IndexerStageOneStop(subsystems.stageOne, true));
         subsystems.stageTwo.setDefaultCommand(new IndexerStageTwoStop(subsystems.stageTwo, true));
         subsystems.intake.setDefaultCommand(new IntakeStop(subsystems.intake));
-        subsystems.intakePivot.setDefaultCommand(new IntakeMoveUp(subsystems.intakePivot, true));
+        subsystems.intakePivot.setDefaultCommand(new IntakeNeutral(subsystems.intakePivot));
+        //subsystems.intakePivot.setDefaultCommand(new IntakeMoveUp(subsystems.intakePivot, true));
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
         subsystems.spinner.setDefaultCommand(new StopSpinnerWheel(subsystems.spinner));
         subsystems.tiltServo.setDefaultCommand(new CameraSetpointOne(subsystems.tiltServo));
