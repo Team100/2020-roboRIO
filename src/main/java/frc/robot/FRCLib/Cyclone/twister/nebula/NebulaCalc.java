@@ -18,7 +18,7 @@ public class NebulaCalc {
      * @param y1
      * @param x2
      * @param y2
-     * @return
+     * @return      The distance between the two points
      */
     public static double slopeDistance(double x1, double y1, double x2, double y2){
         return (y2-y1)/(x2-x1);
