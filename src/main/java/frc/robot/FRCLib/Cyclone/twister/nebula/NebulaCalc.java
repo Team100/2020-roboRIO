@@ -8,8 +8,7 @@
 package frc.robot.FRCLib.Cyclone.twister.nebula;
 
 import frc.robot.FRCLib.Cyclone.twister.TwisterPoint;
-import frc.robot.FRCLib.Cyclone.twister.nebula.NebulaStructures.NebulaCenterpointOffset;
-import frc.robot.FRCLib.Cyclone.twister.nebula.NebulaStructures.NebulaUnits;
+
 
 /**
  * Calculations for the Nebula Library

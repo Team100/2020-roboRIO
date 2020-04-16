@@ -1,8 +1,10 @@
 package frc.robot.FRCLib.Cyclone.twister;
 
+import frc.robot.FRCLib.Cyclone.twister.nebula.NebulaCenterpointOffset;
+import frc.robot.FRCLib.Cyclone.twister.nebula.NebulaUnits;
 
 public class TwisterCriticalPoints {
-
+    public static NebulaCenterpointOffset offset = new NebulaCenterpointOffset(6.85, 7.48, NebulaUnits.METERS);
     
     //TODO see if y needs to be inverted
     public static TwisterPoint frontOfLoadingTriangle =      new TwisterPoint(-6.08, 1.85);
