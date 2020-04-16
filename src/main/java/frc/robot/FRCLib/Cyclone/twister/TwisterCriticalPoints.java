@@ -1,6 +1,9 @@
 package frc.robot.FRCLib.Cyclone.twister;
 
+
 public class TwisterCriticalPoints {
+
+    
     //TODO see if y needs to be inverted
     public static TwisterPoint frontOfLoadingTriangle =      new TwisterPoint(-6.08, 1.85);
     public static TwisterPoint loadingZoneAtLine =           new TwisterPoint(-3.75, 1.85);
