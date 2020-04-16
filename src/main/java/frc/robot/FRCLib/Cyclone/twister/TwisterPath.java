@@ -12,23 +12,19 @@ public class TwisterPath {
      */
     public ArrayList<TwisterPoint> path;
 
-    public String name;
-
     /**
      * Creates a blank TwisterPath
      */
-    public TwisterPath(String name){
+    public TwisterPath(){
         this.path = new ArrayList<>();
-        this.name = name;
     }
 
     /**
      * Creates a TwisterPath given a set of ChaChaPoints
      * @param path the points to have on the path
      */
-    public TwisterPath( String name,TwisterPoint[] path){
+    public TwisterPath(TwisterPoint[] path){
         this.path = new ArrayList<>(Arrays.asList(path));
-        this.name = name;
     }
 
     /**
@@ -45,9 +41,5 @@ public class TwisterPath {
      */
     public void appendNewChaChaPoint(TwisterPoint point){
         this.path.add(point);
-    }
-
-    public String getName(){
-        return this.name;
     }
 }

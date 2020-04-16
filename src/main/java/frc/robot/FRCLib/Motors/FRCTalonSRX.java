@@ -167,8 +167,7 @@ public class FRCTalonSRX implements Sendable {
     /**
      * Determines what mode to use for inversion
      * 
-     * true uses InvertType invertType
-     * false uses boolean inverted
+     * true uses InvertType invertType false uses boolean inverted
      */
     private boolean useInvertType;
 
@@ -364,8 +363,8 @@ public class FRCTalonSRX implements Sendable {
         motor.config_kF(1, this.getkF());
 
     }
-	
-	public int getRawAnalogSensor(){
+
+    public int getRawAnalogSensor() {
         return m_sensorCollection.getAnalogInRaw();
     }
 
@@ -375,10 +374,13 @@ public class FRCTalonSRX implements Sendable {
 
         motor.configFactoryDefault();
         motor.setSafetyEnabled(false);
+        System.out.println("#################RESET");
 
         if (this.isInverted() || this.isInvertedWithType()) {
-            if (this.useInvertType) motor.setInverted(this.invertType);
-            else  motor.setInverted(this.isInverted());
+            if (this.useInvertType)
+                motor.setInverted(this.invertType);
+            else
+                motor.setInverted(this.isInverted());
             System.out.println("Configuring Inverted");
         }
         if (this.isCurrentLimitEnabled()) {
@@ -1034,8 +1036,10 @@ public class FRCTalonSRX implements Sendable {
         public FRCTalonSRX build() {
             FRCTalonSRX fRCTalonSRX = new FRCTalonSRX();
             fRCTalonSRX.setCanID(canID);
-            if (useInvertType) fRCTalonSRX.setInverted(invertType);
-            else fRCTalonSRX.setInverted(inverted);
+            if (useInvertType)
+                fRCTalonSRX.setInverted(invertType);
+            else
+                fRCTalonSRX.setInverted(inverted);
             fRCTalonSRX.setFeedbackPort(feedbackPort);
             fRCTalonSRX.setTimeout(timeout);
             fRCTalonSRX.setSensorPhase(sensorPhase);

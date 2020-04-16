@@ -391,6 +391,7 @@ public class FRCTalonFX implements Sendable {
 
         motor.selectProfileSlot(0, 0);
         motor.setSafetyEnabled(false);
+        System.out.println("#################RESET");
         if (this.isInvertedWithType()) {
             motor.setInverted(this.invertType);
             System.out.println("Configuring Inverted");

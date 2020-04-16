@@ -70,6 +70,7 @@ public class FRCVictorSPX {
 
 
         motor.configFactoryDefault();
+        System.out.println("#################RESET");
         if (this.isInverted() || this.isInvertedWithType()) {
             if (this.useInvertType) motor.setInverted(this.invertType);
             else  motor.setInverted(this.isInverted());
