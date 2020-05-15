@@ -14,16 +14,33 @@ import frc.robot.Constants;
 import frc.robot.GlobalManager;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
 
+/**
+ * Handles the intake for the indexer
+ *
+ * Stage one is the side that is closest to the intake
+ */
 public class IndexerStageOne extends SubsystemBase {
 
+  /**
+   * The motor controlling the first stage of the indexer
+   */
   public FRCTalonSRX indexerStageOne;
 
-
+  /**
+   * The states that the IndexerStageOne can be in
+   */
   public static enum ActionState {
-    MOVE_FOWARD, MOVE_BACKWARDS, STOP
+    MOVE_FORWARD, MOVE_BACKWARDS, STOP
   }
+
+  /**
+   * The current state of IndexerStageOne
+   */
   public ActionState actionState;
 
+  /**
+   * The sensor detecting if a ball is present in the stage one
+   */
   public DigitalInput sensor;
 
   /**
@@ -61,10 +78,17 @@ public class IndexerStageOne extends SubsystemBase {
 
   }
 
+  /**
+   * Detect the presence of a ball
+   * @return whether a ball is present or not
+   */
   public boolean getSensorValue() {
     return sensor.get(); //sensor.get();
   }
 
+  /**
+   * Runs periodically and updates the state of the IndexerStageOne
+   */
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

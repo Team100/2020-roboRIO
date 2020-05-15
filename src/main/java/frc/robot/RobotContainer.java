@@ -99,6 +99,12 @@ public class RobotContainer {
         triggers = new Triggers(subsystems, this);
     }
 
+    /**
+     * Configure the default commands for a RobotContainer
+     *
+     * Every subsystem <em>MUST</em> have a default command mapped,
+     * otherwise an error will be thrown
+     */
     public void setDefaultCommands() {
 
         subsystems.drivetrain.setDefaultCommand(new ArcadeDrive(subsystems.drivetrain, leftJoystick, rightJoystick));

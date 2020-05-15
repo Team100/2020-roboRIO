@@ -25,14 +25,14 @@ public class TwisterController {
     /**
      * Navigation directions for the TwisterPath
      */
-    public enum ChaChaDirection{ //TODO CHANGE THIS
+    public enum PathDirection {
         NEUTRAL, POSITIVE, NEGATIVE
     }
 
     /**
      * The direction that the TwisterController is currently driving in
      */
-    public ChaChaDirection direction = ChaChaDirection.NEUTRAL;
+    public PathDirection direction = PathDirection.NEUTRAL;
 
     /**
      * The acceptable offset that the robot can be in for the TwisterController to be complete
@@ -80,18 +80,19 @@ public class TwisterController {
      */
     public Command runPathWithDash(TwisterPath currentPath, double angle){
         this.loadPath(currentPath);
-        this.addChaChaSlide(this.generateDashPoint(angle));
+        this.addDash(this.generateDashPoint(angle));
+
         return this.generateAutonomous();
     }
 
     /**
-     * Adds a ChaCha slide path modification to the path
+     * Adds a Dash path modification to the path
      *
      * ChaCha slides should have requirement as true
      * @param point
      * @return the new command
      */
-    public Command addChaChaSlide(TwisterPoint point){ //TODO Change This
+    public Command addDash(TwisterPoint point){
         this.stripCurrentPath();
         this.currentPath.prependNewChaChaPoint(point);
         return this.generateAutonomous();
@@ -132,10 +133,10 @@ public class TwisterController {
         TwisterPoint endPoint = this.currentPath.path.get(this.currentPath.path.size()-1);
 
         if(currentPose.getTranslation().getX() < endPoint.x){
-            this.direction = ChaChaDirection.POSITIVE;
+            this.direction = PathDirection.POSITIVE;
         }
         else if(currentPose.getTranslation().getX() > endPoint.x){
-            this.direction = ChaChaDirection.NEGATIVE;
+            this.direction = PathDirection.NEGATIVE;
         }
 
         recursiveStrip(this.currentPath, this.getRobotPose());
@@ -159,14 +160,14 @@ public class TwisterController {
         if(path.path.get(0).isRequired){
             return path;
         }
-        else if(this.direction == ChaChaDirection.POSITIVE){
+        else if(this.direction == PathDirection.POSITIVE){
             if(pose.getTranslation().getX() >= path.path.get(0).x) {
                 //Currently more positive than point
                 path.path.remove(0);
                 return recursiveStrip(path, pose);
             }
         }
-        else if(this.direction == ChaChaDirection.NEGATIVE){
+        else if(this.direction == PathDirection.NEGATIVE){
             if(pose.getTranslation().getX() <= path.path.get(0).x){
                 path.path.remove(0);
                 return recursiveStrip(path, pose);
@@ -214,11 +215,11 @@ public class TwisterController {
      * Returns whether the robot is complete or not
      * @return whether deltaX and deltaY are within the acceptable range
      */
-    public boolean isInAccpetableRange(){
+    public boolean isInAcceptableRange(){
         double deltaX = Math.abs(getRobotPose().getTranslation().getX() - endPosition.getTranslation().getX());
         double deltaY = Math.abs(getRobotPose().getTranslation().getY() - endPosition.getTranslation().getY());
 
 
-        return (deltaX < acceptableError) && (deltaY < acceptableError);
+        return ((deltaX * deltaX) + (deltaY * deltaY))<(acceptableError * acceptableError); //a^2 + b^2 < c^2
     }
 }

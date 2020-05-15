@@ -32,7 +32,7 @@ public class IndexerStageOneDriveForward extends CommandBase {
     public void initialize() {
         //System.out.println("WE DONT HAVE ACCESS TO THE ROBOT"); preserved her for prosperity
 
-        this.indexer.actionState = ActionState.MOVE_FOWARD;
+        this.indexer.actionState = ActionState.MOVE_FORWARD;
         indexer.indexerStageOne.drivePercentOutput(Constants.IndexerConstants.IndexerMotionParameters.STAGE_ONE_PERCENT_OUTPUT_FORWARD);
     }
 

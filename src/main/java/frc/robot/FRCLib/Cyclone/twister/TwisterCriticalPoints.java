@@ -17,6 +17,7 @@ public class TwisterCriticalPoints {
     public static TwisterPoint onTopOfThirdBall =            new TwisterPoint(2.97,  0);
     public static TwisterPoint shootLineDirectLine =         new TwisterPoint(6.03,  1.69);
     public static TwisterPoint colorWheelCenterpoint =       new TwisterPoint(0,     0);       // FIELD ORIGIN
+
     public static TwisterPoint twoBallsNearControlPanel =    new TwisterPoint(2.98,  1.99);
     public static TwisterPoint threeAwayBallsInsideStruct =  new TwisterPoint(2.66,  3.06);    // NEED TO EXIT @ 45DEG
     public static TwisterPoint threeAwayBallsOutsideStruct = new TwisterPoint(3.92,  3.61);

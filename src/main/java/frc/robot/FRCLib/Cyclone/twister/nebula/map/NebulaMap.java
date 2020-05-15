@@ -14,6 +14,11 @@ public class NebulaMap {
     double delta;
     int[][] map;
 
+    /**
+     * Construct a map with a given width and height
+     * @param mapX
+     * @param mapY
+     */
     public void constructMap(double mapX, double mapY){
         int numXSegments = (int) Math.round(mapX / delta);
         int numYSegments = (int) Math.round(mapY / delta);

@@ -38,6 +38,6 @@ public class CycloneController {
     }
 
     public boolean isTwisterComplete(){
-        return twisterController.isInAccpetableRange();
+        return twisterController.isInAcceptableRange();
     }
 }

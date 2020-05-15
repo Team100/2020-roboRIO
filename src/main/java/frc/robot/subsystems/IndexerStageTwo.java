@@ -17,7 +17,7 @@ public class IndexerStageTwo extends SubsystemBase {
 
 
   public static enum ActionState {
-    MOVE_FOWARD, MOVE_BACKWARDS, STOP
+    MOVE_FORWARD, MOVE_BACKWARDS, STOP
   }
   public ActionState actionState;
 
