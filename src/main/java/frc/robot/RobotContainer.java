@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import java.util.List;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -17,9 +16,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.FRCLib.AutoHelperFunctions.PathGenerator;
 import frc.robot.FRCLib.Cyclone.CycloneController;
 import frc.robot.FRCLib.Cyclone.twister.TwisterPathLibrary;
 import frc.robot.commands.drivetrain.*;
@@ -32,7 +28,6 @@ import frc.robot.commands.supersystem.indexer.indexStageTwo.*;
 import frc.robot.commands.supersystem.intake.*;
 import frc.robot.commands.supersystem.intake.intakePivot.*;
 import frc.robot.commands.supersystem.shooter.*;
-import frc.robot.commands.supersystem.turret.*;
 
 import frc.robot.Subsystems;
 
