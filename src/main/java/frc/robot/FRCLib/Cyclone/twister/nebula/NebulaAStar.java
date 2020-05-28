@@ -57,7 +57,7 @@ class NebulaAStar {
         this.ystart = ystart;
         this.diag = diag;
     }
-    /*
+    /**
     ** Finds path to xend/yend or returns null
     **
     ** @param (int) xend coordinates of the target position
@@ -93,7 +93,7 @@ class NebulaAStar {
     private static boolean findNeighborInList(List<Node> array, Node node) {
         return array.stream().anyMatch((n) -> (n.x == node.x && n.y == node.y));
     }
-    /*
+    /**
     ** Calulate distance between this.now and xend/yend
     **
     ** @return (int) distance
@@ -105,12 +105,19 @@ class NebulaAStar {
             return Math.abs(this.now.x + dx - this.xend) + Math.abs(this.now.y + dy - this.yend); // else return "Manhattan distance"
         }
     }
+
+    /**
+     * Adds neighbor points to the list
+     * 
+     * This is how we find the best path
+     */
     private void addNeigborsToOpenList() {
         Node node;
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 if (!this.diag && x != 0 && y != 0) {
-                    continue; // skip if diagonal movement is not allowed
+                    //continue; // skip if diagonal movement is not allowed
+                    
                 }
                 node = new Node(this.now, this.now.x + x, this.now.y + y, this.now.g, this.distance(x, y));
                 if ((x != 0 || y != 0) // not this.now
