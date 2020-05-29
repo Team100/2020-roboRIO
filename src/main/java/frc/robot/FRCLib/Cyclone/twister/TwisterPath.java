@@ -23,7 +23,7 @@ public class TwisterPath {
     }
 
     /**
-     * Creates a TwisterPath given a set of ChaChaPoints
+     * Creates a TwisterPath given a set of TwisterPoints
      * @param path the points to have on the path
      */
     public TwisterPath( String name,TwisterPoint[] path){

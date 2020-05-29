@@ -96,7 +96,7 @@ class NebulaAStar {
     /**
     ** Calulate distance between this.now and xend/yend
     **
-    ** @return (int) distance
+    ** @return (double) distance
     */
     private double distance(int dx, int dy) {
         if (this.diag) { // if diagonal movement is alloweed

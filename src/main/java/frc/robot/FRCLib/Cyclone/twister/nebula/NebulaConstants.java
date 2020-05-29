@@ -11,5 +11,5 @@ package frc.robot.FRCLib.Cyclone.twister.nebula;
  * Add your docs here.
  */
 public class NebulaConstants {
-    public static final double DELTA = 0.61; // 2 Feets in Meter
+    public static final double DELTA = 0.61; // 2 Feet in Meters
 }
