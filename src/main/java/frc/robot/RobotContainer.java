@@ -182,6 +182,8 @@ public class RobotContainer {
         
     }
 
+ 
+
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
@@ -192,7 +194,7 @@ public class RobotContainer {
         subsystems.drivetrain.zeroHeading();
         subsystems.drivetrain.resetOdometry(new Pose2d(0,0, new Rotation2d(0)));
         
-        return cyclone.getAutoCommand(TwisterPathLibrary.straightTwoMeters);
+        return cyclone.getAutoCommand(TwisterPathLibrary.sCurve);
     }
 
     

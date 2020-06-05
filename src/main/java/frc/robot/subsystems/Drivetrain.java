@@ -88,6 +88,7 @@ public class Drivetrain extends SubsystemBase {
             .withNeutralMode(Constants.DrivetrainConstants.DrivetrainMotors.RightFollower.NEUTRAL_MODE)
             .withMaster(rightMaster).build();
     
+            ahrs.zeroYaw();
     odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
 
     addChild("drivetrainLeftMaster", leftMaster);

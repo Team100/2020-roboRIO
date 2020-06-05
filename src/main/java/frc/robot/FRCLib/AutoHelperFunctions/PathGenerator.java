@@ -46,6 +46,7 @@ public class PathGenerator {
                 .addConstraint(autoVoltageConstraint)
                 .addConstraint(kinematicsConstraint);
 
+        System.out.println("GENERATING ANNOTATED TRJAECTORY");
         // An example trajectory to follow. All units in meters.
         AnnotatedTrajectory trajectory = new AnnotatedTrajectory(
                 TrajectoryGenerator.generateTrajectory(start, waypoints, end, config));
