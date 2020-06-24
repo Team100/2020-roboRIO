@@ -196,7 +196,7 @@ public class RobotContainer {
         subsystems.drivetrain.zeroHeading();
         subsystems.drivetrain.resetOdometry(new Pose2d(0,0, new Rotation2d(0)));
         
-        return cyclone.getAutoCommand(TwisterPathLibrary.sCurve);
+        return cyclone.getAutoCommand(TwisterPathLibrary.crossField);
     }
 
     

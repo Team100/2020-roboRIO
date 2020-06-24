@@ -61,7 +61,7 @@ public final class Constants {
             public static final double KTRACK_WIDTH = 0.6514; // TODO Change
             public static final double KA = 0.0225;
 
-            public static final double KINEMATICS_MAX_RATE_PER_SIDE = 2.125;
+            public static final double KINEMATICS_MAX_RATE_PER_SIDE = 1;
 
             public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(
                     KTRACK_WIDTH);
@@ -76,7 +76,7 @@ public final class Constants {
 
         public static final class AutonConstants {
             public static final double DT = 0.05;
-            public static final double MAX_VELOCITY = 12;
+            public static final double MAX_VELOCITY = 6;
             public static final double MAX_ACCELERATION = 3;
             public static final double MAX_JERK = .25;
         
