@@ -27,6 +27,8 @@ import frc.robot.subsystems.Drivetrain;
 public class PathGenerator {
     public static Command createAutoNavigationCommand(Drivetrain m_drivetrain, Pose2d start,
                                                       List<Translation2d> waypoints, Pose2d end) {
+boolean isReversed = end.getTranslation().getX() < start.getTranslation().getX();
+
         System.out.println("Creating Auto Command");
         var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
                 new SimpleMotorFeedforward(Constants.DrivetrainConstants.DrivetrainParameters.KS,
@@ -42,9 +44,11 @@ public class PathGenerator {
                 // Add kinematics to ensure max speed is actually obeyed
                 .setKinematics(Constants.DrivetrainConstants.DrivetrainParameters.kDriveKinematics)
 
+                .setReversed(isReversed)
                 // Apply the voltage constraint
                 .addConstraint(autoVoltageConstraint)
                 .addConstraint(kinematicsConstraint);
+                
 
         System.out.println("GENERATING ANNOTATED TRJAECTORY");
         // An example trajectory to follow. All units in meters.

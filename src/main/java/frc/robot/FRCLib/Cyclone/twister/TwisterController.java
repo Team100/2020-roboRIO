@@ -186,6 +186,9 @@ public class TwisterController {
         Pose2d start = this.getRobotPose();
         Pose2d end = this.currentPath.path.get(this.currentPath.path.size() - 1).asPose2d();
         endPosition = end;
+
+
+
         ArrayList<Translation2d> midpoints = new ArrayList<>();
         for(int i = 0; i < this.currentPath.path.size() - 1; i++){
             midpoints.add(this.currentPath.path.get(i).asWaypoint());
