@@ -65,7 +65,7 @@ public class RobotContainer {
     public JoystickButton dashRight;
     public JoystickButton zeroPose;
 
-    public JoystickButton toggleMotorMode;
+    // public JoystickButton toggleMotorMode;
 
     public CycloneController cyclone;
 
