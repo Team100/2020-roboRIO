@@ -65,6 +65,8 @@ public class RobotContainer {
     public JoystickButton dashRight;
     public JoystickButton zeroPose;
 
+    public JoystickButton toggleMotorMode;
+
     public CycloneController cyclone;
 
     
@@ -176,7 +178,13 @@ public class RobotContainer {
             subsystems.drivetrain.zeroHeading();
             subsystems.drivetrain.resetOdometry(new Pose2d(0,0, new Rotation2d(0)));
         }));
+        
         ///////////////////////////////////////////////////////////////////////////////
+
+        // toggleMotorMode = new JoystickButton(gamepad, 12);
+        // InstantCommand comm = new InstantCommand(() -> subsystems.drivetrain.toggleNeutralMode());
+        // //comm.setRunWhenDisabled(true);
+        // toggleMotorMode.whileHeld(comm);
     }
 
     public void periodic(){

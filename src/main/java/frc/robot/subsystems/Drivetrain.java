@@ -20,6 +20,7 @@ import frc.robot.Constants;
 import frc.robot.FRCLib.AutoHelperFunctions.AutonConversionFactors;
 import frc.robot.FRCLib.Cyclone.twister.TwisterController;
 import frc.robot.FRCLib.Motors.FRCTalonFX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -189,5 +190,19 @@ public class Drivetrain extends SubsystemBase {
   public double getTurnRate() {
     return ahrs.getRate();
     // return gyro.getRate();
+  }
+
+  public void toggleNeutralMode() {
+    if (leftMaster.getNeutralMode() == NeutralMode.Brake) {
+      this.leftMaster.setNeutralMode(NeutralMode.Coast);
+      this.rightMaster.setNeutralMode(NeutralMode.Coast);
+      this.leftFollower.setNeutralMode(NeutralMode.Coast);
+      this.rightFollower.setNeutralMode(NeutralMode.Coast);
+    } else {
+      this.leftMaster.setNeutralMode(NeutralMode.Brake);
+      this.rightMaster.setNeutralMode(NeutralMode.Brake);
+      this.leftFollower.setNeutralMode(NeutralMode.Brake);
+      this.rightFollower.setNeutralMode(NeutralMode.Brake);
+    }
   }
 }
