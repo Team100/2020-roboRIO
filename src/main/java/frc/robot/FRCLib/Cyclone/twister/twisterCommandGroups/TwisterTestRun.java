@@ -22,6 +22,8 @@ public class TwisterTestRun extends SequentialCommandGroup {
   public TwisterTestRun(RobotContainer container) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
+
+    //TODO FIGURE OUT HOW TO GET THE ROBOT POSITION ON RUNTIME
     super(container.cyclone.getAutoCommand(new TwisterPath("Step 1", new TwisterPoint[] { new TwisterPoint(4, 0, 0) })),
         container.cyclone.getAutoCommand(new TwisterPath("Step 2", new TwisterPoint[] { new TwisterPoint(3, 0, 0) })));
   }
