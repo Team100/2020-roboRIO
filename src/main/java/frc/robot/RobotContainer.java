@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import frc.robot.FRCLib.Cyclone.CycloneController;
 import frc.robot.FRCLib.Cyclone.twister.TwisterPathLibrary;
+import frc.robot.FRCLib.Cyclone.twister.twisterCommandGroups.TwisterTestRun;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.supersystem.indexer.*;
 import frc.robot.commands.colorSpinner.*;
@@ -204,7 +205,7 @@ public class RobotContainer {
         subsystems.drivetrain.zeroHeading();
         subsystems.drivetrain.resetOdometry(new Pose2d(0,0, new Rotation2d(0)));
         
-        return ;
+        return new TwisterTestRun(this);
     }
 
     

@@ -184,6 +184,7 @@ public class TwisterController {
     public Command generateAutonomous(){
         // this.stripCurrentPath();
         Pose2d start = this.getRobotPose();
+        System.out.println("START" + start.getTranslation().toString());
         Pose2d end = this.currentPath.path.get(this.currentPath.path.size() - 1).asPose2d();
         endPosition = end;
 

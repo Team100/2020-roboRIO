@@ -22,6 +22,7 @@ public class TwisterTestRun extends SequentialCommandGroup {
   public TwisterTestRun(RobotContainer container) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(container.cyclone.getAutoCommand(new TwisterPath("Step 1", new TwisterPoint[]{new TwisterPoint(4,.5,0)}) ),container.cyclone.getAutoCommand(new TwisterPath("Step 1", new TwisterPoint[]{new TwisterPoint(2,0,0)}) ));
+    super(container.cyclone.getAutoCommand(new TwisterPath("Step 1", new TwisterPoint[] { new TwisterPoint(4, 0, 0) })),
+        container.cyclone.getAutoCommand(new TwisterPath("Step 2", new TwisterPoint[] { new TwisterPoint(3, 0, 0) })));
   }
 }
