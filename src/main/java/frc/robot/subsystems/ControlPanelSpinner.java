@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
@@ -114,10 +113,10 @@ public class ControlPanelSpinner extends SubsystemBase {
 
   public void calibrate() {
     configuratingColors = SmartDashboard.getNumber("configurating Colors", 0);
-    Color detectedColor1 = colorSensor.getColor();
-    double red1 = detectedColor1.red;
-    double blue1 = detectedColor1.blue;
-    double green1 = detectedColor1.green;
+    Color detectedColorCalibration = colorSensor.getColor();
+    double red1 = detectedColorCalibration.red;
+    double blue1 = detectedColorCalibration.blue;
+    double green1 = detectedColorCalibration.green;
 
     if (configuratingColors == 1) {
       Preferences.getInstance().putDouble("RedTile_RedComponent", red1);
