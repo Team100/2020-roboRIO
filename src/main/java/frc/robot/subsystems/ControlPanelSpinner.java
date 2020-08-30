@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
@@ -72,23 +71,22 @@ public class ControlPanelSpinner extends SubsystemBase {
 
   public ControlPanelSpinner() {
     spinner = new FRCTalonSRX.FRCTalonSRXBuilder(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.CAN_ID)
-    .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
-    .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
-    .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.SENSOR_PHASE)
-    .withTimeout(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.TIMEOUT)
-    .withCurrentLimitEnabled(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.ENABLE_CURRENT_LIMIT)
-    .withCurrentLimit(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CURRENT_LIMIT)
-    .withOpenLoopRampRate(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.OPEN_LOOP_RAMP)
-    .withNominalOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_FORWARD)
-    .withNominalOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_REVERSE)
-    .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
-    .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE).build();
-
-    spinner.setNeutralMode(NeutralMode.Brake);
+    .withInverted(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.INVERT)
+    .withFeedbackPort(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.FEEDBACK_PORT)
+    .withSensorPhase(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.SENSOR_PHASE)
+    .withTimeout(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.TIMEOUT)
+    .withCurrentLimitEnabled(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.ENABLE_CURRENT_LIMIT)
+    .withCurrentLimit(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.CURRENT_LIMIT)
+    .withOpenLoopRampRate(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.OPEN_LOOP_RAMP)
+    .withNominalOutputForward(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.NOMINAL_OUTPUT_FORWARD)
+    .withNominalOutputReverse(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.NOMINAL_OUTPUT_REVERSE)
+    .withPeakOutputForward(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.PEAK_OUTPUT_FORWARD)
+    .withNeutralMode(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.NEUTRAL_MODE)
+    .withPeakOutputReverse(Constants.ControlPanelSpinnerConstants.ControlPanelSpinnerMotors.PEAK_OUTPUT_REVERSE).build();
 
     addChild("Control Panel Motor", spinner);
 
-     colorMatcher.addColorMatch(kBlueTarget);
+    colorMatcher.addColorMatch(kBlueTarget);
     colorMatcher.addColorMatch(kGreenTarget);
     colorMatcher.addColorMatch(kRedTarget);
     colorMatcher.addColorMatch(kYellowTarget);
@@ -115,10 +113,10 @@ public class ControlPanelSpinner extends SubsystemBase {
 
   public void calibrate() {
     configuratingColors = SmartDashboard.getNumber("configurating Colors", 0);
-    Color detectedColor1 = colorSensor.getColor();
-    double red1 = detectedColor1.red;
-    double blue1 = detectedColor1.blue;
-    double green1 = detectedColor1.green;
+    Color detectedColorCalibration = colorSensor.getColor();
+    double red1 = detectedColorCalibration.red;
+    double blue1 = detectedColorCalibration.blue;
+    double green1 = detectedColorCalibration.green;
 
     if (configuratingColors == 1) {
       Preferences.getInstance().putDouble("RedTile_RedComponent", red1);

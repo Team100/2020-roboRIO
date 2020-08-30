@@ -391,6 +391,8 @@ public final class Constants {
             public static final double SPIN_SPEED = 0.6;
             public static final double RISE_SPEED = 0.7;
             public static final double LOWER_SPEED = -0.7;
+
+            public static final NeutralMode NEUTRAL_MODE = NeutralMode.Brake;
         }
         public static final class ControlPanelSpinnerColors {
             public static final double RGB_RED_VALUE_FOR_YELLOW =0.301;
