@@ -154,7 +154,7 @@ public final class Constants {
 
     public static final class TurretConstants {
         public static final class TurretMotionParameters {
-            public static final double PERCENT_OUTPUT_FORWARD = 0.5;
+            public static final double PERCENT_OUTPUT_FORWARD = 1;//use this to nerf turret, 0.5 for safe indoors use
             public static final double TICKS_PER_DEGREE =   TurretMotors.TurretMotor.ENCODER_TICKS_PER_MOTOR_REVOLUTION *
                                                             TurretMotors.TurretMotor.GEARING_RATIO / 360;
         }
