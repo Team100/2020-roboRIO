@@ -154,7 +154,7 @@ public final class Constants {
 
     public static final class TurretConstants {
         public static final class TurretMotionParameters {
-            public static final double PERCENT_OUTPUT_FORWARD = 1;//use this to nerf turret, 0.5 for safe indoors use
+            public static final double PERCENT_OUTPUT_FORWARD = 0.5;
             public static final double TICKS_PER_DEGREE =   TurretMotors.TurretMotor.ENCODER_TICKS_PER_MOTOR_REVOLUTION *
                                                             TurretMotors.TurretMotor.GEARING_RATIO / 360;
         }
@@ -322,7 +322,7 @@ public final class Constants {
     public static final class ShooterConstants {
         public static final class ShooterMotionParameters {
             public static final double RECOVER_PO = ShooterMotionParameters.SHOOT_PO;
-            public static final double SHOOT_PO = 0.30;
+            public static final double SHOOT_PO = 0.80;//set to 0.3 for inside use
             public static final double STOP_PO = 0;
 
         }
