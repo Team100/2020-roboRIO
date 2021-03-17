@@ -41,33 +41,33 @@ public class Climber extends SubsystemBase {
     //sensor = new DigitalInput(Constants.IndexerConstants.IndexerSensors.FrontSensor.ID);
     // Construct Motor Objects
     leftWinch = new FRCTalonSRX.FRCTalonSRXBuilder(
-        Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
-            .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
-            .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
-            .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.SENSOR_PHASE)
-            .withTimeout(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.TIMEOUT)
-            .withCurrentLimitEnabled(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.ENABLE_CURRENT_LIMIT)
-            .withCurrentLimit(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CURRENT_LIMIT)
-            .withOpenLoopRampRate(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.OPEN_LOOP_RAMP)
-            .withNominalOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_FORWARD)
-            .withNominalOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_REVERSE)
-            .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
-            .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE)
+        Constants.ClimberConstants.ClimberMotors.LEFT_CAN_ID)
+            .withInverted(Constants.ClimberConstants.ClimberMotors.INVERT)
+            .withFeedbackPort(Constants.ClimberConstants.ClimberMotors.FEEDBACK_PORT)
+            .withSensorPhase(Constants.ClimberConstants.ClimberMotors.SENSOR_PHASE)
+            .withTimeout(Constants.ClimberConstants.ClimberMotors.TIMEOUT)
+            .withCurrentLimitEnabled(Constants.ClimberConstants.ClimberMotors.ENABLE_CURRENT_LIMIT)
+            .withCurrentLimit(Constants.ClimberConstants.ClimberMotors.CURRENT_LIMIT)
+            .withOpenLoopRampRate(Constants.ClimberConstants.ClimberMotors.OPEN_LOOP_RAMP)
+            .withNominalOutputForward(Constants.ClimberConstants.ClimberMotors.NOMINAL_OUTPUT_FORWARD)
+            .withNominalOutputReverse(Constants.ClimberConstants.ClimberMotors.NOMINAL_OUTPUT_REVERSE)
+            .withPeakOutputForward(Constants.ClimberConstants.ClimberMotors.PEAK_OUTPUT_FORWARD)
+            .withPeakOutputReverse(Constants.ClimberConstants.ClimberMotors.PEAK_OUTPUT_REVERSE)
             .build();
 
     rightWinch = new FRCTalonSRX.FRCTalonSRXBuilder(
-        Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CAN_ID)
-        .withInverted(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.INVERT)
-        .withFeedbackPort(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.FEEDBACK_PORT)
-        .withSensorPhase(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.SENSOR_PHASE)
-        .withTimeout(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.TIMEOUT)
-        .withCurrentLimitEnabled(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.ENABLE_CURRENT_LIMIT)
-        .withCurrentLimit(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.CURRENT_LIMIT)
-        .withOpenLoopRampRate(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.OPEN_LOOP_RAMP)
-        .withNominalOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_FORWARD)
-        .withNominalOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.NOMINAL_OUTPUT_REVERSE)
-        .withPeakOutputForward(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_FORWARD)
-        .withPeakOutputReverse(Constants.IndexerConstants.IndexerMotors.IndexerStageOne.PEAK_OUTPUT_REVERSE)
+        Constants.ClimberConstants.ClimberMotors.RIGHT_CAN_ID)
+            .withInverted(Constants.ClimberConstants.ClimberMotors.INVERT)
+            .withFeedbackPort(Constants.ClimberConstants.ClimberMotors.FEEDBACK_PORT)
+            .withSensorPhase(Constants.ClimberConstants.ClimberMotors.SENSOR_PHASE)
+            .withTimeout(Constants.ClimberConstants.ClimberMotors.TIMEOUT)
+            .withCurrentLimitEnabled(Constants.ClimberConstants.ClimberMotors.ENABLE_CURRENT_LIMIT)
+            .withCurrentLimit(Constants.ClimberConstants.ClimberMotors.CURRENT_LIMIT)
+            .withOpenLoopRampRate(Constants.ClimberConstants.ClimberMotors.OPEN_LOOP_RAMP)
+            .withNominalOutputForward(Constants.ClimberConstants.ClimberMotors.NOMINAL_OUTPUT_FORWARD)
+            .withNominalOutputReverse(Constants.ClimberConstants.ClimberMotors.NOMINAL_OUTPUT_REVERSE)
+            .withPeakOutputForward(Constants.ClimberConstants.ClimberMotors.PEAK_OUTPUT_FORWARD)
+            .withPeakOutputReverse(Constants.ClimberConstants.ClimberMotors.PEAK_OUTPUT_REVERSE)
         .withMaster(leftWinch).build();
 
             //addChild("frontSensor", sensor);
@@ -79,21 +79,17 @@ public class Climber extends SubsystemBase {
    * Update any states
    */
   public void updateState() {
-    SmartDashboard.putNumber("INDEXER BALL INDEX VALUE", GlobalManager.IndexerManager.numBalls);
-    SmartDashboard.putString("INDEXER BALL INDEX ENUM", GlobalManager.IndexerManager.locationState.toString());
+    //SmartDashboard.putNumber("INDEXER BALL INDEX VALUE", GlobalManager.IndexerManager.numBalls);
+    //SmartDashboard.putString("INDEXER BALL INDEX ENUM", GlobalManager.IndexerManager.locationState.toString());
 
   }
 
-  /**
-   * Detect the presence of a ball
-   * @return whether a ball is present or not
-   */
-//   public boolean getSensorValue() {
-//     return sensor.get(); //sensor.get();
-//   }
+  public void spin(double speed) {
+    leftWinch.drivePercentOutput(speed);
+  }
 
   /**
-   * Runs periodically and updates the state of the IndexerStageOne
+   * Runs periodically and updates the state of the Winch
    */
   @Override
   public void periodic() {
