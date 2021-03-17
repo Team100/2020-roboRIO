@@ -322,7 +322,7 @@ public final class Constants {
     public static final class ShooterConstants {
         public static final class ShooterMotionParameters {
             public static final double RECOVER_PO = ShooterMotionParameters.SHOOT_PO;
-            public static final double SHOOT_PO = 0.80;//set to 0.3 for inside use
+            public static final double SHOOT_PO = 1;//set to 0.3 for inside use
             public static final double STOP_PO = 0;
 
         }
