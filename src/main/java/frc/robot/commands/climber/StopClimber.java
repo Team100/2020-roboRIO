@@ -26,13 +26,13 @@ public class StopClimber extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    this.climber.spin(0);
+    climber.spin(0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    this.climber.spin(0);
+    climber.spin(0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -43,7 +43,7 @@ public class StopClimber extends CommandBase {
 
   // Called once after isFinished returns true
   protected void end() {
-    this.climber.spin(0);
+    climber.spin(0);
   }
 
   // Called when another command which requires one or more of the same

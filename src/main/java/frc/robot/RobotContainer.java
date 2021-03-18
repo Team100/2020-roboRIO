@@ -125,7 +125,7 @@ public class RobotContainer {
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
         subsystems.spinner.setDefaultCommand(new StopSpinnerWheel(subsystems.spinner));
         subsystems.tiltServo.setDefaultCommand(new CameraSetpointOne(subsystems.tiltServo));
-        subsystems.tiltServo.setDefaultCommand(new StopClimber(subsystems.climber));
+        subsystems.climber.setDefaultCommand(new StopClimber(subsystems.climber));
     }
 
     /**
