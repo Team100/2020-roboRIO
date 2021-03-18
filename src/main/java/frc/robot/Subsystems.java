@@ -23,4 +23,5 @@ public class Subsystems {
     public final PDP pdpSubsystem = new PDP();
     public final CameraTiltServo tiltServo = new CameraTiltServo();
     public final ControlPanelSpinner spinner = new ControlPanelSpinner();
+    public final Climber climber = new Climber();
 }

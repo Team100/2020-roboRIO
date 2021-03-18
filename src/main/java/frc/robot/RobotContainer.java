@@ -21,6 +21,7 @@ import frc.robot.FRCLib.Cyclone.twister.TwisterPathLibrary;
 import frc.robot.FRCLib.Cyclone.twister.twisterCommandGroups.TwisterTestRun;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.supersystem.indexer.*;
+import frc.robot.commands.climber.*;
 import frc.robot.commands.colorSpinner.*;
 import frc.robot.commands.driverCamera.CameraSetpointOne;
 import frc.robot.commands.driverCamera.CameraSetpointTwo;
@@ -65,6 +66,9 @@ public class RobotContainer {
     public JoystickButton dashLeft;
     public JoystickButton dashRight;
     public JoystickButton zeroPose;
+
+    public JoystickButton climberForwards;
+    public JoystickButton climberBackwards;
 
     // public JoystickButton toggleMotorMode;
 
@@ -121,6 +125,7 @@ public class RobotContainer {
         subsystems.shooter.setDefaultCommand(new ShooterStop(subsystems.shooter));
         subsystems.spinner.setDefaultCommand(new StopSpinnerWheel(subsystems.spinner));
         subsystems.tiltServo.setDefaultCommand(new CameraSetpointOne(subsystems.tiltServo));
+        subsystems.tiltServo.setDefaultCommand(new StopClimber(subsystems.climber));
     }
 
     /**
@@ -181,7 +186,12 @@ public class RobotContainer {
         }));
         
         ///////////////////////////////////////////////////////////////////////////////
+        climberForwards = new JoystickButton(rightJoystick, 11);
+        climberBackwards = new JoystickButton(rightJoystick, 12);
 
+
+        climberForwards.whileHeld(new SpinClimberForwards(subsystems.climber));
+        climberBackwards.whileHeld(new SpinClimberForwards(subsystems.climber));
         // toggleMotorMode = new JoystickButton(gamepad, 12);
         // InstantCommand comm = new InstantCommand(() -> subsystems.drivetrain.toggleNeutralMode());
         // //comm.setRunWhenDisabled(true);

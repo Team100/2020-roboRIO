@@ -25,13 +25,13 @@ public class SpinClimberBackwards extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    climber.spin(Constants.ClimberConstants.ClimberMotors.SPIN_SPEED);
+    climber.spin(-Constants.ClimberConstants.ClimberMotors.SPIN_SPEED);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    climber.spin(Constants.ClimberConstants.ClimberMotors.SPIN_SPEED);
+    climber.spin(-Constants.ClimberConstants.ClimberMotors.SPIN_SPEED);
   }
 
   // Make this return true when this Command no longer needs to run execute()
