@@ -440,5 +440,11 @@ public final class Constants {
 
             public static final double SPIN_SPEED = 0.5;
         }
+        public static final class LeftSensor {
+            public static final int ID = 4;//find these
+        }
+        public static final class RightSensor {
+            public static final int ID = 5;//find these
+        }
     }
 }

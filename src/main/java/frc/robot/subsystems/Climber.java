@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -73,6 +75,10 @@ public class Climber extends SubsystemBase {
             //addChild("frontSensor", sensor);
             //addChild("indexerStageOne", indexerStageOne);
 
+
+    // Climber.leftWinch.configSelectedFeedbackSensor(FeedbackDevice.Analog);
+    // pivot.motor.setSelectedSensorPosition(pivot.getRawAnalogSensor());
+
   }
 
   /**
@@ -81,6 +87,7 @@ public class Climber extends SubsystemBase {
   public void updateState() {
     //SmartDashboard.putNumber("INDEXER BALL INDEX VALUE", GlobalManager.IndexerManager.numBalls);
     //SmartDashboard.putString("INDEXER BALL INDEX ENUM", GlobalManager.IndexerManager.locationState.toString());
+    SmartDashboard.putString("LEFT WINCH ENCODER", Climber.getRawAnalogSensor);
 
   }
 
