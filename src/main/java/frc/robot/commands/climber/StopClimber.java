@@ -17,20 +17,22 @@ public class StopClimber extends CommandBase {
   public StopClimber(Climber climber) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    System.out.println("kjfdsahgewhfwiujewakjealijeldewa;oi          " + getRequirements().toString());
     this.climber = climber;
     addRequirements(this.climber);
+    System.out.println("kjfdsahgewAAAAAAAAAAAAAAjeldewa;oi           " + getRequirements().toString());
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    climber.spin(0);
+    this.climber.spin(0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    climber.spin(0);
+    this.climber.spin(0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -41,7 +43,7 @@ public class StopClimber extends CommandBase {
 
   // Called once after isFinished returns true
   protected void end() {
-    climber.spin(0);
+    this.climber.spin(0);
   }
 
   // Called when another command which requires one or more of the same

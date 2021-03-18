@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.GlobalManager;
 import frc.robot.FRCLib.Motors.FRCTalonSRX;
 
 
@@ -74,7 +73,12 @@ public class Climber extends SubsystemBase {
 
             //addChild("frontSensor", sensor);
             //addChild("indexerStageOne", indexerStageOne);
+            leftWinch.motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+            rightWinch.motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+            //leftWinch.motor.setSelectedSensorPosition(leftWinch.getRawAnalogSensor());
 
+            addChild("leftWinch", leftWinch);
+            addChild("rightWinch", rightWinch);
 
     // Climber.leftWinch.configSelectedFeedbackSensor(FeedbackDevice.Analog);
     // pivot.motor.setSelectedSensorPosition(pivot.getRawAnalogSensor());
@@ -87,7 +91,8 @@ public class Climber extends SubsystemBase {
   public void updateState() {
     //SmartDashboard.putNumber("INDEXER BALL INDEX VALUE", GlobalManager.IndexerManager.numBalls);
     //SmartDashboard.putString("INDEXER BALL INDEX ENUM", GlobalManager.IndexerManager.locationState.toString());
-    SmartDashboard.putString("LEFT WINCH ENCODER", Climber.getRawAnalogSensor);
+    SmartDashboard.putString("LEFT WINCH ENCODER", Integer.toString(leftWinch.getRawAnalogSensor()));
+    SmartDashboard.putString("RIGHT WINCH ENCODER", Integer.toString(rightWinch.getRawAnalogSensor()));
 
   }
 
