@@ -191,7 +191,7 @@ public class RobotContainer {
 
 
         climberForwards.whileHeld(new SpinClimberForwards(subsystems.climber));
-        climberBackwards.whileHeld(new SpinClimberForwards(subsystems.climber));
+        climberBackwards.whileHeld(new SpinClimberBackwards(subsystems.climber));
         // toggleMotorMode = new JoystickButton(gamepad, 12);
         // InstantCommand comm = new InstantCommand(() -> subsystems.drivetrain.toggleNeutralMode());
         // //comm.setRunWhenDisabled(true);

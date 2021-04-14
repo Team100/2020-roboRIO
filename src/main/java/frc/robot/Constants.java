@@ -438,7 +438,7 @@ public final class Constants {
 
             public static final NeutralMode NEUTRAL_MODE = NeutralMode.Brake;
 
-            public static final double SPIN_SPEED = 0.5;
+            public static final double SPIN_SPEED = 0.1;
         }
         public static final class LeftSensor {
             public static final int ID = 4;//find these

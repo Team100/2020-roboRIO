@@ -17,10 +17,8 @@ public class StopClimber extends CommandBase {
   public StopClimber(Climber climber) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    System.out.println("kjfdsahgewhfwiujewakjealijeldewa;oi          " + getRequirements().toString());
     this.climber = climber;
     addRequirements(this.climber);
-    System.out.println("kjfdsahgewAAAAAAAAAAAAAAjeldewa;oi           " + getRequirements().toString());
   }
 
   // Called just before this Command runs the first time
