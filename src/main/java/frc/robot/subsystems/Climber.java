@@ -96,10 +96,26 @@ public class Climber extends SubsystemBase {
     //SmartDashboard.putString("RIGHT WINCH ENCODER", Integer.toString(rightWinch.getRawAnalogSensor()));
     SmartDashboard.putNumber("LEFT WINCH Encoder", leftWinch.motor.getSelectedSensorPosition());
     SmartDashboard.putNumber("RIGHT WINCH Encoder", rightWinch.motor.getSelectedSensorPosition());
+    SmartDashboard.putBoolean("Is Extended?", extended());
+    SmartDashboard.putBoolean("Is Retracted?", retracted());
   }
 
   public void spin(double speed) {
     leftWinch.drivePercentOutput(speed);
+  }
+
+  public boolean extended() {
+    if(leftWinch.motor.getSelectedSensorPosition()>10000&&rightWinch.motor.getSelectedSensorPosition()>10000){
+      return true;
+    }
+    return false;
+  }
+
+  public boolean retracted() {
+    if(leftWinch.motor.getSelectedSensorPosition()<100&&rightWinch.motor.getSelectedSensorPosition()<100){
+      return true;
+    }
+    return false;
   }
 
   /**

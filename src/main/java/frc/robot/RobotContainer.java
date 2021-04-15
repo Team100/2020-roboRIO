@@ -67,6 +67,7 @@ public class RobotContainer {
     public JoystickButton dashRight;
     public JoystickButton zeroPose;
 
+    public JoystickButton climb;
     public JoystickButton climberForwards;
     public JoystickButton climberBackwards;
 
@@ -186,12 +187,14 @@ public class RobotContainer {
         }));
         
         ///////////////////////////////////////////////////////////////////////////////
+        climb = new JoystickButton(rightJoystick, 10);
         climberForwards = new JoystickButton(rightJoystick, 11);
         climberBackwards = new JoystickButton(rightJoystick, 12);
 
 
         climberForwards.whileHeld(new SpinClimberForwards(subsystems.climber));
         climberBackwards.whileHeld(new SpinClimberBackwards(subsystems.climber));
+        climb.whenPressed(new Climb(subsystems.climber));
         // toggleMotorMode = new JoystickButton(gamepad, 12);
         // InstantCommand comm = new InstantCommand(() -> subsystems.drivetrain.toggleNeutralMode());
         // //comm.setRunWhenDisabled(true);
