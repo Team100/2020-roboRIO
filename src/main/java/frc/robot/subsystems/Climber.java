@@ -105,14 +105,14 @@ public class Climber extends SubsystemBase {
   }
 
   public boolean extended() {
-    if(leftWinch.motor.getSelectedSensorPosition()>10000&&rightWinch.motor.getSelectedSensorPosition()>10000){
+    if(leftWinch.motor.getSelectedSensorPosition()<-100000&&rightWinch.motor.getSelectedSensorPosition()<-100000){
       return true;
     }
     return false;
   }
 
   public boolean retracted() {
-    if(leftWinch.motor.getSelectedSensorPosition()<100&&rightWinch.motor.getSelectedSensorPosition()<100){
+    if(leftWinch.motor.getSelectedSensorPosition()>-400&&rightWinch.motor.getSelectedSensorPosition()>-400){
       return true;
     }
     return false;

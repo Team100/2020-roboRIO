@@ -430,15 +430,16 @@ public final class Constants {
             public static final boolean ENABLE_CURRENT_LIMIT = true;
             public static final int CURRENT_LIMIT = 25;
             public static final double OPEN_LOOP_RAMP = 0.1;
-            public static final double PEAK_OUTPUT_FORWARD = .5;
-            public static final double PEAK_OUTPUT_REVERSE = -.5;
+            public static final double PEAK_OUTPUT_FORWARD = 1;
+            public static final double PEAK_OUTPUT_REVERSE = -1;
 
             public static final double NOMINAL_OUTPUT_FORWARD = 0;
             public static final double NOMINAL_OUTPUT_REVERSE = 0;
 
             public static final NeutralMode NEUTRAL_MODE = NeutralMode.Brake;
 
-            public static final double SPIN_SPEED = 0.1;
+            public static final double SPIN_SPEED = 0.6;
+            public static final double SLOW_SPIN_SPEED = 0.041;
         }
         public static final class LeftSensor {
             public static final int ID = 4;//find these
